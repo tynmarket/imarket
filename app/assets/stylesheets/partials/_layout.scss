@@ -1,0 +1,27 @@
+#change-container-size .dropdown-menu {
+  width: 127px;
+  min-width: inherit;
+}
+
+.announce {
+  margin-top: 10px;
+  color: $color-red;
+}
+
+.alert-top-page {
+  position: fixed;
+  top: 65px;
+  left: 50%;
+  margin-left: -170px;
+  padding: 10px 35px 10px 10px;
+}
+
+.version {
+  font-size: $font-size-small;
+  color: $color-nabvar;
+}
+
+.current_page, .hover-nav:hover {
+  height: 40px;
+  border-bottom: 2px solid #38a1db; // 露草色
+}

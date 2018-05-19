@@ -11,21 +11,38 @@
 #
 default: &default
   adapter: mysql2
-  encoding: utf8
+  encoding: utf8mb4
+  charset: utf8mb4
+  collation: utf8mb4_general_ci
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV["DATABSE_HOST"] %>
+  username: <%= ENV["DATABSE_USERNAME"] %>
+  password: <%= ENV["DATABSE_PASSWORD"] %>
+
+production:
+  <<: *default
+  database: <%= ENV["MYSQL_DATABASE"] %>
+
+staging:
+  <<: *default
+  database: imarket_staging
+
+
+default_dev: &default_dev
+  <<: *default
+  host:
   username: root
   password:
-  socket: /tmp/mysql.sock
 
 development:
-  <<: *default
+  <<: *default_dev
   database: imarket_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
+  <<: *default_dev
   database: imarket_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
@@ -47,8 +64,3 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: imarket_production
-  username: imarket
-  password: <%= ENV['IMARKET_DATABASE_PASSWORD'] %>

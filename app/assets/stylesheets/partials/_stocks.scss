@@ -1,0 +1,98 @@
+// Place all the styles related to the stocks controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.stocks {
+
+  .result {
+    font-weight: bold;
+    font-size: 15px;
+  }
+
+  .table-title {
+    margin-bottom: 5px;
+  }
+
+  .list_type {
+    font-size: 14px;
+  }
+
+  .term_all {
+    margin-right: 5px;
+  }
+
+  .full-service-name, .full-service-name-margin {
+    margin-right: 5px;
+  }
+
+  .full-service-name-margin {
+    margin-left: 5px;
+  }
+
+  .table-search > thead > tr > th {
+    &:nth-child(1) {
+      width: 70px;
+    }
+
+    &:nth-child(3) {
+      width: 150px;
+    }
+  }
+
+  .table-summary > thead > tr > th {
+    &.w-period {
+      width: 7.5%;
+    }
+
+    &.w-quarter {
+      width: 7.5%;
+    }
+
+    &.w-net-sales {
+      width: 9.5%;
+    }
+
+    &.w-income {
+      width: 8.5%;
+    }
+
+    &.w-eps {
+      width: 8%;
+    }
+
+    &.w-change {
+      width: 7%;
+    }
+  }
+
+  .table-progress-ratio > thead > tr > th {
+    &.w-period {
+      width: 75px;
+    }
+
+    &.w-quarter {
+      width: 75px;
+    }
+
+    &.w-ratio {
+      width: 85px;
+    }
+  }
+
+  .table-monthly > thead > tr > th {
+    &:nth-child(1) {
+      width: 20%;
+    }
+
+    &:nth-child(2) {
+      width: 80%;
+    }
+  }
+
+  .operator-container {
+    margin-left: 15px;
+    float: left;
+    .select-per { margin-top: 5px; }
+  }
+
+}

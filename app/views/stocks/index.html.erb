@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-6 center">
+    <% if @stocks.blank? %>
+    <p class="result">該当する銘柄がありません。</p>
+    <h5 style="margin-top:25px;"><span style="font-size:18px;">※</span>&nbsp;特定のキーワードによる検索は随時対応中です。</h5><!-- スタイルのclass化 -->
+    <% else %>
+    <p class="result">検索結果：</p><br>
+    <table class="table table-search table-striped table-bordered">
+      <thead>
+        <tr>
+          <th class="text-center">コード</th>
+          <th class="text-center">銘柄名</th>
+          <th class="text-center">リンク</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @stocks.each do |stock| %>
+        <tr>
+          <td class="text-center"><%= stock.code %></td><!-- コード -->
+          <td class="text-center"><a href=<%= stock_path stock %>><%= stock.name %></td><!-- 銘柄名 -->
+          <td class="text-center"><%= link_to_other_services stock %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <% end %>
+  </div>
+</div>

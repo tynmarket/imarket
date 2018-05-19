@@ -29,5 +29,15 @@ module Imarket
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.i18n.default_locale = :ja
+
+    # JSTで保存
+    config.active_record.default_timezone = :local
+
+    # JSTで表示
+    config.time_zone = 'Tokyo'
+
+    config.paths.add 'lib', eager_load: true
   end
 end

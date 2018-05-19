@@ -1,0 +1,246 @@
+body {
+  font-size: $font-size-small;
+}
+
+/* ナビゲーションバー */
+@mixin padding-navbar {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.navbar {
+  min-height: 40px;
+  z-index: 1;
+}
+
+.navbar-nav.navbar-right:last-child {
+  margin-right: 0px;
+}
+
+.navbar-nav.navbar-right-tight {
+  margin-right: -15px;
+}
+
+.navbar-nav > li > a {
+  @include padding-navbar;
+}
+
+.navbar-default {
+  .navbar-brand {
+    color: $color-nabvar;
+  }
+
+  .navbar-nav > li > a {
+    color: $color-nabvar;
+  }
+}
+
+.nav-tabs {
+  margin-bottom: 20px;
+}
+
+/* フォームコントロール */
+.form-control::-moz-placeholder {
+  color: #999999;
+}
+
+.form-control:-ms-input-placeholder {
+  color: #999999;
+}
+
+.form-control::-webkit-input-placeholder {
+  color: #999999;
+}
+
+.navbar-brand {
+  @include padding-navbar;
+  font-weight: 200;
+  font-size: 20px;
+  height: 40px;
+}
+
+/* container */
+$container-margin: 20px;
+
+/* container (default) */
+@media (max-width: 1300px) {
+  $container-width: 900px;
+  @import "container"
+}
+
+@media (min-width: 1300px) {
+  $container-width: 1000px;
+  @import "container"
+}
+
+/* ページネーション */
+.pagination {
+  & > .active {
+    & > a, & > a:hover {
+      color: #999999;
+      background-color: #f5f5f5;
+      border-color: #dddddd;
+    }
+  }
+}
+
+/* 検索欄 */
+#search {
+  height: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  .navbar-form {
+    padding-left: 0px;
+  }
+
+  .form-control {
+    width: 250px;
+  }
+}
+
+/* テーブル */
+.table {
+  margin-bottom: 5px;
+
+  & > thead > tr > th {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  // TODO 消す
+  & > thead > tr > th.text-middle {
+    vertical-align: middle;
+  }
+}
+
+.table-striped {
+  & > thead > tr > th {
+    background-color: #f5f0eb;
+  }
+
+  & > tbody > tr {
+    &:nth-child(odd) > td {
+      background-color: white;
+    }
+
+    &:nth-child(even) > td {
+      background-color: #f9f9f9;
+    }
+  }
+
+}
+
+.table-bordered {
+  > thead > tr {
+    > th {
+      border-bottom-width: 1px;
+    }
+  }
+}
+
+.table-condensed {
+  & > thead > tr > th, & > tbody > tr > td {
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+}
+
+
+// ボタン
+.btn-text {
+  padding: 7.5px 12px;
+  border: 1px solid;
+  border-color: #cccccc;
+  border-radius: 4px;
+}
+
+.btn.active-disabled {
+  color: #333333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+  opacity: initial;
+}
+
+div[data-toggle="buttons"] > .btn.active {
+  cursor: default;
+}
+
+/*
+.btn-primary {
+  color: #333333;
+  background-color: white;
+  border-color: #cccccc;
+
+  &.active {
+    color: #333333;
+    background-color: #f5f5f5; // TODO 色を共通化
+    border-color: #dddddd;
+  }
+}
+*/
+
+/* モーダル */
+
+.modal-dialog {
+  margin-top: 150px;
+}
+
+
+/* アラート */
+.alert {
+  & > ul {
+    padding-left: 20px;
+    list-style-type: disc;
+  }
+}
+
+.page_entries_info {
+  margin-top: 15px;
+}
+
+.pagination {
+  margin: 15px 0;
+}
+
+.footer {
+  margin-top: 60px;
+}
+
+/* 免責事項 */
+.disclaimer {
+  font-size: $font-size-small;
+}
+
+/* XBRL */
+.powered {
+  width: 115px;
+  font-size: $font-size-normal;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* センタリング */
+.center {
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* inline要素 */
+.display-inline {
+  display:inline;
+}
+
+/* マージン */
+.margin-left-10 {
+  margin-left: 10px;
+}
+
+.margin-right-10 {
+  margin-right: 10px;
+}
+
+

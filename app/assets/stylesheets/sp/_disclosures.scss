@@ -1,0 +1,99 @@
+.date-selector {
+  margin-top: 10px;
+}
+
+.last_updated {
+  margin-left: 5px;
+}
+
+.page_entries_info {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.pagination {
+  margin-top: 0;
+  margin-bottom: 15px;
+
+  & > .active {
+    & > a, & > a:hover {
+      color: #999999;
+      background-color: #f5f5f5;
+      border-color: #dddddd;
+    }
+  }
+}
+
+.main-content-nav-tabs {
+  margin-bottom: 10px;
+}
+
+.table-disclosure-head {
+  margin-bottom: 10px;
+}
+
+.table-disclosure-sales {
+  margin-bottom: 0px;
+}
+
+.table-disclosure-income {
+  border-top-width: 0px;
+}
+
+.table-bordered > thead > tr {
+  & > th, & > td {
+    border-bottom-width: 1px;
+  }
+}
+
+.table-disclosure > thead > tr > th {
+  &.w_release   { width: 13.5%; }
+  &.w_per       { width: 18%; }
+  &.w_pdf       { width: 13%; }
+  &.w_code      { width: 15.5%; }
+  &.w_period    { width: 27%; }
+  &.w_income    { width: 36%; }
+  &.w_eps       { width: 21%; }
+}
+
+.table-disclosure-summary {
+  &.table-disclosure-sales > tbody > tr > td {
+    &:nth-child(3), &:nth-child(5) {
+      width: 14%;
+    }
+  }
+
+  &.table-disclosure-income > tbody > tr > td {
+    &:nth-child(4), &:nth-child(6) {
+      width: 14%;
+    }
+  }
+}
+
+.table-disclosure-all > thead > tr > th {
+  &.w_name      { width: 30%; }
+}
+
+.table-striped {
+  &.table-disclosure-head, &.table-disclosure-all {
+    thead > tr {
+      background-color: #f5f0eb;
+    }
+  }
+
+  thead > tr {
+    background-color: #f9f9f9;
+  }
+
+  tbody > {
+    tr {
+      &:nth-of-type(odd) {
+        background-color: #fff;
+      }
+
+      &:nth-of-type(even) {
+        background-color: #f9f9f9;
+      }
+    }
+  }
+}

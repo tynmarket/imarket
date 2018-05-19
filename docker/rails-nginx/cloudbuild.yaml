@@ -1,0 +1,4 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/tynmarket-195002/github-tynmarket-imarket-rails-nginx', '-f', 'docker/rails-nginx/Dockerfile', '.']
+images: ['gcr.io/tynmarket-195002/github-tynmarket-imarket-rails-nginx']

@@ -1,0 +1,217 @@
+/ 開示日リスト
+.btn-toolbar.date-selector
+  .btn-group
+    button.btn.btn-default.dropdown-toggle[type="button" data-toggle="dropdown"]
+      | 開示日&nbsp;
+      span.caret
+    ul.dropdown-menu
+      - today_to_prev_month.each do |date|
+        li
+          a href=disclosures_path(date) = date.to_s
+  .btn-group
+    a.btn.btn-default href=disclosures_path(@date) 更新
+
+- if @disclosures.blank?
+  .pagination
+    p = "#{release_date(@date)}に開示された情報はありません。"
+- else
+  / ページネーション
+  .page_entries_info = "#{release_date(@date)}の#{page_entries_info(@disclosures)}"
+  = paginate(@disclosures)
+
+  / タブ
+  ul.nav.nav-tabs.main-content-nav-tabs
+    li class=@class_finance
+      a href="#finance" data-toggle="tab" 決算短信・業績予想の修正
+    li class=@class_monthly
+      a href="#monthly" data-toggle="tab" 月次
+    li class=@class_all
+      a href="#all" data-toggle="tab" 全て
+    li.pull-right.last_updated = "株価反映日時：#{@last_updated}"
+
+  / タブコンテンツ
+  .tab-content
+    / 全て
+    #all.tab-pane class=@class_all
+      table.table.table-striped.table-bordered.table-condensed.table-disclosure.table-disclosure-all
+        thead
+          tr
+            th.w_release.text-center 時刻
+            th.w_name.text-center 会社名
+            th.w_title.text-center 表題
+            th.w_code.text-center コード
+        tbody
+          - @disclosures.each do |disclosure|
+            tr
+              td.text-center = release_time(disclosure)
+              td = disclosure.name
+              td = link_to_pdf(disclosure, disclosure.title)
+              td.text-center = link_to_stock(disclosure)
+
+    / 決算短信・業績予想の修正
+    #finance.tab-pane class=@class_finance
+      - table = disclosure_table
+      - @disclosures.each do |disclosure|
+        - summary = disclosure.summary
+        - forecast = disclosure.results_forecast_q4 || summary&.results_forecast_dummy
+        - forecasts = disclosure.results_forecasts
+
+        - if summary.present?
+          table.table.table-striped.table-bordered.table-condensed.table-disclosure.table-disclosure-head
+            thead
+              tr
+                th.w_release.text-center 時刻
+                th.w_name.text-center 会社名
+                th.w_per.text-center PER
+                th.w_pdf.text-center PDF
+                th.w_code.text-center コード
+            tbody
+              tr
+                td.text-center = release_time(disclosure)
+                td
+                  .overflow_hidden = disclosure.name
+                td.text-center
+                  .overflow_hidden = per_in_disclosure(disclosure)
+                td.text-center = link_to_pdf(disclosure, "短信")
+                td.text-center = link_to_stock(disclosure)
+
+          table.table.table-striped.table-bordered.table-condensed.table-disclosure.table-disclosure-summary.table-disclosure-sales
+            thead
+              tr
+                th.w_period.text-center 決算期
+                th.w_net_sales.text-center colspan='2' 売上高
+                th.w_income.text-center colspan='2' 営業利益
+            tbody
+              tr
+                td.text-center = summary.prev_accounting_period_long
+                td.text-right = number_with_delimiter(summary.prior_net_sales)
+                td.text-right = red_hundred(summary.change_in_prior_net_sales)
+                td.text-right = red_delimiter(summary.prior_operating_income)
+                td.text-right = red_hundred(summary.change_in_prior_operating_income)
+              tr
+                td.text-center = summary.accounting_period_long
+                td.text-right = number_with_delimiter(summary.net_sales)
+                td.text-right = red_hundred(summary.change_in_net_sales)
+                td.text-right = red_delimiter(summary.operating_income)
+                td.text-right = red_hundred(summary.change_in_operating_income)
+              tr
+                td.text-center = forecast.accounting_period_long
+                td.text-right = number_with_delimiter(forecast.forecast_net_sales)
+                td.text-right = red_hundred(forecast.change_in_forecast_net_sales)
+                td.text-right = red_delimiter(forecast.forecast_operating_income)
+                td.text-right = red_hundred(forecast.change_in_forecast_operating_income)
+
+          table.table.table-striped.table-bordered.table-condensed.table-disclosure.table-disclosure-summary.table-disclosure-income
+            thead
+              tr
+                th
+                th.w_eps.text-center EPS
+                th.w_income.text-center colspan='2' 純利益
+                th.w_income.text-center colspan='2' 経常利益
+            tbody
+              tr
+                td.text-center = link_to_profile(disclosure)
+                td.text-right = red_delimiter_per_share(summary.prior_net_income_per_share)
+                td.text-right = red_delimiter(summary.prior_net_income)
+                td.text-right = red_hundred(summary.change_in_prior_net_income)
+                td.text-right = red_delimiter(summary.prior_ordinary_income)
+                td.text-right = red_hundred(summary.change_in_prior_ordinary_income)
+              tr
+                td.text-center = link_to_chart(disclosure)
+                td.text-right = red_delimiter_per_share(summary.net_income_per_share)
+                td.text-right = red_delimiter(summary.net_income)
+                td.text-right = red_hundred(summary.change_in_net_income)
+                td.text-right = red_delimiter(summary.ordinary_income)
+                td.text-right = red_hundred(summary.change_in_ordinary_income)
+              tr
+                td.text-center = link_to_margin(disclosure)
+                td.text-right = red_delimiter_per_share(forecast.forecast_net_income_per_share)
+                td.text-right = red_delimiter(forecast.forecast_net_income)
+                td.text-right = red_hundred(forecast.change_in_forecast_net_income)
+                td.text-right = red_delimiter(forecast.forecast_ordinary_income)
+                td.text-right = red_hundred(forecast.change_in_forecast_ordinary_income)
+
+        - elsif forecast?(summary, forecasts)
+          - forecasts.each do |forecast|
+            table.table.table-striped.table-bordered.table-condensed.table-disclosure.table-disclosure-head
+              thead
+                tr
+                  th.w_release.text-center 時刻
+                  th.w_name.text-center 会社名
+                  th.w_per.text-center PER
+                  th.w_pdf.text-center PDF
+                  th.w_code.text-center コード
+              tbody
+                tr
+                  td.text-center = release_time(disclosure)
+                  td
+                    .overflow_hidden = disclosure.name
+                  td.text-center
+                    .overflow_hidden = per_in_disclosure(disclosure)
+                  td.text-center = link_to_pdf(disclosure, "業予")
+                  td.text-center = link_to_stock(disclosure)
+
+            table.table.table-striped.table-bordered.table-condensed.table-disclosure.table-disclosure-sales
+              thead
+                tr
+                  th.w_period.text-center 決算期
+                  th.w_net_sales.text-center 売上高
+                  th.w_income.text-center 営業利益
+              tbody
+                tr
+                  td.text-center = forecast.accounting_period_long
+                  td.text-right = number_with_delimiter(forecast.previous_forecast_net_sales)
+                  td.text-right = red_delimiter(forecast.previous_forecast_operating_income)
+                tr
+                  td.text-center = forecast.accounting_period_long
+                  td.text-right = number_with_delimiter(forecast.forecast_net_sales)
+                  td.text-right = red_delimiter(forecast.forecast_operating_income)
+                tr
+                  td.text-center 増減率(%)
+                  td.text-right = red_hundred(forecast.change_forecast_net_sales)
+                  td.text-right = red_hundred(forecast.change_forecast_operating_income)
+
+            table.table.table-striped.table-bordered.table-condensed.table-disclosure.table-disclosure-income
+              thead
+                tr
+                  th
+                  th.w_eps.text-center EPS
+                  th.w_income.text-center 純利益
+                  th.w_income.text-center 経常利益
+              tbody
+                tr
+                  td.text-center = link_to_profile(disclosure)
+                  td.text-right = red_delimiter_per_share(forecast.previous_forecast_net_income_per_share)
+                  td.text-right = red_delimiter(forecast.previous_forecast_net_income)
+                  td.text-right = red_delimiter(forecast.previous_forecast_ordinary_income)
+                tr
+                  td.text-center = link_to_chart(disclosure)
+                  td.text-right = red_delimiter_per_share(forecast.forecast_net_income_per_share)
+                  td.text-right = red_delimiter(forecast.forecast_net_income)
+                  td.text-right = red_delimiter(forecast.forecast_ordinary_income)
+                tr
+                  td.text-center = link_to_margin(disclosure)
+                  td
+                  td.text-right = red_hundred(forecast.change_forecast_net_income)
+                  td.text-right = red_hundred(forecast.change_forecast_ordinary_income)
+
+    / 月次
+    #monthly.tab-pane class=@class_monthly
+      table.table.table-striped.table-bordered.table-condensed.table-disclosure.table-disclosure-all
+        thead
+          tr
+            th.w_release.text-center 時刻
+            th.w_name.text-center 会社名
+            th.w_title.text-center 表題
+            th.w_code.text-center コード
+        tbody
+          - @disclosures.each do |disclosure|
+            - if disclosure.monthly?
+              tr
+                td.text-center = release_time(disclosure)
+                td = disclosure.name
+                td = link_to_pdf(disclosure, disclosure.title)
+                td.text-center = link_to_stock(disclosure)
+
+  / ページネーション
+  = paginate(@disclosures)

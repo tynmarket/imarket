@@ -64,6 +64,26 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "imarket_#{Rails.env}"
 
   config.action_mailer.perform_caching = false
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: 587,
+    authentication: 'plain',
+    user_name: ENV["GMAIL_USERNAME"],
+    password: ENV["GMAIL_PASSWORD"],
+  }
+  config.action_mailer.default_url_options = { host: 'tyn-imarket.com' }
+
+  Rails.application.config.middleware.use(
+    ExceptionNotification::Rack,
+    email: {
+      :email_prefix         => "[ERROR] ",
+      :sender_address       => %{"Notifier" <notifier@example.com>},
+      :exception_recipients => %w{tynmarket@gmail.com}
+    }
+  )
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

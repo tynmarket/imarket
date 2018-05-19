@@ -1,3 +1,19 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root 'disclosures#index'
+
+  # 開示情報
+  get 'disclosures/:date', to: 'disclosures#index', as: 'disclosures'
+
+  # 銘柄
+  resources 'stocks', only: [:show] do
+    get 'search', on: :collection
+  end
+
+  # 株価
+  resources 'stock_prices', only: [] do
+    member do
+      get 'per'
+      get 'pbr'
+    end
+  end
 end

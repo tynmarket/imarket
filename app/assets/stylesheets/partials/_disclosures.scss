@@ -1,0 +1,57 @@
+// Place all the styles related to the disclosures controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.disclosures {
+
+  .last_updated {
+    float: right;
+    padding-top: 15px;
+  }
+
+  .table-disclosure {
+    font-size: $font-size-small;
+    margin-bottom: 5px;
+
+    & > thead {
+      & > tr > th {
+        &.w_release   { width: 5%;    }
+        &.w_name      { width: 14%;   }
+        &.w_pdf       { width: 5%;    }
+        &.w_period    { width: 7.5%;  }
+        &.w_quarter   { width: 6%;    }
+        &.w_net_sales { width: 13%;   }
+        &.w_income    { width: 12%;   }
+        &.w_eps       { width: 8%;    }
+        &.w_code      { width: 5.5%;  }
+        &.w_title     { width: 75.5%; }
+      }
+
+      &.space {
+        visibility: hidden;
+
+        & > tr > th {
+          padding-top: 0px;
+          padding-bottom: 0px;
+        }
+      }
+
+    } /* thead */
+
+    $width-change: 4.7%;
+
+    & > tbody > tr > td {
+      &:nth-child(7), &:nth-child(9), &:nth-child(11), &:nth-child(13) {
+        width: $width-change;
+      }
+    }
+
+  }
+
+  .table-disclosure-all {
+    & > tbody > tr > td:nth-child(3) > a {
+      color: #007bbb;
+    }
+  }
+
+}

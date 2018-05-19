@@ -1,0 +1,227 @@
+- set_meta_tags canonical: "#{stock_url(@stock, protocol: :http)}" if stocks_search? && @stock
+
+h4.display-inline.margin-right-10
+  span#code = @stock.code
+  | &nbsp;
+  = @stock.name
+span.font-size-normal.mr5 = per_in_stock @stock
+| &nbsp;
+span.font-size-normal.mr5 = pbr_in_stock @stock
+= link_to_other_services(@stock, true)
+br
+br
+
+/ タブ
+ul.nav.nav-tabs.main-content-nav-tabs
+  li.active
+    a[href="#menu-1" data-toggle="tab"] 決算短信
+  li
+    a[href="#menu-2" data-toggle="tab"] 月次
+  li
+    a#tab-per[href="#menu-3" data-toggle="tab"] 予想PER
+  li
+    a#tab-pbr[href="#menu-4" data-toggle="tab"] PBR
+  - if development? || @debug
+    li
+      a[href="#menu-100" data-toggle="tab"] デバッグ
+
+/ タブコンテンツ
+.tab-content
+  / 決算短信
+  #menu-1.tab-pane.active
+    .table-title
+      .pull-right
+        .term_all
+          - if term_all?(@term)
+            = link_to("今期 〜 過去3期", stock_path(@stock))
+            = " / 全て"
+          - else
+            = "今期 〜 過去3期 / "
+            = link_to("全て", "#{stock_path(@stock)}?term=all")
+      .term-annual
+        span.list_type
+          - if term_annual?
+            = link_to("累計", stock_path(@stock))
+            = " / 通期"
+          - else
+            = "累計 / "
+            = link_to "通期", "#{stock_path(@stock)}?term=annual"
+    table.table.table-summary.table-striped.table-bordered.table-condensed
+      = thead_summary
+      tbody
+        - if @latest_forecast
+          tr
+            td.text-center = @latest_forecast.accounting_period_once(nil)
+            td.text-center = link_to_pdf(@latest_forecast.disclosure_pdf, @latest_forecast.quarter_name_forecast)
+            td.text-right = number_with_delimiter(@latest_forecast.forecast_net_sales)
+            td.text-right = red_delimiter(@latest_forecast.forecast_operating_income)
+            td.text-right = red_delimiter(@latest_forecast.forecast_ordinary_income)
+            td.text-right = red_delimiter(@latest_forecast.forecast_net_income)
+            td.text-right = red_delimiter_per_share(@latest_forecast.forecast_net_income_per_share)
+            td.text-right = red_hundred(@latest_forecast.forecast_net_sales_operating_income_ratio)
+            td.text-right = red_hundred(@latest_forecast.forecast_net_sales_ordinary_income_ratio)
+            - if calc_change_in_forecast?(@latest_forecast, @summaries)
+              td.text-right = red_hundred(@latest_forecast.calc_change_in_forecast_net_sales @summaries)
+              td.text-right = red_hundred(@latest_forecast.calc_change_in_forecast_operating_income @summaries)
+              td.text-right = red_hundred(@latest_forecast.calc_change_in_forecast_ordinary_income @summaries)
+              td.text-right = red_hundred(@latest_forecast.calc_change_in_forecast_net_income @summaries)
+            - else
+              td.text-right = red_hundred(@latest_forecast.change_in_forecast_net_sales)
+              td.text-right = red_hundred(@latest_forecast.change_in_forecast_operating_income)
+              td.text-right = red_hundred(@latest_forecast.change_in_forecast_ordinary_income)
+              td.text-right = red_hundred(@latest_forecast.change_in_forecast_net_income)
+        - @summaries.each_with_index do |summary, i|
+          - if @last_year.blank? || summary.year >= @last_year || term_annual?
+            tr class=(hide_if_term_annual(summary))
+              td.text-center  = summary.accounting_period_once(i > 0 ? @summaries[i - 1] : @latest_forecast)
+              td.text-center = link_to_pdf(summary.disclosure_pdf, summary.quarter_name)
+              td.text-right = number_with_delimiter(summary.net_sales)
+              td.text-right = red_delimiter(summary.operating_income)
+              td.text-right = red_delimiter(summary.ordinary_income)
+              td.text-right = red_delimiter(summary.net_income)
+              td.text-right = red_delimiter_per_share(summary.net_income_per_share)
+              td.text-right = red_hundred(summary.net_sales_operating_income_ratio)
+              td.text-right = red_hundred(summary.net_sales_ordinary_income_ratio)
+              td.text-right = red_hundred(summary.change_in_net_sales)
+              td.text-right = red_hundred(summary.change_in_operating_income)
+              td.text-right = red_hundred(summary.change_in_ordinary_income)
+              td.text-right = red_hundred(summary.change_in_net_income)
+    br
+    h5 四半期
+    table.table.table-summary.table-striped.table-bordered.table-condensed
+      = thead_summary
+      tbody
+        - if @quarter_results_forecast
+          tr
+            td.text-center = @quarter_results_forecast.accounting_period_once(nil)
+            td.text-center = link_to_pdf(@quarter_results_forecast.latest_forecast.disclosure_pdf, @quarter_results_forecast.quarter_name_forecast)
+            td.text-right = number_with_delimiter(@quarter_results_forecast.forecast_net_sales)
+            td.text-right = red_delimiter(@quarter_results_forecast.forecast_operating_income)
+            td.text-right = red_delimiter(@quarter_results_forecast.forecast_ordinary_income)
+            td.text-right = red_delimiter(@quarter_results_forecast.forecast_net_income)
+            td.text-right = red_delimiter_per_share(@quarter_results_forecast.forecast_net_income_per_share)
+            td.text-right = red_hundred(@quarter_results_forecast.forecast_net_sales_operating_income_ratio)
+            td.text-right = red_hundred(@quarter_results_forecast.forecast_net_sales_ordinary_income_ratio)
+            td.text-right = red_hundred(@quarter_results_forecast.change_in_forecast_net_sales)
+            td.text-right = red_hundred(@quarter_results_forecast.change_in_forecast_operating_income)
+            td.text-right = red_hundred(@quarter_results_forecast.change_in_forecast_ordinary_income)
+            td.text-right = red_hundred(@quarter_results_forecast.change_in_forecast_net_income)
+        - @quarter_summaries.each_with_index do |quarter_summary, i|
+          - prev_year_quarter_summary = @quarter_summaries[i + 4]
+          - if @last_year.blank? || quarter_summary.year >= @last_year
+            tr
+              td.text-center = quarter_summary.accounting_period_once(i > 0 ? @quarter_summaries[i - 1] : @quarter_results_forecast)
+              td.text-center = link_to_pdf(quarter_summary.summary.disclosure_pdf, quarter_summary.quarter_name)
+              td.text-right = number_with_delimiter(quarter_summary.net_sales)
+              td.text-right = red_delimiter(quarter_summary.operating_income)
+              td.text-right = red_delimiter(quarter_summary.ordinary_income)
+              td.text-right = red_delimiter(quarter_summary.net_income)
+              td.text-right = red_delimiter_per_share(quarter_summary.net_income_per_share)
+              td.text-right = red_hundred(quarter_summary.net_sales_operating_income_ratio)
+              td.text-right = red_hundred(quarter_summary.net_sales_ordinary_income_ratio)
+              td.text-right = red_hundred(quarter_summary.change_in_net_sales(prev_year_quarter_summary))
+              td.text-right = red_hundred(quarter_summary.change_in_operating_income(prev_year_quarter_summary))
+              td.text-right = red_hundred(quarter_summary.change_in_ordinary_income(prev_year_quarter_summary))
+              td.text-right = red_hundred(quarter_summary.change_in_net_income(prev_year_quarter_summary))
+    br
+    .row
+      .col-6
+        h5 進捗率
+        table.table.table-progress-ratio.table-striped.table-bordered.table-condensed
+          thead
+            tr
+              th.w-period.text-center.text-middle 決算期
+              th.w-quarter.text-center.text-middle 四半期
+              th.w-ratio.text-center
+                | 売上高
+                br
+                | 進捗率
+              th.w-ratio.text-center
+                | 営業利益
+                br
+                | 進捗率
+              th.w-ratio.text-center
+                | 経常利益
+                br
+                | 進捗率
+              th.w-ratio.text-center
+                | 純利益
+                br
+                | 進捗率
+          tbody
+            - @current_summaries.each_with_index do |summary, i|
+              tr
+                td.text-center = summary.accounting_period_once(i > 0 ? @current_summaries[i - 1] : nil)
+                td.text-center = summary.quarter_name
+                td.text-center = summary.net_sales_progress_ratio(@latest_forecast)
+                td.text-center = summary.operating_income_progress_ratio(@latest_forecast)
+                td.text-center = summary.ordinary_income_progress_ratio(@latest_forecast)
+                td.text-center = summary.net_income_progress_ratio(@latest_forecast)
+
+  / 月次
+  #menu-2.tab-pane
+    .row
+      .col-7
+        table.table.table-monthly.table-striped.table-bordered.table-condensed
+          thead
+            tr
+              th.w-ratio.text-center 日時
+              th.w-ratio.text-center 表題
+          tbody
+            - @disclosures_monthly.each do |disclosure|
+              tr
+                td.text-center = release_date_s(disclosure)
+                td.text-center = link_to_pdf(disclosure, disclosure.title)
+
+  / 予想PER
+  #menu-3.tab-pane.tab-chart
+    h5.chart-header 年初来
+    .col-7.per-container
+      #per-current.per-chart
+    .operator-container
+      div PERの最大値
+      = select_tag('select-per-current', options_for_select(options_select_per), include_blank: true, id: "select-per-current", class: "select-per form-control")
+    .clearfix
+    h5.chart-header 全期間
+    .col-7.per-container
+      #per-entire.per-chart
+    .operator-container
+      div PERの最大値
+      = select_tag('select-per-entire', options_for_select(options_select_per), include_blank: true, id: "select-per-entire", class: "select-per form-control")
+    #tooltip-per.tooltip-per
+
+  / PBR
+  #menu-4.tab-pane.tab-chart
+    div ＊PBRは 株主資本 /（期末発行済株式数 - 期末自己株式数）で算出しており、Yahooファイナンス等の値と一致しない場合があります。
+    h5.chart-header 年初来
+    .col-7.per-container
+      #pbr-current.per-chart
+    .operator-container
+      div PBRの最大値
+      = select_tag('select-pbr-current', options_for_select(options_select_pbr), include_blank: true, id: "select-pbr-current", class: "select-per form-control")
+    .clearfix
+    h5.chart-header 全期間
+    .col-7.per-container
+      #pbr-entire.per-chart
+    .operator-container
+      div PBRの最大値
+      = select_tag('select-pbr-entire', options_for_select(options_select_pbr), include_blank: true, id: "select-pbr-entire", class: "select-per form-control")
+    #tooltip-pbr.tooltip-per
+
+  - if development? || @debug
+    #menu-100.tab-pane
+      .row
+        .col-7
+          table.table.table-monthly.table-striped.table-bordered.table-condensed
+            thead
+              tr
+                th.w-ratio.text-center 日時
+                th.w-ratio.text-center 表題
+                th.w-ratio.text-center id
+            tbody
+              - @disclosures_debug.each do |disclosure|
+                tr
+                  td.text-center
+                    = release_date_s(disclosure)
+                  td.text-center = link_to_pdf(disclosure, disclosure.title)
+                  td.text-center = disclosure.id

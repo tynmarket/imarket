@@ -1,0 +1,16 @@
+ja:
+  views:
+    pagination:
+      first: 先頭
+      last: 最終
+      previous: 前ページ
+      next: 次ページ
+      truncate: "..."
+  helpers:
+    page_entries_info:
+      one_page:
+        zero: "<b>該当データがありません。</b>"
+        one: "<b>1件中 1-1 件を表示</b>"
+        display_entries: '%{entry_name}を%{count}件中1 - %{count}件表示しています。'
+      more_pages:
+        display_entries: '%{entry_name}を%{total}件中%{first} - %{last}件表示しています。'
