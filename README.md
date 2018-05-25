@@ -1,24 +1,12 @@
-# README
+# iMarket
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[iMarket（適時開示ネット）](http://tyn-imarket.com/)は株式投資のWebサービスです。
 
-Things you may want to cover:
+## 主要機能
 
-* Ruby version
+* 決算の一覧表示
+* 四半期ごとの決算の表示
+* 決算の進捗率
+* 予想PER、PBRのグラフ
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+2013年〜2014年に書かれたコードが主なので、古い部分がありますがご容赦下さい。
