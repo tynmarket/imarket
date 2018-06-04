@@ -32,7 +32,7 @@ class StocksController < ApplicationController
 
       if disclosure
         # 銘柄のみ未登録
-        @stock = Stock.new code: query, name: disclosure.name
+        @stock = Stock.new id: query, code: query, name: disclosure.name
       else
         render action: 'index'
         return
