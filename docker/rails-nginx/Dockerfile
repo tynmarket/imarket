@@ -24,4 +24,4 @@ WORKDIR /app
 
 COPY Gemfile Gemfile.lock /app/
 
-RUN bundle install --jobs=4
+RUN bundle install --jobs=4 --deployment --path /usr/local/bundle --without development test
