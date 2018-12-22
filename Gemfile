@@ -40,6 +40,7 @@ end
 group :test do
   gem 'capybara'
   gem 'database_cleaner'
+  gem "rspec_junit_formatter"
   gem 'rspec-rails'
   gem 'spring-commands-rspec'
   gem 'timecop'
