@@ -45,7 +45,7 @@ jobs:
 
       # collect reports
       - store_test_results:
-          path: test-results
+          path: test_results
       - store_artifacts:
-          path: test-results
-          destination: test-results
+          path: test_results
+          destination: test_results
