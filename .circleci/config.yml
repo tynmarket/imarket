@@ -17,7 +17,7 @@ jobs:
       # Restore bundle cache
       - restore_cache:
           keys:
-            - spider-bundle-{{ checksum "Gemfile.lock" }}
+            - imarket-bundle-{{ checksum "Gemfile.lock" }}
 
       - run:
           name: bundle install
@@ -25,24 +25,9 @@ jobs:
 
       # Store bundle cache
       - save_cache:
-          key: spider-bundle-{{ checksum "Gemfile.lock" }}
+          key: imarket-bundle-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
-
-      # Only necessary if app uses webpacker or yarn in some other way
-      - restore_cache:
-          keys:
-            - coffeehub-yarn-{{ checksum "yarn.lock" }}
-
-      - run:
-          name: yarn install
-          command: yarn install --cache-folder ~/.cache/yarn
-
-      # Store yarn / webpacker cache
-      - save_cache:
-          key: coffeehub-yarn-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
 
       - run:
           name: Wait for DB
@@ -54,9 +39,13 @@ jobs:
       - run:
           name: Run rspec
           command: |
-            bundle exec rspec --format RspecJunitFormatter \
+            bundle exec rspec --format progress \
+                              --format RspecJunitFormatter \
                               --out test_results/rspec.xml
 
-      # Save test results for timing analysis
+      # collect reports
       - store_test_results:
-          path: test_results
+          path: test-results
+      - store_artifacts:
+          path: test-results
+          destination: test-results
