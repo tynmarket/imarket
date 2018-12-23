@@ -19,8 +19,6 @@ Rails.application.routes.draw do
 
   # API
   namespace :api, defaults: { format: :json } do
-    namespace :v1 do
-      resources :stock_prices, param: :code, only: [:show]
-    end
+    resources :stock_prices, param: :code, only: [:show]
   end
 end
