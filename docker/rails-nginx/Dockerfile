@@ -1,4 +1,4 @@
-FROM ruby:2.5.1
+FROM ruby:2.5.1-stretch
 
 RUN apt-get update \
       # mysql
