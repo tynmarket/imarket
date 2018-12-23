@@ -1,4 +1,6 @@
 defaults: &defaults
+  ga:
+    tracking_id:
 
 development:
   <<: *defaults
@@ -8,3 +10,5 @@ test:
 
 production:
   <<: *defaults
+  ga:
+    tracking_id: UA-46662880-1
