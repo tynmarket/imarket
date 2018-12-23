@@ -5,7 +5,7 @@ class Api::ApplicationController < ApplicationController
 
   def authenticate
     token_str = request.headers["Authorization"]
-    api_key = token_str && token_str.split("token ")&.fetch(1)
+    api_key = token_str&.split("token ")&.fetch(1)
 
     head :unauthorized if api_key.blank?
     head :unauthorized if api_key != Settings.imarket.api_key

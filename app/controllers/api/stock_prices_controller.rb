@@ -9,6 +9,6 @@ class Api::StockPricesController < Api::ApplicationController
                    .where(date: date)
                    .first
 
-    render json: @stock_price
+    render json: (@stock_price || {})
   end
 end
