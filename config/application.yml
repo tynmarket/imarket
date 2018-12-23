@@ -1,0 +1,20 @@
+defaults: &defaults
+  ga:
+    tracking_id:
+  imarket:
+    api_key: <%= ENV["IMARKET_API_KEY"] %>
+
+development:
+  <<: *defaults
+  imarket:
+    api_key: api_key
+
+test:
+  <<: *defaults
+  imarket:
+    api_key: api_key
+
+production:
+  <<: *defaults
+  ga:
+    tracking_id: UA-46662880-1

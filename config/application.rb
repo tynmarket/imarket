@@ -39,5 +39,10 @@ module Imarket
     config.time_zone = 'Tokyo'
 
     config.paths.add 'lib', eager_load: true
+
+    config.generators do |g|
+      g.helper false
+      g.assets false
+    end
   end
 end

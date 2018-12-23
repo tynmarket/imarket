@@ -16,4 +16,9 @@ Rails.application.routes.draw do
       get 'pbr'
     end
   end
+
+  # API
+  namespace :api, defaults: { format: :json } do
+    resources :stock_prices, param: :code, only: [:show]
+  end
 end
