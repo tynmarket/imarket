@@ -7,6 +7,6 @@ StockPrice.seed(:id,
   {id: 6, term: 1, code: "9984", date: "2014-01-20", close: 22, stock_id: 9984},
   {id: 7, code: "1111", term: 1, date: "2014-11-20", per: 20.5, pbr: 1.25, stock_id: 1111},
   {id: 8, code: "1111", term: 1, date: "2014-11-21", per: 19.5, pbr: 1.15, stock_id: 1111},
-  {id: 9, code: "1111", term: 1, date: "2015-11-19", per: 20.5, pbr: 1.25, stock_id: 1111},
+  {id: 9, code: "1111", term: 1, date: "2015-11-19", close: 2100, change: 50, change_rate: 0.0233, per: 20.5, pbr: 1.25, stock_id: 1111},
   {id: 10, code: "1111", term: 1, date: "2015-11-20", per: 19.5, pbr: 1.15, stock_id: 1111}
 )

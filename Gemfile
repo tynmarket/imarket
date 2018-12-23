@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
+gem 'active_model_serializers'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap-sass'
 gem 'browser'
@@ -13,11 +14,13 @@ gem 'kaminari'
 gem 'meta-tags'
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 gem 'newrelic_rpm'
+gem 'pry-rails'
 gem 'pry-byebug'
 gem 'pry-stack_explorer'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.0'
 gem 'sass-rails', '~> 5.0'
+gem 'settingslogic'
 gem 'slim-rails'
 gem 'trading_day_jp', github: 'tyn-iMarket/trading_day_jp'
 gem 'uglifier', '>= 1.3.0'
@@ -40,6 +43,7 @@ end
 group :test do
   gem 'capybara'
   gem 'database_cleaner'
+  gem "rspec_junit_formatter"
   gem 'rspec-rails'
   gem 'spring-commands-rspec'
   gem 'timecop'

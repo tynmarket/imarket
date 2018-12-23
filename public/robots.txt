@@ -1,2 +1,6 @@
 User-Agent: *
-Disallow:
+Disallow: /disclosures/2017*
+Disallow: /disclosures/2016*
+Disallow: /disclosures/2015*
+Disallow: /disclosures/2014*
+Disallow: /disclosures/2013*
