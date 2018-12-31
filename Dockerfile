@@ -22,4 +22,5 @@ ENTRYPOINT bundle exec rails db:migrate \
       && nginx \
       && echo "apikey = \"$MACKEREL_API_KEY\"" >> /etc/mackerel-agent/mackerel-agent.conf \
       && /etc/init.d/mackerel-agent start \
+      && /etc/init.d/cron start \
       && bundle exec puma -b unix:///var/run/puma.sock
