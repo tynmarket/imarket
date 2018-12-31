@@ -20,6 +20,7 @@ EXPOSE 80
 
 ENTRYPOINT bundle exec rails db:migrate \
       && nginx \
+      && echo 'roles = [ "iMarket:app" ]' >> /etc/mackerel-agent/mackerel-agent.conf \
       && echo "apikey = \"$MACKEREL_API_KEY\"" >> /etc/mackerel-agent/mackerel-agent.conf \
       && /etc/init.d/mackerel-agent start \
       && /etc/init.d/cron start \
