@@ -18,7 +18,7 @@ RUN apk upgrade --no-cache && \
     mkdir -p /app/log && \
     mkdir /run/nginx
 
-COPY Gemfile Gemfile.lock package.json yarn.lock /app/
+COPY Gemfile Gemfile.lock /app/
 
 RUN apk add --update --no-cache --virtual=build-dependencies \
       build-base \
