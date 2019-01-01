@@ -6,6 +6,15 @@ COPY docker/nginx.conf /etc/nginx
 COPY docker/nginx /etc/logrotate.d
 COPY docker/mackerel-agent.sh /app
 
+ARG rails_master_key
+
+ENV TZ Asia/Tokyo
+ENV RAILS_MASTER_KEY $rails_master_key
+
+RUN bundle exec rails assets:precompile RAILS_ENV=production
+
+EXPOSE 80
+
 ENTRYPOINT bundle exec rails db:migrate && \
            nginx && \
            ./mackerel-agent.sh && \
