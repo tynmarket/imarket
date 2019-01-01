@@ -5,6 +5,7 @@ $font-size-small: 12px;
 /* color */
 $color-nabvar: #595857;
 $color-red: #d3381c;
+$color-blue: blue;
 $color-link: #428bca;
 $color-text: #333;
 
@@ -35,7 +36,11 @@ $border-divider: 1px solid #e5e5e5;
 }
 
 .red {
-  color: $color-red;
+  color: $color-red !important;
+}
+
+.blue {
+  color: $color-blue !important;
 }
 
 div.overflow_hidden {

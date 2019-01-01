@@ -6,6 +6,12 @@ module DisclosuresHelper
     (today.prev_month + 1..today).to_a.reverse
   end
 
+  def date_color(date)
+    return "blue" if date.saturday?
+
+    "red" if date.sunday? || HolidayJp.holiday?(date)
+  end
+
   def release_time(disclosure)
     return unless disclosure && disclosure.release_date
 
