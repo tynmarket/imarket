@@ -11,7 +11,8 @@ RUN apk upgrade --no-cache && \
       nginx \
       logrotate \
       tzdata \
-      bash && \
+      bash \
+      git && \
     mkdir -p /app/tmp/cache && \
     mkdir -p /app/tmp/pids && \
     mkdir -p /app/tmp/sockets && \
