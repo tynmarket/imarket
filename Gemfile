@@ -45,6 +45,8 @@ group :test do
   gem 'database_cleaner'
   gem "rspec_junit_formatter"
   gem 'rspec-rails'
+  gem 'rubocop', require: false # for FactoryBot
+  gem 'rubocop-rspec'
   gem 'spring-commands-rspec'
   gem 'timecop'
 end
