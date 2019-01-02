@@ -16,4 +16,7 @@ class Disclosure < ActiveRecord::Base
   # kaminariだとincludesの前に指定する必要がある？
 #  scope :display, -> { select("disclosures.id, disclosures.release, disclosures.name, disclosures.pdf, disclosures.title, disclosures.code") }
 
+  def pdf_path
+    "/pdf/#{I18n.l(release_date, format: :ymd_short)}/#{pdf}"
+  end
 end

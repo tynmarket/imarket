@@ -1,6 +1,11 @@
 module Support
   def json
-    @json ||= JSON.parse(response.body).with_indifferent_access
+    @json ||= parse_json(response.body)
+  end
+
+  def parse_json(json_str)
+    result = JSON.parse(json_str)
+    result.is_a?(Hash) ? result.with_indifferent_access : result
   end
 
   def auth_header
