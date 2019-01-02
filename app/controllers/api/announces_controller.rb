@@ -30,7 +30,7 @@ class Api::AnnouncesController < Api::ApplicationController
 
     klass
       .where(code: codes)
-      .where(created_at: from..to)
+      .where(created_at: from..to) # クロールのタイムラグを考慮してrelease_dateにしない
       .pluck(:code)
       .uniq
   end
