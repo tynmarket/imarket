@@ -24,7 +24,7 @@ class StockPricesController < ApplicationController
     # TODO 2011/07/01固定で良い？
     @dates_entire_period = TradingDayJp.between(date_spider_start, TradingDayJp.end_of_year(today))
 
-    @dates_current_year = @dates_entire_period.select {|d| d >= TradingDayJp.beginning_of_year(today) }
+    @dates_current_year = dates_current_year
 
     @ticks_current_year = @dates_current_year.map.with_index do |date, i|
 
@@ -38,5 +38,19 @@ class StockPricesController < ApplicationController
         (date.year == today.year && TradingDayJp.end_of_year?(date))
 
     end.compact
+  end
+
+  def dates_current_year
+    today = Date.current
+    reference_date = today.beginning_of_year + 3.months
+
+    start_date, end_date =
+      if today >= reference_date
+        [today.beginning_of_year, today.end_of_year]
+      else
+        [Date.new(today.year - 1, 10, 1), Date.new(today.year, 9).end_of_month]
+      end
+
+    @dates_entire_period.select { |d| d >= start_date && d <= end_date }
   end
 end

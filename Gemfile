@@ -48,5 +48,4 @@ group :test do
   gem 'rubocop', require: false # for FactoryBot
   gem 'rubocop-rspec'
   gem 'spring-commands-rspec'
-  gem 'timecop'
 end
