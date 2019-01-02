@@ -20,5 +20,11 @@ Rails.application.routes.draw do
   # API
   namespace :api, defaults: { format: :json } do
     resources :stock_prices, param: :code, only: [:show]
+    resource :announce, only: [] do
+      member do
+        get 'financial_results'
+        get 'forecast'
+      end
+    end
   end
 end
