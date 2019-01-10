@@ -6,7 +6,11 @@ class DisclosuresController < ApplicationController
     now = Time.now
 
     if date
-      @date = Date.parse date
+      begin
+        @date = Date.parse date
+      rescue
+        @date = now.to_date
+      end
       page = params[:page].to_i
     elsif (0...7).include? now.hour
       @date = now.to_date - 1.day
