@@ -27,6 +27,8 @@ exports.run = async (data, context, callback) => {
     callback(err);
   } else {
     await deleteSnapshot();
+    // 呼ばないとタイムアウトする？
+    callback();
   }
 
   console.log('End backup.');
