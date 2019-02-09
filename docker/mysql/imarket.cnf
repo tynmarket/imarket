@@ -4,3 +4,4 @@ default-character-set=utf8mb4
 [mysqld]
 character-set-server=utf8mb4
 collation-server=utf8mb4_general_ci
+default-authentication-plugin = mysql_native_password

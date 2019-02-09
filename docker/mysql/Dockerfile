@@ -1,4 +1,6 @@
-FROM mysql:5.7
+# docker build -t tynmarket/mysql .
+
+FROM mysql:8.0
 
 RUN apt-get update \
       && apt-get install -y --no-install-recommends procps \
