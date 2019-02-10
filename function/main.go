@@ -3,11 +3,15 @@ package main
 import (
 	"check_response_time"
 	"context"
-	"fmt"
+	"log"
 )
 
 func main() {
 	ctx := context.Background()
-	check_response_time.Function(ctx, check_response_time.PubSubMessage{})
-	fmt.Println("main")
+	err := check_response_time.Function(ctx, check_response_time.PubSubMessage{})
+	if err != nil {
+		log.Printf("err: %s", err)
+		return
+	}
+	log.Println("succeess")
 }
