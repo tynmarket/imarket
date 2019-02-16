@@ -1,4 +1,4 @@
-# docker build -t tynmarket/mysql .
+# docker build -t tynmarket/mysql:8.0 .
 
 FROM mysql:8.0
 
