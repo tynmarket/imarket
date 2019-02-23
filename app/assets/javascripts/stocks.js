@@ -1,4 +1,5 @@
 $(function () {
+  return
   if (!document.getElementById('stocks-show')) { return };
 
   var data_per, data_pbr, plotData = {};
