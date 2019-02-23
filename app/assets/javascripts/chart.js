@@ -136,7 +136,7 @@ $(function () {
       data: {
         datasets: [{
           borderWidth: 2,
-          pointHitRadius: 5,
+          pointHitRadius: 7,
         }],
       },
       options: {
