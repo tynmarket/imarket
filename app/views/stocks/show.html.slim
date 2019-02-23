@@ -177,14 +177,14 @@ ul.nav.nav-tabs.main-content-nav-tabs
   #menu-3.tab-pane.tab-chart
     h5.chart-header 年初来
     .col-7.per-container
-      #per-current.per-chart
+      canvas#per-current.per-chart
     .operator-container
       div PERの最大値
       = select_tag('select-per-current', options_for_select(options_select_per), include_blank: true, id: "select-per-current", class: "select-per form-control")
     .clearfix
     h5.chart-header 全期間
     .col-7.per-container
-      #per-entire.per-chart
+      canvas#per-entire.per-chart
     .operator-container
       div PERの最大値
       = select_tag('select-per-entire', options_for_select(options_select_per), include_blank: true, id: "select-per-entire", class: "select-per form-control")
