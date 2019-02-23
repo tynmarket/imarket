@@ -195,14 +195,14 @@ ul.nav.nav-tabs.main-content-nav-tabs
     div ＊PBRは 株主資本 /（期末発行済株式数 - 期末自己株式数）で算出しており、Yahooファイナンス等の値と一致しない場合があります。
     h5.chart-header 年初来
     .col-7.per-container
-      #pbr-current.per-chart
+      canvas#pbr-current.per-chart
     .operator-container
       div PBRの最大値
       = select_tag('select-pbr-current', options_for_select(options_select_pbr), include_blank: true, id: "select-pbr-current", class: "select-per form-control")
     .clearfix
     h5.chart-header 全期間
     .col-7.per-container
-      #pbr-entire.per-chart
+      canvas#pbr-entire.per-chart
     .operator-container
       div PBRの最大値
       = select_tag('select-pbr-entire', options_for_select(options_select_pbr), include_blank: true, id: "select-pbr-entire", class: "select-per form-control")
