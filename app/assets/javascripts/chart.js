@@ -9,14 +9,29 @@ $(function () {
   async function renderPerChart(code) {
     const url = `/stock_prices/${code}/per.json`;
     const response = await axios.get(url);
-    renderChart('per-current', response.data.current_year);
-    renderChart('per-entire', response.data.entire_period);
+
+    renderCurrentChart('per-current', response.data.current_year);
+    renderEntireChart('per-entire', response.data.entire_period);
   }
 
-  function renderChart(selector, data) {
-    const ctx = document.getElementById(selector).getContext('2d');
-    const labels = data.x_label;
+  function renderCurrentChart(selector, data) {
+    const labels = data.x_label
     const points = data.data.map((point) => { return {x: point[0], y: point[1]} });
+    const config = _.merge(defaultConfig(points), currentConfig(labels, points));
+
+    renderChart(selector, config);
+  }
+
+  function renderEntireChart(selector, data) {
+    const labels = data.x_label
+    const points = data.data.map((point) => { return {x: labels[point[0]], y: point[1]} });
+    const config = _.merge(defaultConfig(points), entireConfig(labels, points));
+
+    renderChart(selector, config);
+  }
+
+  function renderChart(selector, config) {
+    const ctx = document.getElementById(selector).getContext('2d');
 
     const shadowLineElement = Chart.elements.Line.extend({
       draw () {
@@ -45,80 +60,137 @@ $(function () {
       datasetElementType: shadowLineElement
     })
 
-    const chart = new Chart(ctx, {
-        type: 'shadowLine',
-        data: {
-          datasets: [
-            {
-              data: points,
-              backgroundColor: '#edc240',
-              borderColor: '#edc240',
-              borderWidth: 2,
-              fill: false,
-              pointHitRadius: 5,
-              pointHoverBackgroundColor: 'transparent',
-              pointHoverBorderColor: '#afd8f8',
-              pointHoverBorderWidth: 4,
-              pointHoverRadius: 6,
-              pointRadius: 0,
-            }
-          ]
+    const chart = new Chart(ctx, config);
+  }
+
+  function defaultConfig(points) {
+    return {
+      type: 'shadowLine',
+      data: {
+        datasets: [
+          {
+            data: points,
+            backgroundColor: '#edc240',
+            borderColor: '#edc240',
+            fill: false,
+            pointHoverBackgroundColor: 'transparent',
+            pointHoverBorderColor: '#afd8f8',
+            pointHoverBorderWidth: 4,
+            pointHoverRadius: 6,
+            pointRadius: 0,
+          }
+        ]
+      },
+      options: {
+        animation: {
+            duration: 0,
         },
-        options: {
-          animation: {
-              duration: 0,
-          },
-          elements: {
-              line: {
-                  tension: 0.1,
-              }
-          },
-          hover: {
-              animationDuration: 0,
-          },
-          legend: {
-            display: false
-          },
-          responsive: true,
-          maintainAspectRatio: false,
-          responsiveAnimationDuration: 0,
-          scales: {
-            xAxes: [{
-              type: 'linear',
-              gridLines: {
-                drawTicks: false,
-              },
-              ticks: {
-                callback: (value, i, values) => labels[value],
-                autoSkip: false,
-                padding: 10,
-                max: labels.length,
-                maxRotation: 45,
-                stepSize: 60
-              }
-            }],
-            yAxes: [{
-              gridLines: {
-                drawTicks: false,
-              },
-              ticks: {
-                padding: 10,
-                maxTicksLimit: 6,
-              }
-            }]
-          },
-          tooltips: {
-            callbacks: {
-              label: (item, data) => {
-                const point = points[item.index]
-                const value = point.y
-                return ` ${value} 倍（${labels[point.x]}）`
-              },
-              title: (item, data) => {},
+        elements: {
+            line: {
+                tension: 0.1,
+            }
+        },
+        hover: {
+            animationDuration: 0,
+        },
+        legend: {
+          display: false
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+        responsiveAnimationDuration: 0,
+        scales: {
+          xAxes: [{
+            gridLines: {
+              drawTicks: false,
             },
-            displayColors: false,
+            ticks: {
+              autoSkip: false,
+              padding: 10,
+              maxRotation: 45,
+            }
+          }],
+          yAxes: [{
+            gridLines: {
+              drawTicks: false,
+            },
+            ticks: {
+              padding: 10,
+              maxTicksLimit: 6,
+            }
+          }]
+        },
+        tooltips: {
+          callbacks: {
+            title: (item, data) => {},
           },
-        }
-    });
+          displayColors: false,
+        },
+      }
+    };
+  }
+
+  function currentConfig(labels, points) {
+    return {
+      data: {
+        datasets: [{
+          borderWidth: 2,
+          pointHitRadius: 5,
+        }],
+      },
+      options: {
+        scales: {
+          xAxes: [{
+            type: 'linear',
+            ticks: {
+              callback: (value, i, values) => labels[value],
+              max: labels.length,
+              stepSize: 60
+            }
+          }],
+        },
+        tooltips: {
+          callbacks: {
+            label: (item, data) => {
+              const point = points[item.index]
+              const value = point.y
+              return ` ${value} 倍（${labels[point.x]}）`
+            },
+          },
+        },
+      }
+    };
+  }
+
+  function entireConfig(labels, points) {
+    return {
+      labels: ['2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'], // TODO
+      data: {
+        datasets: [{
+          borderWidth: 1.5,
+          pointHitRadius: 2,
+        }],
+      },
+      options: {
+        scales: {
+          xAxes: [{
+            type: 'time',
+            time: {
+              unit: 'year',
+              stepSize: 1,
+            },
+          }],
+        },
+        tooltips: {
+          callbacks: {
+            label: (item, data) => {
+              const point = points[item.index]
+              const value = point.y
+              return ` ${value} 倍（${point.x}）`
+            },
+          },
+        },
+      }
+    };
   }
 });
