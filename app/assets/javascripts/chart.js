@@ -5,6 +5,8 @@ $(function () {
   const code = document.getElementById('code').textContent;
   //renderPerChart(code);
   renderPerChart(4368);
+  //renderPbrChart(code);
+  renderPbrChart(4368);
 
   async function renderPerChart(code) {
     const url = `/stock_prices/${code}/per.json`;
@@ -12,6 +14,14 @@ $(function () {
 
     renderCurrentChart('per-current', response.data.current_year);
     renderEntireChart('per-entire', response.data.entire_period);
+  }
+
+  async function renderPbrChart(code) {
+    const url = `/stock_prices/${code}/pbr.json`;
+    const response = await axios.get(url);
+
+    renderCurrentChart('pbr-current', response.data.current_year);
+    renderEntireChart('pbr-entire', response.data.entire_period);
   }
 
   function renderCurrentChart(selector, data) {
