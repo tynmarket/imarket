@@ -125,6 +125,7 @@ $(function () {
             title: (item, data) => {},
           },
           displayColors: false,
+          caretPadding: 5,
         },
       }
     };
