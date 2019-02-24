@@ -36,6 +36,7 @@ end
 
 group :development do
   gem 'better_errors'
+  gem 'rack-proxy'
   gem 'seed-fu'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
