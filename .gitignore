@@ -30,3 +30,5 @@ node_modules
 nohup.out
 pkg
 .env.yaml
+
+/public/packs
