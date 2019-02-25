@@ -14,7 +14,14 @@ module.exports = function(api) {
           }
         }
       ],
-      (isProductionEnv || isDevelopmentEnv) && [
+      isDevelopmentEnv [
+        require('@babel/preset-env').default,
+        {
+          "targets": "last 2 Chrome versions",
+          "useBuiltIns": "usage"
+        }
+      ],
+      isProductionEnv [
         require('@babel/preset-env').default,
         {
           forceAllTransforms: true,
