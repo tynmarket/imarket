@@ -1,5 +1,5 @@
 import React from "react";
-import { Chart as ChartJS } from 'chart.js/dist/Chart.bundle'
+import LineChart from './LineChart'
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 const merge = require('lodash/merge');
@@ -16,34 +16,7 @@ const Chart = ({ code }) => {
       const points = (data.data || []).map((point) => { return {x: point[0], y: point[1]} });
       const config = merge(defaultConfig(points), currentConfig(labels, points));
 
-      const shadowLineElement = ChartJS.elements.Line.extend({
-        draw () {
-          const { ctx_ } = this._chart
-
-          const originalStroke = ctx.stroke
-
-          ctx.stroke = function () {
-            ctx.save()
-            ctx.shadowColor = '#d3d3d3'
-            ctx.shadowBlur = 2
-            ctx.shadowOffsetX = 2
-            ctx.shadowOffsetY = 4
-            originalStroke.apply(this, arguments)
-            ctx.restore()
-          }
-
-          ChartJS.elements.Line.prototype.draw.apply(this, arguments)
-
-          ctx.stroke = originalStroke;
-        }
-      })
-
-      ChartJS.defaults.shadowLine = ChartJS.defaults.line
-      ChartJS.controllers.shadowLine = ChartJS.controllers.line.extend({
-        datasetElementType: shadowLineElement
-      })
-
-      const chart = new ChartJS(ctx, config);
+      const chart = LineChart(ctx, config);
     });
   }, []);
 
