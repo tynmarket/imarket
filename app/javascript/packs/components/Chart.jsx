@@ -4,9 +4,22 @@ import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 const merge = require('lodash/merge');
 
-const Chart = ({ code }) => {
-  const canvas = useRef(null);
-  //const [data, setData] = useState({});
+const Chart = ({ code, option, max }) => {
+  const canvas = useRef();
+  const [chart, setChart] = useState();
+
+  if (chart) {
+    const prevMax = chart.options.scales.yAxes[0].ticks.max;
+
+    if (max || prevMax) {
+      if (max) {
+        chart.options.scales.yAxes[0].ticks.max = max;
+      } else {
+        delete chart.options.scales.yAxes[0].ticks.max;
+      }
+      chart.update();
+    }
+  }
 
   useEffect(() => {
     getData(code).then(data => {
@@ -14,14 +27,15 @@ const Chart = ({ code }) => {
 
       const labels = data.x_label || []
       const points = (data.data || []).map((point) => { return {x: point[0], y: point[1]} });
-      const config = merge(defaultConfig(points), currentConfig(labels, points));
+      const config = merge(defaultConfig(points), option(labels, points));
 
-      const chart = LineChart(ctx, config);
+      const chartRef = LineChart(ctx, config);
+      setChart(chartRef);
     });
   }, []);
 
   return (
-    <canvas ref={canvas} id="per-current" className="per-chart" />
+    <canvas ref={canvas} className="per-chart" />
   );
 };
 
@@ -94,70 +108,6 @@ function defaultConfig(points) {
         },
         displayColors: false,
         caretPadding: 5,
-      },
-    }
-  };
-}
-
-function currentConfig(labels, points) {
-  return {
-    data: {
-      datasets: [{
-        borderWidth: 2,
-        pointHitRadius: 7,
-      }],
-    },
-    options: {
-      scales: {
-        xAxes: [{
-          type: 'linear',
-          ticks: {
-            callback: (value, i, values) => labels[value],
-            max: labels.length,
-            stepSize: 60
-          }
-        }],
-      },
-      tooltips: {
-        callbacks: {
-          label: (item, data) => {
-            const point = points[item.index]
-            const value = point.y
-            return ` ${value} 倍（${labels[point.x]}）`
-          },
-        },
-      },
-    }
-  };
-}
-
-function entireConfig(labels, points) {
-  return {
-    labels: ['2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'], // TODO
-    data: {
-      datasets: [{
-        borderWidth: 1.5,
-        pointHitRadius: 2,
-      }],
-    },
-    options: {
-      scales: {
-        xAxes: [{
-          type: 'time',
-          time: {
-            unit: 'year',
-            stepSize: 1,
-          },
-        }],
-      },
-      tooltips: {
-        callbacks: {
-          label: (item, data) => {
-            const point = points[item.index]
-            const value = point.y
-            return ` ${value} 倍（${point.x}）`
-          },
-        },
       },
     }
   };
