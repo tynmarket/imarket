@@ -1,36 +1,78 @@
 import React from "react";
-import Chart from "./Chart";
+import ChartContainer from "./ChartContainer";
 
 const App = ({ code }) => {
   return (
     <div>
-      <h5 className="chart-header">年初来</h5>
-      <div className="col-7 per-container">
-        <Chart code={code} />
-      </div>
-      <div className="operator-container">
-        <div>PERの最大値</div>
-        <select name="select-per-current" id="select-per-current" className="select-per form-control">
-          { selectOptions([null, 10, 15, 20, 30, 50, 100]) }
-        </select>
-      </div>
+      <ChartContainer code={code} config={currentConfig} >年初来</ChartContainer>
       <div className="clearfix" />
-      <h5 className="chart-header">全期間</h5>
-      <div className="col-7 per-container">
-        <canvas id="per-entire" className="per-chart" />
-      </div>
-      <div className="operator-container">
-        <div>PERの最大値</div>
-        <select name="select-per-entire" id="select-per-entire" className="select-per form-control">
-          { selectOptions([null, 10, 15, 20, 30, 50, 100]) }
-        </select>
-      </div>
+      <ChartContainer code={code} config={entireConfig} >全期間</ChartContainer>
     </div>
   );
 };
 
-function selectOptions(values) {
-  return values.map((v, i) => <option value={v} key={i}>{v}</option>);
+const currentConfig = (labels, points) => {
+  return {
+    data: {
+      datasets: [{
+        borderWidth: 2,
+        pointHitRadius: 7,
+      }],
+    },
+    options: {
+      scales: {
+        xAxes: [{
+          type: 'linear',
+          ticks: {
+            callback: (value, i, values) => labels[value],
+            max: labels.length,
+            stepSize: 60
+          }
+        }],
+      },
+      tooltips: {
+        callbacks: {
+          label: (item, data) => {
+            const point = points[item.index]
+            const value = point.y
+            return ` ${value} 倍（${labels[point.x]}）`
+          },
+        },
+      },
+    }
+  };
+}
+
+function entireConfig(labels, points) {
+  return {
+    labels: ['2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'], // TODO
+    data: {
+      datasets: [{
+        borderWidth: 1.5,
+        pointHitRadius: 2,
+      }],
+    },
+    options: {
+      scales: {
+        xAxes: [{
+          type: 'time',
+          time: {
+            unit: 'year',
+            stepSize: 1,
+          },
+        }],
+      },
+      tooltips: {
+        callbacks: {
+          label: (item, data) => {
+            const point = points[item.index]
+            const value = point.y
+            return ` ${value} 倍（${point.x}）`
+          },
+        },
+      },
+    }
+  };
 }
 
 export default App;
