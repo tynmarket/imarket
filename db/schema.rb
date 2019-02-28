@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2015_01_10_053205) do
 
-  create_table "disclosures", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "disclosures", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.datetime "release_date"
     t.string "code", limit: 6
     t.string "name"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2015_01_10_053205) do
     t.index ["stock_id"], name: "index_disclosures_stock_id"
   end
 
-  create_table "latest_results_forecasts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "latest_results_forecasts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "code", limit: 6
     t.integer "year", limit: 2
     t.integer "month", limit: 1
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2015_01_10_053205) do
     t.index ["code"], name: "index_latest_results_forecasts_code"
   end
 
-  create_table "latest_summaries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "latest_summaries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "code", limit: 6
     t.integer "year", limit: 2
     t.integer "month", limit: 1
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 2015_01_10_053205) do
     t.index ["code"], name: "index_latest_summaries_code"
   end
 
-  create_table "results_forecasts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "results_forecasts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "code", limit: 6
     t.integer "year", limit: 2
     t.integer "month", limit: 1
@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 2015_01_10_053205) do
     t.index ["quarter", "code"], name: "index_results_forecasts_quarter_code"
   end
 
-  create_table "stock_prices", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "stock_prices", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "code", limit: 6
     t.integer "term", limit: 1
     t.date "date"
@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(version: 2015_01_10_053205) do
     t.index ["term", "stock_id"], name: "index_stock_prices_term_stock_id"
   end
 
-  create_table "stock_splits", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "stock_splits", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "code", limit: 6
     t.date "allocation_date"
     t.date "split_date"
@@ -164,7 +164,7 @@ ActiveRecord::Schema.define(version: 2015_01_10_053205) do
     t.index ["disclosure_id", "split_date"], name: "index_stock_splits_disclosure_id_split_date"
   end
 
-  create_table "stocks", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "stocks", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "code", limit: 6
     t.string "name"
     t.string "search_name"
@@ -175,7 +175,7 @@ ActiveRecord::Schema.define(version: 2015_01_10_053205) do
     t.index ["code"], name: "index_stocks_code"
   end
 
-  create_table "summaries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "summaries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "code", limit: 6
     t.integer "year", limit: 2
     t.integer "month", limit: 1
@@ -210,7 +210,7 @@ ActiveRecord::Schema.define(version: 2015_01_10_053205) do
     t.index ["disclosure_id"], name: "index_summaries_disclosure_id"
   end
 
-  create_table "system_statuses", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "system_statuses", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "status"
     t.datetime "created_at"
     t.datetime "updated_at"
