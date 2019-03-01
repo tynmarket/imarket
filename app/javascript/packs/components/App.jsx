@@ -30,7 +30,7 @@ const App = ({ code, indices }) => {
 };
 
 async function getData(code, indices) {
-  const url = `/stock_prices/${code}/${indices.toLowerCase()}.json`;
+  const url = `/stock_prices/${code}/${indices}.json`;
   const response = await axios.get(url);
   return response.data;
 }

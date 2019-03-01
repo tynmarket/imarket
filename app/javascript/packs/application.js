@@ -7,12 +7,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const code = document.querySelector("#code").textContent;
 
   ReactDOM.render(
-    <App code={code} indices={"PER"} />,
+    <App code={code} indices={"per"} />,
     document.querySelector("#per-chart")
   );
 
   ReactDOM.render(
-    <App code={code} indices={"PBR"} />,
+    <App code={code} indices={"pbr"} />,
     document.querySelector("#pbr-chart")
   );
 });
