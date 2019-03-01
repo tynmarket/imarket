@@ -1,4 +1,6 @@
 const merge = require('lodash/merge');
+const range = require('lodash/range');
+const moment = require('moment');
 
 export const currentConfigFn = (labels, points) => {
   const config = {
@@ -34,9 +36,17 @@ export const currentConfigFn = (labels, points) => {
   return merge(defaultConfig(points), config);
 };
 
+export const currentPointFn = (labels) => (point) => {
+  return {x: point[0], y: point[1]};
+};
+
 export const entireConfigFn = (labels, points) => {
+  const first = moment(labels[0]).year();
+  const last = moment(labels[labels.length - 1]).year();
+  const labelsRange = range(first, last + 1).map((v) => v.toString());
+
   const config = {
-    labels: ['2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'], // TODO
+    labels: labelsRange,
     data: {
       datasets: [{
         borderWidth: 1.5,
@@ -66,6 +76,10 @@ export const entireConfigFn = (labels, points) => {
   };
 
   return merge(defaultConfig(points), config);
+};
+
+export const entirePointFn = (labels) => (point, i) => {
+  return {x: labels[i], y: point[1]};
 };
 
 function defaultConfig(points) {
