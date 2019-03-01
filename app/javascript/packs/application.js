@@ -4,13 +4,15 @@ import App from "./components/App";
 import React from 'react';
 
 document.addEventListener("DOMContentLoaded", () => {
+  const code = document.querySelector("#code").textContent;
+
   ReactDOM.render(
-    <App code={4368} indices={"PER"} />,
+    <App code={code} indices={"PER"} />,
     document.querySelector("#per-chart")
   );
 
   ReactDOM.render(
-    <App code={4368} indices={"PBR"} />,
+    <App code={code} indices={"PBR"} />,
     document.querySelector("#pbr-chart")
   );
 });
