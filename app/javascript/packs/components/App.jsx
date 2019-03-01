@@ -11,14 +11,12 @@ const App = ({ code, indices }) => {
   useEffect(() => {
     getData(code, indices).then(data => {
       const currentData = data.current_year;
-      let labels = currentData.x_label || []
-      let points = (currentData.data || []).map((point) => { return {x: point[0], y: point[1]} });
-      setCurrentConfig(currentConfigFn(labels, points));
+      const currentConfig = getConfig(currentData, currentConfigFn);
+      setCurrentConfig(currentConfig);
 
       const entireData = data.entire_period;
-      labels = entireData.x_label || []
-      points = (entireData.data || []).map((point) => { return {x: point[0], y: point[1]} });
-      setEntireConfig(entireConfigFn(labels, points));
+      const entireConfig = getConfig(entireData, entireConfigFn);
+      setEntireConfig(entireConfig);
     });
   }, []);
 
@@ -35,6 +33,12 @@ async function getData(code, indices) {
   const url = `/stock_prices/${code}/${indices.toLowerCase()}.json`;
   const response = await axios.get(url);
   return response.data;
+}
+
+function getConfig(data, configFn) {
+  const labels = data.x_label || []
+  const points = (data.data || []).map((point) => { return {x: point[0], y: point[1]} });
+  return configFn(labels, points);
 }
 
 export default App;
