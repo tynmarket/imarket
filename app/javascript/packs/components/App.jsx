@@ -2,7 +2,7 @@ import React from "react";
 import ChartContainer from "./ChartContainer";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { currentConfigFn, entireConfigFn } from "./ChartConfig";
+import { currentConfigFn, currentPointFn, entireConfigFn, entirePointFn } from "./ChartConfig";
 
 const App = ({ code, indices }) => {
   const [currentConfig, setCurrentConfig] = useState();
@@ -11,11 +11,11 @@ const App = ({ code, indices }) => {
   useEffect(() => {
     getData(code, indices).then(data => {
       const currentData = data.current_year;
-      const currentConfig = getConfig(currentData, currentConfigFn);
+      const currentConfig = getConfig(currentData, currentConfigFn, currentPointFn);
       setCurrentConfig(currentConfig);
 
       const entireData = data.entire_period;
-      const entireConfig = getConfig(entireData, entireConfigFn);
+      const entireConfig = getConfig(entireData, entireConfigFn, entirePointFn);
       setEntireConfig(entireConfig);
     });
   }, []);
@@ -35,9 +35,9 @@ async function getData(code, indices) {
   return response.data;
 }
 
-function getConfig(data, configFn) {
+function getConfig(data, configFn, pointFn) {
   const labels = data.x_label || []
-  const points = (data.data || []).map((point) => { return {x: point[0], y: point[1]} });
+  const points = (data.data || []).map(pointFn(labels));
   return configFn(labels, points);
 }
 
