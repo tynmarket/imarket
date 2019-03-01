@@ -12,16 +12,19 @@ const ChartContainer = ({ indices, config, children }) => {
         <Chart config={config} max={max} />
       </div>
       <div className="operator-container">
-        <div>{ indices }の最大値</div>
+        <div>{ indices.toUpperCase() }の最大値</div>
         <select onChange={(e) => { setMax(maxValue(e)) }} className="select-per form-control">
-          { selectOptions([null, 10, 15, 20, 30, 50, 100]) }
+          { selectOptions(indices) }
         </select>
       </div>
     </>
   );
 };
 
-function selectOptions(values) {
+function selectOptions(indices) {
+  const values = indices === 'per' ?
+    [null, 10, 15, 20, 30, 50, 100] :
+    [null, 1, 2, 3, 5, 10, 20]
   return values.map((v, i) => <option value={v} key={i}>{v}</option>);
 }
 
