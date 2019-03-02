@@ -34,7 +34,7 @@
   },
   "scripts": {
     "serve": "webpack-dev-server -d --config webpack.config.js",
-    "lint": "eslint --fix app/javascript/packs/**/*.js{,x}",
+    "lint": "eslint --fix 'app/javascript/packs/**/*.js{,x}'",
     "lint-config": "eslint --fix webpack.config.js babel.config.js"
   }
 }
