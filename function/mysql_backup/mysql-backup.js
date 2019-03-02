@@ -7,7 +7,7 @@ const format = require('date-fns/format');
 const compute = new Compute();
 const zoneName = 'asia-northeast1-b';
 const zone = compute.zone(zoneName);
-const disk = zone.disk('mysql');
+const disk = zone.disk('mysql-1');
 
 // (async () => {
 //   console.log('Start backup.\n');
