@@ -15,20 +15,20 @@ module.exports = function(api) {
         },
       ],
       isDevelopmentEnv && [
-        (require('@babel/preset-env').default,
+        require('@babel/preset-env').default,
         {
           targets: 'last 2 Chrome versions',
           useBuiltIns: 'usage',
-        }),
+        },
       ],
       isProductionEnv && [
-        (require('@babel/preset-env').default,
+        require('@babel/preset-env').default,
         {
           forceAllTransforms: true,
           useBuiltIns: 'entry',
           modules: false,
           exclude: ['transform-typeof-symbol'],
-        }),
+        },
       ],
       [
         require('@babel/preset-react').default,
