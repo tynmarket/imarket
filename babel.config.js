@@ -14,20 +14,13 @@ module.exports = function(api) {
           },
         },
       ],
-      isDevelopmentEnv && [
+      (isProductionEnv || isDevelopmentEnv) && [
         require('@babel/preset-env').default,
         {
-          targets: 'last 2 Chrome versions',
+          targets: {
+            ie: 11,
+          },
           useBuiltIns: 'usage',
-        },
-      ],
-      isProductionEnv && [
-        require('@babel/preset-env').default,
-        {
-          forceAllTransforms: true,
-          useBuiltIns: 'entry',
-          modules: false,
-          exclude: ['transform-typeof-symbol'],
         },
       ],
       [
@@ -39,51 +32,6 @@ module.exports = function(api) {
       ],
     ].filter(Boolean),
     plugins: [
-      // require('babel-plugin-macros'),
-      // require('@babel/plugin-syntax-dynamic-import').default,
-      //isTestEnv && require('babel-plugin-dynamic-import-node'),
-      //require('@babel/plugin-transform-destructuring').default,
-      /*
-      [
-        require('@babel/plugin-proposal-class-properties').default,
-        {
-          loose: true
-        }
-      ],
-      */
-      /*
-      [
-        require('@babel/plugin-proposal-object-rest-spread').default,
-        {
-          useBuiltIns: true
-        }
-      ],
-      */
-      /*
-      [
-        require('@babel/plugin-transform-runtime').default,
-        {
-          helpers: false,
-          regenerator: true
-        }
-      ],
-      */
-      /*
-      [
-        require('@babel/plugin-transform-regenerator').default,
-        {
-          async: false
-        }
-      ],
-      */
-      /*
-      isProductionEnv && [
-        require('babel-plugin-transform-react-remove-prop-types').default,
-        {
-          removeImport: true
-        }
-      ]
-      */
     ].filter(Boolean),
   };
 };
