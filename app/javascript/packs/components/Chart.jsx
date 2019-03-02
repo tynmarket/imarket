@@ -1,6 +1,6 @@
-import React from 'react';
+import { useRef, useState } from 'react';
 import LineChart from './LineChart';
-import { useState, useRef } from 'react';
+import React from 'react';
 
 const Chart = ({ config, max }) => {
   const canvas = useRef();

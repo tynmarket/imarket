@@ -1,5 +1,5 @@
-import React from 'react';
 import Chart from './Chart';
+import React from 'react';
 import { useState } from 'react';
 
 const ChartContainer = ({ indices, config, children }) => {

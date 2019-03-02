@@ -1,13 +1,13 @@
-import React from 'react';
-import ChartContainer from './ChartContainer';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import {
   currentConfigFn,
   currentPointFn,
   entireConfigFn,
   entirePointFn,
 } from './ChartConfig';
+import { useEffect, useState } from 'react';
+import ChartContainer from './ChartContainer';
+import React from 'react';
+import axios from 'axios';
 
 const App = ({ code, indices }) => {
   const [currentConfig, setCurrentConfig] = useState();

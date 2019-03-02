@@ -1,6 +1,6 @@
+import getYear from 'date-fns/get_year';
 import merge from 'lodash/fp/merge';
 import range from 'lodash/range';
-import getYear from 'date-fns/get_year';
 
 export const currentConfigFn = (labels, points) => {
   const config = {
