@@ -1,6 +1,6 @@
 const merge = require('lodash/merge');
 const range = require('lodash/range');
-const moment = require('moment');
+const getYear = require('date-fns/get_year')
 
 export const currentConfigFn = (labels, points) => {
   const config = {
@@ -41,8 +41,8 @@ export const currentPointFn = (labels) => (point) => {
 };
 
 export const entireConfigFn = (labels, points) => {
-  const first = moment(labels[0]).year();
-  const last = moment(labels[labels.length - 1]).year();
+  const first = getYear(labels[0]);
+  const last = getYear(labels[labels.length - 1]);
   const labelsRange = range(first, last + 1).map((v) => v.toString());
 
   const config = {
