@@ -1,6 +1,6 @@
-import React from "react";
-import LineChart from './LineChart'
-import { useState, useRef } from "react";
+import React from 'react';
+import LineChart from './LineChart';
+import { useState, useRef } from 'react';
 
 const Chart = ({ config, max }) => {
   const canvas = useRef();
@@ -23,11 +23,9 @@ const Chart = ({ config, max }) => {
     const ctx = canvas.current.getContext('2d');
     const chartRef = LineChart(ctx, config);
     setChart(chartRef);
- }
+  }
 
-  return (
-    <canvas ref={canvas} className="per-chart" />
-  );
+  return <canvas ref={canvas} className="per-chart" />;
 };
 
 export default Chart;
