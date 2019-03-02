@@ -1,13 +1,15 @@
 const Compute = require('@google-cloud/compute');
+const addHours = require('date-fns/add_hours');
 const addMonths = require('date-fns/add_months');
 const lastDayOfMonth = require('date-fns/last_day_of_month');
 const format = require('date-fns/format');
-
 
 const compute = new Compute();
 const zoneName = 'asia-northeast1-b';
 const zone = compute.zone(zoneName);
 const disk = zone.disk('mysql-1');
+
+const isUTC = (new Date()).getTimezoneOffset() == 0;
 
 // (async () => {
 //   console.log('Start backup.\n');
@@ -34,6 +36,14 @@ exports.run = async (data, context, callback) => {
   console.log('End backup.');
 };
 
+function getDate() {
+  if (isUTC) {
+    return addHours(new Date(), 9);
+  } else {
+    return new Date();
+  }
+}
+
 function snapshotName(date) {
   return 'snapshot-mysql-' + format(date, 'YYYY-MM-DD');
 }
@@ -42,7 +52,7 @@ async function createSnapshot() {
   console.log('Start createSnapshot().\n');
 
   // 先月末
-  const createMonth = addMonths(new Date(), -1);
+  const createMonth = addMonths(getDate(), -1);
   const lastDay = lastDayOfMonth(createMonth);
   const name = snapshotName(lastDay);
 
@@ -60,7 +70,7 @@ async function deleteSnapshot() {
   console.log(`Start deleteSnapshot().\n`);
 
   // 3ヶ月前
-  const deleteMonth = addMonths(new Date(), -3);
+  const deleteMonth = addMonths(getDate(), -3);
   const lastDay = lastDayOfMonth(deleteMonth);
   const name = snapshotName(lastDay);
   const snapshot = compute.snapshot(name);
