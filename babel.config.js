@@ -1,8 +1,8 @@
 module.exports = function(api) {
-  var currentEnv = api.env()
-  var isDevelopmentEnv = api.env('development')
-  var isProductionEnv = api.env('production')
-  var isTestEnv = api.env('test')
+  //var currentEnv = api.env()
+  var isDevelopmentEnv = api.env('development');
+  var isProductionEnv = api.env('production');
+  var isTestEnv = api.env('test');
 
   return {
     presets: [
@@ -10,33 +10,33 @@ module.exports = function(api) {
         require('@babel/preset-env').default,
         {
           targets: {
-            node: 'current'
-          }
-        }
+            node: 'current',
+          },
+        },
       ],
-      isDevelopmentEnv [
-        require('@babel/preset-env').default,
+      isDevelopmentEnv && [
+        (require('@babel/preset-env').default,
         {
-          "targets": "last 2 Chrome versions",
-          "useBuiltIns": "usage"
-        }
+          targets: 'last 2 Chrome versions',
+          useBuiltIns: 'usage',
+        }),
       ],
-      isProductionEnv [
-        require('@babel/preset-env').default,
+      isProductionEnv && [
+        (require('@babel/preset-env').default,
         {
           forceAllTransforms: true,
           useBuiltIns: 'entry',
           modules: false,
-          exclude: ['transform-typeof-symbol']
-        }
+          exclude: ['transform-typeof-symbol'],
+        }),
       ],
       [
         require('@babel/preset-react').default,
         {
           development: isDevelopmentEnv || isTestEnv,
-          useBuiltIns: true
-        }
-      ]
+          useBuiltIns: true,
+        },
+      ],
     ].filter(Boolean),
     plugins: [
       // require('babel-plugin-macros'),
@@ -84,6 +84,6 @@ module.exports = function(api) {
         }
       ]
       */
-    ].filter(Boolean)
-  }
-}
+    ].filter(Boolean),
+  };
+};
