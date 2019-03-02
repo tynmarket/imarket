@@ -1,8 +1,13 @@
-import React from "react";
-import ChartContainer from "./ChartContainer";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { currentConfigFn, currentPointFn, entireConfigFn, entirePointFn } from "./ChartConfig";
+import React from 'react';
+import ChartContainer from './ChartContainer';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import {
+  currentConfigFn,
+  currentPointFn,
+  entireConfigFn,
+  entirePointFn,
+} from './ChartConfig';
 
 const App = ({ code, indices }) => {
   const [currentConfig, setCurrentConfig] = useState();
@@ -11,7 +16,11 @@ const App = ({ code, indices }) => {
   useEffect(() => {
     getData(code, indices).then(data => {
       const currentData = data.current_year;
-      const currentConfig = getConfig(currentData, currentConfigFn, currentPointFn);
+      const currentConfig = getConfig(
+        currentData,
+        currentConfigFn,
+        currentPointFn
+      );
       setCurrentConfig(currentConfig);
 
       const entireData = data.entire_period;
@@ -22,9 +31,13 @@ const App = ({ code, indices }) => {
 
   return (
     <div>
-      <ChartContainer indices={indices} config={currentConfig} >年初来</ChartContainer>
+      <ChartContainer indices={indices} config={currentConfig}>
+        年初来
+      </ChartContainer>
       <div className="clearfix" />
-      <ChartContainer indices={indices} config={entireConfig} >全期間</ChartContainer>
+      <ChartContainer indices={indices} config={entireConfig}>
+        全期間
+      </ChartContainer>
     </div>
   );
 };
@@ -36,7 +49,7 @@ async function getData(code, indices) {
 }
 
 function getConfig(data, configFn, pointFn) {
-  const labels = data.x_label || []
+  const labels = data.x_label || [];
   const points = (data.data || []).map(pointFn(labels));
   return configFn(labels, points);
 }
