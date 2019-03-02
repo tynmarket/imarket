@@ -7,7 +7,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 
 module.exports = {
   entry:
@@ -118,7 +117,6 @@ module.exports = {
       new WebpackAssetsManifest({
         writeToDisk: true,
         publicPath: true
-      }),
-      new MomentLocalesPlugin() ],
+      }) ],
 
 };
