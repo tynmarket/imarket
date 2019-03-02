@@ -1,7 +1,7 @@
-import ReactDOM from 'react-dom';
-//import "../styles/application";
 import App from './components/App';
 import React from 'react';
+import ReactDOM from 'react-dom';
+//import "../styles/application";
 
 document.addEventListener('DOMContentLoaded', () => {
   const code = document.querySelector('#code').textContent;
