@@ -29,6 +29,26 @@ jobs:
           paths:
             - vendor/bundle
 
+      # Restore yarn cache
+      - restore_cache:
+          keys:
+            - imarket-yarn-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: yarn install
+          command: yarn install --cache-folder ~/.cache/yarn
+
+      # Store yarn cache
+      - save_cache:
+          key: imarket-yarn-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+
+      # Run eslint
+      - run:
+          name: yarn lint
+          command: yarn lint
+
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
@@ -42,7 +62,6 @@ jobs:
             bundle exec rspec --format progress \
                               --format RspecJunitFormatter \
                               --out test_results/rspec.xml
-
       # collect reports
       - store_test_results:
           path: test_results
