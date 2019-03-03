@@ -4,7 +4,13 @@ import ReactDOM from 'react-dom';
 //import "../styles/application";
 
 document.addEventListener('DOMContentLoaded', () => {
-  const code = document.querySelector('#code').textContent;
+  const elm = document.querySelector('#code');
+
+  if (!elm) {
+    return;
+  }
+
+  const code = elm.textContent;
 
   ReactDOM.render(
     <App code={code} indices={'per'} />,
