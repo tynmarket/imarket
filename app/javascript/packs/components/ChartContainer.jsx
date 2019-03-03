@@ -39,7 +39,8 @@ function selectOptions(indices) {
 }
 
 function maxValue(e) {
-  const val = e.currentTarget.selectedOptions[0].value;
+  const select = e.currentTarget;
+  const val = select.options[select.selectedIndex].value; // IE 11
   return val ? parseInt(val) : null;
 }
 
