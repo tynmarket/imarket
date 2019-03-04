@@ -139,7 +139,7 @@ module.exports = (env, {mode}) => {
               loader: 'babel-loader',
               options: {
                 babelrc: false,
-                presets: [['@babel/preset-env', { modules: false }]],
+                presets: [['@babel/preset-env', { modules: false }]], // babel.config.jsの指定との違いは？
                 cacheDirectory: true,
                 cacheCompression: isProductionEnv,
                 compact: false,
