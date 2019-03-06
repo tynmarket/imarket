@@ -131,6 +131,7 @@ module.exports = (env, {mode}) => {
           ],
           sideEffects: true,
         },
+        /* コメントアウトするとバンドルサイズが少し小さくなる
         {
           test: /\.(js|mjs)$/,
           exclude: /@babel(?:\/|\\{1,2})runtime/,
@@ -138,16 +139,15 @@ module.exports = (env, {mode}) => {
             {
               loader: 'babel-loader',
               options: {
-                babelrc: false,
-                presets: [['@babel/preset-env', { modules: false }]], // babel.config.jsの指定との違いは？
+                presets: [['@babel/preset-env', { modules: false }]], // 外すとエラー
                 cacheDirectory: true,
                 cacheCompression: isProductionEnv,
                 compact: false,
-                sourceMaps: false,
               },
             },
           ],
         },
+        */
         {
           test: /\.(js|jsx|mjs)?(\.erb)?$/,
           exclude: /node_modules/,
