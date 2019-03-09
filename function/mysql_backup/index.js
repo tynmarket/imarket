@@ -1,6 +1,6 @@
 const Compute = require('@google-cloud/compute');
 const addHours = require('date-fns/add_hours');
-const addMonths = require('date-fns/add_months');
+const addDays = require('date-fns/add_days');
 const lastDayOfMonth = require('date-fns/last_day_of_month');
 const format = require('date-fns/format');
 
@@ -58,10 +58,9 @@ async function createSnapshot(diskName) {
 
   const disk = zone.disk(diskName);
 
-  // 先月末
-  const createMonth = addMonths(getDate(), -1);
-  const lastDay = lastDayOfMonth(createMonth);
-  const name = snapshotName(lastDay);
+  // 1日前
+  const addDay = addDays(getDate(), -1);
+  const name = snapshotName(addDay);
 
   try {
     await disk.createSnapshot(name);
@@ -76,10 +75,9 @@ async function createSnapshot(diskName) {
 async function deleteSnapshot() {
   console.log(`Start deleteSnapshot().\n`);
 
-  // 3ヶ月前
-  const deleteMonth = addMonths(getDate(), -3);
-  const lastDay = lastDayOfMonth(deleteMonth);
-  const name = snapshotName(lastDay);
+  // 2日前
+  const deleteDay = addDays(getDate(), -2);
+  const name = snapshotName(deleteDay);
   const snapshot = compute.snapshot(name);
 
   try {
