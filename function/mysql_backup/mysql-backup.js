@@ -7,7 +7,6 @@ const format = require('date-fns/format');
 const compute = new Compute();
 const zoneName = 'asia-northeast1-b';
 const zone = compute.zone(zoneName);
-const disk = zone.disk('mysql-1');
 
 const isUTC = (new Date()).getTimezoneOffset() == 0;
 
@@ -21,10 +20,15 @@ const isUTC = (new Date()).getTimezoneOffset() == 0;
 // })();
 
 
-exports.run = async (data, context, callback) => {
+exports.run = async (event, context, callback) => {
   console.log('Start backup.');
 
-  err = await createSnapshot();
+  const message = Buffer.from(event.data, 'base64').toString();
+  console.log(`message: ${message}`);
+
+  const data = JSON.parse(message)
+
+  err = await createSnapshot(data.disk);
   if (err) {
     callback(err);
   } else {
@@ -48,8 +52,11 @@ function snapshotName(date) {
   return 'snapshot-mysql-' + format(date, 'YYYY-MM-DD');
 }
 
-async function createSnapshot() {
+async function createSnapshot(diskName) {
   console.log('Start createSnapshot().\n');
+  console.log(`disk: ${diskName}`);
+
+  const disk = zone.disk(diskName);
 
   // 先月末
   const createMonth = addMonths(getDate(), -1);
