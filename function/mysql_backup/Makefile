@@ -1,5 +1,6 @@
 FUNCTION = mysql-backup
 TOPIC = mysql-backup
+DISK = mysql
 
 all: deploy clean
 
@@ -15,3 +16,13 @@ deploy:
 
 clean:
 	rm -rf deploy
+
+pubsub:
+	gcloud pubsub topics publish $(TOPIC) --message '{"disk": "$(DISK)"}'
+
+scheduler:
+	gcloud beta scheduler jobs create pubsub $(FUNCTION) \
+		--schedule "15 0 * * *" \
+		--time-zone Asia/Tokyo \
+		--topic $(TOPIC) \
+		--message-body '{"disk": "$(DISK)"}'
