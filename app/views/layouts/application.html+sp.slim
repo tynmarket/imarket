@@ -38,10 +38,7 @@ html[lang="ja"]
           .search-input
             input.form-control name="query" placeholder="証券コード、企業名" type="text"
       .btn-group.announce class=@container_size
-        | （5/10）個別銘柄のページで通期決算のみ表示できるようにしました
-        br
-        | （5/9）一覧ページをスマホ対応しました。
-        br
+        = release_notes
     / コンテンツ
     .container.main class=@container_size
       = yield

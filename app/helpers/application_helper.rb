@@ -2,6 +2,15 @@ module ApplicationHelper
   include Utils::Constants
   include Utils::UtilMethod
 
+  def release_notes
+    <<~EOS.html_safe
+      （3/16）個別銘柄のページで1年分の開示を確認できるようにしました
+      <br>
+      （5/10）個別銘柄のページで通期決算のみ表示できるようにしました
+      <br>
+    EOS
+  end
+
   def release_date_s(disclosure)
     disclosure.release_date.strftime YMD_S
   end
