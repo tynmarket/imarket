@@ -21,9 +21,8 @@ ul.nav.nav-tabs.main-content-nav-tabs
     a#tab-per[href="#menu-3" data-toggle="tab"] 予想PER
   li
     a#tab-pbr[href="#menu-4" data-toggle="tab"] PBR
-  - if development? || @debug
-    li
-      a[href="#menu-100" data-toggle="tab"] デバッグ
+  li
+    a[href="#menu-5" data-toggle="tab"] 開示（1年分）
 
 / タブコンテンツ
 .tab-content
@@ -208,20 +207,18 @@ ul.nav.nav-tabs.main-content-nav-tabs
       = select_tag('select-pbr-entire', options_for_select(options_select_pbr), include_blank: true, id: "select-pbr-entire", class: "select-per form-control")
     #tooltip-pbr.tooltip-per
 
-  - if development? || @debug
-    #menu-100.tab-pane
-      .row
-        .col-7
-          table.table.table-monthly.table-striped.table-bordered.table-condensed
-            thead
+  / 開示全て
+  #menu-5.tab-pane
+    .row
+      .col-7
+        table.table.table-monthly.table-striped.table-bordered.table-condensed
+          thead
+            tr
+              th.w-ratio.text-center 日時
+              th.w-ratio.text-center 表題
+          tbody
+            - @disclosures.each do |disclosure|
               tr
-                th.w-ratio.text-center 日時
-                th.w-ratio.text-center 表題
-                th.w-ratio.text-center id
-            tbody
-              - @disclosures_debug.each do |disclosure|
-                tr
-                  td.text-center
-                    = release_date_s(disclosure)
-                  td.text-center = link_to_pdf(disclosure, disclosure.title)
-                  td.text-center = disclosure.id
+                td.text-center
+                  = release_date_s(disclosure)
+                td.text-center = link_to_pdf(disclosure, disclosure.title)
