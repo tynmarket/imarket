@@ -49,10 +49,10 @@ class StocksController < ApplicationController
     # 初期表示は今期 〜 過去3期
     @last_year = get_last_year(@summaries) unless view_context.term_all?(@term)
 
-    # TODO 本番でも遅延読み込みで表示？
-    if development? || @debug
-      @disclosures_debug = Disclosure.where(code: @stock.code).order(id: :desc)
-    end
+    @disclosures = Disclosure
+                   .where(code: @stock.code)
+                   .where("release_date > ?", 1.year.ago)
+                   .order(id: :desc)
 
     render action: (@action_name = 'show')
   end
