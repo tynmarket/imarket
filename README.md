@@ -1,6 +1,6 @@
 # iMarket
 
-[iMarket（適時開示ネット）](http://tyn-imarket.com/)は株式投資のWebサービスです。
+[iMarket（適時開示ネット）](https://tyn-imarket.com/)は株式投資のWebサービスです。
 
 ## 主要機能
 
