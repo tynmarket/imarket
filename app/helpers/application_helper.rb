@@ -4,9 +4,9 @@ module ApplicationHelper
 
   def release_notes
     <<~EOS.html_safe
-      （3/16）個別銘柄のページで1年分の開示を確認できるようにしました
+      （4/21）サイトのURLを https://tyn-imarket.com に変更しました（https化）
       <br>
-      （5/10）個別銘柄のページで通期決算のみ表示できるようにしました
+      （3/16）個別銘柄のページで1年分の開示を確認できるようにしました
       <br>
     EOS
   end
