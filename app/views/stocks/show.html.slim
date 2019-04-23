@@ -14,20 +14,20 @@ br
 / タブ
 ul.nav.nav-tabs.main-content-nav-tabs
   li.active
-    a[href="#menu-1" data-toggle="tab"] 決算短信
+    a[href="#menu-summary" data-toggle="tab"] 決算短信
   li
-    a[href="#menu-2" data-toggle="tab"] 月次
+    a[href="#menu-monthly" data-toggle="tab"] 月次
   li
-    a#tab-per[href="#menu-3" data-toggle="tab"] 予想PER
+    a#tab-per[href="#menu-per" data-toggle="tab"] 予想PER
   li
-    a#tab-pbr[href="#menu-4" data-toggle="tab"] PBR
+    a#tab-pbr[href="#menu-pbr" data-toggle="tab"] PBR
   li
-    a[href="#menu-5" data-toggle="tab"] 開示（1年分）
+    a[href="#menu-disclosures" data-toggle="tab"] 開示（1年分）
 
 / タブコンテンツ
 .tab-content
   / 決算短信
-  #menu-1.tab-pane.active
+  #menu-summary.tab-pane.active
     .table-title
       .pull-right
         .term_all
@@ -158,7 +158,7 @@ ul.nav.nav-tabs.main-content-nav-tabs
                 td.text-center = summary.net_income_progress_ratio(@latest_forecast)
 
   / 月次
-  #menu-2.tab-pane
+  #menu-monthly.tab-pane
     .row
       .col-7
         table.table.table-monthly.table-striped.table-bordered.table-condensed
@@ -173,7 +173,7 @@ ul.nav.nav-tabs.main-content-nav-tabs
                 td.text-center = link_to_pdf(disclosure, disclosure.title)
 
   / 予想PER
-  #menu-3.tab-pane.tab-chart
+  #menu-per.tab-pane.tab-chart
     h5.chart-header 年初来
     .col-7.per-container
       #per-current.per-chart
@@ -190,7 +190,7 @@ ul.nav.nav-tabs.main-content-nav-tabs
     #tooltip-per.tooltip-per
 
   / PBR
-  #menu-4.tab-pane.tab-chart
+  #menu-pbr.tab-pane.tab-chart
     div ＊PBRは 株主資本 /（期末発行済株式数 - 期末自己株式数）で算出しており、Yahooファイナンス等の値と一致しない場合があります。
     h5.chart-header 年初来
     .col-7.per-container
@@ -208,7 +208,7 @@ ul.nav.nav-tabs.main-content-nav-tabs
     #tooltip-pbr.tooltip-per
 
   / 開示全て
-  #menu-5.tab-pane
+  #menu-disclosures.tab-pane
     .row
       .col-7
         table.table.table-monthly.table-striped.table-bordered.table-condensed
