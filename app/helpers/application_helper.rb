@@ -29,7 +29,7 @@ module ApplicationHelper
 
   def link_to_other_services(model, full = false)
     link_to_other_services_short(model, full) + link_to_taiho(model, full) +link_to_karauri(model, full) +
-      link_to_balance(model, full) + link_to_pcsl(model, full) + link_to_yuho(model, full)
+    link_to_balance(model, full) + link_to_pcsl(model, full) + link_to_yuho(model, full) + link_to_pts(model, full)
   end
 
   def link_to_other_services_short(model, full = false)
@@ -84,6 +84,11 @@ module ApplicationHelper
   def link_to_yuho(model, full = false)
     "<a #{'class="full-service-name"' if full} href='http://www.kabupro.jp/yuho/#{model.code}.htm' target='_blank'>\
     <span>#{full ? '有報' : '有'}</span></a>".html_safe
+  end
+
+  def link_to_pts(model, full = false)
+    "<a #{'class="full-service-name"' if full} href='http://www.morningstar.co.jp/StockInfo/pts/info/#{model.code}' target='_blank'>\
+    <span>#{full ? 'PTS' : 'P'}</span></a>".html_safe
   end
 
   def stock_path(model)
