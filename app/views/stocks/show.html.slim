@@ -16,6 +16,8 @@ ul.nav.nav-tabs.main-content-nav-tabs
   li.active
     a[href="#menu-summary" data-toggle="tab"] 決算短信
   li
+    a[href="#menu-cashflow" data-toggle="tab"] キャッシュフロー
+  li
     a[href="#menu-monthly" data-toggle="tab"] 月次
   li
     a#tab-per[href="#menu-per" data-toggle="tab"] 予想PER
@@ -156,6 +158,91 @@ ul.nav.nav-tabs.main-content-nav-tabs
                 td.text-center = summary.operating_income_progress_ratio(@latest_forecast)
                 td.text-center = summary.ordinary_income_progress_ratio(@latest_forecast)
                 td.text-center = summary.net_income_progress_ratio(@latest_forecast)
+
+  / キャッシュフロー
+  #menu-cashflow.tab-pane
+    .table-title
+      .pull-right
+        .term_all
+          - if term_all?(@term)
+            = link_to("今期 〜 過去3期", stock_path(@stock))
+            = " / 全て"
+          - else
+            = "今期 〜 過去3期 / "
+            = link_to("全て", "#{stock_path(@stock)}?term=all")
+      .term-annual
+        span.list_type
+          - if term_annual?
+            = link_to("累計", stock_path(@stock))
+            = " / 通期"
+          - else
+            = "累計 / "
+            = link_to "通期", "#{stock_path(@stock)}?term=annual"
+    table.table.table-cashflow.table-striped.table-bordered.table-condensed
+      thead
+        tr
+          th.w-period.text-center.text-middle 決算期
+          th.w-quarter.text-center.text-middle 四半期
+          th.text-center
+            | 営業
+            br
+            | キャッシュフロー
+          th.text-center
+            | 投資
+            br
+            | キャッシュフロー
+          th.text-center
+            | 財務
+            br
+            | キャッシュフロー
+          th.text-center
+            | 現金
+            br
+            | 増減額
+          th.text-center
+            | 現金
+            br
+            | 期首残高
+          th.text-center
+            | 現金
+            br
+            | 期末残高
+      tbody
+        - @disclosures_monthly.each do |disclosure|
+          tr
+            td.text-center = release_date_s(disclosure)
+            td.text-center = link_to_pdf(disclosure, disclosure.title)
+    br
+    h5 四半期
+    table.table.table-cashflow.table-striped.table-bordered.table-condensed
+      thead
+        tr
+          th.w-period.text-center.text-middle 決算期
+          th.w-quarter.text-center.text-middle 四半期
+          th.text-center
+            | 営業
+            br
+            | キャッシュフロー
+          th.text-center
+            | 投資
+            br
+            | キャッシュフロー
+          th.text-center
+            | 財務
+            br
+            | キャッシュフロー
+          th.text-center
+            | 現金
+            br
+            | 増減額
+          th.text-center
+            | 現金
+            br
+            | 期首残高
+          th.text-center
+            | 現金
+            br
+            | 期末残高
 
   / 月次
   #menu-monthly.tab-pane
