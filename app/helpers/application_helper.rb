@@ -4,9 +4,9 @@ module ApplicationHelper
 
   def release_notes
     <<~EOS.html_safe
-      （4/21）サイトのURLを https://tyn-imarket.com に変更しました（https化）
+      （4/25）個別銘柄のページにPTSへのリンクを追加しました
       <br>
-      （3/16）個別銘柄のページで1年分の開示を確認できるようにしました
+      （4/21）サイトのURLを <a href='https://tyn-imarket.com' target='_blank'>https://tyn-imarket.com</a> に変更しました（https化）
       <br>
     EOS
   end
