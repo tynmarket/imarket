@@ -32,7 +32,6 @@ default_dev: &default_dev
   <<: *default
   host: 127.0.0.1
   username: root
-  password: <%= ENV["MYSQL_PASSWORD"] %>
 
 development:
   <<: *default_dev
