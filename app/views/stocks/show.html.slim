@@ -208,10 +208,15 @@ ul.nav.nav-tabs.main-content-nav-tabs
             br
             | 期末残高
       tbody
-        - @disclosures_monthly.each do |disclosure|
-          tr
-            td.text-center = release_date_s(disclosure)
-            td.text-center = link_to_pdf(disclosure, disclosure.title)
+        tr
+          td.text-center 2019/03
+          td.text-center = link_to_pdf(Disclosure.new(pdf: "a.pdf", release_date: Date.today), "4Q")
+          td.text-right = red_delimiter(5671)
+          td.text-right = red_delimiter(1024)
+          td.text-right = red_delimiter(1105)
+          td.text-right = red_delimiter(3547)
+          td.text-right = red_delimiter_per_share(16630)
+          td.text-right = red_hundred(20177)
     br
     h5 四半期
     table.table.table-cashflow.table-striped.table-bordered.table-condensed
