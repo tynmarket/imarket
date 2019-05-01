@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 2019_04_26_104314) do
     t.integer "year", limit: 2, null: false
     t.integer "month", limit: 1, null: false
     t.integer "quarter", limit: 1, null: false
-    t.boolean "is_consolidated", default: true, null: false
     t.integer "net_cash_provided_by_used_in_operating_activities", null: false
     t.integer "net_cash_provided_by_used_in_investment_activities", null: false
     t.integer "net_cash_provided_by_used_in_financing_activities", null: false
