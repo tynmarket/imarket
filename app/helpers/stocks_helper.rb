@@ -10,7 +10,7 @@ module StocksHelper
   end
 
   def show_financial_value?(model, last_year)
-    term_annual? || last_year && model.year >= last_year
+    last_year.blank? || model.year >= last_year || term_annual?
   end
 
   def term_annual?
