@@ -91,10 +91,6 @@ module ApplicationHelper
     <span>#{full ? 'PTS' : 'P'}</span></a>".html_safe
   end
 
-  def stock_path(model)
-    "/stocks/#{model.code}"
-  end
-
   def red_hundred(num)
     return unless num
 

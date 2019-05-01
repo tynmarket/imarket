@@ -22,30 +22,11 @@ class DisclosuresController < ApplicationController
 
     @last_updated = SystemStatus.stock_price_last_updated
 
-    activate_tab
-
     @disclosures = Disclosure
       .includes(:summary, :results_forecasts, stock: :stock_price_latest)
       .where(release_date: @date...@date + 1)
       .page(page)
       .order(id: :desc)
-  end
-
-  private
-
-  def activate_tab
-    tab = params[:tab]
-
-    case tab
-    when "finance"
-      @class_finance = "active";
-    when "monthly"
-      @class_monthly = "active";
-    when "all"
-      @class_all = "active";
-    else
-      @class_finance = "active";
-    end
   end
 
 end

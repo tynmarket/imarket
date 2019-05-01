@@ -13,9 +13,9 @@ br
 
 / タブ
 ul.nav.nav-tabs.main-content-nav-tabs
-  li.active
+  li class=activate_stock_tab("menu-summary")
     a[href="#menu-summary" data-toggle="tab"] 決算短信
-  li
+  li class=activate_stock_tab("menu-cashflow")
     a[href="#menu-cashflow" data-toggle="tab"] キャッシュフロー
   li
     a[href="#menu-monthly" data-toggle="tab"] 月次
@@ -29,7 +29,7 @@ ul.nav.nav-tabs.main-content-nav-tabs
 / タブコンテンツ
 .tab-content
   / 決算短信
-  #menu-summary.tab-pane.active
+  #menu-summary.tab-pane class=activate_stock_tab("menu-summary")
     .table-title
       .pull-right
         .term_all
@@ -160,24 +160,24 @@ ul.nav.nav-tabs.main-content-nav-tabs
                 td.text-center = summary.net_income_progress_ratio(@latest_forecast)
 
   / キャッシュフロー
-  #menu-cashflow.tab-pane
+  #menu-cashflow.tab-pane class=activate_stock_tab("menu-cashflow")
     .table-title
       .pull-right
         .term_all
           - if term_all?(@term)
-            = link_to("今期 〜 過去3期", stock_path(@stock))
+            = link_to "今期 〜 過去3期", stock_path(@stock, tab: "menu-cashflow")
             = " / 全て"
           - else
             = "今期 〜 過去3期 / "
-            = link_to("全て", "#{stock_path(@stock)}?term=all")
+            = link_to "全て", stock_path(@stock, term: "all", tab: "menu-cashflow")
       .term-annual
         span.list_type
           - if term_annual?
-            = link_to("累計", stock_path(@stock))
+            = link_to "累計", stock_path(@stock, tab: "menu-cashflow")
             = " / 通期"
           - else
             = "累計 / "
-            = link_to "通期", "#{stock_path(@stock)}?term=annual"
+            = link_to "通期", stock_path(@stock, term: "annual", tab: "menu-cashflow")
     table.table.table-cashflow.table-striped.table-bordered.table-condensed
       thead
         tr
