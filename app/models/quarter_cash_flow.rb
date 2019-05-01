@@ -26,7 +26,10 @@ class QuarterCashFlow
 
   @@methods.each do |method|
     define_method method do
-      if quarter == 1
+      if @prev_quarter_cash_flow.blank? &&
+         (quarter == 1 || quarter == 2) # Q1があるかは分からない
+        @cash_flow.send(method)
+      elsif  quarter == 1
         if @prev_quarter_cash_flow.try(:quarter) == 0  # 前期が0Q
           if @cash_flow.send(method) && @prev_quarter_cash_flow.send(method)
             @cash_flow.send(method) - @prev_quarter_cash_flow.send(method)

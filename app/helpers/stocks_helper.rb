@@ -9,6 +9,10 @@ module StocksHelper
     term == "all"
   end
 
+  def show_financial_value?(model, last_year)
+    term_annual? || last_year && model.year >= last_year
+  end
+
   def term_annual?
     params[:term] == "annual"
   end

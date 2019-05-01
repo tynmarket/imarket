@@ -3,6 +3,30 @@ require 'rails_helper'
 describe QuarterCashFlow do
 
   describe '#operating_activities' do
+    context '1Q・前期なし' do
+      let(:cash_flow) { CashFlow.new(
+        year: 2019,
+        month: 3,
+        quarter: 1,
+        operating_activities: 100) }
+      let(:prev_quarter_cash_flow) { nil }
+      let(:quarter_cash_flow) { QuarterCashFlow.new cash_flow, prev_quarter_cash_flow }
+
+      it { expect(quarter_cash_flow.operating_activities).to eq(100) }
+    end
+
+    context '2Q・前期なし' do
+      let(:cash_flow) { CashFlow.new(
+        year: 2019,
+        month: 3,
+        quarter: 2,
+        operating_activities: 100) }
+      let(:prev_quarter_cash_flow) { nil }
+      let(:quarter_cash_flow) { QuarterCashFlow.new cash_flow, prev_quarter_cash_flow }
+
+      it { expect(quarter_cash_flow.operating_activities).to eq(100) }
+    end
+
     context '2Q・前期1Q' do
       let(:cash_flow) { CashFlow.new(
         year: 2019,
