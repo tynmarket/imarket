@@ -10,7 +10,7 @@ class CreateCashFlows < ActiveRecord::Migration[5.2]
       t.integer :net_cash_provided_by_used_in_operating_activities, null: false
       t.integer :net_cash_provided_by_used_in_investment_activities, null: false
       t.integer :net_cash_provided_by_used_in_financing_activities, null: false
-      t.integer :net_increase_decrease_in_cash_and_cash_equivalents, null: false
+      t.integer :net_increase_decrease_in_cash_and_cash_equivalents # 短信から取得した場合、値がない
       t.integer :cash_and_cash_equivalents, null: false
 
       t.timestamps

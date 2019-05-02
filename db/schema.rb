@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2019_04_26_104314) do
     t.integer "net_cash_provided_by_used_in_operating_activities", null: false
     t.integer "net_cash_provided_by_used_in_investment_activities", null: false
     t.integer "net_cash_provided_by_used_in_financing_activities", null: false
-    t.integer "net_increase_decrease_in_cash_and_cash_equivalents", null: false
+    t.integer "net_increase_decrease_in_cash_and_cash_equivalents"
     t.integer "cash_and_cash_equivalents", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
