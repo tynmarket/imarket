@@ -26,6 +26,9 @@ ActiveRecord::Schema.define(version: 2019_04_26_104314) do
     t.integer "cash_and_cash_equivalents", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_cash_flows_on_code"
+    t.index ["disclosure_id"], name: "index_cash_flows_on_disclosure_id"
+    t.index ["stock_id"], name: "index_cash_flows_on_stock_id"
   end
 
   create_table "disclosures", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|

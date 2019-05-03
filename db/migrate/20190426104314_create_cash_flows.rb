@@ -14,6 +14,10 @@ class CreateCashFlows < ActiveRecord::Migration[5.2]
       t.integer :cash_and_cash_equivalents, null: false
 
       t.timestamps
+
+      t.index :disclosure_id
+      t.index :code
+      t.index :stock_id
     end
   end
 end
