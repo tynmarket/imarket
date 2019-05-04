@@ -218,7 +218,10 @@ ul.nav.nav-tabs.main-content-nav-tabs
               td.text-right = red_delimiter(cash_flow.cash)
     br
     h5 四半期
-    table.table.table-cashflow.table-striped.table-bordered.table-condensed
+    - if @cash_flows_only_q4
+      = "#{@stock.name}の四半期毎のキャッシュフローはありません。"
+    - else
+      table.table.table-cashflow.table-striped.table-bordered.table-condensed
       thead
         tr
           th.w-period.text-center.text-middle 決算期
