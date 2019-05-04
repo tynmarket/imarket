@@ -4,9 +4,9 @@ module ApplicationHelper
 
   def release_notes
     <<~EOS.html_safe
-      （4/25）個別銘柄のページにPTSへのリンクを追加しました
+      （5/5）個別銘柄のページにキャッシュフローを表示するようにしました
       <br>
-      （4/21）サイトのURLを <a href='https://tyn-imarket.com' target='_blank'>https://tyn-imarket.com</a> に変更しました（https化）
+      （4/25）個別銘柄のページにPTSへのリンクを追加しました
       <br>
     EOS
   end
