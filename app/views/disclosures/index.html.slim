@@ -21,18 +21,18 @@
 
   / タブ
   ul.nav.nav-tabs.main-content-nav-tabs
-    li class=@class_finance
+    li class=activate_disclosure_tab("finance")
       a href="#finance" data-toggle="tab" 決算短信・業績予想の修正
-    li class=@class_monthly
+    li class=activate_disclosure_tab("monthly")
       a href="#monthly" data-toggle="tab" 月次
-    li class=@class_all
+    li class=activate_disclosure_tab("all")
       a href="#all" data-toggle="tab" 全て
     li.last_updated = "株価反映日時：#{@last_updated}"
 
   / タブコンテンツ
   .tab-content
     / 全て
-    #all.tab-pane class=@class_all
+    #all.tab-pane class=activate_disclosure_tab("all")
       table.table.table-striped.table-bordered.table-condensed.table-disclosure.table-disclosure-all
         thead
           tr
@@ -50,7 +50,7 @@
               td.text-center = link_to_stock(disclosure)
 
     / 決算短信・業績予想の修正
-    #finance.tab-pane class=@class_finance
+    #finance.tab-pane class=activate_disclosure_tab("finance")
       - table = disclosure_table
       - @disclosures.each do |disclosure|
         - summary = disclosure.summary
@@ -171,7 +171,7 @@
                   td
 
     / 月次
-    #monthly.tab-pane class=@class_monthly
+    #monthly.tab-pane class=activate_disclosure_tab("monthly")
       table.table.table-striped.table-bordered.table-condensed.table-disclosure.table-disclosure-all
         thead
           tr

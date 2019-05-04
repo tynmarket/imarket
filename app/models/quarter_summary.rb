@@ -9,9 +9,7 @@ class QuarterSummary
       return summaries if summaries.blank?
 
       summaries.map.with_index do |summary, i|
-        prev_quarter_summary = summaries[i + 1]
-
-        new summary, prev_quarter_summary
+        new summary, summaries[i + 1]
       end
     end
   end

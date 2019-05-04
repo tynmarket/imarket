@@ -4,9 +4,9 @@ module ApplicationHelper
 
   def release_notes
     <<~EOS.html_safe
-      （4/25）個別銘柄のページにPTSへのリンクを追加しました
+      （5/5）個別銘柄のページにキャッシュフローを表示するようにしました
       <br>
-      （4/21）サイトのURLを <a href='https://tyn-imarket.com' target='_blank'>https://tyn-imarket.com</a> に変更しました（https化）
+      （4/25）個別銘柄のページにPTSへのリンクを追加しました
       <br>
     EOS
   end
@@ -89,10 +89,6 @@ module ApplicationHelper
   def link_to_pts(model, full = false)
     "<a #{'class="full-service-name"' if full} href='http://www.morningstar.co.jp/StockInfo/pts/info/#{model.code}' target='_blank'>\
     <span>#{full ? 'PTS' : 'P'}</span></a>".html_safe
-  end
-
-  def stock_path(model)
-    "/stocks/#{model.code}"
   end
 
   def red_hundred(num)

@@ -9,6 +9,10 @@ module StocksHelper
     term == "all"
   end
 
+  def show_financial_value?(model, last_year)
+    last_year.blank? || model.year >= last_year || term_annual?
+  end
+
   def term_annual?
     params[:term] == "annual"
   end
@@ -84,6 +88,14 @@ module StocksHelper
 
   def options_select_pbr
     [[20, 20], [10, 10], [5, 5], [3, 3], [2, 2], [1, 1]].reverse
+  end
+
+  def activate_stock_tab(item)
+    if params[:tab].blank? && item == "menu-summary"
+      "active"
+    else
+      item == params[:tab] ? "active" : nil
+    end
   end
 
 end

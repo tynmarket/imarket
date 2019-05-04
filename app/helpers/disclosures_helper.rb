@@ -64,4 +64,12 @@ module DisclosuresHelper
     end
   end
 
+  def activate_disclosure_tab(item)
+    if params[:tab].blank? && item == "finance"
+      "active"
+    else
+      item == params[:tab] ? "active" : nil
+    end
+  end
+
 end

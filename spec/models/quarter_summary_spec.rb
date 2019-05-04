@@ -41,10 +41,12 @@ describe QuarterSummary do
     context '2Q' do
       let(:summary) { Summary.new(
         year: 2014,
+        month: 3,
         quarter: 2,
         net_sales: 100) }
       let(:prev_quarter_summary) { Summary.new(
         year: 2014,
+        month: 3,
         quarter: 1,
         net_sales: 90) }
       let(:quarter_summary) { QuarterSummary.new summary, prev_quarter_summary }
@@ -55,10 +57,12 @@ describe QuarterSummary do
     context '1Q・前期4Q' do
       let(:summary) { Summary.new(
         year: 2014,
+        month: 3,
         quarter: 1,
         net_sales: 100) }
       let(:prev_quarter_summary) { Summary.new(
         year: 2013,
+        month: 3,
         quarter: 4,
         net_sales: 90) }
       let(:quarter_summary) { QuarterSummary.new summary, prev_quarter_summary }
@@ -69,6 +73,7 @@ describe QuarterSummary do
     context '1Q・前期0Q' do
       let(:summary) { Summary.new(
         year: 2014,
+        month: 3,
         quarter: 1,
         net_sales: 100) }
       let(:prev_quarter_summary) { Summary.new(
@@ -83,6 +88,7 @@ describe QuarterSummary do
     context '1Q・前期なし' do
       let(:summary) { Summary.new(
         year: 2014,
+        month: 3,
         quarter: 1,
         net_sales: 100) }
       let(:prev_quarter_summary) {  }
@@ -94,9 +100,11 @@ describe QuarterSummary do
     context '1Q値なし・前期0Q' do
       let(:summary) { Summary.new(
         year: 2014,
+        month: 3,
         quarter: 1) }
       let(:prev_quarter_summary) { Summary.new(
         year: 2014,
+        month: 3,
         quarter: 0,
         net_sales: 90) }
       let(:quarter_summary) { QuarterSummary.new summary, prev_quarter_summary }
@@ -107,10 +115,12 @@ describe QuarterSummary do
     context '1Q・前期0Q値なし' do
       let(:summary) { Summary.new(
         year: 2014,
+        month: 3,
         quarter: 1,
         net_sales: 100) }
       let(:prev_quarter_summary) { Summary.new(
         year: 2014,
+        month: 3,
         quarter: 0) }
       let(:quarter_summary) { QuarterSummary.new summary, prev_quarter_summary }
 
@@ -120,10 +130,12 @@ describe QuarterSummary do
     context '0Q・前期4Q' do
       let(:summary) { Summary.new(
         year: 2014,
+        month: 3,
         quarter: 0,
         net_sales: 100) }
       let(:prev_quarter_summary) { Summary.new(
         year: 2013,
+        month: 3,
         quarter: 4,
         net_sales: 90) }
       let(:quarter_summary) { QuarterSummary.new summary, prev_quarter_summary }
@@ -134,9 +146,11 @@ describe QuarterSummary do
     context '当期値なし' do
       let(:summary) { Summary.new(
         year: 2014,
+        month: 3,
         quarter: 2) }
       let(:prev_quarter_summary) { Summary.new(
         year: 2014,
+        month: 3,
         quarter: 1,
         net_sales: 90) }
       let(:quarter_summary) { QuarterSummary.new summary, prev_quarter_summary }
@@ -147,6 +161,7 @@ describe QuarterSummary do
     context '2Q・前期なし' do
       let(:summary) { Summary.new(
         year: 2014,
+        month: 3,
         quarter: 2,
         net_sales: 100) }
       let(:quarter_summary) { QuarterSummary.new summary, nil }
@@ -157,10 +172,12 @@ describe QuarterSummary do
     context '2Q・前期値なし' do
       let(:summary) { Summary.new(
         year: 2014,
+        month: 3,
         quarter: 2,
         net_sales: 100) }
       let(:prev_quarter_summary) { Summary.new(
         year: 2014,
+        month: 3,
         quarter: 1) }
       let(:quarter_summary) { QuarterSummary.new summary, prev_quarter_summary }
 

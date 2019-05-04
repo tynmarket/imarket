@@ -65,6 +65,18 @@
     }
   }
 
+  .table-cashflow > thead > tr > th {
+    width: 17%;
+
+    &.w-period {
+      width: 7.5%;
+    }
+
+    &.w-quarter {
+      width: 7.5%;
+    }
+  }
+
   .table-progress-ratio > thead > tr > th {
     &.w-period {
       width: 75px;

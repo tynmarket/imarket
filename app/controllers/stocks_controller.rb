@@ -42,9 +42,10 @@ class StocksController < ApplicationController
     @disclosures_monthly = @stock.disclosures_monthly.sort_by {|d| d.id * -1 }
 
     @summaries = find_summaries(@stock.code)
+    @cash_flows = find_cash_flows(@stock.code)
 
-    @quarter_summaries, @latest_forecast, @quarter_results_forecast, @current_summaries =
-      find_financial_informations(@stock.code, @summaries)
+    @quarter_summaries, @latest_forecast, @quarter_results_forecast, @current_summaries, @quarter_cash_flows =
+      find_financial_informations(@stock.code, @summaries, @cash_flows)
 
     # 初期表示は今期 〜 過去3期
     @last_year = get_last_year(@summaries) unless view_context.term_all?(@term)
@@ -64,8 +65,16 @@ class StocksController < ApplicationController
       .sort_by {|s| s.disclosure_id * -1 }
   end
 
-  def find_financial_informations(code, summaries)
+  def find_cash_flows(code)
+    CashFlow
+      .includes(:disclosure_pdf)
+      .where(code: code)
+      .sort_by {|s| s.disclosure_id * -1 }
+  end
+
+  def find_financial_informations(code, summaries, cash_flows)
     quarter_summaries = QuarterSummary.arrays summaries
+    quarter_cash_flows = QuarterCashFlow.arrays cash_flows
 
     latest_forecast = LatestResultsForecast.find_latest(code, summaries.first)
 
@@ -79,7 +88,7 @@ class StocksController < ApplicationController
       current_summaries = []
     end
 
-    return quarter_summaries, latest_forecast, quarter_results_forecast, current_summaries
+    return quarter_summaries, latest_forecast, quarter_results_forecast, current_summaries, quarter_cash_flows
   end
 
   def filter_by_year(financials, year)

@@ -13,21 +13,23 @@ br
 
 / タブ
 ul.nav.nav-tabs.main-content-nav-tabs
-  li.active
-    a[href="#menu-1" data-toggle="tab"] 決算短信
+  li class=activate_stock_tab("menu-summary")
+    a[href="#menu-summary" data-toggle="tab"] 決算短信
+  li class=activate_stock_tab("menu-cashflow")
+    a[href="#menu-cashflow" data-toggle="tab"] キャッシュフロー
   li
-    a[href="#menu-2" data-toggle="tab"] 月次
+    a[href="#menu-monthly" data-toggle="tab"] 月次
   li
-    a#tab-per[href="#menu-3" data-toggle="tab"] 予想PER
+    a#tab-per[href="#menu-per" data-toggle="tab"] 予想PER
   li
-    a#tab-pbr[href="#menu-4" data-toggle="tab"] PBR
+    a#tab-pbr[href="#menu-pbr" data-toggle="tab"] PBR
   li
-    a[href="#menu-5" data-toggle="tab"] 開示（1年分）
+    a[href="#menu-disclosures" data-toggle="tab"] 開示（1年分）
 
 / タブコンテンツ
 .tab-content
   / 決算短信
-  #menu-1.tab-pane.active
+  #menu-summary.tab-pane class=activate_stock_tab("menu-summary")
     .table-title
       .pull-right
         .term_all
@@ -70,7 +72,7 @@ ul.nav.nav-tabs.main-content-nav-tabs
               td.text-right = red_hundred(@latest_forecast.change_in_forecast_ordinary_income)
               td.text-right = red_hundred(@latest_forecast.change_in_forecast_net_income)
         - @summaries.each_with_index do |summary, i|
-          - if @last_year.blank? || summary.year >= @last_year || term_annual?
+          - if show_financial_value?(summary, @last_year)
             tr class=(hide_if_term_annual(summary))
               td.text-center  = summary.accounting_period_once(i > 0 ? @summaries[i - 1] : @latest_forecast)
               td.text-center = link_to_pdf(summary.disclosure_pdf, summary.quarter_name)
@@ -107,7 +109,7 @@ ul.nav.nav-tabs.main-content-nav-tabs
             td.text-right = red_hundred(@quarter_results_forecast.change_in_forecast_net_income)
         - @quarter_summaries.each_with_index do |quarter_summary, i|
           - prev_year_quarter_summary = @quarter_summaries[i + 4]
-          - if @last_year.blank? || quarter_summary.year >= @last_year
+          - if show_financial_value?(quarter_summary, @last_year)
             tr
               td.text-center = quarter_summary.accounting_period_once(i > 0 ? @quarter_summaries[i - 1] : @quarter_results_forecast)
               td.text-center = link_to_pdf(quarter_summary.summary.disclosure_pdf, quarter_summary.quarter_name)
@@ -157,8 +159,101 @@ ul.nav.nav-tabs.main-content-nav-tabs
                 td.text-center = summary.ordinary_income_progress_ratio(@latest_forecast)
                 td.text-center = summary.net_income_progress_ratio(@latest_forecast)
 
+  / キャッシュフロー
+  #menu-cashflow.tab-pane class=activate_stock_tab("menu-cashflow")
+    .table-title
+      .pull-right
+        .term_all
+          - if term_all?(@term)
+            = link_to "今期 〜 過去3期", stock_path(@stock, tab: "menu-cashflow")
+            = " / 全て"
+          - else
+            = "今期 〜 過去3期 / "
+            = link_to "全て", stock_path(@stock, term: "all", tab: "menu-cashflow")
+      .term-annual
+        span.list_type
+          - if term_annual?
+            = link_to "累計", stock_path(@stock, tab: "menu-cashflow")
+            = " / 通期"
+          - else
+            = "累計 / "
+            = link_to "通期", stock_path(@stock, term: "annual", tab: "menu-cashflow")
+    table.table.table-cashflow.table-striped.table-bordered.table-condensed
+      thead
+        tr
+          th.w-period.text-center.text-middle 決算期
+          th.w-quarter.text-center.text-middle 四半期
+          th.text-center
+            | 営業
+            br
+            | キャッシュフロー
+          th.text-center
+            | 投資
+            br
+            | キャッシュフロー
+          th.text-center
+            | 財務
+            br
+            | キャッシュフロー
+          th.text-center
+            | 現金及び同等物の
+            br
+            | 増減額
+          th.text-center
+            | 現金及び同等物の
+            br
+            | 期末残高
+      tbody
+        - @cash_flows.each_with_index do |cash_flow, i|
+          - prev_cash_flow = @cash_flows[i + 1]
+
+          - if show_financial_value?(cash_flow, @last_year)
+            tr class=(hide_if_term_annual(cash_flow))
+              td.text-center  = cash_flow.accounting_period_once(i > 0 ? @cash_flows[i - 1] : @latest_forecast)
+              td.text-center = link_to_pdf(cash_flow.disclosure_pdf, cash_flow.quarter_name)
+              td.text-right = red_delimiter(cash_flow.operating_activities)
+              td.text-right = red_delimiter(cash_flow.investment_activities)
+              td.text-right = red_delimiter(cash_flow.financing_activities)
+              td.text-right = red_delimiter(cash_flow.net_increase_in_cash(prev_cash_flow))
+              td.text-right = red_delimiter(cash_flow.cash)
+    br
+    h5 四半期
+    table.table.table-cashflow.table-striped.table-bordered.table-condensed
+      thead
+        tr
+          th.w-period.text-center.text-middle 決算期
+          th.w-quarter.text-center.text-middle 四半期
+          th.text-center
+            | 営業
+            br
+            | キャッシュフロー
+          th.text-center
+            | 投資
+            br
+            | キャッシュフロー
+          th.text-center
+            | 財務
+            br
+            | キャッシュフロー
+          th.text-center
+            | 現金及び同等物の
+            br
+            | 増減額
+          th.text-center
+      tbody
+        - @quarter_cash_flows.each_with_index do |quarter_cash_flow, i|
+          - if show_financial_value?(quarter_cash_flow, @last_year)
+            tr
+              td.text-center = quarter_cash_flow.accounting_period_once(i > 0 ? @quarter_cash_flows[i - 1] : @quarter_results_forecast)
+              td.text-center = link_to_pdf(quarter_cash_flow.cash_flow.disclosure_pdf, quarter_cash_flow.quarter_name)
+              td.text-right = red_delimiter(quarter_cash_flow.operating_activities)
+              td.text-right = red_delimiter(quarter_cash_flow.investment_activities)
+              td.text-right = red_delimiter(quarter_cash_flow.financing_activities)
+              td.text-right = red_delimiter(quarter_cash_flow.net_increase_in_cash)
+              td.text-right
+
   / 月次
-  #menu-2.tab-pane
+  #menu-monthly.tab-pane
     .row
       .col-7
         table.table.table-monthly.table-striped.table-bordered.table-condensed
@@ -173,7 +268,7 @@ ul.nav.nav-tabs.main-content-nav-tabs
                 td.text-center = link_to_pdf(disclosure, disclosure.title)
 
   / 予想PER
-  #menu-3.tab-pane.tab-chart
+  #menu-per.tab-pane.tab-chart
     h5.chart-header 年初来
     .col-7.per-container
       #per-current.per-chart
@@ -190,7 +285,7 @@ ul.nav.nav-tabs.main-content-nav-tabs
     #tooltip-per.tooltip-per
 
   / PBR
-  #menu-4.tab-pane.tab-chart
+  #menu-pbr.tab-pane.tab-chart
     div ＊PBRは 株主資本 /（期末発行済株式数 - 期末自己株式数）で算出しており、Yahooファイナンス等の値と一致しない場合があります。
     h5.chart-header 年初来
     .col-7.per-container
@@ -208,7 +303,7 @@ ul.nav.nav-tabs.main-content-nav-tabs
     #tooltip-pbr.tooltip-per
 
   / 開示全て
-  #menu-5.tab-pane
+  #menu-disclosures.tab-pane
     .row
       .col-7
         table.table.table-monthly.table-striped.table-bordered.table-condensed
