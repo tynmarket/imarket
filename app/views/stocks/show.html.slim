@@ -210,7 +210,7 @@ ul.nav.nav-tabs.main-content-nav-tabs
 
           - if @cash_flows_only_q4 || show_financial_value?(cash_flow, @last_year)
             tr class=(hide_if_term_annual(cash_flow))
-              td.text-center  = cash_flow.accounting_period_once(i > 0 ? @cash_flows[i - 1] : @latest_forecast)
+              td.text-center  = cash_flow.accounting_period_once(@cash_flows[i - 1])
               td.text-center = link_to_pdf(cash_flow.disclosure_pdf, cash_flow.quarter_name)
               td.text-right = red_delimiter(cash_flow.operating_activities)
               td.text-right = red_delimiter(cash_flow.investment_activities)
