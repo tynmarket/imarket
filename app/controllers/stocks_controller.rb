@@ -43,6 +43,7 @@ class StocksController < ApplicationController
 
     @summaries = find_summaries(@stock.code)
     @cash_flows = find_cash_flows(@stock.code)
+    @cash_flows_only_q4 = @cash_flows.all?(&:q4?)
 
     @quarter_summaries, @latest_forecast, @quarter_results_forecast, @current_summaries, @quarter_cash_flows =
       find_financial_informations(@stock.code, @summaries, @cash_flows)

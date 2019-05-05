@@ -161,7 +161,8 @@ ul.nav.nav-tabs.main-content-nav-tabs
 
   / キャッシュフロー
   #menu-cashflow.tab-pane class=activate_stock_tab("menu-cashflow")
-    .table-title
+    - unless @cash_flows_only_q4
+      .table-title
       .pull-right
         .term_all
           - if term_all?(@term)
@@ -207,9 +208,9 @@ ul.nav.nav-tabs.main-content-nav-tabs
         - @cash_flows.each_with_index do |cash_flow, i|
           - prev_cash_flow = @cash_flows[i + 1]
 
-          - if show_financial_value?(cash_flow, @last_year)
+          - if @cash_flows_only_q4 || show_financial_value?(cash_flow, @last_year)
             tr class=(hide_if_term_annual(cash_flow))
-              td.text-center  = cash_flow.accounting_period_once(i > 0 ? @cash_flows[i - 1] : @latest_forecast)
+              td.text-center  = cash_flow.accounting_period_once(@cash_flows[i - 1])
               td.text-center = link_to_pdf(cash_flow.disclosure_pdf, cash_flow.quarter_name)
               td.text-right = red_delimiter(cash_flow.operating_activities)
               td.text-right = red_delimiter(cash_flow.investment_activities)
@@ -218,7 +219,10 @@ ul.nav.nav-tabs.main-content-nav-tabs
               td.text-right = red_delimiter(cash_flow.cash)
     br
     h5 四半期
-    table.table.table-cashflow.table-striped.table-bordered.table-condensed
+    - if @cash_flows_only_q4
+      = "#{@stock.name}の四半期毎のキャッシュフローはありません。"
+    - else
+      table.table.table-cashflow.table-striped.table-bordered.table-condensed
       thead
         tr
           th.w-period.text-center.text-middle 決算期
