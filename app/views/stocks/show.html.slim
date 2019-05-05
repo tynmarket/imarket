@@ -161,7 +161,8 @@ ul.nav.nav-tabs.main-content-nav-tabs
 
   / キャッシュフロー
   #menu-cashflow.tab-pane class=activate_stock_tab("menu-cashflow")
-    .table-title
+    - unless @cash_flows_only_q4
+      .table-title
       .pull-right
         .term_all
           - if term_all?(@term)
@@ -207,7 +208,7 @@ ul.nav.nav-tabs.main-content-nav-tabs
         - @cash_flows.each_with_index do |cash_flow, i|
           - prev_cash_flow = @cash_flows[i + 1]
 
-          - if show_financial_value?(cash_flow, @last_year)
+          - if @cash_flows_only_q4 || show_financial_value?(cash_flow, @last_year)
             tr class=(hide_if_term_annual(cash_flow))
               td.text-center  = cash_flow.accounting_period_once(@cash_flows[i - 1])
               td.text-center = link_to_pdf(cash_flow.disclosure_pdf, cash_flow.quarter_name)
