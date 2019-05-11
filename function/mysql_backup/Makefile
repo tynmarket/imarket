@@ -1,10 +1,11 @@
 FUNCTION = mysql-backup
 TOPIC = mysql-backup
-DISK = mysql
+DISK = mysql-1
 
 all: deploy clean
 
 deploy:
+	cd ~/git/imarket/imarket/function/mysql_backup && \
 	mkdir deploy && \
 	cp index.js package.json deploy && \
 	cd deploy && \
