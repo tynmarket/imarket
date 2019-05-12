@@ -16,6 +16,7 @@ deploy:
 		--region asia-northeast1
 
 clean:
+	cd ~/git/imarket/imarket/function/mysql_backup && \
 	rm -rf deploy
 
 pubsub:
