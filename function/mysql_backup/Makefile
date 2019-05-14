@@ -23,6 +23,7 @@ pubsub:
 	gcloud pubsub topics publish $(TOPIC) --message '{"disk": "$(DISK)"}'
 
 scheduler:
+	gcloud beta scheduler jobs delete $(FUNCTION) -q || true
 	gcloud beta scheduler jobs create pubsub $(FUNCTION) \
 		--schedule "15 0 * * *" \
 		--time-zone Asia/Tokyo \
