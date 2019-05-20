@@ -8,7 +8,6 @@ function trackEvent(selector, action, label) {
 
   target.forEach(function(elm) {
     elm.addEventListener('click', function() {
-      console.log("trackEvent");
       ga('send', 'event', 'click', action, label, null, {nonInteraction: true});
     });
   });
