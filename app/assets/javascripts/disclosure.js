@@ -19,4 +19,19 @@ $(function () {
       return attr + '&tab=' + tab;
     }
   }
+
+  var label = 'disclosures';
+
+  // 月次
+  trackEvent('#tab-monthly', 'monthly', label);
+  // 全て
+  trackEvent('#tab-all', 'all', label);
+  // チャート
+  trackEvent('.link-chart', 'chart', label);
+  // 企業情報
+  trackEvent('.link-profile', 'profile', label);
+  // 信用残高
+  trackEvent('.link-margin', 'margin', label);
+  // コンセンサス
+  trackEvent('.link-ifis', 'ifis', label);
 });
