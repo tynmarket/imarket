@@ -23,9 +23,9 @@
   ul.nav.nav-tabs.main-content-nav-tabs
     li class=activate_disclosure_tab("finance")
       a href="#finance" data-toggle="tab" 決算短信・業績予想の修正
-    li class=activate_disclosure_tab("monthly")
+    li id="tab-monthly" class=activate_disclosure_tab("monthly")
       a href="#monthly" data-toggle="tab" 月次
-    li class=activate_disclosure_tab("all")
+    li id="tab-all" class=activate_disclosure_tab("all")
       a href="#all" data-toggle="tab" 全て
     li.last_updated = "株価反映日時：#{@last_updated}"
 

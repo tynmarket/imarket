@@ -19,4 +19,9 @@ $(function () {
       return attr + '&tab=' + tab;
     }
   }
+
+  // 月次
+  trackEvent('#tab-monthly', 'monthly', 'disclosures');
+  // 全て
+  trackEvent('#tab-all', 'all', 'disclosures');
 });
