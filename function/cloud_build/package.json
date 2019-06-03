@@ -1,0 +1,9 @@
+{
+  "name": "cloud_build",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@slack/client": "^5.0.1"
+  }
+}
