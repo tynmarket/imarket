@@ -76,12 +76,12 @@ module ApplicationHelper
   end
 
   def link_to_balance(model, full = false)
-    "<a class=#{link_class_name('balance', full)} href='http://www.jsf.co.jp/de/stock/data.php?target=balance&div=%93%8C%8F%D8&code=#{model.code}' target='_blank'>\
+    "<a class=#{link_class_name('balance', full)} href='http://www.taisyaku.jp/search/detail/balance/#{model.taisyaku_code}' target='_blank'>\
     <span>#{full ? '融資・貸株' : '融'}</span></a>".html_safe
   end
 
   def link_to_pcsl(model, full = false)
-    "<a class=#{link_class_name('pcsl', full)} href='http://www.jsf.co.jp/de/stock/data.php?target=pcsl&div=%93%8C%8F%D8&code=#{model.code}' target='_blank'>\
+    "<a class=#{link_class_name('pcsl', full)} href='http://www.taisyaku.jp/search/detail/pcsl/#{model.taisyaku_code}' target='_blank'>\
     <span>#{full ? '逆日歩' : '逆'}</span></a>".html_safe
   end
 
