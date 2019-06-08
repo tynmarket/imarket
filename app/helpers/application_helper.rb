@@ -4,10 +4,7 @@ module ApplicationHelper
 
   def release_notes
     <<~EOS.html_safe
-      （5/5）個別銘柄のページにキャッシュフローを表示するようにしました
-      <br>
-      （4/25）個別銘柄のページにPTSへのリンクを追加しました
-      <br>
+      （6/8）融資・貸株と逆日歩のリンク切れを修正しました
     EOS
   end
 
