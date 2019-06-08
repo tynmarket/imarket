@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_26_104314) do
+ActiveRecord::Schema.define(version: 2019_06_08_004830) do
 
   create_table "cash_flows", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.integer "disclosure_id", null: false
@@ -189,6 +189,7 @@ ActiveRecord::Schema.define(version: 2019_04_26_104314) do
     t.string "search_name"
     t.date "listed_date"
     t.boolean "is_consolidated", default: true
+    t.string "taisyaku_code", limit: 6
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["code"], name: "index_stocks_code"
