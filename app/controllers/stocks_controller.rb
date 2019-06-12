@@ -39,7 +39,7 @@ class StocksController < ApplicationController
       end
     end
 
-    @disclosures_monthly = @stock.disclosures_monthly.sort_by {|d| d.id * -1 }
+    @disclosures_monthly = @stock.disclosures_monthly.sort_by { |d| d.id * -1 }
 
     @summaries = find_summaries(@stock.code)
     @cash_flows = find_cash_flows(@stock.code)
@@ -63,14 +63,14 @@ class StocksController < ApplicationController
     Summary
       .includes(:disclosure_pdf)
       .where(code: code)
-      .sort_by {|s| s.disclosure_id * -1 }
+      .sort_by { |s| s.disclosure_id * -1 }
   end
 
   def find_cash_flows(code)
     CashFlow
       .includes(:disclosure_pdf)
       .where(code: code)
-      .sort_by {|s| s.disclosure_id * -1 }
+      .sort_by { |s| s.disclosure_id * -1 }
   end
 
   def find_financial_informations(code, summaries, cash_flows)
@@ -98,7 +98,7 @@ class StocksController < ApplicationController
     current_year = financials.first.year
     last_year = current_year - year
 
-    financials.select {|financial| financial.year >= last_year }
+    financials.select { |financial| financial.year >= last_year }
   end
 
   def get_last_year(summaries)

@@ -91,7 +91,7 @@ describe QuarterSummary do
         month: 3,
         quarter: 1,
         net_sales: 100) }
-      let(:prev_quarter_summary) {  }
+      let(:prev_quarter_summary) {}
       let(:quarter_summary) { QuarterSummary.new summary, prev_quarter_summary }
 
       it { expect(quarter_summary.net_sales).to eq(100) }

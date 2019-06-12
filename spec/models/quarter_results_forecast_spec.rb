@@ -4,7 +4,7 @@ describe QuarterResultsForecast do
 
   describe ".create" do
     context "latest_forecastなし" do
-      let(:latest_forecast) {  }
+      let(:latest_forecast) {}
       let(:summaries) { [Summary.new(year: 2013, quarter:4)] }
       let(:quarter_forecast) { QuarterResultsForecast.create latest_forecast, summaries }
 

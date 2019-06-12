@@ -34,5 +34,8 @@ Style/MutableConstant:
 Style/WordArray:
   Enabled: false
 
+Metrics/BlockLength:
+  Max: 100
+
 Metrics/LineLength:
   Max: 100

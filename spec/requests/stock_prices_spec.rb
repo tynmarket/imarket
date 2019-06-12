@@ -16,7 +16,7 @@ describe "GET /stock_prices/:id/per.json" do
   end
 
   context "current_year" do
-    let(:json_data) { json["current_year"]}
+    let(:json_data) { json["current_year"] }
 
     it "ticks" do
       expect(ticks.size).to eq 5
@@ -51,7 +51,7 @@ describe "GET /stock_prices/:id/per.json" do
   end
 
   context "entire_period" do
-    let(:json_data) { json["entire_period"]}
+    let(:json_data) { json["entire_period"] }
 
     it "ticks" do
       expect(ticks.size).to eq 5
@@ -91,7 +91,7 @@ describe "GET /stock_prices/:id/pbr.json" do
   end
 
   context "current_year" do
-    let(:json_data) { json["current_year"]}
+    let(:json_data) { json["current_year"] }
 
     it "ticks" do
       expect(ticks.size).to eq 5
@@ -126,7 +126,7 @@ describe "GET /stock_prices/:id/pbr.json" do
   end
 
   context "entire_period" do
-    let(:json_data) { json["entire_period"]}
+    let(:json_data) { json["entire_period"] }
 
     it "ticks" do
       expect(ticks.size).to eq 5

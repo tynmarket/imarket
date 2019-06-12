@@ -37,10 +37,10 @@ class Stock < ActiveRecord::Base
         search_names = param
           .split(SPACE)
           .reject(&:blank?)
-          .map{|name| to_search_name name }  # 検索名
+          .map{ |name| to_search_name name }  # 検索名
 
         statement = (["search_name"] * search_names.length).join(" LIKE ? AND ") + " LIKE ?"
-        values = search_names.map {|search_name| "%#{search_name}%" }
+        values = search_names.map { |search_name| "%#{search_name}%" }
 
         where("#{statement}", *values)
       end
