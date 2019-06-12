@@ -19,10 +19,29 @@ AllCops:
 StringLiterals:
   EnforcedStyle: double_quotes
 
+Layout/AlignHash:
+  Exclude:
+    - "spec/**/*"
+
+Layout/BlockEndNewline:
+  Exclude:
+    - "spec/**/*"
+
+Layout/MultilineBlockLayout:
+  Exclude:
+    - "spec/**/*"
+
 Style/AsciiComments:
   Enabled: false
 
+Style/BlockDelimiters:
+  Exclude:
+    - "spec/**/*"
+
 Style/CommentAnnotation:
+  Enabled: false
+
+Style/Documentation:
   Enabled: false
 
 Style/FrozenStringLiteralComment:
@@ -38,4 +57,4 @@ Metrics/BlockLength:
   Max: 100
 
 Metrics/LineLength:
-  Max: 100
+  Max: 120
