@@ -6,7 +6,7 @@ class StockPricesController < ApplicationController
 
   def pbr
     set_stock_price_data(:pbr)
-    render 'per'
+    render "per"
   end
 
   private

@@ -1,9 +1,9 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Disclosure do
 
-  describe '#results_forecast_q4' do
-    it 'true' do
+  describe "#results_forecast_q4" do
+    it "true" do
       disclosure = Disclosure.new
       disclosure.results_forecasts = [ResultsForecast.new(quarter: 4)]
 
@@ -11,10 +11,10 @@ describe Disclosure do
     end
   end
 
-  describe '.monthly' do
+  describe ".monthly" do
     let(:monthly) { Disclosure.monthly }
 
-    context 'category == MONTHLY' do
+    context "category == MONTHLY" do
       it do
         create :disclosure, category: Disclosure::MONTHLY
 
@@ -22,7 +22,7 @@ describe Disclosure do
       end
     end
 
-    context 'category == nil' do
+    context "category == nil" do
       it do
         create :disclosure
 

@@ -1,9 +1,9 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe QuarterCashFlow do
 
-  describe '#operating_activities' do
-    context '1Q・前期なし' do
+  describe "#operating_activities" do
+    context "1Q・前期なし" do
       let(:cash_flow) { CashFlow.new(
         year: 2019,
         month: 3,
@@ -15,7 +15,7 @@ describe QuarterCashFlow do
       it { expect(quarter_cash_flow.operating_activities).to eq(100) }
     end
 
-    context '2Q・前期なし' do
+    context "2Q・前期なし" do
       let(:cash_flow) { CashFlow.new(
         year: 2019,
         month: 3,
@@ -27,7 +27,7 @@ describe QuarterCashFlow do
       it { expect(quarter_cash_flow.operating_activities).to eq(100) }
     end
 
-    context '2Q・前期1Q' do
+    context "2Q・前期1Q" do
       let(:cash_flow) { CashFlow.new(
         year: 2019,
         month: 3,
@@ -43,7 +43,7 @@ describe QuarterCashFlow do
       it { expect(quarter_cash_flow.operating_activities).to eq(10) }
     end
 
-    context '2Q・前期4Q' do
+    context "2Q・前期4Q" do
       let(:cash_flow) { CashFlow.new(
         year: 2019,
         month: 3,
@@ -59,7 +59,7 @@ describe QuarterCashFlow do
       it { expect(quarter_cash_flow.operating_activities).to eq(100) }
     end
 
-    context '4Q・前期3Q' do
+    context "4Q・前期3Q" do
       let(:cash_flow) { CashFlow.new(
         year: 2019,
         month: 3,
@@ -75,7 +75,7 @@ describe QuarterCashFlow do
       it { expect(quarter_cash_flow.operating_activities).to eq(10) }
     end
 
-    context '4Q・前期2Q' do
+    context "4Q・前期2Q" do
       let(:cash_flow) { CashFlow.new(
         year: 2019,
         month: 3,
@@ -92,8 +92,8 @@ describe QuarterCashFlow do
     end
   end
 
-  describe '#investment_activities' do
-    context '2Q・前期1Q' do
+  describe "#investment_activities" do
+    context "2Q・前期1Q" do
       let(:cash_flow) { CashFlow.new(
         year: 2019,
         month: 3,
@@ -110,8 +110,8 @@ describe QuarterCashFlow do
     end
   end
 
-  describe '#financing_activities' do
-    context '2Q・前期1Q' do
+  describe "#financing_activities" do
+    context "2Q・前期1Q" do
       let(:cash_flow) { CashFlow.new(
         year: 2019,
         month: 3,
@@ -128,8 +128,8 @@ describe QuarterCashFlow do
     end
   end
 
-  describe '#net_increase_in_cash' do
-    context '2Q・前期1Q' do
+  describe "#net_increase_in_cash" do
+    context "2Q・前期1Q" do
       let(:cash_flow) { CashFlow.new(
         year: 2019,
         month: 3,

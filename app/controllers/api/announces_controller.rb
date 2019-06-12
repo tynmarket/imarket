@@ -1,6 +1,6 @@
 class Api::AnnouncesController < Api::ApplicationController
   def financial_results
-    codes = params[:code]&.split(',')
+    codes = params[:code]&.split(",")
 
     if codes.present?
       render json: find_results(Summary, codes)
@@ -10,7 +10,7 @@ class Api::AnnouncesController < Api::ApplicationController
   end
 
   def forecast
-    codes = params[:code]&.split(',')
+    codes = params[:code]&.split(",")
 
     if codes.present?
       render json: find_results(ResultsForecast, codes)

@@ -1,9 +1,9 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe CashFlow do
 
-  describe '#net_increase_in_cash' do
-    context '通期のみ' do
+  describe "#net_increase_in_cash" do
+    context "通期のみ" do
       let(:cash_flow) { CashFlow.new(
         year: 2019,
         month: 3,
@@ -20,7 +20,7 @@ describe CashFlow do
       it { expect(cash_flow.net_increase_in_cash prev_cash_flow).to eq 10 }
     end
 
-    context '通期以外もある' do
+    context "通期以外もある" do
       let(:cash_flow) { CashFlow.new(
         year: 2019,
         month: 3,
@@ -38,7 +38,7 @@ describe CashFlow do
       it { expect(cash_flow.net_increase_in_cash prev_cash_flow).to eq 20 }
     end
 
-    context '前期なし' do
+    context "前期なし" do
       let(:cash_flow) { CashFlow.new(
         year: 2019,
         month: 3,

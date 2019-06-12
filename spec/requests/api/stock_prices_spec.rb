@@ -1,6 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
-describe 'GET /api/stock_prices/:code' do
+describe "GET /api/stock_prices/:code" do
   let(:code) { "1111" }
   let(:date) { "2018-10-10" }
 
@@ -20,7 +20,7 @@ describe 'GET /api/stock_prices/:code' do
     end
   end
 
-  context 'date=2018-10-10' do
+  context "date=2018-10-10" do
     let(:close) { 2100 }
     let(:change) { 50 }
     let(:change_rate) { 0.0233 }

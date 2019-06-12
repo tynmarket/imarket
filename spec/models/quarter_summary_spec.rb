@@ -1,15 +1,15 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe QuarterSummary do
 
-  describe '.arrays' do
-    context '連続したSummary2つ' do
+  describe ".arrays" do
+    context "連続したSummary2つ" do
       let(:summary) { Summary.new year: 2014, quarter: 1 }
       let(:summary_2) { Summary.new year: 2013, quarter: 4 }
       let(:summaries) { [summary, summary_2] }
       let(:quarter_summaries) { QuarterSummary.arrays(summaries) }
 
-      it '1つ目' do
+      it "1つ目" do
         quarter_summary = quarter_summaries.first
         prev_quarter_summary = quarter_summary.instance_variable_get(:@prev_quarter_summary)
 
@@ -19,7 +19,7 @@ describe QuarterSummary do
         expect(prev_quarter_summary.quarter).to eq(4)
       end
 
-      it '2つ目' do
+      it "2つ目" do
         quarter_summary = quarter_summaries.second
         prev_quarter_summary = quarter_summary.instance_variable_get(:@prev_quarter_summary)
 
@@ -29,7 +29,7 @@ describe QuarterSummary do
       end
     end
 
-    context '空' do
+    context "空" do
       let(:summaries) { [] }
       let(:quarter_summaries) { QuarterSummary.arrays(summaries) }
 
@@ -37,8 +37,8 @@ describe QuarterSummary do
     end
   end
 
-  describe '#net_sales' do
-    context '2Q' do
+  describe "#net_sales" do
+    context "2Q" do
       let(:summary) { Summary.new(
         year: 2014,
         month: 3,
@@ -54,7 +54,7 @@ describe QuarterSummary do
       it { expect(quarter_summary.net_sales).to eq(10) }
     end
 
-    context '1Q・前期4Q' do
+    context "1Q・前期4Q" do
       let(:summary) { Summary.new(
         year: 2014,
         month: 3,
@@ -70,7 +70,7 @@ describe QuarterSummary do
       it { expect(quarter_summary.net_sales).to eq(100) }
     end
 
-    context '1Q・前期0Q' do
+    context "1Q・前期0Q" do
       let(:summary) { Summary.new(
         year: 2014,
         month: 3,
@@ -85,7 +85,7 @@ describe QuarterSummary do
       it { expect(quarter_summary.net_sales).to eq(10) }
     end
 
-    context '1Q・前期なし' do
+    context "1Q・前期なし" do
       let(:summary) { Summary.new(
         year: 2014,
         month: 3,
@@ -97,7 +97,7 @@ describe QuarterSummary do
       it { expect(quarter_summary.net_sales).to eq(100) }
     end
 
-    context '1Q値なし・前期0Q' do
+    context "1Q値なし・前期0Q" do
       let(:summary) { Summary.new(
         year: 2014,
         month: 3,
@@ -112,7 +112,7 @@ describe QuarterSummary do
       it { expect(quarter_summary.net_sales).to be_nil }
     end
 
-    context '1Q・前期0Q値なし' do
+    context "1Q・前期0Q値なし" do
       let(:summary) { Summary.new(
         year: 2014,
         month: 3,
@@ -127,7 +127,7 @@ describe QuarterSummary do
       it { expect(quarter_summary.net_sales).to be_nil }
     end
 
-    context '0Q・前期4Q' do
+    context "0Q・前期4Q" do
       let(:summary) { Summary.new(
         year: 2014,
         month: 3,
@@ -143,7 +143,7 @@ describe QuarterSummary do
       it { expect(quarter_summary.net_sales).to eq(100) }
     end
 
-    context '当期値なし' do
+    context "当期値なし" do
       let(:summary) { Summary.new(
         year: 2014,
         month: 3,
@@ -158,7 +158,7 @@ describe QuarterSummary do
       it { expect(quarter_summary.net_sales).to be_nil }
     end
 
-    context '2Q・前期なし' do
+    context "2Q・前期なし" do
       let(:summary) { Summary.new(
         year: 2014,
         month: 3,
@@ -169,7 +169,7 @@ describe QuarterSummary do
       it { expect(quarter_summary.net_sales).to be_nil }
     end
 
-    context '2Q・前期値なし' do
+    context "2Q・前期値なし" do
       let(:summary) { Summary.new(
         year: 2014,
         month: 3,
@@ -184,7 +184,7 @@ describe QuarterSummary do
       it { expect(quarter_summary.net_sales).to be_nil }
     end
 
-    context '決算期の変更' do
+    context "決算期の変更" do
       let(:summary) { Summary.new(
         year: 2014,
         month: 12,
@@ -200,7 +200,7 @@ describe QuarterSummary do
       it { expect(quarter_summary.net_sales).to eq(10) }
     end
 
-    context '決算期の変更（修正バッチ適用前）' do
+    context "決算期の変更（修正バッチ適用前）" do
       let(:summary) { Summary.new(
         year: 2014,
         month: 12,
@@ -217,7 +217,7 @@ describe QuarterSummary do
     end
   end
 
-  describe '#change_in_net_sales' do
+  describe "#change_in_net_sales" do
     let(:summary) { Summary.new(
       year: 2014,
       quarter: 2,
@@ -244,7 +244,7 @@ describe QuarterSummary do
 
     it { expect(change_in_net_sales).to eq(0.10) }
 
-    context 'prev_year_quarter_summaryなし' do
+    context "prev_year_quarter_summaryなし" do
       it do
         change_in_net_sales = quarter_summary.change_in_net_sales(nil)
 
@@ -252,7 +252,7 @@ describe QuarterSummary do
       end
     end
 
-    context 'quarter_summaryの値なし' do
+    context "quarter_summaryの値なし" do
       it do
         allow(quarter_summary).to receive(:net_sales) { nil }
 
@@ -260,7 +260,7 @@ describe QuarterSummary do
       end
     end
 
-    context 'prev_year_quarter_summaryの値なし' do
+    context "prev_year_quarter_summaryの値なし" do
       it do
         allow(prev_year_quarter_summary).to receive(:net_sales) { nil }
 
@@ -268,7 +268,7 @@ describe QuarterSummary do
       end
     end
 
-    context 'prev_year_quarter_summaryが前年ではない' do
+    context "prev_year_quarter_summaryが前年ではない" do
       it do
         prev_year_quarter_summary.instance_variable_set :@year, 2012
 
@@ -276,7 +276,7 @@ describe QuarterSummary do
       end
     end
 
-    context 'prev_year_quarter_summaryが同決算月ではない' do
+    context "prev_year_quarter_summaryが同決算月ではない" do
       it do
         prev_year_quarter_summary.instance_variable_set :@month, 1
 
@@ -284,7 +284,7 @@ describe QuarterSummary do
       end
     end
 
-    context 'prev_year_quarter_summaryが同四半期ではない' do
+    context "prev_year_quarter_summaryが同四半期ではない" do
       it do
         prev_year_quarter_summary.instance_variable_set :@quarter, 1
 
@@ -292,7 +292,7 @@ describe QuarterSummary do
       end
     end
 
-    context 'quarter_summaryが負の値' do
+    context "quarter_summaryが負の値" do
       it do
         allow(quarter_summary).to receive(:net_sales) { -10 }
 
@@ -300,7 +300,7 @@ describe QuarterSummary do
       end
     end
 
-    context 'prev_year_quarter_summaryが負の値' do
+    context "prev_year_quarter_summaryが負の値" do
       it do
         allow(prev_year_quarter_summary).to receive(:net_sales) { -10 }
 

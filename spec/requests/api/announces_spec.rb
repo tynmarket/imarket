@@ -1,11 +1,11 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe "GET /api/announces" do
   let(:code) { "1111,2222,3333,4444" }
   let(:from) { "2019-01-10 14:0:0" }
   let(:to) { "2019-01-10 14:59:59" }
 
-  describe 'GET /api/announces/financial_results' do
+  describe "GET /api/announces/financial_results" do
 
     context "from=2019-01-10 14:0:0, to=2019-01-10 14:59:59" do
       before do
@@ -29,7 +29,7 @@ describe "GET /api/announces" do
     end
   end
 
-  describe 'GET /api/announces/forecast' do
+  describe "GET /api/announces/forecast" do
 
     context "from=2019-01-10 14:0:0, to=2019-01-10 14:59:59" do
       before do

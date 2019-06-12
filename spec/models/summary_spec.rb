@@ -1,9 +1,9 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Summary do
 
-  describe 'results_forecast_dummy' do
-    context '1Q' do
+  describe "results_forecast_dummy" do
+    context "1Q" do
       let(:summary) { Summary.new year: 2014, quarter: 1 }
 
       it do
@@ -12,7 +12,7 @@ describe Summary do
       end
     end
 
-    context '4Q' do
+    context "4Q" do
       let(:summary) { Summary.new year: 2014, quarter: 4 }
 
       it do
@@ -21,7 +21,7 @@ describe Summary do
       end
     end
 
-    context 'year == nil' do
+    context "year == nil" do
       let(:summary) { Summary.new }
 
       it do

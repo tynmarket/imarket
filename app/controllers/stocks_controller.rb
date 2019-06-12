@@ -6,7 +6,7 @@ class StocksController < ApplicationController
     @stocks = Stock.search(query)
 
     if @stocks.length > 1
-      render action: 'index'
+      render action: "index"
     else
       find_data @stocks.first, query
     end
@@ -34,7 +34,7 @@ class StocksController < ApplicationController
         # 銘柄のみ未登録
         @stock = Stock.new id: query, code: query, name: disclosure.name
       else
-        render action: 'index'
+        render action: "index"
         return
       end
     end
@@ -56,7 +56,7 @@ class StocksController < ApplicationController
                    .where("release_date > ?", 1.year.ago)
                    .order(id: :desc)
 
-    render action: (@action_name = 'show')
+    render action: (@action_name = "show")
   end
 
   def find_summaries(code)

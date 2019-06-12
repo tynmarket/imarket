@@ -112,14 +112,14 @@ class QuarterResultsForecast
   end
 
   def not_forecast(forcast_metnod)
-    forcast_metnod.to_s.sub('forecast_', '').to_sym
+    forcast_metnod.to_s.sub("forecast_", "").to_sym
   end
 
   def not_change_in(change_in_method)
-    change_in_method.to_s.sub('change_in_', '').to_sym
+    change_in_method.to_s.sub("change_in_", "").to_sym
   end
 
   def not_change_in_forecast(change_in_forecast_method)
-    change_in_forecast_method.to_s.sub('change_in_forecast_', '').to_sym
+    change_in_forecast_method.to_s.sub("change_in_forecast_", "").to_sym
   end
 end

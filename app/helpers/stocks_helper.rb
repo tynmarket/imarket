@@ -2,7 +2,7 @@ module StocksHelper
   include Utils::Constants
 
   def stocks_search?
-    controller_name == 'stocks' && action_name == 'search'
+    controller_name == "stocks" && action_name == "search"
   end
 
   def term_all?(term)

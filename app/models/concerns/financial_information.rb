@@ -5,7 +5,7 @@ module FinancialInformation
     scope :accounting_period_desc, -> { order(year: :desc, month: :desc, quarter: :desc) } if respond_to? :scope
 
     belongs_to :disclosure_pdf, -> { select :id, :release_date, :pdf },
-      class_name: 'Disclosure', foreign_key: "disclosure_id" if respond_to? :belongs_to
+      class_name: "Disclosure", foreign_key: "disclosure_id" if respond_to? :belongs_to
     # :idがないとincludes出来ない。
     # Summaryでselect指定する場合は:diclosure_idが必要 TODO Rails 3.2で検証
   end
@@ -41,7 +41,7 @@ module FinancialInformation
   end
 
   def month_padding(month)
-    sprintf('%02d', month)
+    sprintf("%02d", month)
   end
 
   def q4?
