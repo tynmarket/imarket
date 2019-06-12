@@ -19,6 +19,7 @@ gem 'pry-byebug'
 gem 'pry-stack_explorer'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.0'
+gem 'rubocop', require: false
 gem 'sass-rails', '~> 5.0'
 gem 'settingslogic'
 gem 'slim-rails'
@@ -45,7 +46,6 @@ group :test do
   gem 'database_cleaner'
   gem "rspec_junit_formatter"
   gem 'rspec-rails'
-  gem 'rubocop', require: false # for FactoryBot
   gem 'rubocop-rspec'
   gem 'spring-commands-rspec'
   gem 'timecop'
