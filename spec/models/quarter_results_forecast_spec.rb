@@ -5,14 +5,14 @@ describe QuarterResultsForecast do
   describe ".create" do
     context "latest_forecastなし" do
       let(:latest_forecast) {}
-      let(:summaries) { [Summary.new(year: 2013, quarter:4)] }
+      let(:summaries) { [Summary.new(year: 2013, quarter: 4)] }
       let(:quarter_forecast) { QuarterResultsForecast.create latest_forecast, summaries }
 
       it { expect(quarter_forecast).to be_nil }
     end
 
     context "summariesなし" do
-      let(:latest_forecast) { LatestResultsForecast.new year:2014, quarter: 4 }
+      let(:latest_forecast) { LatestResultsForecast.new year: 2014, quarter: 4 }
       let(:summaries) { [] }
       let(:quarter_forecast) { QuarterResultsForecast.create latest_forecast, summaries }
 
@@ -22,15 +22,15 @@ describe QuarterResultsForecast do
 
   describe "#quarter_name_forecast" do
     context "4Q" do
-      let(:latest_forecast) { LatestResultsForecast.new year:2014, quarter: 4 }
-      let(:summaries) { [Summary.new(year: 2013, quarter:4)] }
+      let(:latest_forecast) { LatestResultsForecast.new year: 2014, quarter: 4 }
+      let(:summaries) { [Summary.new(year: 2013, quarter: 4)] }
       let(:quarter_forecast) { QuarterResultsForecast.create latest_forecast, summaries }
 
       it { expect(quarter_forecast.quarter_name_forecast).to eq("1Q - 4Q<br>予想") }
     end
 
     context "3Q" do
-      let(:latest_forecast) { LatestResultsForecast.new year:2014, quarter: 4 }
+      let(:latest_forecast) { LatestResultsForecast.new year: 2014, quarter: 4 }
       let(:summaries) { [Summary.new(year: 2014, quarter: 3)] }
       let(:quarter_forecast) { QuarterResultsForecast.create latest_forecast, summaries }
 
@@ -38,7 +38,7 @@ describe QuarterResultsForecast do
     end
 
     context "2Q" do
-      let(:latest_forecast) { LatestResultsForecast.new year:2014, quarter: 4 }
+      let(:latest_forecast) { LatestResultsForecast.new year: 2014, quarter: 4 }
       let(:summaries) { [Summary.new(year: 2014, quarter: 2)] }
       let(:quarter_forecast) { QuarterResultsForecast.create latest_forecast, summaries }
 
@@ -46,7 +46,7 @@ describe QuarterResultsForecast do
     end
 
     context "1Q" do
-      let(:latest_forecast) { LatestResultsForecast.new year:2014, quarter: 4 }
+      let(:latest_forecast) { LatestResultsForecast.new year: 2014, quarter: 4 }
       let(:summaries) { [Summary.new(year: 2014, quarter: 1)] }
       let(:quarter_forecast) { QuarterResultsForecast.create latest_forecast, summaries }
 

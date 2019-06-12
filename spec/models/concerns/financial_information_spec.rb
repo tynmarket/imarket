@@ -20,29 +20,29 @@ describe FinancialInformation do
 
   describe "#accounting_period_once" do
     context "next_summary == nil" do
-      let(:summary) { Summary.new year: 2014, month:3 }
+      let(:summary) { Summary.new year: 2014, month: 3 }
       let(:next_summary) { nil }
 
       it { expect(summary.accounting_period_once(next_summary)).to eq("2014/03") }
     end
 
     context "同じ年度" do
-      let(:summary) { Summary.new year: 2014, month:3 }
-      let(:next_summary) { Summary.new year: 2014, month:3 }
+      let(:summary) { Summary.new year: 2014, month: 3 }
+      let(:next_summary) { Summary.new year: 2014, month: 3 }
 
       it { expect(summary.accounting_period_once(next_summary)).to be_nil }
     end
 
     context "次の年度" do
-      let(:summary) { Summary.new year: 2014, month:3 }
-      let(:next_summary) { Summary.new year: 2015, month:3 }
+      let(:summary) { Summary.new year: 2014, month: 3 }
+      let(:next_summary) { Summary.new year: 2015, month: 3 }
 
       it { expect(summary.accounting_period_once(next_summary)).to eq("2014/03") }
     end
 
     context "決算期の変更" do
-      let(:summary) { Summary.new year: 2014, month:3, quarter:4 }
-      let(:next_summary) { Summary.new year: 2014, month:12, quarter: 2 }
+      let(:summary) { Summary.new year: 2014, month: 3, quarter: 4 }
+      let(:next_summary) { Summary.new year: 2014, month: 12, quarter: 2 }
 
       it { expect(summary.accounting_period_once(next_summary)).to eq("2014/03") }
     end
