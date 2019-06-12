@@ -22,6 +22,12 @@ StringLiterals:
 Style/AsciiComments:
   Enabled: false
 
+Style/CommentAnnotation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
 Style/MutableConstant:
   Enabled: false
 

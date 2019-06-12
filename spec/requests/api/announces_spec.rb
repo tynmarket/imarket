@@ -21,7 +21,7 @@ describe "GET /api/announces" do
 
       it "1111, 2222" do
         get financial_results_api_announce_path,
-          params: {code: code, from: from, to: to},
+          params: { code: code, from: from, to: to },
           headers: auth_header
 
         expect(json).to eq ["1111", "2222"]
@@ -45,7 +45,7 @@ describe "GET /api/announces" do
 
       it "1111, 2222" do
         get forecast_api_announce_path,
-          params: {code: code, from: from, to: to},
+          params: { code: code, from: from, to: to },
           headers: auth_header
 
         expect(json).to eq ["1111", "2222"]

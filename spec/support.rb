@@ -9,6 +9,6 @@ module Support
   end
 
   def auth_header
-    {Authorization: "token api_key"}
+    { Authorization: "token api_key" }
   end
 end

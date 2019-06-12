@@ -5,7 +5,7 @@ class Api::StockPricesController < Api::ApplicationController
     @stock_price = StockPrice
                    .joins(:stock)
                    .daily
-                   .where(stocks: {code: code})
+                   .where(stocks: { code: code })
                    .where(date: date)
                    .first
 
