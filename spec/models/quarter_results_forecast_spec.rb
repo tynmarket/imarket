@@ -133,8 +133,8 @@ describe QuarterResultsForecast do
     context "3Q" do
       let(:latest_forecast) { LatestResultsForecast.new(year: 2014, month: 3, quarter: 4, forecast_net_sales: 101) }
       let(:summaries) { [Summary.new(year: 2014, month: 3, quarter: 3, net_sales: 90),
-        Summary.new(year: 2013, month: 3, quarter: 4, net_sales: 90),
-        Summary.new(year: 2013, month: 3, quarter: 3, net_sales: 80)] }
+                         Summary.new(year: 2013, month: 3, quarter: 4, net_sales: 90),
+                         Summary.new(year: 2013, month: 3, quarter: 3, net_sales: 80)] }
       let(:quarter_forecast) { QuarterResultsForecast.create latest_forecast, summaries }
 
       it { expect(quarter_forecast.change_in_forecast_net_sales).to eq(0.1) }
@@ -143,9 +143,9 @@ describe QuarterResultsForecast do
     context "2Q" do
       let(:latest_forecast) { LatestResultsForecast.new(year: 2014, month: 3, quarter: 4, forecast_net_sales: 101) }
       let(:summaries) { [Summary.new(year: 2014, month: 3, quarter: 2, net_sales: 90),
-        Summary.new(year: 2013, month: 3, quarter: 4, net_sales: 90),
-        Summary.new(year: 2013, month: 3, quarter: 3, net_sales: 85),
-        Summary.new(year: 2013, month: 3, quarter: 2, net_sales: 80)] }
+                         Summary.new(year: 2013, month: 3, quarter: 4, net_sales: 90),
+                         Summary.new(year: 2013, month: 3, quarter: 3, net_sales: 85),
+                         Summary.new(year: 2013, month: 3, quarter: 2, net_sales: 80)] }
       let(:quarter_forecast) { QuarterResultsForecast.create latest_forecast, summaries }
 
       it { expect(quarter_forecast.change_in_forecast_net_sales).to eq(0.1) }
@@ -154,10 +154,10 @@ describe QuarterResultsForecast do
     context "1Q" do
       let(:latest_forecast) { LatestResultsForecast.new(year: 2014, month: 3, quarter: 4, forecast_net_sales: 101) }
       let(:summaries) { [Summary.new(year: 2014, month: 3, quarter: 1, net_sales: 90),
-        Summary.new(year: 2013, month: 3, quarter: 4, net_sales: 90),
-        Summary.new(year: 2013, month: 3, quarter: 3, net_sales: 85),
-        Summary.new(year: 2013, month: 3, quarter: 2, net_sales: 82),
-        Summary.new(year: 2013, month: 3, quarter: 1, net_sales: 80)] }
+                         Summary.new(year: 2013, month: 3, quarter: 4, net_sales: 90),
+                         Summary.new(year: 2013, month: 3, quarter: 3, net_sales: 85),
+                         Summary.new(year: 2013, month: 3, quarter: 2, net_sales: 82),
+                         Summary.new(year: 2013, month: 3, quarter: 1, net_sales: 80)] }
       let(:quarter_forecast) { QuarterResultsForecast.create latest_forecast, summaries }
 
       it { expect(quarter_forecast.change_in_forecast_net_sales).to eq(0.1) }
@@ -174,8 +174,8 @@ describe QuarterResultsForecast do
     context "前期の値なし" do
       let(:latest_forecast) { LatestResultsForecast.new(year: 2014, month: 3, quarter: 4, forecast_net_sales: 101) }
       let(:summaries) { [Summary.new(year: 2014, month: 3, quarter: 3, net_sales: 90),
-        Summary.new(year: 2013, month: 3, quarter: 4, net_sales: 90),
-        Summary.new(year: 2013, month: 3, quarter: 3)] }
+                         Summary.new(year: 2013, month: 3, quarter: 4, net_sales: 90),
+                         Summary.new(year: 2013, month: 3, quarter: 3)] }
       let(:quarter_forecast) { QuarterResultsForecast.create latest_forecast, summaries }
 
       it { expect(quarter_forecast.change_in_forecast_net_sales).to be_nil }
@@ -184,8 +184,8 @@ describe QuarterResultsForecast do
     context "前期の値がマイナス" do
       let(:latest_forecast) { LatestResultsForecast.new(year: 2014, month: 3, quarter: 4, forecast_net_sales: 101) }
       let(:summaries) { [Summary.new(year: 2014, month: 3, quarter: 3, net_sales: 90),
-        Summary.new(year: 2013, quarter: 4, month: 3, net_sales: 80),
-        Summary.new(year: 2013, quarter: 3, month: 3, net_sales: 90)] }
+                         Summary.new(year: 2013, quarter: 4, month: 3, net_sales: 80),
+                         Summary.new(year: 2013, quarter: 3, month: 3, net_sales: 90)] }
       let(:quarter_forecast) { QuarterResultsForecast.create latest_forecast, summaries }
 
       it { expect(quarter_forecast.change_in_forecast_net_sales).to be_nil }
@@ -194,8 +194,8 @@ describe QuarterResultsForecast do
     context "予想の値がマイナス" do
       let(:latest_forecast) { LatestResultsForecast.new(year: 2014, month: 3, quarter: 4, forecast_net_sales: 90) }
       let(:summaries) { [Summary.new(year: 2014, month: 3, quarter: 3, net_sales: 100),
-        Summary.new(year: 2013, quarter: 4, month: 3, net_sales: 100),
-        Summary.new(year: 2013, quarter: 3, month: 3, net_sales: 90)] }
+                         Summary.new(year: 2013, quarter: 4, month: 3, net_sales: 100),
+                         Summary.new(year: 2013, quarter: 3, month: 3, net_sales: 90)] }
       let(:quarter_forecast) { QuarterResultsForecast.create latest_forecast, summaries }
 
       it { expect(quarter_forecast.change_in_forecast_net_sales).to be_nil }
@@ -204,8 +204,8 @@ describe QuarterResultsForecast do
     context "前年同期の短信がない" do
       let(:latest_forecast) { LatestResultsForecast.new(year: 2014, month: 3, quarter: 4, forecast_net_sales: 101) }
       let(:summaries) { [Summary.new(year: 2014, month: 3, quarter: 1, net_sales: 90),
-        Summary.new(year: 2013, month: 3, quarter: 4, net_sales: 90),
-        Summary.new(year: 2013, month: 12, quarter: 1, net_sales: 80)] }
+                         Summary.new(year: 2013, month: 3, quarter: 4, net_sales: 90),
+                         Summary.new(year: 2013, month: 12, quarter: 1, net_sales: 80)] }
       let(:quarter_forecast) { QuarterResultsForecast.create latest_forecast, summaries }
 
       it { expect(quarter_forecast.change_in_forecast_net_sales).to be_nil }
@@ -223,8 +223,8 @@ describe QuarterResultsForecast do
     context "前期の短信がに欠落がある" do
       let(:latest_forecast) { LatestResultsForecast.new(year: 2014, month: 3, quarter: 4, forecast_net_sales: 101) }
       let(:summaries) { [Summary.new(year: 2014, month: 3, quarter: 2, net_sales: 90),
-        Summary.new(year: 2013, month: 3, quarter: 4, net_sales: 90),
-        Summary.new(year: 2013, month: 3, quarter: 2, net_sales: 80)] }
+                         Summary.new(year: 2013, month: 3, quarter: 4, net_sales: 90),
+                         Summary.new(year: 2013, month: 3, quarter: 2, net_sales: 80)] }
       let(:quarter_forecast) { QuarterResultsForecast.create latest_forecast, summaries }
 
       it { expect(quarter_forecast.change_in_forecast_net_sales).to be_nil }

@@ -54,6 +54,10 @@ Style/FrozenStringLiteralComment:
 Style/MutableConstant:
   Enabled: false
 
+Style/NestedParenthesizedCalls:
+  Exclude:
+    - "spec/**/*"
+
 Style/WordArray:
   Enabled: false
 
