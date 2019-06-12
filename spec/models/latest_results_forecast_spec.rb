@@ -77,14 +77,14 @@ RSpec.describe LatestResultsForecast, type: :model do
       year: 2014,
       month: 3,
       quarter: 4,
-      forecast_net_sales: 110,
+      forecast_net_sales: 110
     ) }
     let(:summaries) { [
       Summary.new(
         year: 2013,
         month: 3,
         quarter: 4,
-        net_sales: 100,
+        net_sales: 100
       )
     ] }
 

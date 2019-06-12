@@ -60,5 +60,9 @@ Style/WordArray:
 Metrics/BlockLength:
   Max: 100
 
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
+
 Metrics/LineLength:
   Max: 120

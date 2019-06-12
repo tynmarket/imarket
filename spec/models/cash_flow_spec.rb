@@ -8,13 +8,13 @@ describe CashFlow do
         year: 2019,
         month: 3,
         quarter: 4,
-        cash: 100,
+        cash: 100
       ) }
       let(:prev_cash_flow) { CashFlow.new(
         year: 2018,
         month: 3,
         quarter: 4,
-        cash: 90,
+        cash: 90
       ) }
 
       it { expect(cash_flow.net_increase_in_cash prev_cash_flow).to eq 10 }
@@ -32,7 +32,7 @@ describe CashFlow do
         year: 2018,
         month: 3,
         quarter: 3,
-        cash: 90,
+        cash: 90
       ) }
 
       it { expect(cash_flow.net_increase_in_cash prev_cash_flow).to eq 20 }
