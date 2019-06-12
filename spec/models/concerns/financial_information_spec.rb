@@ -5,7 +5,8 @@ describe FinancialInformation do
   describe "#accounting_period" do
     let(:summary) { Summary.new(
       year: 2013,
-      month: 3) }
+      month: 3
+    ) }
 
     it { expect(summary.accounting_period).to eq("2013/03") }
   end
@@ -13,7 +14,8 @@ describe FinancialInformation do
   describe "#prev_accounting_period" do
     let(:summary) { Summary.new(
       year: 2013,
-      month: 3) }
+      month: 3
+    ) }
 
     it { expect(summary.prev_accounting_period).to eq("2012/03") }
   end

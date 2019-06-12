@@ -43,12 +43,14 @@ describe QuarterSummary do
         year: 2014,
         month: 3,
         quarter: 2,
-        net_sales: 100) }
+        net_sales: 100
+      ) }
       let(:prev_quarter_summary) { Summary.new(
         year: 2014,
         month: 3,
         quarter: 1,
-        net_sales: 90) }
+        net_sales: 90
+      ) }
       let(:quarter_summary) { QuarterSummary.new summary, prev_quarter_summary }
 
       it { expect(quarter_summary.net_sales).to eq(10) }
@@ -59,12 +61,14 @@ describe QuarterSummary do
         year: 2014,
         month: 3,
         quarter: 1,
-        net_sales: 100) }
+        net_sales: 100
+      ) }
       let(:prev_quarter_summary) { Summary.new(
         year: 2013,
         month: 3,
         quarter: 4,
-        net_sales: 90) }
+        net_sales: 90
+      ) }
       let(:quarter_summary) { QuarterSummary.new summary, prev_quarter_summary }
 
       it { expect(quarter_summary.net_sales).to eq(100) }
@@ -75,11 +79,13 @@ describe QuarterSummary do
         year: 2014,
         month: 3,
         quarter: 1,
-        net_sales: 100) }
+        net_sales: 100
+      ) }
       let(:prev_quarter_summary) { Summary.new(
         year: 2014,
         quarter: 0,
-        net_sales: 90) }
+        net_sales: 90
+      ) }
       let(:quarter_summary) { QuarterSummary.new summary, prev_quarter_summary }
 
       it { expect(quarter_summary.net_sales).to eq(10) }
@@ -90,7 +96,8 @@ describe QuarterSummary do
         year: 2014,
         month: 3,
         quarter: 1,
-        net_sales: 100) }
+        net_sales: 100
+      ) }
       let(:prev_quarter_summary) {}
       let(:quarter_summary) { QuarterSummary.new summary, prev_quarter_summary }
 
@@ -101,12 +108,14 @@ describe QuarterSummary do
       let(:summary) { Summary.new(
         year: 2014,
         month: 3,
-        quarter: 1) }
+        quarter: 1
+      ) }
       let(:prev_quarter_summary) { Summary.new(
         year: 2014,
         month: 3,
         quarter: 0,
-        net_sales: 90) }
+        net_sales: 90
+      ) }
       let(:quarter_summary) { QuarterSummary.new summary, prev_quarter_summary }
 
       it { expect(quarter_summary.net_sales).to be_nil }
@@ -117,11 +126,13 @@ describe QuarterSummary do
         year: 2014,
         month: 3,
         quarter: 1,
-        net_sales: 100) }
+        net_sales: 100
+      ) }
       let(:prev_quarter_summary) { Summary.new(
         year: 2014,
         month: 3,
-        quarter: 0) }
+        quarter: 0
+      ) }
       let(:quarter_summary) { QuarterSummary.new summary, prev_quarter_summary }
 
       it { expect(quarter_summary.net_sales).to be_nil }
@@ -132,12 +143,14 @@ describe QuarterSummary do
         year: 2014,
         month: 3,
         quarter: 0,
-        net_sales: 100) }
+        net_sales: 100
+      ) }
       let(:prev_quarter_summary) { Summary.new(
         year: 2013,
         month: 3,
         quarter: 4,
-        net_sales: 90) }
+        net_sales: 90
+      ) }
       let(:quarter_summary) { QuarterSummary.new summary, prev_quarter_summary }
 
       it { expect(quarter_summary.net_sales).to eq(100) }
@@ -147,12 +160,14 @@ describe QuarterSummary do
       let(:summary) { Summary.new(
         year: 2014,
         month: 3,
-        quarter: 2) }
+        quarter: 2
+      ) }
       let(:prev_quarter_summary) { Summary.new(
         year: 2014,
         month: 3,
         quarter: 1,
-        net_sales: 90) }
+        net_sales: 90
+      ) }
       let(:quarter_summary) { QuarterSummary.new summary, prev_quarter_summary }
 
       it { expect(quarter_summary.net_sales).to be_nil }
@@ -163,7 +178,8 @@ describe QuarterSummary do
         year: 2014,
         month: 3,
         quarter: 2,
-        net_sales: 100) }
+        net_sales: 100
+      ) }
       let(:quarter_summary) { QuarterSummary.new summary, nil }
 
       it { expect(quarter_summary.net_sales).to be_nil }
@@ -174,11 +190,13 @@ describe QuarterSummary do
         year: 2014,
         month: 3,
         quarter: 2,
-        net_sales: 100) }
+        net_sales: 100
+      ) }
       let(:prev_quarter_summary) { Summary.new(
         year: 2014,
         month: 3,
-        quarter: 1) }
+        quarter: 1
+      ) }
       let(:quarter_summary) { QuarterSummary.new summary, prev_quarter_summary }
 
       it { expect(quarter_summary.net_sales).to be_nil }
@@ -189,12 +207,14 @@ describe QuarterSummary do
         year: 2014,
         month: 12,
         quarter: 2,
-        net_sales: 10) }
+        net_sales: 10
+      ) }
       let(:prev_quarter_summary) { Summary.new(
         year: 2014,
         month: 3,
         quarter: 4,
-        net_sales: 90) }
+        net_sales: 90
+      ) }
       let(:quarter_summary) { QuarterSummary.new summary, prev_quarter_summary }
 
       it { expect(quarter_summary.net_sales).to eq(10) }
@@ -205,12 +225,14 @@ describe QuarterSummary do
         year: 2014,
         month: 12,
         quarter: 1,
-        net_sales: 10) }
+        net_sales: 10
+      ) }
       let(:prev_quarter_summary) { Summary.new(
         year: 2014,
         month: 3,
         quarter: 4,
-        net_sales: 90) }
+        net_sales: 90
+      ) }
       let(:quarter_summary) { QuarterSummary.new summary, prev_quarter_summary }
 
       it { expect(quarter_summary.net_sales).to eq(10) }
@@ -222,23 +244,27 @@ describe QuarterSummary do
       year: 2014,
       quarter: 2,
       month: 3,
-      net_sales: 210) }
+      net_sales: 210
+    ) }
     let(:prev_quarter_summary) { Summary.new(
       year: 2014,
       quarter: 1,
       month: 3,
-      net_sales: 100) }
+      net_sales: 100
+    ) }
     let(:quarter_summary) { QuarterSummary.new summary, prev_quarter_summary }
     let(:prev_year_summary) { Summary.new(
       year: 2013,
       quarter: 2,
       month: 3,
-      net_sales: 150) }
+      net_sales: 150
+    ) }
     let(:prev_year_prev_quarter_summary) { Summary.new(
       year: 2013,
       quarter: 1,
       month: 3,
-      net_sales: 50) }
+      net_sales: 50
+    ) }
     let(:prev_year_quarter_summary) { QuarterSummary.new prev_year_summary, prev_year_prev_quarter_summary }
     let(:change_in_net_sales) { quarter_summary.change_in_net_sales(prev_year_quarter_summary) }
 
