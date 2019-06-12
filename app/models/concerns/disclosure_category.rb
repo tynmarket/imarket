@@ -11,5 +11,4 @@ module DisclosureCategory
   def monthly?
     category == MONTHLY
   end
-
 end

@@ -13,6 +13,5 @@ module Utils
     def development?
       ENV["RAILS_ENV"] == "development"
     end
-
   end
 end

@@ -1,5 +1,4 @@
 module FinancialRatio
-
   # 売上高営業利益率〜売上高経常利益率
   [:operating_income, :ordinary_income].each do |method|
     define_method "net_sales_#{method}_ratio" do
@@ -30,5 +29,4 @@ module FinancialRatio
       end
     end
   end
-
 end

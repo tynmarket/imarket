@@ -116,5 +116,4 @@ module ApplicationHelper
   def span_red(value)
     content_tag(:span, value, style: "color:#d3381c")
   end
-
 end

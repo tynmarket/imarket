@@ -71,5 +71,4 @@ module DisclosuresHelper
       item == params[:tab] ? "active" : nil
     end
   end
-
 end
