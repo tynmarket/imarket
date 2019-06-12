@@ -40,8 +40,8 @@ class QuarterCashFlow
       elsif quarter == 0
         @cash_flow.send(method)
       elsif @prev_quarter_cash_flow &&  # 決算期の変更
-        (year != @prev_quarter_cash_flow.year ||  # 年度の途中から年度が変わっている/四半期のキャッシュフローの開示はない
-          (year == @prev_quarter_cash_flow.year && month != @prev_quarter_cash_flow.month))  # 年度の途中から決算月が変わっている
+            (year != @prev_quarter_cash_flow.year ||  # 年度の途中から年度が変わっている/四半期のキャッシュフローの開示はない
+              (year == @prev_quarter_cash_flow.year && month != @prev_quarter_cash_flow.month))  # 年度の途中から決算月が変わっている
         @cash_flow.send(method)
       elsif @cash_flow.send(method) && @prev_quarter_cash_flow.try(method)
         @cash_flow.send(method) - @prev_quarter_cash_flow.send(method)

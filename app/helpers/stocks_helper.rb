@@ -56,8 +56,8 @@ module StocksHelper
     # TODO 共通化
     prev_summary = summaries.find do |summary|
       summary.year == forecast.year - 1 &&
-      summary.month == forecast.month &&
-      summary.quarter == 4
+        summary.month == forecast.month &&
+        summary.quarter == 4
     end
 
     # 前年同四半期の短信がない

@@ -32,7 +32,7 @@ class StockPricesController < ApplicationController
 
     @ticks_entire_period = @dates_entire_period.map.with_index do |date, i|
       i if date == Date.new(2011, 7, 1) || TradingDayJp.beginning_of_year?(date) ||
-        (date.year == today.year && TradingDayJp.end_of_year?(date))
+           (date.year == today.year && TradingDayJp.end_of_year?(date))
     end.compact
   end
 end

@@ -51,6 +51,9 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+Style/LineEndConcatenation:
+  Enabled: false
+
 Style/MutableConstant:
   Enabled: false
 
@@ -72,4 +75,4 @@ Metrics/BlockLength:
     - "spec/**/*"
 
 Metrics/LineLength:
-  Max: 120
+  Max: 200

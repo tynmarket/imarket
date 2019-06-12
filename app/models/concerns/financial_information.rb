@@ -31,7 +31,7 @@ module FinancialInformation
     return unless year
 
     if !next_information || year != next_information.year ||
-        (year == next_information.year && month != next_information.month)
+       (year == next_information.year && month != next_information.month)
       "#{year}/#{month_padding(month)}"
     end
   end
