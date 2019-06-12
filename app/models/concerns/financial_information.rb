@@ -41,7 +41,7 @@ module FinancialInformation
   end
 
   def month_padding(month)
-    sprintf("%02d", month)
+    format("%02d", month)
   end
 
   def q4?

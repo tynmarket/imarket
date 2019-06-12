@@ -58,6 +58,9 @@ Style/NestedParenthesizedCalls:
   Exclude:
     - "spec/**/*"
 
+Style/NumericPredicate:
+  Enabled: false
+
 Style/WordArray:
   Enabled: false
 

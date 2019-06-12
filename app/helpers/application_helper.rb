@@ -109,7 +109,7 @@ module ApplicationHelper
   def red_delimiter_per_share(num)
     return unless num
 
-    num_delim = number_with_delimiter(sprintf("%.2f", num.to_f))
+    num_delim = number_with_delimiter(format("%.2f", num.to_f))
     num < 0 ? span_red(num_delim) : num_delim
   end
 
