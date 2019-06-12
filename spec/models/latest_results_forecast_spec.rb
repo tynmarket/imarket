@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe LatestResultsForecast, :type => :model do
+RSpec.describe LatestResultsForecast, type: :model do
 
   describe "#find_latest" do
     let(:code) { "1111" }
