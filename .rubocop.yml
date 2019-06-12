@@ -27,6 +27,10 @@ Layout/BlockEndNewline:
   Exclude:
     - "spec/**/*"
 
+Layout/EmptyLinesAroundBlockBody:
+  Exclude:
+    - "spec/**/*"
+
 Layout/MultilineBlockLayout:
   Exclude:
     - "spec/**/*"

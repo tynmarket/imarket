@@ -27,16 +27,12 @@ class StockPricesController < ApplicationController
     @dates_current_year = @dates_entire_period.select { |d| d >= TradingDayJp.beginning_of_year(today) }
 
     @ticks_current_year = @dates_current_year.map.with_index do |date, i|
-
       i if TradingDayJp.beginning_of_quarter?(date) || TradingDayJp.end_of_year?(date)
-
     end.compact
 
     @ticks_entire_period = @dates_entire_period.map.with_index do |date, i|
-
       i if date == Date.new(2011, 7, 1) || TradingDayJp.beginning_of_year?(date) ||
         (date.year == today.year && TradingDayJp.end_of_year?(date))
-
     end.compact
   end
 end
