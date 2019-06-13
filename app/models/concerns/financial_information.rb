@@ -2,7 +2,9 @@ module FinancialInformation
   extend ActiveSupport::Concern
 
   included do
-    scope :accounting_period_desc, -> { order(year: :desc, month: :desc, quarter: :desc) } if respond_to? :scope
+    if respond_to? :scope
+      scope :accounting_period_desc, -> { order(year: :desc, month: :desc, quarter: :desc) }
+    end
 
     if respond_to? :belongs_to
       belongs_to :disclosure_pdf, -> { select :id, :release_date, :pdf },

@@ -23,10 +23,10 @@ class QuarterSummary
   end
 
   # 売上高〜EPS
-  @@methods = [:net_sales, :operating_income, :ordinary_income, :net_income, :net_income_per_share]
+  @methods = [:net_sales, :operating_income, :ordinary_income, :net_income, :net_income_per_share]
 
   # TODO 歯抜けの場合は？
-  @@methods.each do |method|
+  @methods.each do |method|
     define_method method do
       if quarter == 1
         if @prev_quarter_summary.try(:quarter) == 0 # 前期が0Q
@@ -49,9 +49,9 @@ class QuarterSummary
   end
 
   # 売上高前年比〜純利益前年比
-  @@change_in_methods = [:net_sales, :operating_income, :ordinary_income, :net_income]
+  @change_in_methods = [:net_sales, :operating_income, :ordinary_income, :net_income]
 
-  @@change_in_methods.each do |method|
+  @change_in_methods.each do |method|
     define_method "change_in_#{method}" do |prev_year_quarter_summary|
       if prev_year_quarter_summary && # 前年同四半期
          year - 1 == prev_year_quarter_summary.year &&
