@@ -35,9 +35,9 @@ class Stock < ActiveRecord::Base
         where id: id
       else # キーワード
         search_names = param
-          .split(SPACE)
-          .reject(&:blank?)
-          .map{ |name| to_search_name name } # 検索名
+                       .split(SPACE)
+                       .reject(&:blank?)
+                       .map{ |name| to_search_name name } # 検索名
 
         statement = (["search_name"] * search_names.length).join(" LIKE ? AND ") + " LIKE ?"
         values = search_names.map { |search_name| "%#{search_name}%" }

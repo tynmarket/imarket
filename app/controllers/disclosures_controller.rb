@@ -23,10 +23,10 @@ class DisclosuresController < ApplicationController
     @last_updated = SystemStatus.stock_price_last_updated
 
     @disclosures = Disclosure
-      .includes(:summary, :results_forecasts, stock: :stock_price_latest)
-      .where(release_date: @date...@date + 1)
-      .page(page)
-      .order(id: :desc)
+                   .includes(:summary, :results_forecasts, stock: :stock_price_latest)
+                   .where(release_date: @date...@date + 1)
+                   .page(page)
+                   .order(id: :desc)
   end
 
 end
