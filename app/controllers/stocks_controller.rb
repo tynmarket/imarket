@@ -47,7 +47,7 @@ class StocksController < ApplicationController
 
     @quarter_summaries, @latest_forecast, @quarter_results_forecast,
       @current_summaries, @quarter_cash_flows =
-        find_financial_informations(@stock.code, @summaries, @cash_flows)
+      find_financial_informations(@stock.code, @summaries, @cash_flows)
 
     # 初期表示は今期 〜 過去3期
     @last_year = get_last_year(@summaries) unless view_context.term_all?(@term)
