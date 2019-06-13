@@ -31,6 +31,9 @@ Layout/EmptyLinesAroundBlockBody:
   Exclude:
     - "spec/**/*"
 
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+
 Layout/MultilineBlockLayout:
   Exclude:
     - "spec/**/*"
@@ -46,6 +49,9 @@ Style/CommentAnnotation:
   Enabled: false
 
 Style/Documentation:
+  Enabled: false
+
+Style/DoubleNegation:
   Enabled: false
 
 Style/FrozenStringLiteralComment:
@@ -64,15 +70,48 @@ Style/NestedParenthesizedCalls:
 Style/NumericPredicate:
   Enabled: false
 
+Style/RescueStandardError:
+  Enabled: false
+
+Style/StringLiteralsInInterpolation:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
 Style/WordArray:
   Enabled: false
 
-Metrics/BlockLength:
-  Max: 100
+Naming/AccessorMethodName:
+  Exclude:
+    - "app/controllers/*"
+
+Naming/HeredocDelimiterNaming:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+  Max: 25
 
 Metrics/BlockLength:
   Exclude:
     - "spec/**/*"
+  Max: 100
 
 Metrics/LineLength:
-  Max: 200
+  Exclude:
+    - "app/helpers/application_helper.rb"
+    - "spec/**/*"
+  Max: 100
+
+Metrics/MethodLength:
+  Max: 100
+
+Metrics/PerceivedComplexity:
+  Max: 13
+
+Metrics/CyclomaticComplexity:
+  Max: 13
+
+Performance/RangeInclude:
+  Enabled: false
