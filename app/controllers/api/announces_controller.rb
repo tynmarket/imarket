@@ -1,5 +1,5 @@
 module Api
-  class AnnouncesController < Api::ApplicationController
+  class AnnouncesController < ApplicationController
     def financial_results
       codes = params[:code]&.split(",")
 

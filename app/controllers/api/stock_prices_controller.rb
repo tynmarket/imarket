@@ -1,5 +1,5 @@
-class Api
-  class StockPricesController < Api::ApplicationController
+module Api
+  class StockPricesController < ApplicationController
     def show
       code = params[:code]
       date = params[:date]
