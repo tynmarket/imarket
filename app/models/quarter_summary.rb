@@ -29,7 +29,7 @@ class QuarterSummary
   @@methods.each do |method|
     define_method method do
       if quarter == 1
-        if @prev_quarter_summary.try(:quarter) == 0  # 前期が0Q
+        if @prev_quarter_summary.try(:quarter) == 0 # 前期が0Q
           if @summary.send(method) && @prev_quarter_summary.send(method)
             @summary.send(method) - @prev_quarter_summary.send(method)
           end
@@ -38,9 +38,9 @@ class QuarterSummary
         end
       elsif quarter == 0
         @summary.send(method)
-      elsif @prev_quarter_summary &&  # 決算期の変更
+      elsif @prev_quarter_summary && # 決算期の変更
             (year != @prev_quarter_summary.year || # 年度の途中から年度が変わっている
-              (year == @prev_quarter_summary.year && month != @prev_quarter_summary.month))  # 年度の途中から決算月が変わっている
+              (year == @prev_quarter_summary.year && month != @prev_quarter_summary.month)) # 年度の途中から決算月が変わっている
         @summary.send(method)
       elsif @summary.send(method) && @prev_quarter_summary.try(method)
         @summary.send(method) - @prev_quarter_summary.send(method)
@@ -53,7 +53,7 @@ class QuarterSummary
 
   @@change_in_methods.each do |method|
     define_method "change_in_#{method}" do |prev_year_quarter_summary|
-      if prev_year_quarter_summary &&  # 前年同四半期
+      if prev_year_quarter_summary && # 前年同四半期
          year - 1 == prev_year_quarter_summary.year &&
          month == prev_year_quarter_summary.month &&
          quarter == prev_year_quarter_summary.quarter &&

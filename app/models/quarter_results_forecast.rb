@@ -10,7 +10,7 @@ class QuarterResultsForecast
   class << self
 
     def create(latest_forecast, summaries)
-      new(latest_forecast, summaries) if latest_forecast.present?  # 予想のみある場合は可とする
+      new(latest_forecast, summaries) if latest_forecast.present? # 予想のみある場合は可とする
     end
 
   end
@@ -61,22 +61,22 @@ class QuarterResultsForecast
         change_in_forecast_value = @latest_forecast.send method
 
         if change_in_forecast_value
-          return change_in_forecast_value  # 累計と同じ
+          return change_in_forecast_value # 累計と同じ
         else
-          return @latest_forecast.send "calc_#{method}", @summaries  # 計算する
+          return @latest_forecast.send "calc_#{method}", @summaries # 計算する
         end
       end
 
-      forecast_value = send(not_change_in(method))  # 四半期ベースの予想
+      forecast_value = send(not_change_in(method)) # 四半期ベースの予想
 
       return unless forecast_value
 
       prev_summaries = @summaries.select do |summary|
         summary.year == year - 1 && summary.month == month &&
-          summary.quarter >= @latest_summary.quarter  # 去年の累計、@latest_summaryがないケースは弾かれてる
+          summary.quarter >= @latest_summary.quarter # 去年の累計、@latest_summaryがないケースは弾かれてる
       end
 
-      return unless prev_summaries_exist?(prev_summaries)  # 前年の値が計算出来ない
+      return unless prev_summaries_exist?(prev_summaries) # 前年の値が計算出来ない
 
       value_method = not_change_in_forecast(method)
       to_value = prev_summaries.first.send(value_method)
@@ -94,7 +94,7 @@ class QuarterResultsForecast
   private
 
   def next_year?
-    !@latest_summary || @latest_summary.year != year  # 短信がない場合も本決算後とする
+    !@latest_summary || @latest_summary.year != year # 短信がない場合も本決算後とする
   end
 
   def quarter_name_forecast_from(from)

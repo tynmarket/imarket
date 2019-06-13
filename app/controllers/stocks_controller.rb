@@ -24,7 +24,7 @@ class StocksController < ApplicationController
 
   def find_data(stock, query)
     @debug = params[:debug] == "true"
-    @term = params[:term]  # 表示期間
+    @term = params[:term] # 表示期間
     @stock = stock
 
     unless @stock
@@ -45,8 +45,9 @@ class StocksController < ApplicationController
     @cash_flows = find_cash_flows(@stock.code)
     @cash_flows_only_q4 = @cash_flows.all?(&:q4?)
 
-    @quarter_summaries, @latest_forecast, @quarter_results_forecast, @current_summaries, @quarter_cash_flows =
-      find_financial_informations(@stock.code, @summaries, @cash_flows)
+    @quarter_summaries, @latest_forecast, @quarter_results_forecast,
+      @current_summaries, @quarter_cash_flows =
+        find_financial_informations(@stock.code, @summaries, @cash_flows)
 
     # 初期表示は今期 〜 過去3期
     @last_year = get_last_year(@summaries) unless view_context.term_all?(@term)
@@ -89,7 +90,8 @@ class StocksController < ApplicationController
       current_summaries = []
     end
 
-    [quarter_summaries, latest_forecast, quarter_results_forecast, current_summaries, quarter_cash_flows]
+    [quarter_summaries, latest_forecast, quarter_results_forecast,
+      current_summaries, quarter_cash_flows]
   end
 
   def filter_by_year(financials, year)

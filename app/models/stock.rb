@@ -1,9 +1,9 @@
 class Stock < ActiveRecord::Base
 
-  MOJI_DELETE = /株式会社|（株）|・/  # 「株式会社」（株）・を削除
-  SPACE = / |　/  # 半角・全角空白
+  MOJI_DELETE = /株式会社|（株）|・/ # 「株式会社」（株）・を削除
+  SPACE = / |　/ # 半角・全角空白
 
-  CODE_INDEX = ["998407"]  # 日経平均
+  CODE_INDEX = ["998407"] # 日経平均
 
   has_many :disclosures
 
@@ -31,13 +31,13 @@ class Stock < ActiveRecord::Base
 
       id = param.tr("０-９", "0-9").to_i
 
-      if id != 0  # 証券コード（=id）
+      if id != 0 # 証券コード（=id）
         where id: id
-      else  # キーワード
+      else # キーワード
         search_names = param
           .split(SPACE)
           .reject(&:blank?)
-          .map{ |name| to_search_name name }  # 検索名
+          .map{ |name| to_search_name name } # 検索名
 
         statement = (["search_name"] * search_names.length).join(" LIKE ? AND ") + " LIKE ?"
         values = search_names.map { |search_name| "%#{search_name}%" }
@@ -63,11 +63,11 @@ class Stock < ActiveRecord::Base
     end
 
     def hankaku_downcase(name)
-      name.tr("ａ-ｚ", "a-z").tr("Ａ-Ｚ", "a-z").tr("０-９", "0-9").tr("＆", "&")  # 半角英数字小文字
+      name.tr("ａ-ｚ", "a-z").tr("Ａ-Ｚ", "a-z").tr("０-９", "0-9").tr("＆", "&") # 半角英数字小文字
     end
 
     def katakana(name)
-      name.tr "ぁ-ん", "ァ-ン"  # 全角カタカナ
+      name.tr "ぁ-ん", "ァ-ン" # 全角カタカナ
     end
 
     def delete_kabu(name)
