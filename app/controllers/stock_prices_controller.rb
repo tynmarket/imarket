@@ -24,8 +24,8 @@ class StockPricesController < ApplicationController
     # TODO 2011/07/01固定で良い？
     @dates_entire_period = TradingDayJp.between(date_spider_start, TradingDayJp.end_of_year(today))
 
-    @dates_current_year = @dates_entire_period.select do
-      |d| d >= TradingDayJp.beginning_of_year(today)
+    @dates_current_year = @dates_entire_period.select do |d|
+      d >= TradingDayJp.beginning_of_year(today)
     end
 
     @ticks_current_year = @dates_current_year.map.with_index do |date, i|
