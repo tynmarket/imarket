@@ -13,7 +13,7 @@ module ApplicationHelper
   end
 
   def link_to_pdf(disclosure, text)
-    if disclosure && disclosure.release_date && disclosure.pdf
+    if disclosure&.release_date && disclosure.pdf
       "<a href='#{disclosure.pdf_path}' target='_blank'>#{text}</a>".html_safe
     elsif text
       text.html_safe

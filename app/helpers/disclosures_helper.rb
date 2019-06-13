@@ -13,7 +13,7 @@ module DisclosuresHelper
   end
 
   def release_time(disclosure)
-    return unless disclosure && disclosure.release_date
+    return unless disclosure&.release_date
 
     disclosure.release_date.strftime(HM_C)
   end
