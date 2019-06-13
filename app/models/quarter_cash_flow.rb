@@ -23,7 +23,7 @@ class QuarterCashFlow
 
   # 営業キャッシュ〜現金及び同等物の増減額
   @methods = [:operating_activities, :investment_activities,
-               :financing_activities, :net_increase_in_cash]
+              :financing_activities, :net_increase_in_cash]
 
   @methods.each do |method|
     define_method method do

@@ -42,7 +42,7 @@ class Stock < ActiveRecord::Base
         statement = (["search_name"] * search_names.length).join(" LIKE ? AND ") + " LIKE ?"
         values = search_names.map { |search_name| "%#{search_name}%" }
 
-        where("#{statement}", *values)
+        where(statement.to_s, *values)
       end
     end
 

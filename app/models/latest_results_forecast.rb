@@ -16,7 +16,6 @@ class LatestResultsForecast < ActiveRecord::Base
     end
   end
 
-
   def quarter_name_forecast
     "#{quarter}Q予想" if quarter
   end
