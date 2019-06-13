@@ -11,7 +11,9 @@ module FinancialRatio
     define_method "forecast_net_sales_#{method}_ratio" do
       forecast_method = "forecast_#{method}"
 
-      (send(forecast_method).to_f / forecast_net_sales).round(3) if forecast_net_sales && forecast_net_sales > 0 && send(forecast_method)
+      if forecast_net_sales && forecast_net_sales > 0 && send(forecast_method)
+        (send(forecast_method).to_f / forecast_net_sales).round(3)
+      end
     end
   end
 

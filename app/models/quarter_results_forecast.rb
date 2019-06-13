@@ -60,11 +60,11 @@ class QuarterResultsForecast
       if next_year?
         change_in_forecast_value = @latest_forecast.send method
 
-        if change_in_forecast_value
-          return change_in_forecast_value # 累計と同じ
-        else
-          return @latest_forecast.send "calc_#{method}", @summaries # 計算する
-        end
+        # 累計と同じ
+        return change_in_forecast_value if change_in_forecast_value
+
+        # 計算する
+        return @latest_forecast.send "calc_#{method}", @summaries
       end
 
       forecast_value = send(not_change_in(method)) # 四半期ベースの予想
