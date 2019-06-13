@@ -82,13 +82,14 @@ class StocksController < ApplicationController
 
     quarter_results_forecast = QuarterResultsForecast.create latest_forecast, summaries
 
-    if latest_forecast.present?
-      current_summaries = summaries.select do |summary|
-        summary.year == latest_forecast.year
+    current_summaries =
+      if latest_forecast.present?
+        summaries.select do |summary|
+          summary.year == latest_forecast.year
+        end
+      else
+        []
       end
-    else
-      current_summaries = []
-    end
 
     [quarter_summaries, latest_forecast, quarter_results_forecast,
      current_summaries, quarter_cash_flows]
