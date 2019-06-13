@@ -40,7 +40,8 @@ class QuarterSummary
         @summary.send(method)
       elsif @prev_quarter_summary && # 決算期の変更
             (year != @prev_quarter_summary.year || # 年度の途中から年度が変わっている
-              (year == @prev_quarter_summary.year && month != @prev_quarter_summary.month)) # 年度の途中から決算月が変わっている
+              (year == @prev_quarter_summary.year &&
+               month != @prev_quarter_summary.month)) # 年度の途中から決算月が変わっている
         @summary.send(method)
       elsif @summary.send(method) && @prev_quarter_summary.try(method)
         @summary.send(method) - @prev_quarter_summary.send(method)
@@ -59,7 +60,9 @@ class QuarterSummary
          quarter == prev_year_quarter_summary.quarter &&
          send(method) && send(method) > 0 &&
          prev_year_quarter_summary.send(method) && prev_year_quarter_summary.send(method) > 0
-        ((send(method).to_f - prev_year_quarter_summary.send(method)) / prev_year_quarter_summary.send(method)).round(3)
+        ((send(method).to_f - prev_year_quarter_summary.send(method)) /
+          prev_year_quarter_summary.send(method))
+          .round(3)
       end
     end
   end

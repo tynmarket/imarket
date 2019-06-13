@@ -7,9 +7,6 @@ class Disclosure < ActiveRecord::Base
 
   has_many :results_forecasts
 
-  # kaminariだとincludesの前に指定する必要がある？
-  # scope :display, -> { select("disclosures.id, disclosures.release, disclosures.name, disclosures.pdf, disclosures.title, disclosures.code") }
-
   def results_forecast_q4
     results_forecasts.find do |results_forecast|
       results_forecast.quarter == 4

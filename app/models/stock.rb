@@ -7,7 +7,8 @@ class Stock < ActiveRecord::Base
 
   has_many :disclosures
 
-  has_many :disclosures_monthly, -> { select(:id, :stock_id, :release_date, :title, :pdf).monthly }, class_name: "Disclosure"
+  has_many :disclosures_monthly, -> { select(:id, :stock_id, :release_date, :title, :pdf).monthly },
+           class_name: "Disclosure"
 
   has_one :stock_price_latest, -> { where term: StockPrice::LATEST }, class_name: "StockPrice"
 
@@ -37,7 +38,7 @@ class Stock < ActiveRecord::Base
         search_names = param
                        .split(SPACE)
                        .reject(&:blank?)
-                       .map{ |name| to_search_name name } # 検索名
+                       .map { |name| to_search_name name } # 検索名
 
         statement = (["search_name"] * search_names.length).join(" LIKE ? AND ") + " LIKE ?"
         values = search_names.map { |search_name| "%#{search_name}%" }
