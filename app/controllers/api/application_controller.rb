@@ -1,5 +1,5 @@
 module Api
-  class ApplicationController < ApplicationController
+  class ApplicationController < ::ApplicationController
     before_action :authenticate
 
     private
