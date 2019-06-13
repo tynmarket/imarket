@@ -89,7 +89,7 @@ class StocksController < ApplicationController
       current_summaries = []
     end
 
-    return quarter_summaries, latest_forecast, quarter_results_forecast, current_summaries, quarter_cash_flows
+    [quarter_summaries, latest_forecast, quarter_results_forecast, current_summaries, quarter_cash_flows]
   end
 
   def filter_by_year(financials, year)

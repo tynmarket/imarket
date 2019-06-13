@@ -19,7 +19,7 @@ module StocksHelper
 
   def hide_if_term_annual(summary)
     if term_annual? && !summary.q4?
-      return "hide"
+      "hide"
     end
   end
 
