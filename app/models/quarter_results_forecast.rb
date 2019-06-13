@@ -40,7 +40,7 @@ class QuarterResultsForecast
   # TODO @methodsなくす
   # 予想売上高〜予想EPS
   @methods = [:forecast_net_sales, :forecast_operating_income, :forecast_ordinary_income,
-    :forecast_net_income, :forecast_net_income_per_share]
+              :forecast_net_income, :forecast_net_income_per_share]
 
   @methods.each do |method|
     define_method method do
@@ -54,7 +54,7 @@ class QuarterResultsForecast
 
   # 予想売上高前年比〜予想純利益前年比
   @methods = [:change_in_forecast_net_sales, :change_in_forecast_operating_income,
-    :change_in_forecast_ordinary_income, :change_in_forecast_net_income]
+              :change_in_forecast_ordinary_income, :change_in_forecast_net_income]
 
   @methods.each do |method|
     define_method method do
