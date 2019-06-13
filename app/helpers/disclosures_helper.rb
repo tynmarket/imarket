@@ -58,7 +58,7 @@ module DisclosuresHelper
           </tr>
         </thead>".html_safe
 
-      @rendered = true unless @rendered
+      @rendered ||= true
 
       thead
     end
