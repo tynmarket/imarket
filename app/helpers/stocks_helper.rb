@@ -18,9 +18,7 @@ module StocksHelper
   end
 
   def hide_if_term_annual(summary)
-    if term_annual? && !summary.q4?
-      "hide"
-    end
+    "hide" if term_annual? && !summary.q4?
   end
 
   def thead_summary
