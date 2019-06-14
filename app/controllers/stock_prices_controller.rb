@@ -28,7 +28,7 @@ class StockPricesController < ApplicationController
 
     @ticks_current_year = ticks_current_year
 
-    @ticks_entire_period = ticks_entire_period
+    @ticks_entire_period = ticks_entire_period(today)
   end
 
   def dates_current_year(today)
@@ -43,7 +43,7 @@ class StockPricesController < ApplicationController
     end.compact
   end
 
-  def ticks_entire_period
+  def ticks_entire_period(today)
     @dates_entire_period.map.with_index do |date, i|
       i if date == Date.new(2011, 7, 1) || TradingDayJp.beginning_of_year?(date) ||
            (date.year == today.year && TradingDayJp.end_of_year?(date))
