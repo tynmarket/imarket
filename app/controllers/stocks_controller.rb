@@ -14,32 +14,33 @@ class StocksController < ApplicationController
 
   def show
     id = params[:id]
-    # TODO includes :stock_price_latestする？
-    stock = Stock.find_by(id: id.to_i)
 
-    find_data stock, id
+    # TODO includes :stock_price_latestする？
+    @stock = find_stock(id)
+
+    if @stock
+      find_data
+    else
+      render action: "index"
+    end
   end
 
   private
 
-  def find_data(stock, query)
+  def find_stock(id)
+    stock = Stock.find_by(id: id.to_i)
+
+    return stock if stock
+
+    disclosure = Disclosure.select(:name).find_by(code: id)
+    Stock.new id: id, code: id, name: disclosure.name if disclosure
+  end
+
+  def find_data
     @debug = params[:debug] == "true"
     @term = params[:term] # 表示期間
-    @stock = stock
 
-    unless @stock
-      disclosure = Disclosure.select(:name).find_by(code: query)
-
-      if disclosure
-        # 銘柄のみ未登録
-        @stock = Stock.new id: query, code: query, name: disclosure.name
-      else
-        render action: "index"
-        return
-      end
-    end
-
-    @disclosures_monthly = @stock.disclosures_monthly.sort_by { |d| d.id * -1 }
+    @disclosures_monthly = @stock.for_disclosures_monthly
 
     @summaries = find_summaries(@stock.code)
     @cash_flows = find_cash_flows(@stock.code)
@@ -52,10 +53,7 @@ class StocksController < ApplicationController
     # 初期表示は今期 〜 過去3期
     @last_year = get_last_year(@summaries) unless view_context.term_all?(@term)
 
-    @disclosures = Disclosure
-                   .where(code: @stock.code)
-                   .where("release_date > ?", 1.year.ago)
-                   .order(id: :desc)
+    @disclosures = Disclosure.one_year_disclosures(@stock.code)
 
     render action: (@action_name = "show")
   end

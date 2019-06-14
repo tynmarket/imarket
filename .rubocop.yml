@@ -90,7 +90,6 @@ Naming/HeredocDelimiterNaming:
   Enabled: false
 
 Metrics/AbcSize:
-  Enabled: false
   Max: 25
 
 Metrics/BlockLength:

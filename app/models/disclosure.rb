@@ -7,6 +7,14 @@ class Disclosure < ActiveRecord::Base
 
   has_many :results_forecasts
 
+  class << self
+    def one_year_disclosures(code)
+      where(code: code)
+        .where("release_date > ?", 1.year.ago)
+        .order(id: :desc)
+    end
+  end
+
   def results_forecast_q4
     results_forecasts.find do |results_forecast|
       results_forecast.quarter == 4

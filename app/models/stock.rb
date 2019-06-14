@@ -76,6 +76,10 @@ class Stock < ActiveRecord::Base
     end
   end
 
+  def for_disclosures_monthly
+    disclosures_monthly.sort_by { |d| d.id * -1 }
+  end
+
   def shikiho_latest
     shikihos.last
   end
