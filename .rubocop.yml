@@ -113,5 +113,8 @@ Metrics/PerceivedComplexity:
 Metrics/CyclomaticComplexity:
   Max: 13
 
+Lint/SafeNavigationConsistency:
+  Enabled: false
+
 Performance/RangeInclude:
   Enabled: false

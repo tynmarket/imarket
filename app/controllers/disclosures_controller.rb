@@ -2,7 +2,6 @@ class DisclosuresController < ApplicationController
 
   def index
     date = params[:date]
-    show = params[:show]
     now = Time.now
 
     if date
