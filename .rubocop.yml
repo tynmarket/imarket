@@ -70,6 +70,9 @@ Style/NestedParenthesizedCalls:
 Style/NumericPredicate:
   Enabled: false
 
+Style/RescueModifier:
+  Enabled: false
+
 Style/RescueStandardError:
   Enabled: false
 
@@ -88,9 +91,6 @@ Naming/AccessorMethodName:
 
 Naming/HeredocDelimiterNaming:
   Enabled: false
-
-Metrics/AbcSize:
-  Max: 25
 
 Metrics/BlockLength:
   Exclude:
