@@ -1,5 +1,7 @@
 AllCops:
   Exclude:
+    - 'app/assets/**/*'
+    - 'app/javascript/**/*'
     - 'bin/**'
     - 'config/environments/**/*'
     - 'config/initializers/**/*'
@@ -8,13 +10,16 @@ AllCops:
     - 'db/schema.rb'
     - 'db/seeds.rb'
     - 'node_modules/**/*'
+    - 'public/**/*'
     - 'spec/rails_helper.rb'
     - 'spec/spec_helper.rb'
+    - 'tmp/**/*'
     - 'vendor/**/*'
     - 'Gemfile'
     - 'config.ru'
     - 'config/**/*'
     - 'Rakefile'
+    - 'log/**/*'
 
 StringLiterals:
   EnforcedStyle: double_quotes
@@ -91,6 +96,9 @@ Naming/AccessorMethodName:
 
 Naming/HeredocDelimiterNaming:
   Enabled: false
+
+Metrics/AbcSize:
+  Max: 16
 
 Metrics/BlockLength:
   Exclude:

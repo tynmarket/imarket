@@ -35,16 +35,20 @@ class Stock < ActiveRecord::Base
       if id != 0 # 証券コード（=id）
         where id: id
       else # キーワード
-        search_names = param
-                       .split(SPACE)
-                       .reject(&:blank?)
-                       .map { |name| to_search_name name } # 検索名
-
-        statement = (["search_name"] * search_names.length).join(" LIKE ? AND ") + " LIKE ?"
-        values = search_names.map { |search_name| "%#{search_name}%" }
-
-        where(statement.to_s, *values)
+        search_from_keyword(param)
       end
+    end
+
+    def search_from_keyword(keyword)
+      search_names = keyword
+                     .split(SPACE)
+                     .reject(&:blank?)
+                     .map { |name| to_search_name name } # 検索名
+
+      statement = (["search_name"] * search_names.length).join(" LIKE ? AND ") + " LIKE ?"
+      values = search_names.map { |search_name| "%#{search_name}%" }
+
+      where(statement.to_s, *values)
     end
 
     def filter_index(code, user)

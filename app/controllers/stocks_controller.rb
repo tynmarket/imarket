@@ -36,6 +36,7 @@ class StocksController < ApplicationController
     Stock.new id: id, code: id, name: disclosure.name if disclosure
   end
 
+  # rubocop:disable Metrics/AbcSize
   def find_data
     @debug = params[:debug] == "true"
     @term = params[:term] # 表示期間
@@ -54,9 +55,11 @@ class StocksController < ApplicationController
     @last_year = get_last_year(@summaries) unless view_context.term_all?(@term)
 
     @disclosures = Disclosure.one_year_disclosures(@stock.code)
+    @action_name = "show"
 
-    render action: (@action_name = "show")
+    render action: @action_name
   end
+  # rubocop:enable Metrics/AbcSize
 
   def find_summaries(code)
     Summary
