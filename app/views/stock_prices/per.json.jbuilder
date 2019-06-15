@@ -1,4 +1,4 @@
-stock_prices = @stock_prices.map {|s| [s[0], s[1]] }.to_h
+stock_prices = @stock_prices.map { |s| [s[0], s[1]] }.to_h
 
 def render_per(ticks, dates, stock_prices, json)
   json.ticks do
@@ -9,8 +9,10 @@ def render_per(ticks, dates, stock_prices, json)
     json.array! dates
   end
 
+  dates_with_index = dates.map.with_index { |d, i| [d, i] }
+
   json.data do
-    json.array! dates.map.with_index {|d, i| [d, i] } do |date_idx|
+    json.array! dates_with_index do |date_idx|
       date, i = *date_idx
       stock_price = stock_prices[date]
 

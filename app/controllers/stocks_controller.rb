@@ -6,7 +6,7 @@ class StocksController < ApplicationController
     @stocks = Stock.search(query)
 
     if @stocks.length > 1
-      render action: 'index'
+      render action: "index"
     else
       find_data @stocks.first, query
     end
@@ -14,63 +14,65 @@ class StocksController < ApplicationController
 
   def show
     id = params[:id]
-    # TODO includes :stock_price_latestする？
-    stock = Stock.find_by(id: id.to_i)
 
-    find_data stock, id
+    # TODO includes :stock_price_latestする？
+    @stock = find_stock(id)
+
+    if @stock
+      find_data
+    else
+      render action: "index"
+    end
   end
 
   private
 
-  def find_data(stock, query)
+  def find_stock(id)
+    stock = Stock.find_by(id: id.to_i)
+
+    return stock if stock
+
+    disclosure = Disclosure.select(:name).find_by(code: id)
+    Stock.new id: id, code: id, name: disclosure.name if disclosure
+  end
+
+  # rubocop:disable Metrics/AbcSize
+  def find_data
     @debug = params[:debug] == "true"
-    @term = params[:term]  # 表示期間
-    @stock = stock
+    @term = params[:term] # 表示期間
 
-    unless @stock
-      disclosure = Disclosure.select(:name).find_by(code: query)
-
-      if disclosure
-        # 銘柄のみ未登録
-        @stock = Stock.new id: query, code: query, name: disclosure.name
-      else
-        render action: 'index'
-        return
-      end
-    end
-
-    @disclosures_monthly = @stock.disclosures_monthly.sort_by {|d| d.id * -1 }
+    @disclosures_monthly = @stock.for_disclosures_monthly
 
     @summaries = find_summaries(@stock.code)
     @cash_flows = find_cash_flows(@stock.code)
     @cash_flows_only_q4 = @cash_flows.all?(&:q4?)
 
-    @quarter_summaries, @latest_forecast, @quarter_results_forecast, @current_summaries, @quarter_cash_flows =
+    @quarter_summaries, @latest_forecast, @quarter_results_forecast,
+      @current_summaries, @quarter_cash_flows =
       find_financial_informations(@stock.code, @summaries, @cash_flows)
 
     # 初期表示は今期 〜 過去3期
     @last_year = get_last_year(@summaries) unless view_context.term_all?(@term)
 
-    @disclosures = Disclosure
-                   .where(code: @stock.code)
-                   .where("release_date > ?", 1.year.ago)
-                   .order(id: :desc)
+    @disclosures = Disclosure.one_year_disclosures(@stock.code)
+    @action_name = "show"
 
-    render action: (@action_name = 'show')
+    render action: @action_name
   end
+  # rubocop:enable Metrics/AbcSize
 
   def find_summaries(code)
     Summary
       .includes(:disclosure_pdf)
       .where(code: code)
-      .sort_by {|s| s.disclosure_id * -1 }
+      .sort_by { |s| s.disclosure_id * -1 }
   end
 
   def find_cash_flows(code)
     CashFlow
       .includes(:disclosure_pdf)
       .where(code: code)
-      .sort_by {|s| s.disclosure_id * -1 }
+      .sort_by { |s| s.disclosure_id * -1 }
   end
 
   def find_financial_informations(code, summaries, cash_flows)
@@ -81,15 +83,17 @@ class StocksController < ApplicationController
 
     quarter_results_forecast = QuarterResultsForecast.create latest_forecast, summaries
 
-    if latest_forecast.present?
-      current_summaries = summaries.select do |summary|
-        summary.year == latest_forecast.year
+    current_summaries =
+      if latest_forecast.present?
+        summaries.select do |summary|
+          summary.year == latest_forecast.year
+        end
+      else
+        []
       end
-    else
-      current_summaries = []
-    end
 
-    return quarter_summaries, latest_forecast, quarter_results_forecast, current_summaries, quarter_cash_flows
+    [quarter_summaries, latest_forecast, quarter_results_forecast,
+     current_summaries, quarter_cash_flows]
   end
 
   def filter_by_year(financials, year)
@@ -98,7 +102,7 @@ class StocksController < ApplicationController
     current_year = financials.first.year
     last_year = current_year - year
 
-    financials.select {|financial| financial.year >= last_year }
+    financials.select { |financial| financial.year >= last_year }
   end
 
   def get_last_year(summaries)
