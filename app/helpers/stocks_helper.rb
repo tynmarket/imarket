@@ -52,11 +52,7 @@ module StocksHelper
     return false if forecast.disclosure_id == summaries.first.disclosure_id
 
     # TODO 共通化
-    prev_summary = summaries.find do |summary|
-      summary.year == forecast.year - 1 &&
-        summary.month == forecast.month &&
-        summary.quarter == 4
-    end
+    prev_summary = find_prev_summary(summaries)
 
     # 前年同四半期の短信がない
     return false if prev_summary.blank?
@@ -66,6 +62,14 @@ module StocksHelper
     return false if forecast_summary.blank? || forecast_summary.change_in_forecast_net_sales.blank?
 
     true
+  end
+
+  def find_prev_summary(summaries)
+    summaries.find do |summary|
+      summary.year == forecast.year - 1 &&
+        summary.month == forecast.month &&
+        summary.quarter == 4
+    end
   end
 
   def per_in_stock(stock)
