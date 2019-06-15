@@ -42,26 +42,14 @@ module StocksHelper
   end
 
   def calc_change_in_forecast?(forecast, summaries)
-    # 前年比がある
-    return false if forecast.change_in_forecast_net_sales
-
-    # 短信がない
-    return false if summaries.blank?
-
-    # 短信の業績予想
-    return false if forecast.disclosure_id == summaries.first.disclosure_id
-
-    # TODO 共通化
     prev_summary = find_prev_summary(summaries)
-
-    # 前年同四半期の短信がない
-    return false if prev_summary.blank?
-
-    # 短信の業績予想も前年比がない（会計基準の変更など）
     forecast_summary = summaries.first.disclosure_pdf.results_forecast_q4
-    return false if forecast_summary.blank? || forecast_summary.change_in_forecast_net_sales.blank?
 
-    true
+    !forecast.change_in_forecast_net_sales && # 前年比がない
+      summaries.present? &&　# 短信がある
+      forecast.disclosure_id != summaries.first.disclosure_id && # 短信の業績予想ではない
+      prev_summary &&　# 前年同四半期の短信がある
+      forecast_summary&.change_in_forecast_net_sales # 短信の業績予想も前年比がある（会計基準の変更などはない）
   end
 
   def find_prev_summary(summaries)
