@@ -41,16 +41,23 @@ module StocksHelper
     </thead>'.html_safe
   end
 
+  # rubocop:disable all
   def calc_change_in_forecast?(forecast, summaries)
     prev_summary = find_prev_summary(summaries)
     forecast_summary = summaries.first.disclosure_pdf.results_forecast_q4
 
-    !forecast.change_in_forecast_net_sales && # 前年比がない
-      summaries.present? &&　# 短信がある
-      forecast.disclosure_id != summaries.first.disclosure_id && # 短信の業績予想ではない
-      prev_summary &&　# 前年同四半期の短信がある
-      forecast_summary&.change_in_forecast_net_sales # 短信の業績予想も前年比がある（会計基準の変更などはない）
+    # 前年比がない
+    !forecast.change_in_forecast_net_sales &&
+      # 短信の業績予想ではない
+      summaries.present? &&　
+      # 短信がある
+      forecast.disclosure_id != summaries.first.disclosure_id &&
+      # 前年同四半期の短信がある
+      prev_summary &&　
+      # 短信の業績予想も前年比がある（会計基準の変更などはない）
+      forecast_summary&.change_in_forecast_net_sales
   end
+  # rubocop:enable all
 
   def find_prev_summary(summaries)
     summaries.find do |summary|
