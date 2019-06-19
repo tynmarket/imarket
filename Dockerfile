@@ -12,6 +12,7 @@ RUN apk upgrade --no-cache && \
       logrotate \
       tzdata \
       bash \
+      less \
       git && \
     mkdir -p /app/tmp/cache && \
     mkdir -p /app/tmp/pids && \
