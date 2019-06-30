@@ -17,8 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#per-chart')
   );
 
+  /*
   ReactDOM.render(
     <App code={code} indices={'pbr'} />,
     document.querySelector('#pbr-chart')
   );
+  */
 });

@@ -1,8 +1,8 @@
 import {
   currentConfigFn,
   currentPointFn,
-  entireConfigFn,
-  entirePointFn,
+  //entireConfigFn,
+  //entirePointFn,
 } from './ChartConfig';
 import { useEffect, useState } from 'react';
 import ChartContainer from './ChartContainer';
@@ -14,7 +14,7 @@ Exporting(Highcharts);
 
 const App = ({ code, indices }) => {
   const [currentConfig, setCurrentConfig] = useState();
-  const [entireConfig, setEntireConfig] = useState();
+  //const [entireConfig, setEntireConfig] = useState();
 
   useEffect(() => {
     getData(code, indices).then(data => {
@@ -26,17 +26,20 @@ const App = ({ code, indices }) => {
       );
       setCurrentConfig(currentConfig);
 
+      /*
       const entireData = data.entire_period;
       const entireConfig = getConfig(entireData, entireConfigFn, entirePointFn);
       setEntireConfig(entireConfig);
+      */
 
-      Highcharts.chart('container', {
+      data = data.current_year.map(plot => plot[1]);
+      Highcharts.chart('per-current', {
         title: '',
         legend: {
           enabled: false,
         },
         xAxis: {
-          tickInterval: 2,
+          tickInterval: 60,
           gridLineWidth: 1,
           labels: {
             formatter: function() {
@@ -87,7 +90,7 @@ const App = ({ code, indices }) => {
         series: [
           {
             name: 'Installation',
-            data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175],
+            data: currentData,
           },
         ],
         tooltip: {
@@ -121,9 +124,6 @@ const App = ({ code, indices }) => {
         年初来
       </ChartContainer>
       <div className="clearfix" />
-      <ChartContainer indices={indices} config={entireConfig}>
-        全期間
-      </ChartContainer>
     </div>
   );
 };
