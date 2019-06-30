@@ -6,8 +6,11 @@ import {
 } from './ChartConfig';
 import { useEffect, useState } from 'react';
 import ChartContainer from './ChartContainer';
+import Exporting from 'highcharts/modules/exporting';
+import Highcharts from 'highcharts';
 import React from 'react';
 import axios from 'axios';
+Exporting(Highcharts);
 
 const App = ({ code, indices }) => {
   const [currentConfig, setCurrentConfig] = useState();
@@ -26,6 +29,89 @@ const App = ({ code, indices }) => {
       const entireData = data.entire_period;
       const entireConfig = getConfig(entireData, entireConfigFn, entirePointFn);
       setEntireConfig(entireConfig);
+
+      Highcharts.chart('container', {
+        title: '',
+        legend: {
+          enabled: false,
+        },
+        xAxis: {
+          tickInterval: 2,
+          gridLineWidth: 1,
+          labels: {
+            formatter: function() {
+              return `${this.value} km`;
+            },
+          },
+        },
+        yAxis: {
+          title: {
+            text: null,
+          },
+          labels: {
+            format: '{value} m',
+          },
+        },
+        plotOptions: {
+          line: {
+            animation: false,
+            marker: {
+              enabled: false,
+              fillColor: 'transparent',
+              lineColor: '#7cb5ec',
+              lineWidth: 2.5,
+              radius: 3.5,
+            },
+            lineWidth: 1.5,
+            states: {
+              hover: {
+                enabled: false,
+              },
+            },
+          },
+          series: {
+            label: {
+              connectorAllowed: false,
+            },
+            color: '#edc240',
+            states: {
+              hover: {
+                enabled: true,
+                halo: {
+                  size: 0,
+                },
+              },
+            },
+          },
+        },
+        series: [
+          {
+            name: 'Installation',
+            data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175],
+          },
+        ],
+        tooltip: {
+          headerFormat: '',
+          pointFormat:
+            '<span style="font-weight: bold; color: #595857;">{point.y} 倍 ({point.x})</span>',
+        },
+        responsive: {
+          rules: [
+            {
+              condition: {
+                maxWidth: 500,
+              },
+              chartOptions: {
+                legend: {
+                  layout: 'horizontal',
+                  align: 'center',
+                  verticalAlign: 'bottom',
+                },
+              },
+            },
+          ],
+        },
+      });
     });
   }, []);
 
