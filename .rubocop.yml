@@ -1,0 +1,121 @@
+AllCops:
+  Exclude:
+    - 'app/assets/**/*'
+    - 'app/javascript/**/*'
+    - 'bin/**'
+    - 'config/environments/**/*'
+    - 'config/initializers/**/*'
+    - 'db/fixtures/**/*'
+    - 'db/migrate/*'
+    - 'db/schema.rb'
+    - 'db/seeds.rb'
+    - 'node_modules/**/*'
+    - 'public/**/*'
+    - 'spec/rails_helper.rb'
+    - 'spec/spec_helper.rb'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - 'Gemfile'
+    - 'config.ru'
+    - 'config/**/*'
+    - 'Rakefile'
+    - 'log/**/*'
+
+StringLiterals:
+  EnforcedStyle: double_quotes
+
+Layout/AlignHash:
+  Exclude:
+    - "spec/**/*"
+
+Layout/BlockEndNewline:
+  Exclude:
+    - "spec/**/*"
+
+Layout/EmptyLinesAroundBlockBody:
+  Exclude:
+    - "spec/**/*"
+
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Layout/MultilineBlockLayout:
+  Exclude:
+    - "spec/**/*"
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/BlockDelimiters:
+  Exclude:
+    - "spec/**/*"
+
+Style/CommentAnnotation:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/LineEndConcatenation:
+  Enabled: false
+
+Style/MutableConstant:
+  Enabled: false
+
+Style/NestedParenthesizedCalls:
+  Exclude:
+    - "spec/**/*"
+
+Style/NumericPredicate:
+  Enabled: false
+
+Style/RescueModifier:
+  Enabled: false
+
+Style/RescueStandardError:
+  Enabled: false
+
+Style/StringLiteralsInInterpolation:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/WordArray:
+  Enabled: false
+
+Naming/AccessorMethodName:
+  Exclude:
+    - "app/controllers/*"
+
+Naming/HeredocDelimiterNaming:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 16
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
+  Max: 100
+
+Metrics/LineLength:
+  Exclude:
+    - "app/helpers/application_helper.rb"
+    - "spec/**/*"
+  Max: 100
+
+Metrics/MethodLength:
+  Max: 100
+
+Lint/SafeNavigationConsistency:
+  Enabled: false
+
+Performance/RangeInclude:
+  Enabled: false

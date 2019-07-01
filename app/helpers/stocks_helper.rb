@@ -2,7 +2,7 @@ module StocksHelper
   include Utils::Constants
 
   def stocks_search?
-    controller_name == 'stocks' && action_name == 'search'
+    controller_name == "stocks" && action_name == "search"
   end
 
   def term_all?(term)
@@ -18,9 +18,7 @@ module StocksHelper
   end
 
   def hide_if_term_annual(summary)
-    if term_annual? && !summary.q4?
-      return "hide"
-    end
+    "hide" if term_annual? && !summary.q4?
   end
 
   def thead_summary
@@ -43,31 +41,30 @@ module StocksHelper
     </thead>'.html_safe
   end
 
+  # rubocop:disable all
   def calc_change_in_forecast?(forecast, summaries)
-    # 前年比がある
-    return false if forecast.change_in_forecast_net_sales
-
-    # 短信がない
-    return false if summaries.blank?
-
-    # 短信の業績予想
-    return false if forecast.disclosure_id == summaries.first.disclosure_id
-
-    # TODO 共通化
-    prev_summary = summaries.find do |summary|
-      summary.year == forecast.year - 1 &&
-      summary.month == forecast.month &&
-      summary.quarter == 4
-    end
-
-    # 前年同四半期の短信がない
-    return false if prev_summary.blank?
-
-    # 短信の業績予想も前年比がない（会計基準の変更など）
+    prev_summary = find_prev_summary(forecast, summaries)
     forecast_summary = summaries.first.disclosure_pdf.results_forecast_q4
-    return false if forecast_summary.blank? || forecast_summary.change_in_forecast_net_sales.blank?
 
-    true
+    # 前年比がない
+    !forecast.change_in_forecast_net_sales &&
+      # 短信の業績予想ではない
+      summaries.present? &&　
+      # 短信がある
+      forecast.disclosure_id != summaries.first.disclosure_id &&
+      # 前年同四半期の短信がある
+      prev_summary &&　
+      # 短信の業績予想も前年比がある（会計基準の変更などはない）
+      forecast_summary&.change_in_forecast_net_sales
+  end
+  # rubocop:enable all
+
+  def find_prev_summary(forecast, summaries)
+    summaries.find do |summary|
+      summary.year == forecast.year - 1 &&
+        summary.month == forecast.month &&
+        summary.quarter == 4
+    end
   end
 
   def per_in_stock(stock)
@@ -97,5 +94,4 @@ module StocksHelper
       item == params[:tab] ? "active" : nil
     end
   end
-
 end

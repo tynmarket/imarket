@@ -13,7 +13,7 @@ module DisclosuresHelper
   end
 
   def release_time(disclosure)
-    return unless disclosure && disclosure.release_date
+    return unless disclosure&.release_date
 
     disclosure.release_date.strftime(HM_C)
   end
@@ -42,25 +42,48 @@ module DisclosuresHelper
 
   class DisclosureTable
     def thead
-      thead = "<thead class='#{@rendered ? "space" : nil}'>
-          <tr>
-            <th class='w_release text-center'>#{@rendered ? nil : "時刻"}</th>
-            <th class='w_name text-center'>#{@rendered ? nil : "会社名"}</th>
-            <th class='w_pdf text-center'>#{@rendered ? nil : "PDF"}</th>
-            <th class='w_period text-center'>#{@rendered ? nil : "決算期"}</th>
-            <th class='w_quarter text-center'>#{@rendered ? nil : "四半期"}</th>
-            <th class='w_net_sales text-center' colspan='2'>#{@rendered ? nil : "売上高"}</th>
-            <th class='w_income text-center' colspan='2'>#{@rendered ? nil : "営業利益"}</th>
-            <th class='w_income text-center' colspan='2'>#{@rendered ? nil : "経常利益"}</th>
-            <th class='w_income text-center' colspan='2'>#{@rendered ? nil : "純利益"}</th>
-            <th class='w_eps text-center'>#{@rendered ? nil : "EPS"}</th>
-            <th class='w_code text-center'>#{@rendered ? nil : "コード"}</th>
-          </tr>
-        </thead>".html_safe
+      if @rendered
+        thead_rendered
+      else
+        @rendered = true
+        thead_not_rendered
+      end
+    end
 
-      @rendered = true unless @rendered
+    def thead_not_rendered
+      "<thead>
+        <tr>
+          <th class='w_release text-center'>時刻</th>
+          <th class='w_name text-center'>会社名</th>
+          <th class='w_pdf text-center'>PDF</th>
+          <th class='w_period text-center'>決算期</th>
+          <th class='w_quarter text-center'>四半期</th>
+          <th class='w_net_sales text-center' colspan='2'>売上高</th>
+          <th class='w_income text-center' colspan='2'>営業利益</th>
+          <th class='w_income text-center' colspan='2'>経常利益</th>
+          <th class='w_income text-center' colspan='2'>純利益</th>
+          <th class='w_eps text-center'>EPS</th>
+          <th class='w_code text-center'>コード</th>
+        </tr>
+      </thead>".html_safe
+    end
 
-      thead
+    def thead_rendered
+      "<thead class='space'>
+        <tr>
+          <th class='w_release text-center'></th>
+          <th class='w_name text-center'></th>
+          <th class='w_pdf text-center'></th>
+          <th class='w_period text-center'></th>
+          <th class='w_quarter text-center'></th>
+          <th class='w_net_sales text-center' colspan='2'></th>
+          <th class='w_income text-center' colspan='2'></th>
+          <th class='w_income text-center' colspan='2'></th>
+          <th class='w_income text-center' colspan='2'></th>
+          <th class='w_eps text-center'></th>
+          <th class='w_code text-center'></th>
+        </tr>
+      </thead>".html_safe
     end
   end
 
@@ -71,5 +94,4 @@ module DisclosuresHelper
       item == params[:tab] ? "active" : nil
     end
   end
-
 end

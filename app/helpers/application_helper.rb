@@ -13,7 +13,7 @@ module ApplicationHelper
   end
 
   def link_to_pdf(disclosure, text)
-    if disclosure && disclosure.release_date && disclosure.pdf
+    if disclosure&.release_date && disclosure.pdf
       "<a href='#{disclosure.pdf_path}' target='_blank'>#{text}</a>".html_safe
     elsif text
       text.html_safe
@@ -25,8 +25,9 @@ module ApplicationHelper
   end
 
   def link_to_other_services(model, full = false)
-    link_to_other_services_short(model, full) + link_to_taiho(model, full) +link_to_karauri(model, full) +
-    link_to_balance(model, full) + link_to_pcsl(model, full) + link_to_yuho(model, full) + link_to_pts(model, full)
+    link_to_other_services_short(model, full) + link_to_taiho(model, full) +
+      link_to_karauri(model, full) + link_to_balance(model, full) +
+      link_to_pcsl(model, full) + link_to_yuho(model, full) + link_to_pts(model, full)
   end
 
   def link_to_other_services_short(model, full = false)
@@ -109,12 +110,11 @@ module ApplicationHelper
   def red_delimiter_per_share(num)
     return unless num
 
-    num_delim = number_with_delimiter(sprintf("%.2f", num.to_f))
+    num_delim = number_with_delimiter(format("%.2f", num.to_f))
     num < 0 ? span_red(num_delim) : num_delim
   end
 
   def span_red(value)
-    content_tag(:span, value, style: 'color:#d3381c')
+    content_tag(:span, value, style: "color:#d3381c")
   end
-
 end

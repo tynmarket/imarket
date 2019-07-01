@@ -2,10 +2,14 @@ module FinancialInformation
   extend ActiveSupport::Concern
 
   included do
-    scope :accounting_period_desc, -> { order(year: :desc, month: :desc, quarter: :desc) } if respond_to? :scope
+    if respond_to? :scope
+      scope :accounting_period_desc, -> { order(year: :desc, month: :desc, quarter: :desc) }
+    end
 
-    belongs_to :disclosure_pdf, -> { select :id, :release_date, :pdf },
-      class_name: 'Disclosure', foreign_key: "disclosure_id" if respond_to? :belongs_to
+    if respond_to? :belongs_to
+      belongs_to :disclosure_pdf, -> { select :id, :release_date, :pdf },
+                 class_name: "Disclosure", foreign_key: "disclosure_id"
+    end
     # :idがないとincludes出来ない。
     # Summaryでselect指定する場合は:diclosure_idが必要 TODO Rails 3.2で検証
   end
@@ -31,7 +35,7 @@ module FinancialInformation
     return unless year
 
     if !next_information || year != next_information.year ||
-        (year == next_information.year && month != next_information.month)
+       (year == next_information.year && month != next_information.month)
       "#{year}/#{month_padding(month)}"
     end
   end
@@ -41,7 +45,7 @@ module FinancialInformation
   end
 
   def month_padding(month)
-    sprintf('%02d', month)
+    format("%02d", month)
   end
 
   def q4?

@@ -1,12 +1,12 @@
-require 'rails_helper'
+require "rails_helper"
 
-describe 'GET /api/stock_prices/:code' do
+describe "GET /api/stock_prices/:code" do
   let(:code) { "1111" }
   let(:date) { "2018-10-10" }
 
   context "Authorizationヘッダなし" do
     it "401" do
-      get api_stock_price_path(code), params: {date: date}
+      get api_stock_price_path(code), params: { date: date }
 
       expect(response.status).to eq 401
     end
@@ -14,13 +14,13 @@ describe 'GET /api/stock_prices/:code' do
 
   context "tokenが不正" do
     it "401" do
-      get api_stock_price_path(code), params: {date: date}, headers: {Authorization: "token bad_api_key"}
+      get api_stock_price_path(code), params: { date: date }, headers: { Authorization: "token bad_api_key" }
 
       expect(response.status).to eq 401
     end
   end
 
-  context 'date=2018-10-10' do
+  context "date=2018-10-10" do
     let(:close) { 2100 }
     let(:change) { 50 }
     let(:change_rate) { 0.0233 }
@@ -34,7 +34,7 @@ describe 'GET /api/stock_prices/:code' do
     end
 
     it "" do
-      get api_stock_price_path(code), params: {date: date}, headers: auth_header
+      get api_stock_price_path(code), params: { date: date }, headers: auth_header
 
       expect(json[:close]).to eq close
       expect(json[:change]).to eq change
