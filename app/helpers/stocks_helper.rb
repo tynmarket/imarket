@@ -43,7 +43,7 @@ module StocksHelper
 
   # rubocop:disable all
   def calc_change_in_forecast?(forecast, summaries)
-    prev_summary = find_prev_summary(summaries)
+    prev_summary = find_prev_summary(forecast, summaries)
     forecast_summary = summaries.first.disclosure_pdf.results_forecast_q4
 
     # 前年比がない
@@ -59,7 +59,7 @@ module StocksHelper
   end
   # rubocop:enable all
 
-  def find_prev_summary(summaries)
+  def find_prev_summary(forecast, summaries)
     summaries.find do |summary|
       summary.year == forecast.year - 1 &&
         summary.month == forecast.month &&
