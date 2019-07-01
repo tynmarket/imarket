@@ -5,18 +5,17 @@ class StocksController < ApplicationController
 
     @stocks = Stock.search(query)
 
-    if @stocks.length > 1
-      render action: "index"
+    if @stocks.length == 1
+      @stock = @stocks.first
+      find_data
     else
-      find_data @stocks.first, query
+      render action: "index"
     end
   end
 
   def show
-    id = params[:id]
-
     # TODO includes :stock_price_latestする？
-    @stock = find_stock(id)
+    @stock = Stock.find_by(id: params[:id])
 
     if @stock
       find_data
@@ -26,15 +25,6 @@ class StocksController < ApplicationController
   end
 
   private
-
-  def find_stock(id)
-    stock = Stock.find_by(id: id.to_i)
-
-    return stock if stock
-
-    disclosure = Disclosure.select(:name).find_by(code: id)
-    Stock.new id: id, code: id, name: disclosure.name if disclosure
-  end
 
   # rubocop:disable Metrics/AbcSize
   def find_data
