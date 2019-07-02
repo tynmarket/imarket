@@ -49,11 +49,11 @@ module StocksHelper
     # 前年比がない
     !forecast.change_in_forecast_net_sales &&
       # 短信の業績予想ではない
-      summaries.present? &&　
+      summaries.present? &&
       # 短信がある
       forecast.disclosure_id != summaries.first.disclosure_id &&
       # 前年同四半期の短信がある
-      prev_summary &&　
+      prev_summary &&
       # 短信の業績予想も前年比がある（会計基準の変更などはない）
       forecast_summary&.change_in_forecast_net_sales
   end
