@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const indices = 'per';
 
   getData(code, indices).then(data => {
-    data = data.current_year.data.map(plot => plot[1]);
+    data = data.entire_period.data.map(plot => plot[1]);
     Highcharts.chart('highcharts', {
       title: '',
       legend: {
