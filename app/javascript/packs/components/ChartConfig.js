@@ -90,74 +90,87 @@ export const entirePointFn = labels => (point, i) => {
   return { x: labels[i], y: point[1] };
 };
 
-function defaultConfig(points) {
+function defaultConfig(data) {
   return {
-    type: 'shadowLine',
-    data: {
-      datasets: [
+    title: '',
+    legend: {
+      enabled: false,
+    },
+    xAxis: {
+      tickInterval: 60,
+      gridLineWidth: 1,
+      labels: {
+        formatter: function() {
+          return `${this.value} km`;
+        },
+      },
+    },
+    yAxis: {
+      title: {
+        text: null,
+      },
+      labels: {
+        format: '{value} m',
+      },
+    },
+    plotOptions: {
+      line: {
+        animation: false,
+        marker: {
+          enabled: false,
+          fillColor: 'transparent',
+          lineColor: '#7cb5ec',
+          lineWidth: 2.5,
+          radius: 3.5,
+        },
+        lineWidth: 1.5,
+        states: {
+          hover: {
+            enabled: false,
+          },
+        },
+      },
+      series: {
+        label: {
+          connectorAllowed: false,
+        },
+        color: '#edc240',
+        states: {
+          hover: {
+            enabled: true,
+            halo: {
+              size: 0,
+            },
+          },
+        },
+      },
+    },
+    series: [
+      {
+        name: 'Installation',
+        data: data,
+      },
+    ],
+    tooltip: {
+      headerFormat: '',
+      pointFormat:
+        '<span style="font-weight: bold; color: #595857;">{point.y} 倍 ({point.x})</span>',
+    },
+    responsive: {
+      rules: [
         {
-          data: points,
-          backgroundColor: '#edc240',
-          borderColor: '#edc240',
-          fill: false,
-          pointHoverBackgroundColor: 'transparent',
-          pointHoverBorderColor: '#afd8f8',
-          pointHoverBorderWidth: 4,
-          pointHoverRadius: 6,
-          pointRadius: 0,
+          condition: {
+            maxWidth: 500,
+          },
+          chartOptions: {
+            legend: {
+              layout: 'horizontal',
+              align: 'center',
+              verticalAlign: 'bottom',
+            },
+          },
         },
       ],
-    },
-    options: {
-      animation: {
-        duration: 0,
-      },
-      elements: {
-        line: {
-          tension: 0.1,
-        },
-      },
-      hover: {
-        animationDuration: 0,
-      },
-      legend: {
-        display: false,
-      },
-      responsive: true,
-      maintainAspectRatio: false,
-      responsiveAnimationDuration: 0,
-      scales: {
-        xAxes: [
-          {
-            gridLines: {
-              drawTicks: false,
-            },
-            ticks: {
-              autoSkip: false,
-              padding: 10,
-              maxRotation: 45,
-            },
-          },
-        ],
-        yAxes: [
-          {
-            gridLines: {
-              drawTicks: false,
-            },
-            ticks: {
-              padding: 10,
-              maxTicksLimit: 6,
-            },
-          },
-        ],
-      },
-      tooltips: {
-        callbacks: {
-          title: () => {},
-        },
-        displayColors: false,
-        caretPadding: 5,
-      },
     },
   };
 }
