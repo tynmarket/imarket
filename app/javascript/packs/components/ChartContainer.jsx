@@ -2,14 +2,15 @@ import Chart from './Chart';
 import React from 'react';
 import { useState } from 'react';
 
-const ChartContainer = ({ indices, config, children }) => {
+const ChartContainer = ({ indices, period, config, children }) => {
   const [max, setMax] = useState();
+  const id = `${indices}-${period}`;
 
   return (
     <>
       <h5 className="chart-header">{children}</h5>
       <div className="col-7 per-container">
-        <Chart config={config} max={max} />
+        <Chart idStr={id} config={config} max={max} />
       </div>
       <div className="operator-container">
         <div>{indices.toUpperCase()}の最大値</div>

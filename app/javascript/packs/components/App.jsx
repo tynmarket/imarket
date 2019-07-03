@@ -31,11 +31,15 @@ const App = ({ code, indices }) => {
 
   return (
     <div>
-      <ChartContainer indices={indices} config={currentConfig}>
+      <ChartContainer
+        indices={indices}
+        period={'current'}
+        config={currentConfig}
+      >
         年初来
       </ChartContainer>
       <div className="clearfix" />
-      <ChartContainer indices={indices} config={entireConfig}>
+      <ChartContainer indices={indices} period={'entire'} config={entireConfig}>
         全期間
       </ChartContainer>
     </div>

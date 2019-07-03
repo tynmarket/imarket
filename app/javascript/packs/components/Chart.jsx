@@ -1,11 +1,11 @@
-import { useRef, useState } from 'react';
-import LineChart from './LineChart';
+import Highcharts from 'highcharts';
 import React from 'react';
+import { useState } from 'react';
 
-const Chart = ({ config, max }) => {
-  const canvas = useRef();
+const Chart = ({ idStr, config, max }) => {
   const [chart, setChart] = useState();
 
+  /*
   if (chart) {
     const prevMax = chart.options.scales.yAxes[0].ticks.max;
 
@@ -18,14 +18,14 @@ const Chart = ({ config, max }) => {
       chart.update();
     }
   }
+  */
 
   if (!chart && config) {
-    const ctx = canvas.current.getContext('2d');
-    const chartRef = LineChart(ctx, config);
+    const chartRef = Highcharts.chart(idStr, config);
     setChart(chartRef);
   }
 
-  return <canvas ref={canvas} className="per-chart" />;
+  return <div id={idStr} className="per-chart" />;
 };
 
 export default Chart;

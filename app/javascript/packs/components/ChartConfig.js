@@ -143,12 +143,13 @@ function defaultConfig(data) {
             },
           },
         },
+        turboThreshold: 100000,
       },
     },
     series: [
       {
         name: 'Installation',
-        data: data,
+        data: data.map(plot => plot[1]),
       },
     ],
     tooltip: {
