@@ -119,18 +119,25 @@ function defaultConfig(data) {
       line: {
         animation: false,
         marker: {
-          enabled: false,
           fillColor: 'transparent',
           lineColor: '#7cb5ec',
           lineWidth: 2.5,
           radius: 3.5,
         },
-        lineWidth: 1.5,
+        lineWidth: 2,
+        shadow: {
+          offsetY: 1.5,
+          width: 1.5,
+        },
         states: {
           hover: {
             halo: {
               size: 0,
             },
+            lineWidthPlus: 0,
+          },
+          normal: {
+            animation: false,
           },
         },
       },
@@ -139,9 +146,6 @@ function defaultConfig(data) {
           connectorAllowed: false,
         },
         color: '#edc240',
-        states: {
-          hover: {},
-        },
         turboThreshold: 100000,
       },
     },
