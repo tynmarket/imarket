@@ -126,7 +126,13 @@ function defaultConfig(data) {
           radius: 3.5,
         },
         lineWidth: 1.5,
-        states: {},
+        states: {
+          hover: {
+            halo: {
+              size: 0,
+            },
+          },
+        },
       },
       series: {
         label: {
@@ -134,12 +140,7 @@ function defaultConfig(data) {
         },
         color: '#edc240',
         states: {
-          hover: {
-            enabled: true,
-            halo: {
-              size: 0,
-            },
-          },
+          hover: {},
         },
         turboThreshold: 100000,
       },
