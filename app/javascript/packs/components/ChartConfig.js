@@ -41,8 +41,7 @@ export const currentConfigFn = (labels, points) => {
 };
 
 export const currentPointFn = () => point => {
-  return point;
-  //return { x: point[0], y: point[1] };
+  return { x: point[0], y: point[1] };
 };
 
 export const entireConfigFn = (labels, points) => {
@@ -88,8 +87,7 @@ export const entireConfigFn = (labels, points) => {
 };
 
 export const entirePointFn = labels => (point, i) => {
-  return point;
-  //return { x: labels[i], y: point[1] };
+  return { x: labels[i], y: point[1] };
 };
 
 function defaultConfig(data) {
@@ -152,7 +150,7 @@ function defaultConfig(data) {
     series: [
       {
         name: 'Installation',
-        data: data.map(plot => plot[1]),
+        data: data.map(plot => plot.y),
       },
     ],
     tooltip: {
