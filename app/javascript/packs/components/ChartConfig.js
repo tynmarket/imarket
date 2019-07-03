@@ -126,11 +126,7 @@ function defaultConfig(data) {
           radius: 3.5,
         },
         lineWidth: 1.5,
-        states: {
-          hover: {
-            enabled: false,
-          },
-        },
+        states: {},
       },
       series: {
         label: {
