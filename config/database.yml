@@ -15,7 +15,7 @@ default: &default
   charset: utf8mb4
   collation: utf8mb4_general_ci
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: <%= ENV["DATABSE_HOST"] %>
+  host: 35.200.111.217
   username: <%= ENV["DATABSE_USERNAME"] %>
   password: <%= ENV["DATABSE_PASSWORD"] %>
 
@@ -34,8 +34,8 @@ default_dev: &default_dev
   username: root
 
 development:
-  <<: *default_dev
-  database: imarket_development
+  <<: *default
+  database: imarket
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

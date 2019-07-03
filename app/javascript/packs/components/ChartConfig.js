@@ -41,7 +41,8 @@ export const currentConfigFn = (labels, points) => {
 };
 
 export const currentPointFn = () => point => {
-  return { x: point[0], y: point[1] };
+  return point;
+  //return { x: point[0], y: point[1] };
 };
 
 export const entireConfigFn = (labels, points) => {
@@ -87,7 +88,8 @@ export const entireConfigFn = (labels, points) => {
 };
 
 export const entirePointFn = labels => (point, i) => {
-  return { x: labels[i], y: point[1] };
+  return point;
+  //return { x: labels[i], y: point[1] };
 };
 
 function defaultConfig(data) {
