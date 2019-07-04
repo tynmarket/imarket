@@ -5,20 +5,14 @@ import { useState } from 'react';
 const Chart = ({ idStr, config, max }) => {
   const [chart, setChart] = useState();
 
-  /*
   if (chart) {
-    const prevMax = chart.options.scales.yAxes[0].ticks.max;
+    const prevMax = chart.options.yAxis[0].max;
 
     if (max || prevMax) {
-      if (max) {
-        chart.options.scales.yAxes[0].ticks.max = max;
-      } else {
-        delete chart.options.scales.yAxes[0].ticks.max;
-      }
-      chart.update();
+      const options = { yAxis: { max: max } };
+      chart.update(options);
     }
   }
-  */
 
   if (!chart && config) {
     const chartRef = Highcharts.chart(idStr, config);
