@@ -1,6 +1,4 @@
-import getYear from 'date-fns/get_year';
 import merge from 'lodash/fp/merge';
-import range from 'lodash/range';
 
 export const pointFn = labels => (point, i) => {
   return { name: labels[i], y: point[1] };
