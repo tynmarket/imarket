@@ -46,7 +46,7 @@ async function getData(code, indices) {
 function getConfig(data, configFn) {
   const labels = data.x_label || [];
   const points = (data.data || []).map(pointFn(labels));
-  return configFn(labels, points);
+  return configFn(points, labels);
 }
 
 export default App;

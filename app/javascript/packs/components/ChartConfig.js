@@ -6,107 +6,43 @@ export const pointFn = labels => (point, i) => {
   return { name: labels[i], y: point[1] };
 };
 
-export const currentConfigFn = (labels, points) => {
+export const currentConfigFn = (points, labels) => {
   const config = {
-    data: {
-      datasets: [
-        {
-          borderWidth: 2,
-          pointHitRadius: 7,
-        },
-      ],
-    },
-    options: {
-      scales: {
-        xAxes: [
-          {
-            type: 'linear',
-            ticks: {
-              callback: value => labels[value],
-              max: labels.length,
-              stepSize: 60,
-            },
-          },
-        ],
-      },
-      tooltips: {
-        callbacks: {
-          label: item => {
-            const point = points[item.index];
-            const value = point.y;
-            return ` ${value} 倍（${labels[point.x]}）`;
-          },
-        },
-      },
+    xAxis: {
+      tickInterval: 60,
     },
   };
 
-  return merge(defaultConfig(points), config);
+  return merge(defaultConfig(points, labels), config);
 };
 
-export const entireConfigFn = (labels, points) => {
-  const first = getYear(labels[0]);
-  const last = getYear(labels[labels.length - 1]);
-  const labelsRange = range(first, last + 1).map(v => v.toString());
-
+export const entireConfigFn = (points, labels) => {
   const config = {
-    labels: labelsRange,
-    data: {
-      datasets: [
-        {
-          borderWidth: 1.5,
-          pointHitRadius: 2,
-        },
-      ],
-    },
-    options: {
-      scales: {
-        xAxes: [
-          {
-            type: 'time',
-            time: {
-              unit: 'year',
-              stepSize: 1,
-            },
-          },
-        ],
-      },
-      tooltips: {
-        callbacks: {
-          label: item => {
-            const point = points[item.index];
-            const value = point.y;
-            return ` ${value} 倍（${point.x}）`;
-          },
-        },
-      },
+    xAxis: {
+      tickInterval: 245,
     },
   };
 
-  return merge(defaultConfig(points), config);
+  return merge(defaultConfig(points, labels), config);
 };
 
-function defaultConfig(data) {
+function defaultConfig(data, labels) {
   return {
     title: '',
     legend: {
       enabled: false,
     },
     xAxis: {
-      tickInterval: 60,
       gridLineWidth: 1,
       labels: {
         formatter: function() {
-          return `${this.value} km`;
+          return `${labels[this.value]}`;
         },
       },
     },
     yAxis: {
       title: {
         text: null,
-      },
-      labels: {
-        format: '{value} m',
       },
     },
     plotOptions: {
