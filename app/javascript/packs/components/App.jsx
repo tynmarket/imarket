@@ -1,9 +1,4 @@
-import {
-  currentConfigFn,
-  currentPointFn,
-  entireConfigFn,
-  entirePointFn,
-} from './ChartConfig';
+import { currentConfigFn, entireConfigFn, pointFn } from './ChartConfig';
 import { useEffect, useState } from 'react';
 import ChartContainer from './ChartContainer';
 import React from 'react';
@@ -16,15 +11,11 @@ const App = ({ code, indices }) => {
   useEffect(() => {
     getData(code, indices).then(data => {
       const currentData = data.current_year;
-      const currentConfig = getConfig(
-        currentData,
-        currentConfigFn,
-        currentPointFn
-      );
+      const currentConfig = getConfig(currentData, currentConfigFn);
       setCurrentConfig(currentConfig);
 
       const entireData = data.entire_period;
-      const entireConfig = getConfig(entireData, entireConfigFn, entirePointFn);
+      const entireConfig = getConfig(entireData, entireConfigFn);
       setEntireConfig(entireConfig);
     });
   }, []);
@@ -52,7 +43,7 @@ async function getData(code, indices) {
   return response.data;
 }
 
-function getConfig(data, configFn, pointFn) {
+function getConfig(data, configFn) {
   const labels = data.x_label || [];
   const points = (data.data || []).map(pointFn(labels));
   return configFn(labels, points);

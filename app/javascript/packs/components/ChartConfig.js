@@ -2,6 +2,10 @@ import getYear from 'date-fns/get_year';
 import merge from 'lodash/fp/merge';
 import range from 'lodash/range';
 
+export const pointFn = labels => (point, i) => {
+  return { name: labels[i], y: point[1] };
+};
+
 export const currentConfigFn = (labels, points) => {
   const config = {
     data: {
@@ -38,10 +42,6 @@ export const currentConfigFn = (labels, points) => {
   };
 
   return merge(defaultConfig(points), config);
-};
-
-export const currentPointFn = () => point => {
-  return { x: point[0], y: point[1] };
 };
 
 export const entireConfigFn = (labels, points) => {
@@ -84,10 +84,6 @@ export const entireConfigFn = (labels, points) => {
   };
 
   return merge(defaultConfig(points), config);
-};
-
-export const entirePointFn = labels => (point, i) => {
-  return { name: labels[i], y: point[1] };
 };
 
 function defaultConfig(data) {
