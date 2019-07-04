@@ -1,7 +1,6 @@
 import App from './components/App';
 import Exporting from 'highcharts/modules/exporting';
 import Highcharts from 'highcharts';
-import axios from 'axios';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
