@@ -87,7 +87,7 @@ export const entireConfigFn = (labels, points) => {
 };
 
 export const entirePointFn = labels => (point, i) => {
-  return { x: labels[i], y: point[1] };
+  return { name: labels[i], y: point[1] };
 };
 
 function defaultConfig(data) {
@@ -150,13 +150,16 @@ function defaultConfig(data) {
     series: [
       {
         name: 'Installation',
-        data: data.map(plot => plot.y),
+        data: data,
       },
     ],
     tooltip: {
       headerFormat: '',
-      pointFormat:
-        '<span style="font-weight: bold; color: #595857;">{point.y} 倍 ({point.x})</span>',
+      pointFormatter: function() {
+        return `<span style="font-weight: bold; color: #595857;">${
+          this.y
+        } 倍 (${this.name})</span>`;
+      },
     },
     responsive: {
       rules: [
