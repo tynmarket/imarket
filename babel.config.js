@@ -21,6 +21,7 @@ module.exports = function(api) {
             ie: 11,
           },
           useBuiltIns: 'usage',
+          corejs: 3,
           modules: false,
         },
       ],
