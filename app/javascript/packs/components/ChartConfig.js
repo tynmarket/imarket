@@ -26,9 +26,16 @@ export const entirePointFn = labels => (point, i) => {
 
 export const entireConfigFn = (points, labels) => {
   const config = {
+    chart: {
+      zoomType: 'x',
+    },
     xAxis: {
-      tickInterval: 365 * 24 * 3600 * 1000,
       type: 'datetime',
+      dateTimeLabelFormats: {
+        day: '%Y-%m-%d',
+        week: '%Y-%m-%d',
+        month: '%Y-%m-%d',
+      },
     },
   };
 
