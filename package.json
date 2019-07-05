@@ -11,6 +11,7 @@
     "case-sensitive-paths-webpack-plugin": "^2.2.0",
     "core-js": "^3.1.4",
     "css-loader": "^2.1.0",
+    "dayjs": "^1.8.14",
     "file-loader": "^3.0.1",
     "highcharts": "^7.1.2",
     "lodash": "^4.17.11",

@@ -32,7 +32,7 @@ class StockPricesController < ApplicationController
   end
 
   def spider_start_date
-    Date.new 2011, 7, 1
+    Date.new 2011, 1, 1
   end
 
   def dates_current_year(today)

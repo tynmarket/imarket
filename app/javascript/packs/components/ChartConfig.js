@@ -1,23 +1,34 @@
+import dayjs from 'dayjs';
 import merge from 'lodash/fp/merge';
 
-export const pointFn = labels => (point, i) => {
-  return { name: labels[i], y: point[1] };
+export const currentPointFn = () => point => {
+  return [point[0], point[1]];
 };
 
 export const currentConfigFn = (points, labels) => {
   const config = {
     xAxis: {
       tickInterval: 60,
+      labels: {
+        formatter: function() {
+          return `${labels[this.value]}`;
+        },
+      },
     },
   };
 
   return merge(defaultConfig(points, labels), config);
 };
 
+export const entirePointFn = labels => (point, i) => {
+  return { x: dayjs(labels[i]).toDate(), y: point[1] };
+};
+
 export const entireConfigFn = (points, labels) => {
   const config = {
     xAxis: {
-      tickInterval: 245,
+      tickInterval: 365 * 24 * 3600 * 1000,
+      type: 'datetime',
     },
   };
 
@@ -32,11 +43,6 @@ function defaultConfig(data, labels) {
     },
     xAxis: {
       gridLineWidth: 1,
-      labels: {
-        formatter: function() {
-          return `${labels[this.value]}`;
-        },
-      },
     },
     yAxis: {
       title: {
@@ -79,7 +85,6 @@ function defaultConfig(data, labels) {
     },
     series: [
       {
-        name: 'Installation',
         data: data,
       },
     ],
@@ -88,7 +93,7 @@ function defaultConfig(data, labels) {
       pointFormatter: function() {
         return `<span style="font-weight: bold; color: #595857;">${
           this.y
-        } 倍 (${this.name})</span>`;
+        } 倍 (${labels[this.index]})</span>`;
       },
     },
     responsive: {
