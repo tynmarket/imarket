@@ -18,15 +18,6 @@ describe "GET /stock_prices/:id/per.json" do
   context "current_year" do
     let(:json_data) { json["current_year"] }
 
-    it "ticks" do
-      expect(ticks.size).to eq 5
-      expect(x_label[ticks[0]]).to eq "2014-01-06"
-      expect(x_label[ticks[1]]).to eq "2014-04-01"
-      expect(x_label[ticks[2]]).to eq "2014-07-01"
-      expect(x_label[ticks[3]]).to eq "2014-10-01"
-      expect(x_label[ticks[4]]).to eq "2014-12-30"
-    end
-
     it "x_label" do
       expect(x_label.first).to eq "2014-01-06"
       expect(x_label.last).to eq "2014-12-30"
@@ -52,15 +43,6 @@ describe "GET /stock_prices/:id/per.json" do
 
   context "entire_period" do
     let(:json_data) { json["entire_period"] }
-
-    it "ticks" do
-      expect(ticks.size).to eq 5
-      expect(x_label[ticks[0]]).to eq "2011-07-01"
-      expect(x_label[ticks[1]]).to eq "2012-01-04"
-      expect(x_label[ticks[2]]).to eq "2013-01-04"
-      expect(x_label[ticks[3]]).to eq "2014-01-06"
-      expect(x_label[ticks[4]]).to eq "2014-12-30"
-    end
 
     it "x_label" do
       expect(x_label.first).to eq "2011-07-01"
@@ -93,15 +75,6 @@ describe "GET /stock_prices/:id/pbr.json" do
   context "current_year" do
     let(:json_data) { json["current_year"] }
 
-    it "ticks" do
-      expect(ticks.size).to eq 5
-      expect(x_label[ticks[0]]).to eq "2014-01-06"
-      expect(x_label[ticks[1]]).to eq "2014-04-01"
-      expect(x_label[ticks[2]]).to eq "2014-07-01"
-      expect(x_label[ticks[3]]).to eq "2014-10-01"
-      expect(x_label[ticks[4]]).to eq "2014-12-30"
-    end
-
     it "x_label" do
       expect(x_label.first).to eq "2014-01-06"
       expect(x_label.last).to eq "2014-12-30"
@@ -127,15 +100,6 @@ describe "GET /stock_prices/:id/pbr.json" do
 
   context "entire_period" do
     let(:json_data) { json["entire_period"] }
-
-    it "ticks" do
-      expect(ticks.size).to eq 5
-      expect(x_label[ticks[0]]).to eq "2011-07-01"
-      expect(x_label[ticks[1]]).to eq "2012-01-04"
-      expect(x_label[ticks[2]]).to eq "2013-01-04"
-      expect(x_label[ticks[3]]).to eq "2014-01-06"
-      expect(x_label[ticks[4]]).to eq "2014-12-30"
-    end
 
     it "x_label" do
       expect(x_label.first).to eq "2011-07-01"
