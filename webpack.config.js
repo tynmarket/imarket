@@ -69,6 +69,8 @@ module.exports = (env, {mode}) => {
 
     resolve: {
       extensions: [
+        '.tsx',
+        '.ts',
         '.jsx',
         '.mjs',
         '.js',
@@ -159,6 +161,15 @@ module.exports = (env, {mode}) => {
                 cacheCompression: isProductionEnv,
                 compact: isProductionEnv,
               },
+            },
+          ],
+        },
+        {
+          test: /\.(ts|tsx)$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'ts-loader',
             },
           ],
         },
