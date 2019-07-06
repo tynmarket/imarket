@@ -11,11 +11,21 @@ const App = ({ code, indices }) => {
   useEffect(() => {
     getData(code, indices).then(data => {
       const currentData = data.current_year;
-      const currentConfig = getConfig(currentData, null, currentConfigFn);
+      const currentConfig = getConfig(
+        currentData.data,
+        currentData.x_label,
+        null,
+        currentConfigFn
+      );
       setCurrentConfig(currentConfig);
 
       const entireData = data.entire_period;
-      const entireConfig = getConfig(entireData, entirePointFn, entireConfigFn);
+      const entireConfig = getConfig(
+        entireData.data,
+        entireData.x_label,
+        entirePointFn,
+        entireConfigFn
+      );
       setEntireConfig(entireConfig);
     });
   }, []);
@@ -43,13 +53,13 @@ async function getData(code, indices) {
   return response.data;
 }
 
-function getConfig(data, pointFn, configFn) {
-  const labels = data.x_label || [];
-  let points;
+function getConfig(data, labels, pointFn, configFn) {
+  data = data || [];
+  labels = labels || [];
   if (pointFn) {
-    points = (data.data || []).map(pointFn(labels));
+    data = data.map(pointFn(labels));
   }
-  return configFn(points || data.data, labels);
+  return configFn(data, labels);
 }
 
 export default App;
