@@ -28,14 +28,14 @@ describe "GET /stock_prices/:id/per.json" do
 
       context "株価がある" do
         it "PERを出力する" do
-          expect(data[0]).to eq [0, 10.0]
-          expect(data[2]).to eq [2, 11.0]
+          expect(data[0]).to eq 10.0
+          expect(data[2]).to eq 11.0
         end
       end
 
       context "株価がない" do
         it "PERを出力しない" do
-          expect(data[1]).to eq [1, nil]
+          expect(data[1]).to eq nil
         end
       end
     end
@@ -52,7 +52,7 @@ describe "GET /stock_prices/:id/per.json" do
     context "data" do
       it { expect(data.size).to eq x_label.size }
 
-      it { expect(data[0]).to eq [0, 9.0] }
+      it { expect(data[0]).to eq 9.0 }
     end
   end
 end
@@ -85,14 +85,14 @@ describe "GET /stock_prices/:id/pbr.json" do
 
       context "株価がある" do
         it "PERを出力する" do
-          expect(data[0]).to eq [0, 10.0]
-          expect(data[2]).to eq [2, 11.0]
+          expect(data[0]).to eq 10.0
+          expect(data[2]).to eq 11.0
         end
       end
 
       context "株価がない" do
         it "PERを出力しない" do
-          expect(data[1]).to eq [1, nil]
+          expect(data[1]).to eq nil
         end
       end
     end
@@ -109,7 +109,7 @@ describe "GET /stock_prices/:id/pbr.json" do
     context "data" do
       it { expect(data.size).to eq x_label.size }
 
-      it { expect(data[0]).to eq [0, 9.0] }
+      it { expect(data[0]).to eq 9.0 }
     end
   end
 end
