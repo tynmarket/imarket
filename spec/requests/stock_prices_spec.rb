@@ -8,7 +8,7 @@ describe "GET /stock_prices/:id/per.json" do
 
   before do
     Timecop.travel Date.new(2014, 8, 1)
-    create :stock_price, :daily, per: 9.0, date: Date.new(2011, 7, 1)
+    create :stock_price, :daily, per: 9.0, date: Date.new(2011, 1, 4)
     create :stock_price, :daily, per: 10.0, date: Date.new(2014, 1, 6)
     create :stock_price, :daily, per: 11.0, date: Date.new(2014, 1, 8)
 
@@ -45,7 +45,7 @@ describe "GET /stock_prices/:id/per.json" do
     let(:json_data) { json["entire_period"] }
 
     it "x_label" do
-      expect(x_label.first).to eq "2011-07-01"
+      expect(x_label.first).to eq "2011-01-04"
       expect(x_label.last).to eq "2014-12-30"
     end
 
@@ -65,7 +65,7 @@ describe "GET /stock_prices/:id/pbr.json" do
 
   before do
     Timecop.travel Date.new(2014, 8, 1)
-    create :stock_price, :daily, pbr: 9.0, date: Date.new(2011, 7, 1)
+    create :stock_price, :daily, pbr: 9.0, date: Date.new(2011, 1, 4)
     create :stock_price, :daily, pbr: 10.0, date: Date.new(2014, 1, 6)
     create :stock_price, :daily, pbr: 11.0, date: Date.new(2014, 1, 8)
 
@@ -102,7 +102,7 @@ describe "GET /stock_prices/:id/pbr.json" do
     let(:json_data) { json["entire_period"] }
 
     it "x_label" do
-      expect(x_label.first).to eq "2011-07-01"
+      expect(x_label.first).to eq "2011-01-04"
       expect(x_label.last).to eq "2014-12-30"
     end
 
