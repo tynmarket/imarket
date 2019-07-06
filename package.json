@@ -43,7 +43,7 @@
   },
   "scripts": {
     "build": "rm -rf public/packs && webpack --mode=production",
-    "lint": "eslint --fix 'app/javascript/packs/**/*.js{,x}'",
+    "lint": "eslint --fix app/javascript/packs/** --ext .js,.jsx,.ts,.tsx",
     "lint-config": "eslint --fix webpack.config.js babel.config.js",
     "serve": "webpack-dev-server -d"
   }
