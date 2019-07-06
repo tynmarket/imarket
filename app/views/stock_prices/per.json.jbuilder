@@ -5,15 +5,12 @@ def render_per(dates, stock_prices, json)
     json.array! dates
   end
 
-  dates_with_index = dates.map.with_index { |d, i| [d, i] }
+  data = dates.map do |date|
+    stock_prices[date]
+  end
 
   json.data do
-    json.array! dates_with_index do |date_idx|
-      date, i = *date_idx
-      stock_price = stock_prices[date]
-
-      json.array! [i, stock_price]
-    end
+    json.array! data
   end
 end
 

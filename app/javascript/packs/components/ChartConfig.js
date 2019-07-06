@@ -1,10 +1,6 @@
 import dayjs from 'dayjs';
 import merge from 'lodash/fp/merge';
 
-export const currentPointFn = () => point => {
-  return [point[0], point[1]];
-};
-
 export const currentConfigFn = (points, labels) => {
   const config = {
     xAxis: {
@@ -21,7 +17,7 @@ export const currentConfigFn = (points, labels) => {
 };
 
 export const entirePointFn = labels => (point, i) => {
-  return { x: dayjs(labels[i]).toDate(), y: point[1] };
+  return { x: dayjs(labels[i]).toDate(), y: point };
 };
 
 export const entireConfigFn = (points, labels) => {
