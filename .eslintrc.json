@@ -14,9 +14,10 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
+  "parser": "@typescript-eslint/parser",
   "plugins": [
     "react",
-    "prettier"
+    "@typescript-eslint"
   ],
   "settings": {
     "react": {
@@ -24,9 +25,10 @@
     }
   },
   "extends": [
-    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "prettier/@typescript-eslint"
     "plugin:react/recommended",
-    "plugin:prettier/recommended",
     "prettier/react"
   ],
   "rules": {
