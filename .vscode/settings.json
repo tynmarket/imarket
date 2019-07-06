@@ -5,5 +5,16 @@
     },
     "eslint.packageManager": "yarn",
     "eslint.run": "onSave",
-    "prettier.eslintIntegration": true
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        {
+            "language": "typescript",
+            "autoFix": true
+        },
+        {
+            "language": "typescriptreact",
+            "autoFix": true
+        }
+    ],
 }
