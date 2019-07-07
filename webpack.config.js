@@ -8,6 +8,7 @@ const WebpackAssetsManifest = require('webpack-assets-manifest');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = (env, {mode}) => {
   isDevelopmentEnv = mode === 'development';
@@ -89,6 +90,15 @@ module.exports = (env, {mode}) => {
       strictExportPresence: true,
       rules: [
         {
+          test: /\.(ts|tsx)$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'ts-loader',
+            },
+          ],
+        },
+        {
           test: /(.jpg|.jpeg|.png|.gif|.tiff|.ico|.svg|.eot|.otf|.ttf|.woff|.woff2)$/i,
           use: [
             {
@@ -164,15 +174,6 @@ module.exports = (env, {mode}) => {
             },
           ],
         },
-        {
-          test: /\.(ts|tsx)$/,
-          exclude: /node_modules/,
-          use: [
-            {
-              loader: 'ts-loader',
-            },
-          ],
-        },
       ],
     },
     plugins: [
@@ -186,6 +187,7 @@ module.exports = (env, {mode}) => {
         publicPath: true,
       }),
       new OptimizeCSSAssetsPlugin(),
+      new BundleAnalyzerPlugin(),
     ],
   };
 
