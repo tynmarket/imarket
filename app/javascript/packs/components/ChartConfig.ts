@@ -1,26 +1,33 @@
+import { Options, PositionObject } from 'highcharts';
 import dayjs from 'dayjs';
 import merge from 'lodash/fp/merge';
 
-export const currentConfigFn = (points, labels) => {
+export const currentConfigFn = (data: number[], labels: string[]): Options => {
   const config = {
     xAxis: {
       tickInterval: 60,
       labels: {
-        formatter: function() {
+        formatter: function(): string {
           return `${labels[this.value]}`;
         },
       },
     },
   };
 
-  return merge(defaultConfig(points, labels), config);
+  return merge(defaultConfig(data, labels), config);
 };
 
-export const entirePointFn = labels => (point, i) => {
+interface PointFun {
+  (point: number, i: number): { x: Date; y: number };
+}
+
+export const entirePointFn: (labels: string[]) => PointFun = (
+  labels: string[]
+) => (point: number, i: number): { x: Date; y: number } => {
   return { x: dayjs(labels[i]).toDate(), y: point };
 };
 
-export const entireConfigFn = (points, labels) => {
+export const entireConfigFn = (data: number[], labels: string[]): Options => {
   const config = {
     chart: {
       zoomType: 'x',
@@ -35,12 +42,14 @@ export const entireConfigFn = (points, labels) => {
     },
   };
 
-  return merge(defaultConfig(points, labels), config);
+  return merge(defaultConfig(data, labels), config);
 };
 
-function defaultConfig(data, labels) {
+function defaultConfig(data: number[], labels: string[]): Options {
   return {
-    title: '',
+    title: {
+      text: '',
+    },
     legend: {
       enabled: false,
     },
@@ -88,12 +97,13 @@ function defaultConfig(data, labels) {
     },
     series: [
       {
+        type: 'line',
         data: data,
       },
     ],
     tooltip: {
       headerFormat: '',
-      pointFormatter: function() {
+      pointFormatter: function(): string {
         return `<span style="font-weight: bold; color: #595857;">${
           this.y
         } 倍 (${labels[this.index]})</span>`;
