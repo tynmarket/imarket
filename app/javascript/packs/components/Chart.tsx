@@ -2,7 +2,7 @@ import Highcharts from 'highcharts';
 import React from 'react';
 import { useState } from 'react';
 
-const Chart = ({ idStr, config, max }) => {
+const Chart = ({ idStr, config, max }): JSX.Element => {
   const [chart, setChart] = useState();
 
   if (chart) {

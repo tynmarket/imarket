@@ -1,8 +1,15 @@
 import Chart from './Chart';
+import { Options } from 'highcharts';
 import React from 'react';
+import { ReactNode } from 'react';
 import { useState } from 'react';
 
-const ChartContainer = ({ indices, period, config, children }) => {
+const ChartContainer = (
+  indices: string,
+  period: string,
+  config: Options,
+  children: ReactNode
+): JSX.Element => {
   const [max, setMax] = useState();
   const id = `${indices}-${period}`;
 
@@ -15,7 +22,7 @@ const ChartContainer = ({ indices, period, config, children }) => {
       <div className="operator-container">
         <div>{indices.toUpperCase()}の最大値</div>
         <select
-          onChange={e => {
+          onChange={(e): void => {
             setMax(maxValue(e));
           }}
           className="select-per form-control"
@@ -27,19 +34,21 @@ const ChartContainer = ({ indices, period, config, children }) => {
   );
 };
 
-function selectOptions(indices) {
+function selectOptions(indices: string): JSX.Element[] {
   const values =
     indices === 'per'
       ? [null, 10, 15, 20, 30, 50, 100]
       : [null, 1, 2, 3, 5, 10, 20];
-  return values.map((v, i) => (
-    <option value={v} key={i}>
-      {v}
-    </option>
-  ));
+  return values.map(
+    (v, i): JSX.Element => (
+      <option value={v} key={i}>
+        {v}
+      </option>
+    )
+  );
 }
 
-function maxValue(e) {
+function maxValue(e: React.ChangeEvent<HTMLSelectElement>): number | null {
   const select = e.currentTarget;
   const val = select.options[select.selectedIndex].value; // IE 11
   return val ? parseInt(val) : null;
