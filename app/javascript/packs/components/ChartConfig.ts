@@ -27,11 +27,6 @@ export const currentConfigFn = (points: Point[], labels: string[]): Options => {
 
 export type Point = number | SeriesLineDataOptions;
 
-interface EntirePoint {
-  x: Date;
-  y: number;
-}
-
 export interface PointFun {
   (point: number, i: number): Point;
 }
