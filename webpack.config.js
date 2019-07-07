@@ -143,7 +143,6 @@ module.exports = (env, {mode}) => {
           ],
           sideEffects: true,
         },
-        /* コメントアウトするとバンドルサイズが少し小さくなる
         {
           test: /\.(js|mjs)$/,
           exclude: /@babel(?:\/|\\{1,2})runtime/,
@@ -159,7 +158,6 @@ module.exports = (env, {mode}) => {
             },
           ],
         },
-        */
         {
           test: /\.(js|jsx|mjs)?(\.erb)?$/,
           exclude: /node_modules/,
