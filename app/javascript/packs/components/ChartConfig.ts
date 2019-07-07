@@ -21,11 +21,13 @@ interface PointFun {
   (point: number, i: number): { x: Date; y: number };
 }
 
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 export const entirePointFn: (labels: string[]) => PointFun = (
   labels: string[]
 ) => (point: number, i: number): { x: Date; y: number } => {
   return { x: dayjs(labels[i]).toDate(), y: point };
 };
+/* eslint-enable @typescript-eslint/explicit-function-return-type */
 
 export const entireConfigFn = (data: number[], labels: string[]): Options => {
   const config = {
