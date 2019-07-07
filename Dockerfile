@@ -34,6 +34,7 @@ RUN apk add --update --no-cache --virtual=build-dependencies \
       zlib-dev && \
     gem install bundler && \
     bundle install -j4 --deployment --path /usr/local/bundle --without development test && \
+    yarn install --production && \
     curl -LO https://mackerel.io/file/agent/tgz/mackerel-agent-latest.tar.gz && \
     tar xvzf mackerel-agent-latest.tar.gz && \
     apk del build-dependencies
