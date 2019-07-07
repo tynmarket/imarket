@@ -44,6 +44,11 @@ jobs:
           paths:
             - ~/.cache/yarn
 
+      # Run tsc
+      - run:
+          name: yarn tsc
+          command: yarn tsc
+
       # Run eslint
       - run:
           name: yarn lint
