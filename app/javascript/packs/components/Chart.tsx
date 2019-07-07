@@ -1,8 +1,15 @@
 import Highcharts from 'highcharts';
+import { Options } from 'highcharts';
 import React from 'react';
 import { useState } from 'react';
 
-const Chart = ({ idStr, config, max }): JSX.Element => {
+interface Props {
+  idStr: string;
+  config: Options;
+  max?: number;
+}
+
+const Chart: React.FC<Props> = ({ idStr, config, max }): JSX.Element => {
   const [chart, setChart] = useState();
 
   if (chart) {

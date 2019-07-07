@@ -42,8 +42,8 @@ const ChartContainer: React.FC<Props> = ({
 function selectOptions(indices: string): JSX.Element[] {
   const values =
     indices === 'per'
-      ? [null, 10, 15, 20, 30, 50, 100]
-      : [null, 1, 2, 3, 5, 10, 20];
+      ? [undefined, 10, 15, 20, 30, 50, 100]
+      : [undefined, 1, 2, 3, 5, 10, 20];
   return values.map(
     (v, i): JSX.Element => (
       <option value={v} key={i}>
