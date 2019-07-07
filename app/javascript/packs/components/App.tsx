@@ -1,15 +1,34 @@
-import { currentConfigFn, entireConfigFn, entirePointFn } from './ChartConfig';
+import {
+  ConfigFn,
+  Point,
+  PointFun,
+  currentConfigFn,
+  entireConfigFn,
+  entirePointFn,
+} from './ChartConfig';
 import { useEffect, useState } from 'react';
 import ChartContainer from './ChartContainer';
+import { Options } from 'highcharts';
 import React from 'react';
 import axios from 'axios';
 
-const App = ({ code, indices }) => {
+interface StockPriceData {
+  current_year: {
+    data: number[];
+    x_label: string[];
+  };
+  entire_period: {
+    data: number[];
+    x_label: string[];
+  };
+}
+
+const App = (code: string, indices: string): JSX.Element => {
   const [currentConfig, setCurrentConfig] = useState();
   const [entireConfig, setEntireConfig] = useState();
 
-  useEffect(() => {
-    getData(code, indices).then(data => {
+  useEffect((): void => {
+    getData(code, indices).then((data: StockPriceData): void => {
       const currentData = data.current_year;
       const currentConfig = getConfig(
         currentData.data,
@@ -47,19 +66,24 @@ const App = ({ code, indices }) => {
   );
 };
 
-async function getData(code, indices) {
+async function getData(code: string, indices: string): Promise<StockPriceData> {
   const url = `/stock_prices/${code}/${indices}.json`;
   const response = await axios.get(url);
   return response.data;
 }
 
-function getConfig(data, labels, pointFn, configFn) {
-  data = data || [];
+function getConfig(
+  data: number[],
+  labels: string[],
+  pointFn: (labels: string[]) => PointFun,
+  configFn: ConfigFn
+): Options {
+  let points: Point[] = data || [];
   labels = labels || [];
   if (pointFn) {
-    data = data.map(pointFn(labels));
+    points = data.map(pointFn(labels));
   }
-  return configFn(data, labels);
+  return configFn(points, labels);
 }
 
 export default App;

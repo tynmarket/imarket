@@ -2,7 +2,11 @@ import { Options } from 'highcharts';
 import dayjs from 'dayjs';
 import merge from 'lodash/fp/merge';
 
-export const currentConfigFn = (data: number[], labels: string[]): Options => {
+export interface ConfigFn {
+  (points: Point[], labels: string[]): Options;
+}
+
+export const currentConfigFn = (points: Point[], labels: string[]): Options => {
   const config = {
     xAxis: {
       tickInterval: 60,
@@ -14,17 +18,24 @@ export const currentConfigFn = (data: number[], labels: string[]): Options => {
     },
   };
 
-  return merge(defaultConfig(data, labels), config);
+  return merge(defaultConfig(points, labels), config);
 };
 
-interface PointFun {
-  (point: number, i: number): { x: Date; y: number };
+export type Point = number | EntirePoint;
+
+interface EntirePoint {
+  x: Date;
+  y: number;
+}
+
+export interface PointFun {
+  (point: number, i: number): Point;
 }
 
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 export const entirePointFn: (labels: string[]) => PointFun = (
   labels: string[]
-) => (point: number, i: number): { x: Date; y: number } => {
+) => (point: number, i: number): Point => {
   return { x: dayjs(labels[i]).toDate(), y: point };
 };
 /* eslint-enable @typescript-eslint/explicit-function-return-type */
@@ -47,7 +58,9 @@ export const entireConfigFn = (data: number[], labels: string[]): Options => {
   return merge(defaultConfig(data, labels), config);
 };
 
-function defaultConfig(data: number[], labels: string[]): Options {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+function defaultConfig(points: any[], labels: string[]): Options {
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   return {
     title: {
       text: '',
@@ -100,7 +113,7 @@ function defaultConfig(data: number[], labels: string[]): Options {
     series: [
       {
         type: 'line',
-        data: data,
+        data: points,
       },
     ],
     tooltip: {
