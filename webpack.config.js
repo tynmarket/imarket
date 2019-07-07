@@ -8,7 +8,7 @@ const WebpackAssetsManifest = require('webpack-assets-manifest');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+//const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = (env, {mode}) => {
   isDevelopmentEnv = mode === 'development';
@@ -185,7 +185,7 @@ module.exports = (env, {mode}) => {
         publicPath: true,
       }),
       new OptimizeCSSAssetsPlugin(),
-      new BundleAnalyzerPlugin(),
+      //new BundleAnalyzerPlugin(),
     ],
   };
 
