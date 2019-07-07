@@ -1,15 +1,21 @@
 import Chart from './Chart';
 import { Options } from 'highcharts';
 import React from 'react';
-//import { ReactNode } from 'react';
 import { useState } from 'react';
 
-const ChartContainer = (
+interface Props {
+  indices: string;
+  period: string;
+  config: Options;
+  children: React.ReactNode;
+}
+
+const ChartContainer: React.FC<Props> = ({
   indices,
   period,
-  config: Options,
-  children
-): JSX.Element => {
+  config,
+  children,
+}): JSX.Element => {
   const [max, setMax] = useState();
   const id = `${indices}-${period}`;
 

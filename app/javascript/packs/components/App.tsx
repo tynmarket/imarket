@@ -23,7 +23,12 @@ interface StockPriceData {
   };
 }
 
-const App = (code: string, indices: string): JSX.Element => {
+interface Props {
+  code: string;
+  indices: string;
+}
+
+const App: React.FC<Props> = ({ code, indices }): JSX.Element => {
   const [currentConfig, setCurrentConfig] = useState();
   const [entireConfig, setEntireConfig] = useState();
 
