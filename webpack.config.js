@@ -90,15 +90,6 @@ module.exports = (env, {mode}) => {
       strictExportPresence: true,
       rules: [
         {
-          test: /\.(ts|tsx)$/,
-          exclude: /node_modules/,
-          use: [
-            {
-              loader: 'ts-loader',
-            },
-          ],
-        },
-        {
           test: /(.jpg|.jpeg|.png|.gif|.tiff|.ico|.svg|.eot|.otf|.ttf|.woff|.woff2)$/i,
           use: [
             {
@@ -169,6 +160,15 @@ module.exports = (env, {mode}) => {
                 cacheCompression: isProductionEnv,
                 compact: isProductionEnv,
               },
+            },
+          ],
+        },
+        {
+          test: /\.(ts|tsx)$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'ts-loader',
             },
           ],
         },
