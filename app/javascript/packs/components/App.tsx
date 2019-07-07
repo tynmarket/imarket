@@ -38,8 +38,8 @@ const App: React.FC<Props> = ({ code, indices }): JSX.Element => {
       const currentConfig = getConfig(
         currentData.data,
         currentData.x_label,
-        null,
-        currentConfigFn
+        currentConfigFn,
+        undefined
       );
       setCurrentConfig(currentConfig);
 
@@ -47,8 +47,8 @@ const App: React.FC<Props> = ({ code, indices }): JSX.Element => {
       const entireConfig = getConfig(
         entireData.data,
         entireData.x_label,
-        entirePointFn,
-        entireConfigFn
+        entireConfigFn,
+        entirePointFn
       );
       setEntireConfig(entireConfig);
     });
@@ -80,8 +80,8 @@ async function getData(code: string, indices: string): Promise<StockPriceData> {
 function getConfig(
   data: number[],
   labels: string[],
-  pointFn: (labels: string[]) => PointFun,
-  configFn: ConfigFn
+  configFn: ConfigFn,
+  pointFn?: (labels: string[]) => PointFun
 ): Options {
   let points: Point[] = data || [];
   labels = labels || [];
