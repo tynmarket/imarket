@@ -1,4 +1,8 @@
-import { Options } from 'highcharts';
+import {
+  AxisLabelsFormatterContextObject,
+  Options,
+  SeriesLineDataOptions,
+} from 'highcharts';
 import dayjs from 'dayjs';
 import merge from 'lodash/fp/merge';
 
@@ -11,7 +15,7 @@ export const currentConfigFn = (points: Point[], labels: string[]): Options => {
     xAxis: {
       tickInterval: 60,
       labels: {
-        formatter: function(): string {
+        formatter: function(this: AxisLabelsFormatterContextObject): string {
           return `${labels[this.value]}`;
         },
       },
@@ -21,7 +25,7 @@ export const currentConfigFn = (points: Point[], labels: string[]): Options => {
   return merge(defaultConfig(points, labels), config);
 };
 
-export type Point = number | EntirePoint;
+export type Point = number | SeriesLineDataOptions;
 
 interface EntirePoint {
   x: Date;
@@ -36,11 +40,17 @@ export interface PointFun {
 export const entirePointFn: (labels: string[]) => PointFun = (
   labels: string[]
 ) => (point: number, i: number): Point => {
-  return { x: dayjs(labels[i]).toDate(), y: point };
+  return {
+    x: dayjs(`${labels[i]}T00:00Z`)
+      .toDate()
+      .getTime(),
+    y: point,
+    key: i,
+  };
 };
 /* eslint-enable @typescript-eslint/explicit-function-return-type */
 
-export const entireConfigFn = (data: number[], labels: string[]): Options => {
+export const entireConfigFn = (points: Point[], labels: string[]): Options => {
   const config = {
     chart: {
       zoomType: 'x',
@@ -55,12 +65,10 @@ export const entireConfigFn = (data: number[], labels: string[]): Options => {
     },
   };
 
-  return merge(defaultConfig(data, labels), config);
+  return merge(defaultConfig(points, labels), config);
 };
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-function defaultConfig(points: any[], labels: string[]): Options {
-  /* eslint-disable @typescript-eslint/no-explicit-any */
+function defaultConfig(points: Point[], labels: string[]): Options {
   return {
     title: {
       text: '',
