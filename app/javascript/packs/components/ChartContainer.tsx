@@ -7,7 +7,6 @@ interface Props {
   indices: string;
   period: string;
   config: Options;
-  children: React.ReactNode;
 }
 
 const ChartContainer: React.FC<Props> = ({
