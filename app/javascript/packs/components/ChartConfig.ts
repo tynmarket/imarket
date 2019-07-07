@@ -1,4 +1,4 @@
-import { Options, PositionObject } from 'highcharts';
+import { Options } from 'highcharts';
 import dayjs from 'dayjs';
 import merge from 'lodash/fp/merge';
 
