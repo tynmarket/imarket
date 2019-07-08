@@ -18,7 +18,7 @@ module.exports = function(api) {
         require('@babel/preset-env').default,
         {
           targets: {
-            ie: 11,
+            ie: "11",
           },
           useBuiltIns: 'usage',
           corejs: 3,
