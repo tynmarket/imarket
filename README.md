@@ -10,3 +10,7 @@
 * 予想PER、PBRのグラフ
 
 2013年〜2014年に書かれたコードが主なので、古い部分がありますがご容赦下さい。
+
+## BrowserStack
+
+[BrowserStack](http://browserstack.com/) をIE 11での動作確認のために使用しています。
