@@ -49,6 +49,7 @@
     "tsc": "(tsc || true) && rm -rf build",
     "lint": "eslint --fix app/javascript/packs/** --ext .js,.jsx,.ts,.tsx",
     "lint-config": "eslint --fix webpack.config.js babel.config.js",
+    "check-all": "(yarn lint || true) && yarn tsc",
     "serve": "webpack-dev-server -d"
   }
 }
