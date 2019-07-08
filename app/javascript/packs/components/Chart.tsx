@@ -1,6 +1,9 @@
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
 import Highcharts from 'highcharts';
 import { Options } from 'highcharts';
 import React from 'react';
+import { media } from '../styles/variables';
 import { useState } from 'react';
 
 interface Props {
@@ -26,7 +29,16 @@ const Chart: React.FC<Props> = ({ idStr, config, max }): JSX.Element => {
     setChart(chartRef);
   }
 
-  return <div id={idStr} className="per-chart" />;
+  return <div id={idStr} css={style} />;
 };
+
+const style = css`
+  ${media.mobile} {
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    line-height: 1.2em;
+  }
+`;
 
 export default Chart;
