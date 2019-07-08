@@ -13,4 +13,4 @@
 
 ## BrowserStack
 
-[BrowserStack](http://browserstack.com/) をIE 11での動作確認のために使用しています。
+[BrowserStack](http://browserstack.com/)をIE 11での動作確認のために使用しています。
