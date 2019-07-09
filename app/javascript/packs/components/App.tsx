@@ -8,6 +8,7 @@ import {
 } from './ChartConfig';
 import { useEffect, useState } from 'react';
 import ChartContainer from './ChartContainer';
+import { Fragment } from 'react';
 import { Options } from 'highcharts';
 import React from 'react';
 import axios from 'axios';
@@ -55,7 +56,7 @@ const App: React.FC<Props> = ({ code, indices }): JSX.Element => {
   }, []);
 
   return (
-    <div>
+    <Fragment>
       <ChartContainer
         indices={indices}
         period={'current'}
@@ -67,7 +68,7 @@ const App: React.FC<Props> = ({ code, indices }): JSX.Element => {
       <ChartContainer indices={indices} period={'entire'} config={entireConfig}>
         全期間
       </ChartContainer>
-    </div>
+    </Fragment>
   );
 };
 
