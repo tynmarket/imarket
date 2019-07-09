@@ -135,20 +135,11 @@ module.exports = (env, {mode}) => {
           sideEffects: true,
         },
         {
-          test: /\.(js|jsx|mjs)?(\.erb)?$/,
+          test: /\.(js|jsx|ts|tsx)$/i,
           exclude: /node_modules/,
           use: [
             {
               loader: 'babel-loader',
-            },
-          ],
-        },
-        {
-          test: /\.(ts|tsx)$/,
-          exclude: /node_modules/,
-          use: [
-            {
-              loader: 'ts-loader',
             },
           ],
         },

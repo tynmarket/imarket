@@ -12,5 +12,7 @@ module Utils
     YMD_KA_LA = "%Y年%-m月%-d日"
     YMD_HM_KA_LA = "%Y年%-m月%-d日 %-H時%-M分"
     YMD_HMSU_S = "%Y-%m-%d %H:%M:%S.%6N "
+
+    HYPHEN_SPACE = " -"
   end
 end

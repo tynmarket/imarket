@@ -6,33 +6,20 @@ module.exports = function(api) {
 
   return {
     presets: [
-      isTestEnv && [
-        require('@babel/preset-env').default,
-        {
-          targets: {
-            node: 'current',
-          },
+      ["@babel/preset-env", {
+        targets: {
+          ie: "11"
         },
-      ],
-      (isProductionEnv || isDevelopmentEnv) && [
-        require('@babel/preset-env').default,
-        {
-          targets: {
-            ie: "11",
-          },
-          useBuiltIns: 'usage',
-          corejs: 3,
-        },
-      ],
-      [
-        require('@babel/preset-react').default,
-        {
-          development: isDevelopmentEnv || isTestEnv,
-          useBuiltIns: true,
-        },
-      ],
-    ].filter(Boolean),
+        useBuiltIns: 'usage',
+        corejs: 3,
+      }],
+      ['@babel/preset-typescript', {
+        isTSX: true,
+        allExtensions: true
+      }],
+      ["@babel/preset-react"],
+    ],
     plugins: [
-    ].filter(Boolean),
+    ],
   };
 };
