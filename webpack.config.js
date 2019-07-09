@@ -135,30 +135,13 @@ module.exports = (env, {mode}) => {
           sideEffects: true,
         },
         {
-          test: /\.(js|mjs)$/,
-          exclude: /@babel(?:\/|\\{1,2})runtime/,
-          use: [
-            {
-              loader: 'babel-loader',
-              options: {
-                presets: [['@babel/preset-env', { modules: false }]], // 外すとエラー
-                cacheDirectory: true,
-                cacheCompression: isProductionEnv,
-                compact: false,
-              },
-            },
-          ],
-        },
-        {
           test: /\.(js|jsx|mjs)?(\.erb)?$/,
           exclude: /node_modules/,
           use: [
             {
               loader: 'babel-loader',
               options: {
-                cacheDirectory: true,
-                cacheCompression: isProductionEnv,
-                compact: isProductionEnv,
+                presets: ['@babel/preset-env'],
               },
             },
           ],
