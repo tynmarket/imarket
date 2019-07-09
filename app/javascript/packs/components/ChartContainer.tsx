@@ -1,4 +1,7 @@
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
 import Chart from './Chart';
+import { Fragment } from 'react';
 import { Options } from 'highcharts';
 import React from 'react';
 import { useState } from 'react';
@@ -19,9 +22,9 @@ const ChartContainer: React.FC<Props> = ({
   const id = `${indices}-${period}`;
 
   return (
-    <>
-      <h5 className="chart-header">{children}</h5>
-      <div className="col-7 per-container">
+    <Fragment>
+      <h5 css={header}>{children}</h5>
+      <div className="col-7" css={container}>
         <Chart idStr={id} config={config} max={max} />
       </div>
       <div className="operator-container">
@@ -35,7 +38,7 @@ const ChartContainer: React.FC<Props> = ({
           {selectOptions(indices)}
         </select>
       </div>
-    </>
+    </Fragment>
   );
 };
 
@@ -58,5 +61,28 @@ function maxValue(e: React.ChangeEvent<HTMLSelectElement>): number | null {
   const val = select.options[select.selectedIndex].value; // IE 11
   return val ? parseInt(val) : null;
 }
+
+const header = css`
+  margin-top: 20px;
+`;
+
+const container = css`
+  box-sizing: border-box;
+  height: 350px;
+  margin-bottom: 20px;
+  padding: 20px 10px 15px 10px;
+  border: 1px solid #ddd;
+  background: #fff;
+  background: linear-gradient(#f6f6f6 0, #fff 50px);
+  background: -o-linear-gradient(#f6f6f6 0, #fff 50px);
+  background: -ms-linear-gradient(#f6f6f6 0, #fff 50px);
+  background: -moz-linear-gradient(#f6f6f6 0, #fff 50px);
+  background: -webkit-linear-gradient(#f6f6f6 0, #fff 50px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  -o-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  -ms-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+`;
 
 export default ChartContainer;
