@@ -33,12 +33,10 @@ const Chart: React.FC<Props> = ({ idStr, config, max }): JSX.Element => {
 };
 
 const style = css`
-  ${media.mobile} {
-    width: 100%;
-    height: 100%;
-    font-size: 14px;
-    line-height: 1.2em;
-  }
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+  line-height: 1.2em;
 `;
 
 export default Chart;
