@@ -4,6 +4,7 @@ import Chart from './Chart';
 import { Fragment } from 'react';
 import { Options } from 'highcharts';
 import React from 'react';
+import { media } from '../styles/variables';
 import { useState } from 'react';
 
 interface Props {
@@ -27,13 +28,14 @@ const ChartContainer: React.FC<Props> = ({
       <div className="col-7" css={container}>
         <Chart idStr={id} config={config} max={max} />
       </div>
-      <div className="operator-container">
+      <div css={operator}>
         <div>{indices.toUpperCase()}の最大値</div>
         <select
           onChange={(e): void => {
             setMax(maxValue(e));
           }}
-          className="select-per form-control"
+          className="form-control"
+          css={selectMax}
         >
           {selectOptions(indices)}
         </select>
@@ -68,21 +70,29 @@ const header = css`
 
 const container = css`
   box-sizing: border-box;
-  height: 350px;
+  height: 400px;
   margin-bottom: 20px;
   padding: 20px 10px 15px 10px;
   border: 1px solid #ddd;
   background: #fff;
-  background: linear-gradient(#f6f6f6 0, #fff 50px);
-  background: -o-linear-gradient(#f6f6f6 0, #fff 50px);
-  background: -ms-linear-gradient(#f6f6f6 0, #fff 50px);
-  background: -moz-linear-gradient(#f6f6f6 0, #fff 50px);
-  background: -webkit-linear-gradient(#f6f6f6 0, #fff 50px);
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
   -o-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   -ms-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+
+  ${media.mobile} {
+    height: 350px;
+  }
+`;
+
+const operator = css`
+  margin-left: 15px;
+  float: left;
+`;
+
+const selectMax = css`
+  margin-top: 5px;
 `;
 
 export default ChartContainer;
