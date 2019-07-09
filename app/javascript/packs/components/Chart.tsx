@@ -3,7 +3,6 @@ import { css, jsx } from '@emotion/core';
 import Highcharts from 'highcharts';
 import { Options } from 'highcharts';
 import React from 'react';
-import { media } from '../styles/variables';
 import { useState } from 'react';
 
 interface Props {
