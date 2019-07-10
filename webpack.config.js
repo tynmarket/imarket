@@ -158,7 +158,7 @@ module.exports = (env, { mode }) => {
     ],
   };
 
-  if (env.analyze) {
+  if (env && env.analyze) {
     const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
     config.plugins.push(new BundleAnalyzerPlugin());
 
