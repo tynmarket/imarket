@@ -45,7 +45,7 @@
     "webpack-dev-server": "^3.2.0"
   },
   "scripts": {
-    "analyze": "webpack-dev-server -d --env.analyze",
+    "analyze": "rm -rf public/packs && NODE_ENV=production webpack --mode=production --env.analyze",
     "build": "rm -rf public/packs && NODE_ENV=production webpack --mode=production",
     "check-all": "(yarn lint || true) && yarn tsc",
     "lint": "eslint --fix app/javascript/packs/** --ext .js,.jsx,.ts,.tsx",
