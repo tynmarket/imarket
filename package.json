@@ -33,7 +33,6 @@
     "typescript": "^3.5.2",
     "webpack": "^4.29.5",
     "webpack-assets-manifest": "^3.1.1",
-    "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.2.3"
   },
   "devDependencies": {
@@ -42,14 +41,16 @@
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
     "prettier": "^1.16.4",
+    "webpack-bundle-analyzer": "^3.3.2",
     "webpack-dev-server": "^3.2.0"
   },
   "scripts": {
+    "analyze": "webpack-dev-server -d --env.analyze",
     "build": "rm -rf public/packs && NODE_ENV=production webpack --mode=production",
-    "tsc": "(tsc || true) && rm -rf build",
+    "check-all": "(yarn lint || true) && yarn tsc",
     "lint": "eslint --fix app/javascript/packs/** --ext .js,.jsx,.ts,.tsx",
     "lint-config": "eslint --fix webpack.config.js babel.config.js",
-    "check-all": "(yarn lint || true) && yarn tsc",
-    "serve": "webpack-dev-server -d"
+    "serve": "webpack-dev-server -d",
+    "tsc": "(tsc || true) && rm -rf build"
   }
 }

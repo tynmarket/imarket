@@ -8,11 +8,10 @@ const WebpackAssetsManifest = require('webpack-assets-manifest');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-//const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = (env, { mode }) => {
-  isDevelopmentEnv = mode === 'development';
-  isProductionEnv = mode === 'production';
+  const isDevelopmentEnv = mode === 'development';
+  const isProductionEnv = mode === 'production';
 
   const devConfig = {
     cache: true,
@@ -156,9 +155,14 @@ module.exports = (env, { mode }) => {
         publicPath: true,
       }),
       new OptimizeCSSAssetsPlugin(),
-      //new BundleAnalyzerPlugin(),
     ],
   };
+
+  if (env.analyze) {
+    const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+    config.plugins.push(new BundleAnalyzerPlugin());
+
+  }
 
   if (isProductionEnv) {
     return { ...config, ...prodConfig };
