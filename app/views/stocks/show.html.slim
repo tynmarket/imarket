@@ -1,5 +1,7 @@
 - set_meta_tags canonical: "#{stock_url(@stock, protocol: :http)}" if stocks_search? && @stock
 
+= javascript_pack_tag "application", defer: true
+
 h4.display-inline.margin-right-10
   span#code = @stock.code
   | &nbsp;
