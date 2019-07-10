@@ -7,7 +7,7 @@ function trackEvent(selector, action, label) {
   }
 
   for (var i = 0; i < targets.length; i++) {
-    target[i].addEventListener('click', function() {
+    targets[i].addEventListener('click', function() {
       ga('send', 'event', 'click', action, label, null, {nonInteraction: true});
     });
   }
