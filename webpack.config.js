@@ -10,7 +10,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 //const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
-module.exports = (env, {mode}) => {
+module.exports = (env, { mode }) => {
   isDevelopmentEnv = mode === 'development';
   isProductionEnv = mode === 'production';
 
@@ -52,8 +52,8 @@ module.exports = (env, {mode}) => {
           parallel: true,
           cache: true,
           sourceMap: false, // TODO 引数
-        })
-      ]
+        }),
+      ],
     },
   };
 
@@ -164,5 +164,5 @@ module.exports = (env, {mode}) => {
     return { ...config, ...prodConfig };
   } else {
     return { ...config, ...devConfig };
-  };
+  }
 };
