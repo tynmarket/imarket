@@ -1,5 +1,3 @@
-// node_modules/.bin/webpack-dev-server  -d --config webpack.config.development.js
-
 const path = require('path');
 const webpack = require('webpack');
 
