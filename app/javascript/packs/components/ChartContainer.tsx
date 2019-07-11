@@ -87,12 +87,16 @@ const container = css`
 `;
 
 const operator = css`
-  margin-left: 15px;
-  float: left;
+  ${media.tablet} {
+    margin-left: 15px;
+    float: left;
+  }
 `;
 
 const selectMax = css`
-  margin-top: 5px;
+  ${media.tablet} {
+    margin-top: 5px;
+  }
 `;
 
 export default ChartContainer;
