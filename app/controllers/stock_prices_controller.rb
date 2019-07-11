@@ -18,29 +18,23 @@ class StockPricesController < ApplicationController
     @stock_prices = StockPrice
                     .daily
                     .where(code: code)
-                    .where(date: date_spider_start..today)
+                    .where(date: spider_start_date..today)
                     .pluck(:date, column)
 
     # TODO 2011/07/01固定で良い？
-    @dates_entire_period = TradingDayJp.between(date_spider_start, TradingDayJp.end_of_year(today))
+    @dates_entire_period = TradingDayJp.between(spider_start_date, TradingDayJp.end_of_year(today))
 
     @dates_current_year = dates_current_year(today)
+  end
 
-    @ticks_current_year = ticks_current_year
-
-    @ticks_entire_period = ticks_entire_period(today)
+  def spider_start_date
+    Date.new 2011, 1, 1
   end
 
   def dates_current_year(today)
     @dates_entire_period.select do |d|
       d >= TradingDayJp.beginning_of_year(today)
     end
-  end
-
-  def ticks_current_year
-    @dates_current_year.map.with_index do |date, i|
-      i if TradingDayJp.beginning_of_quarter?(date) || TradingDayJp.end_of_year?(date)
-    end.compact
   end
 
   def ticks_entire_period(today)

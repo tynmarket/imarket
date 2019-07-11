@@ -13,5 +13,4 @@
 //= require rails-ujs
 //= require jquery
 //= require bootstrap-sprockets
-//= require flot/jquery.flot
 //= require_tree .

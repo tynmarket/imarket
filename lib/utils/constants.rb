@@ -14,7 +14,5 @@ module Utils
     YMD_HMSU_S = "%Y-%m-%d %H:%M:%S.%6N "
 
     HYPHEN_SPACE = " -"
-
-    DATE_SPIDER_START = Date.new 2011, 7, 1
   end
 end

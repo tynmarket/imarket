@@ -1,14 +1,14 @@
 function trackEvent(selector, action, label) {
-  var target = document.querySelectorAll(selector);
+  var targets = document.querySelectorAll(selector);
 
-  if(!target) {
-    console.error("trackEvent: no event target");
+  if(!targets) {
+    console.error("trackEvent: no event targets");
     return;
   }
 
-  target.forEach(function(elm) {
-    elm.addEventListener('click', function() {
+  for (var i = 0; i < targets.length; i++) {
+    targets[i].addEventListener('click', function() {
       ga('send', 'event', 'click', action, label, null, {nonInteraction: true});
     });
-  });
+  }
 }

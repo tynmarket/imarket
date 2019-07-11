@@ -20,7 +20,7 @@ RUN apk upgrade --no-cache && \
     mkdir -p /app/log && \
     mkdir /run/nginx
 
-COPY Gemfile Gemfile.lock /app/
+COPY Gemfile Gemfile.lock yarn.lock /app/
 
 RUN apk add --update --no-cache --virtual=build-dependencies \
       build-base \
@@ -34,6 +34,7 @@ RUN apk add --update --no-cache --virtual=build-dependencies \
       zlib-dev && \
     gem install bundler && \
     bundle install -j4 --deployment --path /usr/local/bundle --without development test && \
+    yarn install --production && \
     curl -LO https://mackerel.io/file/agent/tgz/mackerel-agent-latest.tar.gz && \
     tar xvzf mackerel-agent-latest.tar.gz && \
     apk del build-dependencies
@@ -49,7 +50,9 @@ ARG rails_master_key
 ENV TZ Asia/Tokyo
 ENV RAILS_MASTER_KEY $rails_master_key
 
-RUN bundle exec rails assets:precompile RAILS_ENV=production
+RUN bundle exec rails assets:precompile RAILS_ENV=production && \
+    yarn build && \
+    rm -rf node_modules
 
 EXPOSE 80
 

@@ -8,7 +8,7 @@ describe "GET /stock_prices/:id/per.json" do
 
   before do
     Timecop.travel Date.new(2014, 8, 1)
-    create :stock_price, :daily, per: 9.0, date: Date.new(2011, 7, 1)
+    create :stock_price, :daily, per: 9.0, date: Date.new(2011, 1, 4)
     create :stock_price, :daily, per: 10.0, date: Date.new(2014, 1, 6)
     create :stock_price, :daily, per: 11.0, date: Date.new(2014, 1, 8)
 
@@ -17,15 +17,6 @@ describe "GET /stock_prices/:id/per.json" do
 
   context "current_year" do
     let(:json_data) { json["current_year"] }
-
-    it "ticks" do
-      expect(ticks.size).to eq 5
-      expect(x_label[ticks[0]]).to eq "2014-01-06"
-      expect(x_label[ticks[1]]).to eq "2014-04-01"
-      expect(x_label[ticks[2]]).to eq "2014-07-01"
-      expect(x_label[ticks[3]]).to eq "2014-10-01"
-      expect(x_label[ticks[4]]).to eq "2014-12-30"
-    end
 
     it "x_label" do
       expect(x_label.first).to eq "2014-01-06"
@@ -37,14 +28,14 @@ describe "GET /stock_prices/:id/per.json" do
 
       context "株価がある" do
         it "PERを出力する" do
-          expect(data[0]).to eq [0, 10.0]
-          expect(data[2]).to eq [2, 11.0]
+          expect(data[0]).to eq 10.0
+          expect(data[2]).to eq 11.0
         end
       end
 
       context "株価がない" do
         it "PERを出力しない" do
-          expect(data[1]).to eq [1, nil]
+          expect(data[1]).to eq nil
         end
       end
     end
@@ -53,24 +44,15 @@ describe "GET /stock_prices/:id/per.json" do
   context "entire_period" do
     let(:json_data) { json["entire_period"] }
 
-    it "ticks" do
-      expect(ticks.size).to eq 5
-      expect(x_label[ticks[0]]).to eq "2011-07-01"
-      expect(x_label[ticks[1]]).to eq "2012-01-04"
-      expect(x_label[ticks[2]]).to eq "2013-01-04"
-      expect(x_label[ticks[3]]).to eq "2014-01-06"
-      expect(x_label[ticks[4]]).to eq "2014-12-30"
-    end
-
     it "x_label" do
-      expect(x_label.first).to eq "2011-07-01"
+      expect(x_label.first).to eq "2011-01-04"
       expect(x_label.last).to eq "2014-12-30"
     end
 
     context "data" do
       it { expect(data.size).to eq x_label.size }
 
-      it { expect(data[0]).to eq [0, 9.0] }
+      it { expect(data[0]).to eq 9.0 }
     end
   end
 end
@@ -83,7 +65,7 @@ describe "GET /stock_prices/:id/pbr.json" do
 
   before do
     Timecop.travel Date.new(2014, 8, 1)
-    create :stock_price, :daily, pbr: 9.0, date: Date.new(2011, 7, 1)
+    create :stock_price, :daily, pbr: 9.0, date: Date.new(2011, 1, 4)
     create :stock_price, :daily, pbr: 10.0, date: Date.new(2014, 1, 6)
     create :stock_price, :daily, pbr: 11.0, date: Date.new(2014, 1, 8)
 
@@ -92,15 +74,6 @@ describe "GET /stock_prices/:id/pbr.json" do
 
   context "current_year" do
     let(:json_data) { json["current_year"] }
-
-    it "ticks" do
-      expect(ticks.size).to eq 5
-      expect(x_label[ticks[0]]).to eq "2014-01-06"
-      expect(x_label[ticks[1]]).to eq "2014-04-01"
-      expect(x_label[ticks[2]]).to eq "2014-07-01"
-      expect(x_label[ticks[3]]).to eq "2014-10-01"
-      expect(x_label[ticks[4]]).to eq "2014-12-30"
-    end
 
     it "x_label" do
       expect(x_label.first).to eq "2014-01-06"
@@ -112,14 +85,14 @@ describe "GET /stock_prices/:id/pbr.json" do
 
       context "株価がある" do
         it "PERを出力する" do
-          expect(data[0]).to eq [0, 10.0]
-          expect(data[2]).to eq [2, 11.0]
+          expect(data[0]).to eq 10.0
+          expect(data[2]).to eq 11.0
         end
       end
 
       context "株価がない" do
         it "PERを出力しない" do
-          expect(data[1]).to eq [1, nil]
+          expect(data[1]).to eq nil
         end
       end
     end
@@ -128,24 +101,15 @@ describe "GET /stock_prices/:id/pbr.json" do
   context "entire_period" do
     let(:json_data) { json["entire_period"] }
 
-    it "ticks" do
-      expect(ticks.size).to eq 5
-      expect(x_label[ticks[0]]).to eq "2011-07-01"
-      expect(x_label[ticks[1]]).to eq "2012-01-04"
-      expect(x_label[ticks[2]]).to eq "2013-01-04"
-      expect(x_label[ticks[3]]).to eq "2014-01-06"
-      expect(x_label[ticks[4]]).to eq "2014-12-30"
-    end
-
     it "x_label" do
-      expect(x_label.first).to eq "2011-07-01"
+      expect(x_label.first).to eq "2011-01-04"
       expect(x_label.last).to eq "2014-12-30"
     end
 
     context "data" do
       it { expect(data.size).to eq x_label.size }
 
-      it { expect(data[0]).to eq [0, 9.0] }
+      it { expect(data[0]).to eq 9.0 }
     end
   end
 end
