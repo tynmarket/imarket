@@ -44,15 +44,20 @@ jobs:
           paths:
             - ~/.cache/yarn
 
-      # Run tsc
+      # Check type
       - run:
-          name: yarn tsc
-          command: yarn tsc
+          name: npx tsc
+          command: npx tsc
 
       # Run eslint
       - run:
           name: yarn lint
           command: yarn lint
+
+      # Build assets
+      - run:
+          name: yarn build
+          command: yarn build
 
       - run:
           name: Wait for DB
