@@ -43,7 +43,7 @@ module StocksHelper
 
   def calc_change_in_forecast?(forecast, summaries)
     prev_summary = find_prev_summary(forecast, summaries)
-    forecast_summary = summaries.first.disclosure_pdf.results_forecast_q4
+    forecast_summary = summaries.first&.disclosure_pdf&.results_forecast_q4
 
     # 前年比がない
     !forecast.change_in_forecast_net_sales &&
