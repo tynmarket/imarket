@@ -1,4 +1,91 @@
 html
   body style=("margin: 0;")
-    div Hello from Google Cloud Run!
-    iframe#inlineFrameExample height="100%" src="http://localhost/pdf/4368.pdf" title=("Inline Frame Example") width="100%"
+    .navbar.navbar-default
+      .container
+        .navbar-header
+          a.navbar-brand href="/"  iMarket（適時開示ネット）
+    scss:
+      body {
+          font-size: 12px;
+      }
+      body {
+          font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+          font-size: 14px;
+          line-height: 1.428571429;
+          color: #333333;
+          background-color: #fff;
+      }
+      iframe {
+        border: 0;
+      }
+      @media (min-width: 768px) {
+      .navbar {
+          border-radius: 4px;
+      }
+      .navbar {
+          position: relative;
+          min-height: 50px;
+          border: 1px solid transparent;
+          border-bottom: 0;
+      }
+      }
+      .navbar {
+          min-height: 40px;
+          z-index: 1;
+      }
+      .navbar-default {
+          background-color: #f8f8f8;
+          border-color: #e7e7e7;
+      }
+      @media all{
+      a{background-color:transparent;}
+      a:active,a:hover{outline:0;}
+      @media print{
+      *,*:before,*:after{color:#000!important;text-shadow:none!important;background:transparent!important;box-shadow:none!important;}
+      a,a:visited{text-decoration:underline;}
+      a[href]:after{content:" (" attr(href) ")";}
+      }
+      *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+      *:before,*:after{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+      a{color:#337ab7;text-decoration:none;}
+      a:hover,a:focus{color:#23527c;text-decoration:underline;}
+      a:focus{outline:5px auto -webkit-focus-ring-color;outline-offset:-2px;}
+      .container{padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto;}
+      .container:before,.container:after{display:table;content:" ";}
+      .container:after{clear:both;}
+      @media (min-width: 768px){
+      .container{width:750px;}
+      }
+      @media (min-width: 992px){
+      .container{width:970px;}
+      }
+      @media (min-width: 1200px){
+      .container{width:1170px;}
+      }
+      .navbar-header:before,.navbar-header:after{display:table;content:" ";}
+      .navbar-header:after{clear:both;}
+      @media (min-width: 768px){
+      .navbar-header{float:left;}
+      }
+      .container>.navbar-header{margin-right:-15px;margin-left:-15px;}
+      @media (min-width: 768px){
+      .container>.navbar-header{margin-right:0;margin-left:0;}
+      }
+      .navbar-brand{float:left;height:50px;padding:15px 15px;font-size:18px;line-height:20px;}
+      .navbar-brand:hover,.navbar-brand:focus{text-decoration:none;}
+      @media (min-width: 768px){
+      .navbar>.container .navbar-brand{margin-left:-15px;}
+      }
+      .navbar-default .navbar-brand{color:#777;}
+      .navbar-default .navbar-brand:hover,.navbar-default .navbar-brand:focus{color:#5e5e5e;background-color:transparent;}
+      .navbar-default .navbar-brand{color:#595857;}
+      .navbar-brand{padding-top:10px;padding-bottom:10px;font-weight:200;font-size:20px;height:40px;}
+      @media (max-width: 1300px){
+      .container{width:900px;padding-left:0px;padding-right:0px;}
+      }
+      @media (min-width: 1300px){
+      .container{width:1000px;padding-left:0px;padding-right:0px;}
+      }
+      }
+
+    iframe#inlineFrameExample height="100%" src=("#{@path}.pdf") title=("Inline Frame Example") width="100%"
