@@ -3,21 +3,13 @@ html
     meta[charset="utf-8"]
     meta[http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"]
     meta name="viewport" content="width=device-width, initial-scale=1"
-  body style=("margin: 0;")
-    .navbar.navbar-default
-      .container
-        .navbar-header
-          a.navbar-brand href="/"  iMarket（適時開示ネット）
     scss:
       * {
         box-sizing: border-box;
       }
       body {
-        font-size: 12px;
-      }
-      body {
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        font-size: 14px;
+        font-size: 12px;
         line-height: 1.428571429;
         color: #333333;
         background-color: #fff;
@@ -41,7 +33,33 @@ html
       .navbar-default .navbar-brand {
         color: #595857;
       }
+      .navbar-header {
+        margin-left: 0px;
+        margin-right: 0px;
+       }
+     .navbar-header:before,
+      .navbar-header:after {
+        display: table;
+        content: " ";
+      }
+      *:before, *:after {
+        box-sizing: border-box;
+      }
+      .navbar-header:after {
+        clear: both;
+      }
+      .navbar-header:before,
+      .navbar-header:after {
+        display: table;
+        content: " ";
+      }
+      *:before, *:after {
+        box-sizing: border-box;
+      }
       @media (max-width: 768px) {
+        body {
+          font-size: 14px;
+        }
         .navbar {
           min-height: 50px;
         }
@@ -52,25 +70,6 @@ html
           font-size: 18px;
           line-height: 20px;
         }
-        .navbar-header:before,
-        .navbar-header:after {
-          display: table;
-          content: " ";
-        }
-        *:before, *:after {
-          box-sizing: border-box;
-        }
-        .navbar-header:after {
-          clear: both;
-        }
-        .navbar-header:before,
-        .navbar-header:after {
-          display: table;
-          content: " ";
-        }
-        *:before, *:after {
-          box-sizing: border-box;
-        }
       }
       @media (min-width: 769px) {
         .container {
@@ -79,6 +78,10 @@ html
           padding-right: 0px;
           margin-right: auto;
           margin-left: auto;
+          height: 40px; // 追加
+        }
+        .navbar-header {
+          float: left;
         }
         .navbar-brand {
           font-weight: 200;
@@ -88,6 +91,61 @@ html
           padding: 10px 15px;
           line-height: 20px;
           margin-left: -15px;
+        }
+        .navbar-collapse {
+          width: auto;
+          border-top: 0;
+          box-shadow: none;
+          padding-right: 15px;
+          padding-left: 15px;
+        }
+        .navbar-collapse.collapse {
+          display: block !important;
+          height: auto !important;
+          padding-bottom: 0;
+          overflow: visible !important;
+        }
+        .container > .navbar-collapse {
+          margin-right: 0;
+          margin-left: 0;
+        }
+        .navbar-collapse:before,
+        .navbar-collapse:after {
+          display: table;
+          content: " ";
+        }
+        .navbar-nav.navbar-right:last-child {
+          margin-right: 0px;
+        }
+        .navbar-right {
+          float: right !important;
+        }
+        .navbar-nav {
+          margin: 0;
+        }
+        .nav {
+          padding-left: 0;
+          list-style: none;
+        }
+        .nav:before, .nav:after {
+          display: table;
+          content: " ";
+        }
+        .navbar-nav > li {
+          float: left;
+        }
+        .nav > li {
+          position: relative;
+          display: block;
+        }
+        .navbar-nav > li > a {
+          color: #595857;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          line-height: 20px;
+          position: relative;
+          display: block;
+          padding: 10px 15px;
         }
       }
       @media (min-width: 992px) {
@@ -110,5 +168,15 @@ html
           width: 1000px;
         }
       }
+
+  body style=("margin: 0;")
+    .navbar.navbar-default
+      .container
+        .navbar-header
+          a.navbar-brand href="/"  iMarket（適時開示ネット）
+        .collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            li
+              a href=("/stocks/#{@code}") 決算短信
 
     iframe#inlineFrameExample height="100%" src=("#{@path}.pdf") title=("Inline Frame Example") width="100%"
