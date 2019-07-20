@@ -13,6 +13,7 @@ html
         line-height: 1.428571429;
         color: #333333;
         background-color: #fff;
+        margin: 0;
       }
       a {
         text-decoration: none;
@@ -37,7 +38,7 @@ html
         margin-left: 0px;
         margin-right: 0px;
        }
-     .navbar-header:before,
+      .navbar-header:before,
       .navbar-header:after {
         display: table;
         content: " ";
@@ -56,9 +57,35 @@ html
       *:before, *:after {
         box-sizing: border-box;
       }
+      .navbar-right {
+        float: right !important;
+      }
+      @media (min-width: 992px) {
+        .container {
+          width: 970px;
+        }
+      }
+      @media (min-width: 1200px) {
+        .container {
+          width: 1170px;
+        }
+      }
+      @media (max-width: 1300px) {
+        .container{
+          width: 900px;
+        }
+      }
+      @media (min-width: 1300px) {
+        .container{
+          width: 1000px;
+        }
+      }
       @media (max-width: 768px) {
         body {
           font-size: 14px;
+        }
+        .container {
+          width: unset;
         }
         .navbar {
           min-height: 50px;
@@ -70,10 +97,21 @@ html
           font-size: 18px;
           line-height: 20px;
         }
+        .navbar-collapse {
+          display: none;
+        }
+        .navbar-right {
+          color: #595857;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          line-height: 20px;
+          position: relative;
+          display: block;
+          padding: 15px 15px;
+        }
       }
       @media (min-width: 769px) {
         .container {
-          width: 750px;
           padding-left: 0px;
           padding-right: 0px;
           margin-right: auto;
@@ -117,9 +155,6 @@ html
         .navbar-nav.navbar-right:last-child {
           margin-right: 0px;
         }
-        .navbar-right {
-          float: right !important;
-        }
         .navbar-nav {
           margin: 0;
         }
@@ -146,37 +181,22 @@ html
           position: relative;
           display: block;
           padding: 10px 15px;
+          font-size: 16px;
         }
-      }
-      @media (min-width: 992px) {
-        .container {
-          width: 970px;
-        }
-      }
-      @media (min-width: 1200px) {
-        .container {
-          width: 1170px;
-        }
-      }
-      @media (max-width: 1300px) {
-        .container{
-          width: 900px;
-        }
-      }
-      @media (min-width: 1300px) {
-        .container{
-          width: 1000px;
+        a.navbar-right {
+          display: none;
         }
       }
 
-  body style=("margin: 0;")
+  body
     .navbar.navbar-default
       .container
         .navbar-header
           a.navbar-brand href="/"  iMarket（適時開示ネット）
+          a.navbar-right href=("/stocks/#{@code}") 決算短信
         .collapse.navbar-collapse
           ul.nav.navbar-nav.navbar-right
             li
               a href=("/stocks/#{@code}") 決算短信
 
-    iframe#inlineFrameExample height="100%" src=("#{@path}.pdf") title=("Inline Frame Example") width="100%"
+    iframe width="100%" height="100%" src=("#{@path}.pdf")
