@@ -4,7 +4,7 @@ module ApplicationHelper
 
   def release_notes
     <<~EOS.html_safe
-      （6/8）融資・貸株と逆日歩のリンク切れを修正しました
+      （7/26）スマホ画面で初期表示時に何も表示されないのを修正しました
     EOS
   end
 
