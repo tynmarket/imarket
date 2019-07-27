@@ -4,3 +4,8 @@ Disallow: /disclosures/2016*
 Disallow: /disclosures/2015*
 Disallow: /disclosures/2014*
 Disallow: /disclosures/2013*
+Disallow: /pdf/2017*
+Disallow: /pdf/2016*
+Disallow: /pdf/2015*
+Disallow: /pdf/2014*
+Disallow: /pdf/2013*
