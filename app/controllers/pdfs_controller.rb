@@ -5,9 +5,7 @@ class PdfsController < ApplicationController
     path = params[:path]
     pdf = path&.split("/")&.last
     @pdf = "#{pdf}.pdf"
-    @disclosure = Disclosure.find_by(pdf: @pdf)
-
-    return unless @disclosure
+    @disclosure = Disclosure.find_by!(pdf: @pdf)
 
     @code = @disclosure.code
     @title = title
