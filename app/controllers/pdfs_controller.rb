@@ -5,7 +5,17 @@ class PdfsController < ApplicationController
     path = params[:path]
     pdf = path&.split("/")&.last
     @pdf = "#{pdf}.pdf"
-    @code = Disclosure.find_by(pdf: @pdf)&.code
+    @disclosure = Disclosure.find_by(pdf: @pdf)
+
+    return unless @disclosure
+
+    @code = @disclosure.code
+    @title = title
   end
 
+  private
+
+  def title
+    "#{@disclosure.name}の#{@disclosure.title} | iMarket（適時開示ネット）"
+  end
 end
