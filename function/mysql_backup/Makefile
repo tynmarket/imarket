@@ -1,6 +1,6 @@
 FUNCTION = mysql-backup
 TOPIC = mysql-backup
-DISK = mysql
+DISK = mysql-1
 
 all: deploy clean
 
