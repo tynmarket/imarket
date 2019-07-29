@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_08_004830) do
+ActiveRecord::Schema.define(version: 2019_07_29_105209) do
 
   create_table "cash_flows", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.integer "disclosure_id", null: false
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2019_06_08_004830) do
     t.integer "quarter", limit: 1, null: false
     t.integer "net_cash_provided_by_used_in_operating_activities"
     t.integer "net_cash_provided_by_used_in_investment_activities"
+    t.integer "fcf"
     t.integer "net_cash_provided_by_used_in_financing_activities"
     t.integer "net_increase_decrease_in_cash_and_cash_equivalents"
     t.integer "cash_and_cash_equivalents"
