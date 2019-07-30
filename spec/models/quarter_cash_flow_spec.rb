@@ -122,6 +122,26 @@ describe QuarterCashFlow do
     end
   end
 
+  describe "#fcf" do
+    context "2Q・前期1Q" do
+      let(:cash_flow) { CashFlow.new(
+        year: 2019,
+        month: 3,
+        quarter: 2,
+        fcf: 100
+      ) }
+      let(:prev_quarter_cash_flow) { CashFlow.new(
+        year: 2019,
+        month: 3,
+        quarter: 1,
+        fcf: 90
+      ) }
+      let(:quarter_cash_flow) { QuarterCashFlow.new cash_flow, prev_quarter_cash_flow }
+
+      it { expect(quarter_cash_flow.fcf).to eq(10) }
+    end
+  end
+
   describe "#financing_activities" do
     context "2Q・前期1Q" do
       let(:cash_flow) { CashFlow.new(
