@@ -4,7 +4,7 @@ module ApplicationHelper
 
   def release_notes
     <<~EOS.html_safe
-      （7/31）キャッシュフローにフリーキャッシュフローを表示するようにしました
+      （8/1）キャッシュフローにフリーキャッシュフローを表示するようにしました
     EOS
   end
 
