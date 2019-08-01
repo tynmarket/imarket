@@ -36,6 +36,7 @@ end
 
 group :development do
   gem 'better_errors'
+  gem 'foreman'
   gem 'rack-proxy'
   gem 'seed-fu'
   gem 'spring'
