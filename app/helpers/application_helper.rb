@@ -64,7 +64,7 @@ module ApplicationHelper
   end
 
   def link_to_taiho(model, full = false)
-    "<a class=#{link_class_name('taiho', full)} href='https://maonline.jp/pro/shareholding_reports?query%5Bisname_or_issyokencode_or_company_iscode_start%5D=#{model.code}' target='_blank'>\
+    "<a class=#{link_class_name('taiho', full)} href='https://maonline.jp/db/shareholding_reports?query%5Bisname_or_issyokencode_or_company_iscode_start%5D=#{model.code}' target='_blank'>\
     <span>#{full ? '大量保有' : '大'}</span></a>".html_safe
   end
 
