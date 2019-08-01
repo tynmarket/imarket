@@ -165,22 +165,22 @@ ul.nav.nav-tabs.main-content-nav-tabs
   #menu-cashflow.tab-pane class=activate_stock_tab("menu-cashflow")
     - unless @cash_flows_only_q4
       .table-title
-      .pull-right
-        .term_all
-          - if term_all?(@term)
-            = link_to "今期 〜 過去3期", stock_path(@stock, tab: "menu-cashflow")
-            = " / 全て"
-          - else
-            = "今期 〜 過去3期 / "
-            = link_to "全て", stock_path(@stock, term: "all", tab: "menu-cashflow")
-      .term-annual
-        span.list_type
-          - if term_annual?
-            = link_to "累計", stock_path(@stock, tab: "menu-cashflow")
-            = " / 通期"
-          - else
-            = "累計 / "
-            = link_to "通期", stock_path(@stock, term: "annual", tab: "menu-cashflow")
+        .pull-right
+          .term_all
+            - if term_all?(@term)
+              = link_to "今期 〜 過去3期", stock_path(@stock, tab: "menu-cashflow")
+              = " / 全て"
+            - else
+              = "今期 〜 過去3期 / "
+              = link_to "全て", stock_path(@stock, term: "all", tab: "menu-cashflow")
+        .term-annual
+          span.list_type
+            - if term_annual?
+              = link_to "累計", stock_path(@stock, tab: "menu-cashflow")
+              = " / 通期"
+            - else
+              = "累計 / "
+              = link_to "通期", stock_path(@stock, term: "annual", tab: "menu-cashflow")
     table.table.table-cashflow.table-striped.table-bordered.table-condensed
       thead
         tr
