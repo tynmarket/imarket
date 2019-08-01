@@ -259,7 +259,7 @@ ul.nav.nav-tabs.main-content-nav-tabs
           - @quarter_cash_flows.each_with_index do |quarter_cash_flow, i|
             - if show_financial_value?(quarter_cash_flow, @last_year)
               tr
-                td.text-center = quarter_cash_flow.accounting_period_once(i > 0 ? @quarter_cash_flows[i - 1] : @quarter_results_forecast)
+                td.text-center = quarter_cash_flow.accounting_period_once(@quarter_cash_flows[i - 1])
                 td.text-center = link_to_pdf(quarter_cash_flow.cash_flow.disclosure_pdf, quarter_cash_flow.quarter_name)
                 td.text-right = red_delimiter(quarter_cash_flow.operating_activities)
                 td.text-right = red_delimiter(quarter_cash_flow.investment_activities)
