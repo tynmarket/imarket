@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_29_105209) do
+ActiveRecord::Schema.define(version: 2019_08_02_104501) do
+
+  create_table "authentications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "provider", null: false
+    t.string "uid", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["provider", "uid"], name: "index_authentications_on_provider_and_uid"
+  end
 
   create_table "cash_flows", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.integer "disclosure_id", null: false
@@ -161,6 +170,7 @@ ActiveRecord::Schema.define(version: 2019_07_29_105209) do
     t.bigint "shares"
     t.float "per"
     t.float "pbr"
+    t.float "market_cap_fcf_ratio"
     t.float "close_adjusted"
     t.integer "stock_id"
     t.datetime "created_at"
@@ -235,6 +245,15 @@ ActiveRecord::Schema.define(version: 2019_07_29_105209) do
     t.string "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "crypted_password"
+    t.string "salt"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end
