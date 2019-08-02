@@ -23,6 +23,7 @@ gem 'rubocop', require: false
 gem 'sass-rails', '~> 5.0'
 gem 'settingslogic'
 gem 'slim-rails'
+gem 'sorcery'
 gem 'trading_day_jp', github: 'tyn-iMarket/trading_day_jp'
 gem 'uglifier', '>= 1.3.0'
 
