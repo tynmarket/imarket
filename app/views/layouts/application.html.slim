@@ -28,6 +28,9 @@ html[lang="ja"]
         .navbar-header
           a.navbar-brand href="/"
             | iMarket（適時開示ネット）
+          .hide
+            = link_to 'Login with Google', auth_at_provider_path(:provider => :google)
+            = logged_in? ? "ログイン済み" : "未ログイン"
 
     / 検索
     #search.container class=@container_size
