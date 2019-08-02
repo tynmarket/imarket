@@ -170,7 +170,6 @@ ActiveRecord::Schema.define(version: 2019_08_02_104501) do
     t.bigint "shares"
     t.float "per"
     t.float "pbr"
-    t.float "market_cap_fcf_ratio"
     t.float "close_adjusted"
     t.integer "stock_id"
     t.datetime "created_at"
