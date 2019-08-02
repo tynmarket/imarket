@@ -5,7 +5,7 @@ ruby '2.5.3'
 
 gem 'active_model_serializers'
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'bootstrap-sass'
+gem 'bootstrap', '~> 4.3.1'
 gem 'browser'
 gem 'holiday_jp'
 gem 'jbuilder'
