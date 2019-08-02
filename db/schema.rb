@@ -249,8 +249,6 @@ ActiveRecord::Schema.define(version: 2019_08_02_104501) do
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "email", null: false
-    t.string "crypted_password"
-    t.string "salt"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
