@@ -25,26 +25,26 @@ html[lang="ja"]
 
   body id="#{controller_name}-#{@action_name || action_name}" class=controller_name
     .navbar.navbar-default
-      .container class=@container_size
+      .container
         .navbar-header
           a.navbar-brand href="/"
             | iMarket（適時開示ネット）
 
     / 検索
-    #search.container class=@container_size
+    #search.container
       form.search-form action="/stocks/search" role="search"
         .form-group
           input.btn.btn-default.search-submit.pull-right type="submit" value="検索"
           .search-input
             input.form-control name="query" placeholder="証券コード、企業名" type="text"
-      .btn-group.announce class=@container_size
+      .btn-group.announce
         = release_notes
     / コンテンツ
-    .container.main class=@container_size
+    .container.main
       = yield
 
     / フッター
-    footer.container.footer class=@container_size
+    footer.container.footer
       .disclaimer
         div ・動作確認はChromeで行っています。
         div ・データは数十秒〜数十分程度遅れて表示されます。
