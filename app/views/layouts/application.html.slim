@@ -23,21 +23,21 @@ html[lang="ja"]
       ga('send', 'pageview');
 
   body id="#{controller_name}-#{@action_name || action_name}" class=(controller_name + ' pc')
-    .navbar.navbar-default
+    header.navbar.navbar-expand-sm.navbar-light.bg-light
       .container
-        .navbar-header
-          a.navbar-brand href="/"
-            | iMarket（適時開示ネット）
+        a.navbar-brand href="/" iMarket（適時開示ネット）
 
-    / 検索
-    #search.container
-      form.navbar-form.navbar-left action="/stocks/search" role="search"
-        .form-group
-          input.form-control name="query" placeholder="証券コード、企業名" type="text"
-        | &nbsp;
-        button.btn.btn-default type="submit" 検索
-      .btn-group.announce
-        = release_notes
+    .container
+      .form-row.align-items-center.py-3
+        .col-auto
+          input.form-control.mr-2 type="search" placeholder="証券コード、企業名"
+        .col-auto
+          button.btn.btn-outline-primary type="submit"
+            | 検索
+        .col-xs-12
+          sapn
+            = release_notes
+
     / コンテンツ
     .container.main
       = yield
