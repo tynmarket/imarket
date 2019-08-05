@@ -29,6 +29,17 @@ html[lang="ja"]
         .navbar-header
           a.navbar-brand href="/"
             | iMarket（適時開示ネット）
+          button.navbar-toggle.collapsed aria-expanded="false" data-target="#header-menu" data-toggle="collapse" type="button"
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+
+        #header-menu.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li
+              a href="#"
+                | Link
 
     / 検索
     #search.container class=@container_size
