@@ -1,15 +1,11 @@
 / 開示日リスト
-.btn-toolbar
-  .btn-group
-    button.btn.btn-default.dropdown-toggle[type="button" data-toggle="dropdown"]
-      | 開示日&nbsp;
-      span.caret
-    ul.dropdown-menu
-      - today_to_prev_month.each do |date|
-        li
-          a class=date_color(date) href=disclosures_path(date) = date.to_s
-  .btn-group
-    a.btn.btn-default href=disclosures_path(@date) 更新
+.dropdown
+  button.btn.btn-outline-primary.dropdown-toggle data-flip="false" data-toggle="dropdown"
+    | 開示日
+  .dropdown-menu
+    - today_to_prev_month.each do |date|
+      a.dropdown-item class=date_color(date) href=disclosures_path(date)
+        = date.to_s
 
 - if @disclosures.blank?
   .pagination
