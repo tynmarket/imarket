@@ -28,10 +28,11 @@ html[lang="ja"]
         .navbar-header
           a.navbar-brand href="/"
             | iMarket（適時開示ネット）
-          - if logged_in?
-            = link_to "ログアウト", logout_path, method: :post
-          - else
-            = link_to "Login with Google", auth_at_provider_path(provider: :google)
+          .hide
+            - if logged_in?
+              = link_to "ログアウト", logout_path, method: :post
+            - else
+              = link_to "Login with Google", auth_at_provider_path(provider: :google)
 
     / 検索
     #search.container class=@container_size
