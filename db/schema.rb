@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_02_104501) do
+ActiveRecord::Schema.define(version: 2019_08_08_222239) do
 
   create_table "authentications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -57,6 +57,15 @@ ActiveRecord::Schema.define(version: 2019_08_02_104501) do
     t.index ["pdf"], name: "index_disclosures_pdf"
     t.index ["release_date", "category", "code"], name: "index_disclosures_release_date_category_code"
     t.index ["stock_id"], name: "index_disclosures_stock_id"
+  end
+
+  create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "stock_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stock_id"], name: "index_favorites_on_stock_id"
+    t.index ["user_id", "stock_id"], name: "index_favorites_on_user_id_and_stock_id", unique: true
   end
 
   create_table "latest_results_forecasts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
