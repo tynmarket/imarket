@@ -160,6 +160,7 @@ Rails.application.config.sorcery.configure do |config|
     end
   config.google.user_info_mapping = {:email => "email"}
   config.google.scope = "https://www.googleapis.com/auth/userinfo.email"
+  config.google.auth_url = "/o/oauth2/v2/auth"
   #
   # For Microsoft Graph, the key will be your App ID, and the secret will be your app password/public key.
   # The callback URL "can't contain a query string or invalid special characters"
