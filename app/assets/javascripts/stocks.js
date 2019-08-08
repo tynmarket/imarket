@@ -1,6 +1,8 @@
 $(function () {
   if (!document.getElementById('stocks-show')) { return };
 
+  $('[data-toggle="tooltip"]').tooltip();
+
   var label = 'stocks';
 
   // キャッシュフロー
