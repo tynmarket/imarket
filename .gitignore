@@ -32,3 +32,6 @@ pkg
 .env.yaml
 
 /public/packs
+
+# firebase
+.firebase
