@@ -25,3 +25,12 @@
   height: 40px;
   border-bottom: 2px solid #38a1db; // 露草色
 }
+
+.login {
+  padding-top: 10px;
+
+  .text {
+    margin-top: 1px;
+    font-size: $font-size-normal;
+  }
+}
