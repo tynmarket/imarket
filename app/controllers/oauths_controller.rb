@@ -10,16 +10,16 @@ class OauthsController < ApplicationController
     @user = login_from(provider)
 
     if @user
-      redirect_to root_path, notice: "Logged in from #{provider.titleize}!"
+      redirect_to root_path
     else
       begin
         @user = create_from(provider)
 
         reset_session # protect from session fixation attack
         auto_login(@user)
-        redirect_to "#{root_path}?conversion", notice: "Logged in from #{provider.titleize}!"
+        redirect_to "#{root_path}?conversion"
       rescue
-        redirect_to root_path, alert: "Failed to login from #{provider.titleize}!"
+        redirect_to "#{root_path}?login-failure"
       end
     end
   end
