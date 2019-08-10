@@ -38,8 +38,10 @@ $(function () {
       .done(toggleFav);
   }
 
+  // お気に入りツールチップ
   $('[data-toggle="tooltip"]').tooltip();
 
+  // お気に入り登録/解除
   $('#fav-on').click(addFav);
   $('#fav-off').click(deleteFav);
 
