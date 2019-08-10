@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     get "search", on: :collection
 
     # お気に入り
-    resources :favorites, only: [:create], shallow: true, module: :stocks
+    post :favorites, to: "favorites#create"
   end
 
   # お気に入り
