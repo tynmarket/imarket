@@ -1,4 +1,5 @@
 class Stock < ActiveRecord::Base
+  has_many :favorites
 
   MOJI_DELETE = /株式会社|（株）|・/ # 「株式会社」（株）・を削除
   SPACE = / |　/ # 半角・全角空白
