@@ -1,7 +1,47 @@
 $(function () {
   if (!document.getElementById('stocks-show')) { return };
 
+  function getStockId() {
+    return $('#stock-id').data('stock_id');
+  }
+
+  function getUrl() {
+    return '/stocks/' + getStockId() + '/favorites';
+  }
+
+  function getCsrfToken() {
+    return $('meta[name="csrf-token"]').attr('content');
+  }
+
+  function toggleFav() {
+    $('.js-fav').toggleClass('hide');
+  }
+
+  function addFav() {
+    var url = getUrl();
+    var token = getCsrfToken();
+    var data = {authenticity_token: token};
+
+    $.post(url, data)
+      .done(toggleFav);
+  }
+
+  function deleteFav() {
+    var url = getUrl();
+    var token = getCsrfToken();
+    var data = {
+      data: {authenticity_token: token},
+      type: 'DELETE',
+    };
+
+    $.ajax(url, data)
+      .done(toggleFav);
+  }
+
   $('[data-toggle="tooltip"]').tooltip();
+
+  $('#fav-on').click(addFav);
+  $('#fav-off').click(deleteFav);
 
   var label = 'stocks';
 

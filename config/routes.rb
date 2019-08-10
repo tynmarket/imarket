@@ -16,10 +16,11 @@ Rails.application.routes.draw do
 
     # お気に入り
     post :favorites, to: "favorites#create"
+    delete :favorites, to: "favorites#destroy"
   end
 
   # お気に入り
-  resources :favorites, only: [:index, :destroy]
+  resources :favorites, only: [:index]
 
   # 株価
   resources :stock_prices, only: [] do
