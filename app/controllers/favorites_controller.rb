@@ -2,6 +2,7 @@ class FavoritesController < ApplicationController
   before_action :require_login
 
   def index
+    @stocks = Stock.joins(:favorites).where(favorites: { user_id: current_user.id }).order(:code)
   end
 
   def show

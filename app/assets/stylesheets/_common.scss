@@ -73,6 +73,15 @@ div.overflow_hidden {
 .fav {
   width: 20px;
   height: 20px;
-  margin-left: 5px;
   cursor: pointer;
+}
+
+.stocks .fav {
+  margin-left: 5px;
+}
+
+.favorites .fav {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }

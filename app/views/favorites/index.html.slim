@@ -1,0 +1,28 @@
+.row
+  .col-6.center
+    - if @stocks.blank?
+      p.result 該当する銘柄がありません。
+      h5 style="margin-top:25px;"
+        span style="font-size:18px;" > ※
+    - else
+      p.result お気に入り一覧
+      br/
+      table.table.table-search.table-striped.table-bordered
+        thead
+          tr
+            th
+            th.text-center コード
+            th.text-center 銘柄名
+            th.text-center リンク
+        tbody
+          - @stocks.each do |stock|
+            tr
+              td
+                = render "shared/fav_icon", fav_on: true
+              td.text-center
+                a href=stock_path(stock) target="_blank"
+                  = stock.code
+              td.text-center
+                = stock.name
+              td.text-center
+                = link_to_other_services stock
