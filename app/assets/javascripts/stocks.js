@@ -6,7 +6,7 @@ $(function () {
   }
 
   function getUrl() {
-    return '/stocks/' + getStockId() + '/favorites';
+    return '/stocks/' + getStockId() + '/favorite';
   }
 
   function getCsrfToken() {
@@ -15,6 +15,14 @@ $(function () {
 
   function toggleFav() {
     $('.js-fav').toggleClass('hide');
+  }
+
+  function statusOk(callback) {
+    return function(data) {
+      if (data.status === 'ok') {
+        callback();
+      }
+    }
   }
 
   function addFav() {
@@ -38,8 +46,18 @@ $(function () {
       .done(toggleFav);
   }
 
+  function favoriteCheck() {
+    var url = getUrl();
+
+    $.get(url)
+      .done(statusOk(toggleFav));
+  }
+
   // お気に入りツールチップ
   $('[data-toggle="tooltip"]').tooltip();
+
+  // お気に入りチェック
+  favoriteCheck();
 
   // お気に入り登録/解除
   $('#fav-on').click(addFav);

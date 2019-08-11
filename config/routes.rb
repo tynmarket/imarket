@@ -15,8 +15,7 @@ Rails.application.routes.draw do
     get "search", on: :collection
 
     # お気に入り
-    post :favorites, to: "favorites#create"
-    delete :favorites, to: "favorites#destroy"
+    resource :favorite, only: [:show, :create, :destroy]
   end
 
   # お気に入り

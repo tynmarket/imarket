@@ -9,4 +9,8 @@ class User < ApplicationRecord
   def favorite(stock_id)
     favorites.find_by!(stock_id: stock_id)
   end
+
+  def favorite_exist?(stock_id)
+    favorites.find_by(stock_id: stock_id)
+  end
 end

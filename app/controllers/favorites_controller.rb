@@ -4,23 +4,21 @@ class FavoritesController < ApplicationController
   def index
   end
 
+  def show
+    favorite = current_user.favorite_exist?(params[:stock_id])
+
+    favorite ? render(json: {status: :ok}) : head(:ok)
+  end
+
   def create
-    stock = find_stock
-    Favorite.create!(stock_id: stock.id, user_id: current_user.id)
+    Favorite.create!(stock_id: params[:stock_id], user_id: current_user.id)
 
     head :ok
   end
 
   def destroy
-    stock = find_stock
-    current_user.favorite(stock.id).destroy!
+    current_user.favorite(params[:stock_id]).destroy!
 
     head :ok
-  end
-
-  private
-
-  def find_stock
-    Stock.find(params[:stock_id])
   end
 end
