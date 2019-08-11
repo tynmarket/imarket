@@ -26,15 +26,19 @@ $(function () {
   }
 
   function addFav() {
+    toggleFav();
+
     var url = getUrl();
     var token = getCsrfToken();
     var data = {authenticity_token: token};
 
     $.post(url, data)
-      .done(toggleFav);
+      .fail(toggleFav);
   }
 
   function deleteFav() {
+    toggleFav();
+
     var url = getUrl();
     var token = getCsrfToken();
     var data = {
@@ -43,7 +47,7 @@ $(function () {
     };
 
     $.ajax(url, data)
-      .done(toggleFav);
+      .fail(toggleFav);
   }
 
   function favoriteCheck() {
