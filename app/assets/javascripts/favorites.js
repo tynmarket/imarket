@@ -16,8 +16,13 @@ $(function () {
     return $('meta[name="csrf-token"]').attr('content');
   }
 
-  function toggleFav() {
-    $('.js-fav').toggleClass('hide');
+  function toggleFav(elm) {
+    var stock_id = getStockId(elm);
+
+    return function() {
+      var selector = '.js-fav-' + stock_id;
+      $(selector).toggleClass('hide');
+    }
   }
 
   function statusOk(callback) {
@@ -29,20 +34,22 @@ $(function () {
   }
 
   function addFav(e) {
-    toggleFav();
+    var elm = e.currentTarget;
+    toggleFav(elm)();
 
-    var url = getUrl(e.currentTarget);
+    var url = getUrl(elm);
     var token = getCsrfToken();
     var data = {authenticity_token: token};
 
     $.post(url, data)
-      .fail(toggleFav);
+      .fail(toggleFav(elm));
   }
 
   function deleteFav(e) {
-    toggleFav();
+    var elm = e.currentTarget;
+    toggleFav(elm)();
 
-    var url = getUrl(e.currentTarget);
+    var url = getUrl(elm);
     var token = getCsrfToken();
     var data = {
       data: {authenticity_token: token},
@@ -50,7 +57,7 @@ $(function () {
     };
 
     $.ajax(url, data)
-      .fail(toggleFav);
+      .fail(toggleFav(elm));
   }
 
   function favoriteCheck() {
@@ -58,7 +65,7 @@ $(function () {
     var url = getUrl(elm);
 
     $.get(url)
-      .done(statusOk(toggleFav));
+      .done(statusOk(toggleFav(elm)));
   }
 
   if (stocks) {
