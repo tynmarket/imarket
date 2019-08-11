@@ -2,14 +2,14 @@
 
 = javascript_pack_tag "application", defer: true
 
-h4#stock-id.display-inline.mr5 data-stock_id=@stock.id
+h4.display-inline.mr5
   span#code = @stock.code
   | &nbsp;
   = @stock.name
 
   / お気に入り
   - if logged_in?
-    = render "shared/fav_icon"
+    = render "shared/fav_icon", stock_id: @stock.id
   - else
     a href=session_path
       svg#fav-on.fav data-toggle="tooltip" data-placement="top" title="お気に入りに登録" viewbox=("0 0 24 24")

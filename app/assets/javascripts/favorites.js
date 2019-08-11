@@ -4,12 +4,12 @@ $(function () {
 
   if (!stocks && !favorites) { return };
 
-  function getStockId() {
-    return $('#stock-id').data('stock_id');
+  function getStockId(elm) {
+    return elm.getAttribute('data-stock_id');
   }
 
-  function getUrl() {
-    return '/stocks/' + getStockId() + '/favorite';
+  function getUrl(elm) {
+    return '/stocks/' + getStockId(elm) + '/favorite';
   }
 
   function getCsrfToken() {
@@ -28,10 +28,10 @@ $(function () {
     }
   }
 
-  function addFav() {
+  function addFav(e) {
     toggleFav();
 
-    var url = getUrl();
+    var url = getUrl(e.currentTarget);
     var token = getCsrfToken();
     var data = {authenticity_token: token};
 
@@ -39,10 +39,10 @@ $(function () {
       .fail(toggleFav);
   }
 
-  function deleteFav() {
+  function deleteFav(e) {
     toggleFav();
 
-    var url = getUrl();
+    var url = getUrl(e.currentTarget);
     var token = getCsrfToken();
     var data = {
       data: {authenticity_token: token},
@@ -54,7 +54,8 @@ $(function () {
   }
 
   function favoriteCheck() {
-    var url = getUrl();
+    var elm = document.querySelector('.js-fav');
+    var url = getUrl(elm);
 
     $.get(url)
       .done(statusOk(toggleFav));
@@ -69,6 +70,6 @@ $(function () {
   }
 
   // お気に入り登録/解除
-  $('#fav-on').click(addFav);
-  $('#fav-off').click(deleteFav);
+  $('.js-fav-on').click(addFav);
+  $('.js-fav-off').click(deleteFav);
 });
