@@ -1,5 +1,5 @@
 .row
-  .col-6.center
+  .col-8.center
     - if @stocks.blank?
       p.result 該当する銘柄がありません。
       h5 style="margin-top:25px;"
@@ -13,7 +13,9 @@
             th
             th.text-center コード
             th.text-center 銘柄名
-            th.text-center リンク
+            th.text-center PER
+            th.text-center PBR
+            th.text-center チャート
         tbody
           - @stocks.each do |stock|
             tr
@@ -25,4 +27,8 @@
               td.text-center
                 = stock.name
               td.text-center
-                = link_to_other_services stock
+                = per_in_stock stock
+              td.text-center
+                = pbr_in_stock stock
+              td.text-center
+                = link_to_chart stock
