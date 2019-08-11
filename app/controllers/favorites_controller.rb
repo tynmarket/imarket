@@ -1,13 +1,15 @@
 class FavoritesController < ApplicationController
-  before_action :require_login
+  before_action :require_login, except: [:show]
 
   def index
   end
 
   def show
+    return unless current_user
+
     favorite = current_user.favorite_exist?(params[:stock_id])
 
-    favorite ? render(json: {status: :ok}) : head(:ok)
+    render(json: { status: :ok }) if favorite
   end
 
   def create
