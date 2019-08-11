@@ -19,7 +19,7 @@ $(function () {
 
   function statusOk(callback) {
     return function(data) {
-      if (data.status === 'ok') {
+      if (data && data.status === 'ok') {
         callback();
       }
     }
