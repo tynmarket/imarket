@@ -3,7 +3,7 @@ class OauthsController < ApplicationController
 
   def oauth
     # sessionだと数回に1回リダイレクト後に空になっている。原因不明。
-    cookies[:return_to_url] = request.referer
+    cookies[:return_to_url] = params[:return_to_url] || request.referer
 
     login_at(params[:provider])
   end

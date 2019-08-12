@@ -22,4 +22,10 @@ class FavoritesController < ApplicationController
 
     head :ok
   end
+
+  private
+
+  def not_authenticated
+    redirect_to auth_at_provider_path(provider: :google, return_to_url: request.url)
+  end
 end
