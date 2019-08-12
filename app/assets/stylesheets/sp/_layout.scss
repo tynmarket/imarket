@@ -19,7 +19,10 @@
 }
 
 .login {
-  .icon {
-    vertical-align: sub;
+  a {
+    padding-left: 17px !important;
+  }
+  .text {
+    padding-left: 7px;
   }
 }
