@@ -40,6 +40,8 @@ module Imarket
 
     config.paths.add 'lib', eager_load: true
 
+    config.action_controller.forgery_protection_origin_check = false
+
     config.generators do |g|
       g.helper false
       g.assets false
