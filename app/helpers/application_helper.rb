@@ -8,7 +8,7 @@ module ApplicationHelper
 
   def release_notes
     <<~EOS.html_safe
-      （8/1）キャッシュフローにフリーキャッシュフローを表示するようにしました
+      （8/12）簡易的なお気に入り機能を追加しました
     EOS
   end
 
