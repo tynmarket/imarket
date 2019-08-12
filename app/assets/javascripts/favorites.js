@@ -61,10 +61,6 @@ $(function () {
   }
 
   function favoriteCheck() {
-    // ログイン時のみ
-    var loggedIn = document.querySelector(".logged_in");
-    if (!loggedIn) { return }
-
     var elm = document.querySelector('.js-fav');
     var url = getUrl(elm);
 
@@ -72,15 +68,21 @@ $(function () {
       .done(statusOk(toggleFav(elm)));
   }
 
+  var loggedIn = document.querySelector(".logged_in");
+
   if (stocks) {
     // お気に入りチェック
-    favoriteCheck();
+    if (loggedIn) {
+      favoriteCheck();
+    }
 
     // お気に入りツールチップ
     $('[data-toggle="tooltip"]').tooltip();
   }
 
   // お気に入り登録/解除
-  $('.js-fav-on').click(addFav);
-  $('.js-fav-off').click(deleteFav);
+  if (loggedIn) {
+    $('.js-fav-on').click(addFav);
+    $('.js-fav-off').click(deleteFav);
+   }
 });
