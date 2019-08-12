@@ -18,7 +18,7 @@
           - @stocks.each do |stock|
             tr
               td
-                = render "shared/fav_icon", fav_on: true, stock_id:  stock.id
+                = render "shared/fav_icon", fav_on: true, stock_id: stock.id
               td.text-center
                 a href=stock_path(stock) target="_blank"
                   = stock.code

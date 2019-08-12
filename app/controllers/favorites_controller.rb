@@ -12,13 +12,17 @@ class FavoritesController < ApplicationController
   end
 
   def create
-    Favorite.create!(stock_id: params[:stock_id], user_id: current_user.id)
+    begin
+      Favorite.create(stock_id: params[:stock_id], user_id: current_user.id)
+    rescue ActiveRecord::RecordNotUnique
+      # 作成済み
+    end
 
     head :ok
   end
 
   def destroy
-    current_user.favorite(params[:stock_id]).destroy!
+    current_user.favorite(params[:stock_id])&.destroy
 
     head :ok
   end
@@ -26,6 +30,7 @@ class FavoritesController < ApplicationController
   private
 
   def not_authenticated
+    # ログイン後、お気に入り一覧に飛ばす
     redirect_to auth_at_provider_path(provider: :google, return_to_url: request.url)
   end
 end
