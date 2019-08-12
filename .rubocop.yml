@@ -24,6 +24,29 @@ AllCops:
 StringLiterals:
   EnforcedStyle: double_quotes
 
+Lint/HandleExceptions:
+  Enabled: false
+
+Lint/SafeNavigationConsistency:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 16
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
+  Max: 100
+
+Metrics/LineLength:
+  Exclude:
+    - "app/helpers/application_helper.rb"
+    - "spec/**/*"
+  Max: 100
+
+Metrics/MethodLength:
+  Max: 100
+
 Layout/AlignHash:
   Exclude:
     - "spec/**/*"
@@ -98,26 +121,6 @@ Naming/AccessorMethodName:
     - "app/controllers/*"
 
 Naming/HeredocDelimiterNaming:
-  Enabled: false
-
-Metrics/AbcSize:
-  Max: 16
-
-Metrics/BlockLength:
-  Exclude:
-    - "spec/**/*"
-  Max: 100
-
-Metrics/LineLength:
-  Exclude:
-    - "app/helpers/application_helper.rb"
-    - "spec/**/*"
-  Max: 100
-
-Metrics/MethodLength:
-  Max: 100
-
-Lint/SafeNavigationConsistency:
   Enabled: false
 
 Performance/RangeInclude:

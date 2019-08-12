@@ -10,17 +10,25 @@ Rails.application.routes.draw do
   get "disclosures/:date", to: "disclosures#index", as: "disclosures"
 
   # 銘柄
-  resources "stocks", only: [:show] do
+  resources :stocks, only: [:show] do
+    # 検索
     get "search", on: :collection
+
+    # お気に入り
+    resource :favorite, only: [:show, :create, :destroy]
   end
 
+  # お気に入り
+  resources :favorites, only: [:index]
+
   # 株価
-  resources "stock_prices", only: [] do
+  resources :stock_prices, only: [] do
     member do
       get "per"
       get "pbr"
     end
   end
+
 
   # PDF（iMrket以外）
   get "pdf/*path", to: "pdfs#show"

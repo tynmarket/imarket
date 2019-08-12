@@ -1,0 +1,32 @@
+.row
+  .col-8.center
+    - if @stocks.blank?
+      p.result お気に入りは登録されていません。
+    - else
+      p.result お気に入り一覧
+      br/
+      table.table.table-search.table-striped.table-bordered
+        thead
+          tr
+            th
+            th.text-center コード
+            th.text-center 銘柄名
+            th.text-center PER
+            th.text-center PBR
+            th.text-center チャート
+        tbody
+          - @stocks.each do |stock|
+            tr
+              td
+                = render "shared/fav_icon", fav_on: true, stock_id: stock.id
+              td.text-center
+                a href=stock_path(stock) target="_blank"
+                  = stock.code
+              td.text-center
+                = stock.name
+              td.text-center
+                = per_in_stock stock
+              td.text-center
+                = pbr_in_stock stock
+              td.text-center
+                = link_to_chart stock

@@ -9,9 +9,11 @@ $color-blue: blue;
 $color-link: #428bca;
 $color-text: #333;
 
-/* margin, paddind */
+/* margin, padding */
 .ml5 { margin-left: 5px !important; }
 .mr5 { margin-right: 5px !important; }
+.pl10 { padding-left: 10px !important; }
+.pr10 { padding-right: 10px !important; }
 
 /* alignment */
 .tac { text-align: center !important; }
@@ -64,8 +66,43 @@ div.overflow_hidden {
   left: 50%;
 }
 
-.login {
-  .text {
-    padding-left: 5px;
+.navbar-nav svg path {
+  fill: #9a9a9a;
+
+  &.none {
+    fill: none;
   }
+}
+
+.login {
+  svg {
+    width: 16px;
+    height: 16px;
+    vertical-align: text-bottom;
+  }
+}
+
+.fav {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  vertical-align: bottom;
+}
+
+header .text {
+  padding-left: 5px;
+}
+
+header .fav {
+  display: inline !important;
+}
+
+.stocks .fav {
+  margin-left: 5px;
+}
+
+.favorites .fav {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
