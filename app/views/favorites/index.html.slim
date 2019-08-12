@@ -1,9 +1,7 @@
 .row
   .col-8.center
     - if @stocks.blank?
-      p.result 該当する銘柄がありません。
-      h5 style="margin-top:25px;"
-        span style="font-size:18px;" > ※
+      p.result お気に入りは登録されていません。
     - else
       p.result お気に入り一覧
       br/
