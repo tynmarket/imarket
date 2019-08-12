@@ -2,10 +2,6 @@ module ApplicationHelper
   include Utils::Constants
   include Utils::UtilMethod
 
-  def session_path
-    logged_in? ? logout_path : auth_at_provider_path(provider: :google)
-  end
-
   def release_notes
     <<~EOS.html_safe
       （8/12）簡易的なお気に入り機能を追加しました
