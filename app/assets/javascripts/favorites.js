@@ -61,6 +61,10 @@ $(function () {
   }
 
   function favoriteCheck() {
+    // ログイン時のみ
+    var loggedIn = document.querySelector(".logged_in");
+    if (!loggedIn) { return }
+
     var elm = document.querySelector('.js-fav');
     var url = getUrl(elm);
 

@@ -2,6 +2,10 @@ module ApplicationHelper
   include Utils::Constants
   include Utils::UtilMethod
 
+  def body_class
+    "#{controller_name} #{'logged_in' if logged_in?}"
+  end
+
   def login_path
     auth_at_provider_path(provider: :google)
   end

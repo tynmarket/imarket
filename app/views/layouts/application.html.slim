@@ -22,7 +22,7 @@ html[lang="ja"]
       ga('create', "#{Settings.ga.tracking_id}", 'auto');
       ga('send', 'pageview');
 
-  body id="#{controller_name}-#{@action_name || action_name}" class=(controller_name + ' pc')
+  body id="#{controller_name}-#{@action_name || action_name}" class=body_class
     header.navbar.navbar-default
       .container class=@container_size
         .navbar-header
