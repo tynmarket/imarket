@@ -6,8 +6,8 @@ module ApplicationHelper
     "#{controller_name} #{'logged_in' if logged_in?}"
   end
 
-  def login_path
-    auth_at_provider_path(provider: :google)
+  def login_path(options = {})
+    auth_at_provider_path(options.merge(provider: :google))
   end
 
   def release_notes

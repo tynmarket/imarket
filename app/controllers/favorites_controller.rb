@@ -14,11 +14,7 @@ class FavoritesController < ApplicationController
   end
 
   def create
-    begin
-      Favorite.create(stock_id: params[:stock_id], user_id: current_user.id)
-    rescue ActiveRecord::RecordNotUnique
-      # 作成済み
-    end
+    current_user.add_favorite(params[:stock_id])
 
     head :ok
   end

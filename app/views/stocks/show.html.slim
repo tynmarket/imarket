@@ -11,7 +11,7 @@ h4.stock.display-inline.mr5
   - if logged_in?
     = render "shared/fav_icon", stock_id: @stock.id
   - else
-    a href=login_path
+    a href=login_path(favorite_stock_id: @stock.id)
       = render "shared/fav_icon", stock_id: @stock.id
 
 
