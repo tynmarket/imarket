@@ -6,7 +6,7 @@ html[lang="ja"]
     ruby:
       description_head =
         if @stock
-          "#{@stock.name} (#{@stock.code}) "
+          "#{@stock.code}　#{@stock.name}"
         elsif @date && !current_page?(root_path)
           "#{l(@date, format: :ymd_k)}"
         end
