@@ -47,6 +47,9 @@ Metrics/LineLength:
 Metrics/MethodLength:
   Max: 100
 
+Metrics/ModuleLength:
+  Enabled: false
+
 Layout/AlignHash:
   Exclude:
     - "spec/**/*"

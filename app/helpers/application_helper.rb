@@ -2,6 +2,18 @@ module ApplicationHelper
   include Utils::Constants
   include Utils::UtilMethod
 
+  def set_title_and_description
+    title =
+      if @stock
+        "【#{@stock.code}】#{@stock.name}"
+      elsif @date && !current_page?(root_path)
+        l(@date, format: :ymd_k)
+      end
+
+    @title = "#{title ? title + 'の決算短信 | ' : ''}iMarket（適時開示ネット）"
+    @description = "#{title || '東証'}の適時開示で開示された決算短信や業績予想の修正の一覧が見られます。四半期ごとの業績の推移や前年比、営業利益率、予想PERとPBRの時系列データをグラフ確認できます。"
+  end
+
   def body_class
     "#{controller_name} #{'logged_in' if logged_in?}"
   end

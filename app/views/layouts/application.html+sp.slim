@@ -1,18 +1,11 @@
 doctype html
-html[lang="ja"]
+html lang="ja"
   head
-    meta[charset="utf-8"]
-    meta[http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"]
-    ruby:
-      description_head =
-        if @stock
-          "#{@stock.name} (#{@stock.code}) "
-        elsif @date && !current_page?(root_path)
-          "#{l(@date, format: :ymd_k)}"
-        end
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
     title
-      = "#{description_head ? description_head + ' の決算短信 | ' : ''}iMarket（適時開示ネット）"
-    meta[name="description" content="#{description_head ? description_head : '東証'}の適時開示で開示された決算短信や業績予想の修正の一覧が見られます。四半期ごとの業績の推移や前年比、営業利益率、予想PERとPBRの時系列データをグラフ確認できます。"]
+      = @title
+    meta name="description" content=@description
     meta name="viewport" content="width=device-width, initial-scale=1"
     = display_meta_tags
     = csrf_meta_tags
