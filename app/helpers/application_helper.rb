@@ -4,13 +4,15 @@ module ApplicationHelper
 
   def set_title_and_description
     title =
-      if @stock
-        "【#{@stock.code}】#{@stock.name}"
+      if controller_name == "favorites"
+        "お気に入り | "
+      elsif @stock
+        "【#{@stock.code}】#{@stock.name}の決算短信 | "
       elsif @date && !current_page?(root_path)
-        l(@date, format: :ymd_k)
+        "#{l(@date, format: :ymd_k)}の決算短信 | "
       end
 
-    @title = "#{title ? title + 'の決算短信 | ' : ''}iMarket（適時開示ネット）"
+    @title = "#{title}iMarket（適時開示ネット）"
     @description = "#{title || '東証'}の適時開示で開示された決算短信や業績予想の修正の一覧が見られます。四半期ごとの業績の推移や前年比、営業利益率、予想PERとPBRの時系列データをグラフ確認できます。"
   end
 
