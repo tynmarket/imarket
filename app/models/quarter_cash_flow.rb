@@ -3,6 +3,8 @@ class QuarterCashFlow
 
   attr_reader :year, :quarter, :month, :cash_flow
 
+  delegate :cash, to: :cash_flow
+
   class << self
     def arrays(cash_flows)
       return cash_flows if cash_flows.blank?
