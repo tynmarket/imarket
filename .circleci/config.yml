@@ -4,13 +4,15 @@ jobs:
   build:
     working_directory: ~/app
     docker:
-      - image: circleci/ruby:2.5.3-node-browsers
+      - image: circleci/ruby:2.6.3-node-browsers
         environment:
           RAILS_ENV: test
           TZ: Asia/Tokyo
-      - image: mysql:5.7
+      - image: mysql:8
+        command: mysqld --default-authentication-plugin=mysql_native_password
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
+
     steps:
       - checkout
 
@@ -18,6 +20,12 @@ jobs:
       - restore_cache:
           keys:
             - imarket-bundle-{{ checksum "Gemfile.lock" }}
+
+      - run:
+          name: update bundler
+          command: |
+            gem update --system
+            gem install bundler
 
       - run:
           name: bundle install
