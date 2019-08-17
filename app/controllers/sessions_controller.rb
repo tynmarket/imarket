@@ -12,7 +12,11 @@ class SessionsController < ApplicationController
   private
 
   def redirect_path
-    # ログアウト ⇒ ログインになる
-    request.referer.include?("favorites") ? root_path : request.referer
+    if request.referer.include?("favorites") ||
+       request.referer.include?("login")
+      root_path
+    else
+      request.referer
+    end
   end
 end
