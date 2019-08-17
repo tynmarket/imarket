@@ -20,10 +20,6 @@ module ApplicationHelper
     "#{controller_name} #{'logged_in' if logged_in?}"
   end
 
-  def login_path(options = {})
-    auth_at_provider_path(options.merge(provider: :google))
-  end
-
   def google?
     return false unless current_user
 
