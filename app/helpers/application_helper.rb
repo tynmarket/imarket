@@ -28,7 +28,7 @@ module ApplicationHelper
 
   def release_notes
     <<~EOS.html_safe
-      （8/12）簡易的なお気に入り機能を追加しました
+      （8/17）お気に入りのログインにTwitterログインを追加しました
     EOS
   end
 
