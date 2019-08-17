@@ -14,6 +14,7 @@ $color-text: #333;
 .mr5 { margin-right: 5px !important; }
 .pl10 { padding-left: 10px !important; }
 .pr10 { padding-right: 10px !important; }
+.mb20 { margin-bottom: 20px !important; }
 
 /* alignment */
 .tac { text-align: center !important; }
@@ -74,11 +75,32 @@ div.overflow_hidden {
   }
 }
 
+.login-area {
+  padding: 20px;
+  text-align: center;
+
+  .btn {
+    padding: 10px 12px;
+  }
+}
+
 .login {
+  text-align: left;
+
   svg {
     width: 16px;
     height: 16px;
     vertical-align: text-bottom;
+  }
+
+  .twitter {
+    width: 18px;
+    height: 18px;
+    vertical-align: top;
+  }
+
+  .text {
+    padding-left: 5px;
   }
 }
 

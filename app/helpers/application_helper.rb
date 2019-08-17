@@ -20,13 +20,15 @@ module ApplicationHelper
     "#{controller_name} #{'logged_in' if logged_in?}"
   end
 
-  def login_path(options = {})
-    auth_at_provider_path(options.merge(provider: :google))
+  def google?
+    return false unless current_user
+
+    current_user.authentications.first.provider == "google"
   end
 
   def release_notes
     <<~EOS.html_safe
-      （8/12）簡易的なお気に入り機能を追加しました
+      （8/17）お気に入りのログインにTwitterログインを追加しました
     EOS
   end
 

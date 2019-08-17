@@ -29,6 +29,6 @@ class FavoritesController < ApplicationController
 
   def not_authenticated
     # ログイン後、お気に入り一覧に飛ばす
-    redirect_to auth_at_provider_path(provider: :google, return_to_url: request.url)
+    redirect_to login_path(return_to_url: request.url)
   end
 end

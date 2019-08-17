@@ -41,6 +41,12 @@ class OauthsController < ApplicationController
   end
 
   def redirect_url
-    cookies.delete(:return_to_url) || root_path
+    return_to_url = cookies.delete(:return_to_url)
+
+    if !return_to_url || return_to_url.include?("login")
+      root_path
+    else
+      return_to_url
+    end
   end
 end
