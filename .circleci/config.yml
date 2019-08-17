@@ -9,6 +9,7 @@ jobs:
           RAILS_ENV: test
           TZ: Asia/Tokyo
       - image: mysql:8
+        command: mysqld --default-authentication-plugin=mysql_native_password
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
     steps:
