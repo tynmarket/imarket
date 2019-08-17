@@ -24,6 +24,12 @@ module ApplicationHelper
     auth_at_provider_path(options.merge(provider: :google))
   end
 
+  def google?
+    return false unless current_user
+
+    current_user.authentications.first.provider == "google"
+  end
+
   def release_notes
     <<~EOS.html_safe
       （8/12）簡易的なお気に入り機能を追加しました
