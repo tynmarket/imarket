@@ -1,10 +1,8 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.3'
-
 gem 'active_model_serializers'
-gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootsnap', require: false
 gem 'bootstrap-sass'
 gem 'browser'
 gem 'holiday_jp'
@@ -17,15 +15,15 @@ gem 'newrelic_rpm'
 gem 'pry-rails'
 gem 'pry-byebug'
 gem 'pry-stack_explorer'
-gem 'puma', '~> 3.11'
-gem 'rails', '~> 5.2.0'
+gem 'puma'
+gem 'rails', '~> 6.0.0'
 gem 'rubocop', require: false
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails'
 gem 'settingslogic'
 gem 'slim-rails'
 gem 'sorcery'
 gem 'trading_day_jp', github: 'tyn-iMarket/trading_day_jp'
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 
 group :production do
   gem 'exception_notification'
@@ -41,7 +39,7 @@ group :development do
   gem 'rack-proxy'
   gem 'seed-fu'
   gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-watcher-listen'
 end
 
 group :test do
