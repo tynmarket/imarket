@@ -6,7 +6,13 @@ class ApplicationController < ActionController::Base
 
   before_action :set_variant
 
+  helper_method :tynmarket?
+
   rescue_from ActiveRecord::RecordNotFound, with: :error_404 unless Rails.env.development?
+
+  def tynmarket?
+    current_user&.email == "tynmarket@gmail.com"
+  end
 
   private
 

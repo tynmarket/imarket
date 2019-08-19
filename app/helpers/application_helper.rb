@@ -50,9 +50,11 @@ module ApplicationHelper
   end
 
   def link_to_other_services(model, full = false)
-    link_to_other_services_short(model, full) + link_to_taiho(model, full) +
+    link = link_to_other_services_short(model, full) + link_to_taiho(model, full) +
       link_to_karauri(model, full) + link_to_balance(model, full) +
       link_to_pcsl(model, full) + link_to_yuho(model, full) + link_to_pts(model, full)
+
+    tynmarket? ? link + link_to_sbi(model, full) : link
   end
 
   def link_to_other_services_short(model, full = false)
@@ -116,6 +118,11 @@ module ApplicationHelper
   def link_to_pts(model, full = false)
     "<a class=#{link_class_name('pts', full)} href='http://www.morningstar.co.jp/StockInfo/pts/info/#{model.code}' target='_blank'>\
     <span>#{full ? 'PTS' : 'P'}</span></a>".html_safe
+  end
+
+  def link_to_sbi(model, full = false)
+    "<a class=#{link_class_name('sbi', full)} href='https://site2.sbisec.co.jp/ETGate/?_ControlID=WPLETsiR001Control&_PageID=WPLETsiR001Idtl10&_ActionID=stockDetail&i_stock_sec=#{model.code}&stock_sec_code_mul=#{model.code}' target='_blank'>\
+    <span>#{full ? 'SBI' : 'S'}</span></a>".html_safe
   end
 
   def red_hundred(num)
