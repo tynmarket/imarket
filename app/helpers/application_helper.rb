@@ -103,7 +103,7 @@ module ApplicationHelper
   end
 
   def link_to_pcsl(model, full = false)
-    "<a class=#{link_class_name('pcsl', full)} href='http://www.taisyaku.jp/search/detail/pcsl/#{model.taisyaku_code}' target='_blank'>\
+    "<a class=#{link_class_name('pcsl', full)} href='https://www.nisshokin.com/#{model.code}/' target='_blank'>\
     <span>#{full ? '逆日歩' : '逆'}</span></a>".html_safe
   end
 
