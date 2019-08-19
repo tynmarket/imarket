@@ -28,7 +28,7 @@ module ApplicationHelper
 
   def release_notes
     <<~EOS.html_safe
-      （8/17）お気に入りのログインにTwitterログインを追加しました
+      （8/17）お気に入りのログインに <a href="/login">Twitterログイン</a> を追加しました
     EOS
   end
 
