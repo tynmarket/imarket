@@ -125,6 +125,3 @@ Naming/AccessorMethodName:
 
 Naming/HeredocDelimiterNaming:
   Enabled: false
-
-Performance/RangeInclude:
-  Enabled: false
