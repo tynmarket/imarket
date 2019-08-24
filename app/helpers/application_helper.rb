@@ -48,12 +48,14 @@ module ApplicationHelper
     "<a href='/stocks/#{model.code}' target='_blank'>#{model.code}</a>".html_safe
   end
 
+  # rubocop:disable Metrics/AbcSize
   def link_to_other_services(model, full = false)
     link_to_other_services_short(model, full) + link_to_taiho(model, full) +
       link_to_karauri(model, full) + link_to_balance(model, full) + link_to_pcsl(model, full) +
       link_to_yuho(model, full) + link_to_pts(model, full) + link_to_sbi(model, full) +
       link_to_kabutan(model, full) + link_to_fisco(model, full)
   end
+  # rubocop:enable Metrics/AbcSize
 
   def link_to_other_services_short(model, full = false)
     link_to_chart(model, full) + link_to_profile(model, full) +
