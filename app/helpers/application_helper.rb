@@ -28,8 +28,7 @@ module ApplicationHelper
 
   def release_notes
     <<~EOS.html_safe
-      （8/19）逆日歩のリンク先を <a href="https://www.nisshokin.com/" target='_blank'>日証金.COM</a> に変更しました<br>
-      （8/17）お気に入りのログインに <a href="/login">Twitterログイン</a> を追加しました
+      （8/24）個別銘柄のページにSBI証券と株探とFISCOへのリンクを追加しました
     EOS
   end
 
