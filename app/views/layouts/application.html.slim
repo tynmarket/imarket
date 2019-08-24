@@ -55,7 +55,7 @@ html lang="ja"
     #search.container class=@container_size
       form.navbar-form.navbar-left action="/stocks/search" role="search"
         .form-group
-          input.form-control name="query" placeholder="証券コード、企業名" type="text"
+          input.form-control name="query" placeholder="証券コード、企業名" type="text" tabindex="1"
         | &nbsp;
         button.btn.btn-default type="submit" 検索
       .btn-group.announce class=@container_size
