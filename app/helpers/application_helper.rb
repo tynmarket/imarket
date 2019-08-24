@@ -50,15 +50,9 @@ module ApplicationHelper
   end
 
   def link_to_other_services(model, full = false)
-    link = link_all(model, full)
-
-    tynmarket? ? link + link_to_sbi(model, full) : link
-  end
-
-  def link_all(model, full = false)
     link_to_other_services_short(model, full) + link_to_taiho(model, full) +
-      link_to_karauri(model, full) + link_to_balance(model, full) +
-      link_to_pcsl(model, full) + link_to_yuho(model, full) + link_to_pts(model, full)
+      link_to_karauri(model, full) + link_to_balance(model, full) + link_to_pcsl(model, full) +
+      link_to_yuho(model, full) + link_to_pts(model, full) + link_to_sbi(model, full)
   end
 
   def link_to_other_services_short(model, full = false)
