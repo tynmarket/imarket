@@ -26,4 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
     <App code={code} indices={'pbr'} />,
     document.querySelector('#pbr-chart')
   );
+
+  ReactDOM.render(
+    <App code={code} indices={'fcf-ratio'} />,
+    document.querySelector('#fcf-ratio')
+  );
 });
