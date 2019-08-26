@@ -17,18 +17,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const code = elm.textContent;
 
+  // PER
   ReactDOM.render(
     <App code={code} indices={'per'} />,
     document.querySelector('#per-chart')
   );
 
+  // PBR
   ReactDOM.render(
     <App code={code} indices={'pbr'} />,
     document.querySelector('#pbr-chart')
   );
 
-  ReactDOM.render(
-    <App code={code} indices={'fcf-ratio'} />,
-    document.querySelector('#fcf-ratio-chart')
-  );
+  const fcfElm = document.querySelector('#fcf-ratio-chart');
+
+  // FCF倍率
+  if (fcfElm) {
+    ReactDOM.render(<App code={code} indices={'fcf-ratio'} />, fcfElm);
+  }
 });
