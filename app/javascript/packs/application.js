@@ -29,6 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   ReactDOM.render(
     <App code={code} indices={'fcf-ratio'} />,
-    document.querySelector('#fcf-ratio')
+    document.querySelector('#fcf-ratio-chart')
   );
 });
