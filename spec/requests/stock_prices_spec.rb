@@ -114,7 +114,7 @@ describe "GET /stock_prices/:id/pbr.json" do
   end
 end
 
-describe "GET /stock_prices/:id/market_cap_fcf_ratio.json" do
+describe "GET /stock_prices/:id/fcf_ratio.json" do
   let(:id) { "1111" }
   let(:ticks) { json_data["ticks"] }
   let(:x_label) { json_data["x_label"] }
@@ -122,11 +122,11 @@ describe "GET /stock_prices/:id/market_cap_fcf_ratio.json" do
 
   before do
     Timecop.travel Date.new(2014, 8, 1)
-    create :stock_price, :daily, market_cap_fcf_ratio: 9.0, date: Date.new(2011, 1, 4)
-    create :stock_price, :daily, market_cap_fcf_ratio: 10.0, date: Date.new(2014, 1, 6)
-    create :stock_price, :daily, market_cap_fcf_ratio: 11.0, date: Date.new(2014, 1, 8)
+    create :stock_price, :daily, fcf_ratio: 9.0, date: Date.new(2011, 1, 4)
+    create :stock_price, :daily, fcf_ratio: 10.0, date: Date.new(2014, 1, 6)
+    create :stock_price, :daily, fcf_ratio: 11.0, date: Date.new(2014, 1, 8)
 
-    get "/stock_prices/#{id}/market_cap_fcf_ratio.json"
+    get "/stock_prices/#{id}/fcf_ratio.json"
   end
 
   context "current_year" do

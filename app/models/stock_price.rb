@@ -1,5 +1,4 @@
 class StockPrice < ActiveRecord::Base
-
   LATEST = 0
   DAILY = 1
 
@@ -7,4 +6,5 @@ class StockPrice < ActiveRecord::Base
 
   belongs_to :stock
 
+  alias_attribute :fcf_ratio, :market_cap_fcf_ratio
 end

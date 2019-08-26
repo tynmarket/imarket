@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     member do
       get "per"
       get "pbr"
-      get "market_cap_fcf_ratio"
+      get "fcf_ratio"
     end
   end
 
