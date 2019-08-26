@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     member do
       get "per"
       get "pbr"
+      get "fcf-ratio"
     end
   end
 

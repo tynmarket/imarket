@@ -9,6 +9,11 @@ class StockPricesController < ApplicationController
     render "per"
   end
 
+  def fcf_ratio
+    set_stock_price_data(:fcf_ratio)
+    render "per"
+  end
+
   private
 
   def set_stock_price_data(column)

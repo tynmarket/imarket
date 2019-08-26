@@ -8,8 +8,6 @@
       - today_to_prev_month.each do |date|
         li
           a class=date_color(date) href=disclosures_path(date) = date.to_s
-  .btn-group
-    a.btn.btn-default href=disclosures_path(@date) 更新
 
 - if @disclosures.blank?
   .pagination

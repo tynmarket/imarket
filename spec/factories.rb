@@ -21,10 +21,6 @@ FactoryBot.define do
     quarter { 4 }
   end
 
-  factory :latest_summary, class: LatestSummary do
-    code { "1111" }
-  end
-
   factory :stock do
     code { "1111" }
     name { "銘柄1" }
