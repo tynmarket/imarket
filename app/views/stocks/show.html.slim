@@ -28,8 +28,9 @@ ul.nav.nav-tabs.main-content-nav-tabs
     a[href="#menu-summary" data-toggle="tab"] 決算短信
   li id="tab-cashflow" class=activate_stock_tab("menu-cashflow")
     a[href="#menu-cashflow" data-toggle="tab"] キャッシュフロー
-  li id="tab-monthly"
-    a[href="#menu-monthly" data-toggle="tab"] 月次
+  - if @disclosures_monthly.present?
+    li id="tab-monthly"
+      a[href="#menu-monthly" data-toggle="tab"] 月次
   li id="tab-per-track"
     a#tab-per[href="#menu-per" data-toggle="tab"] 予想PER
   li id="tab-pbr-track"
@@ -286,19 +287,20 @@ ul.nav.nav-tabs.main-content-nav-tabs
       | ＊フリーキャッシュフローは「営業キャッシュフロー − 投資キャッシュフロー」で計算しています
 
   / 月次
-  #menu-monthly.tab-pane
-    .row
-      .col-7
-        table.table.table-monthly.table-striped.table-bordered.table-condensed
-          thead
-            tr
-              th.w-ratio.text-center 日時
-              th.w-ratio.text-center 表題
-          tbody
-            - @disclosures_monthly.each do |disclosure|
+  - if @disclosures_monthly.present?
+    #menu-monthly.tab-pane
+      .row
+        .col-7
+          table.table.table-monthly.table-striped.table-bordered.table-condensed
+            thead
               tr
-                td.text-center = release_date_s(disclosure)
-                td.text-center = link_to_pdf(disclosure, disclosure.title)
+                th.w-ratio.text-center 日時
+                th.w-ratio.text-center 表題
+            tbody
+              - @disclosures_monthly.each do |disclosure|
+                tr
+                  td.text-center = release_date_s(disclosure)
+                  td.text-center = link_to_pdf(disclosure, disclosure.title)
 
   / 予想PER
   #menu-per.tab-pane.tab-chart
