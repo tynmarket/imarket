@@ -29,7 +29,7 @@ const ChartContainer: React.FC<Props> = ({
         <Chart idStr={id} config={config} max={max} />
       </div>
       <div css={operator}>
-        <div>{indices.toUpperCase()}の最大値</div>
+        <div>{indicesName(indices)}の最大値</div>
         <select
           onChange={(e): void => {
             setMax(maxValue(e));
@@ -43,6 +43,14 @@ const ChartContainer: React.FC<Props> = ({
     </Fragment>
   );
 };
+
+function indicesName(indices: string): string {
+  if (indices == 'fcf-ratio') {
+    return 'FCF倍率';
+  } else {
+    return indices.toUpperCase();
+  }
+}
 
 function selectOptions(indices: string): JSX.Element[] {
   const values =
