@@ -53,10 +53,15 @@ function indicesName(indices: string): string {
 }
 
 function selectOptions(indices: string): JSX.Element[] {
-  const values =
-    indices === 'per'
-      ? [undefined, 10, 15, 20, 30, 50, 100]
-      : [undefined, 1, 2, 3, 5, 10, 20];
+  let values;
+
+  if (indices == 'per') {
+    values = [undefined, 10, 15, 20, 30, 50, 100];
+  } else if (indices == 'pbr') {
+    values = [undefined, 1, 2, 3, 5, 10, 20];
+  } else {
+    values = [undefined, 10, 20, 50, 100, 200, 500];
+  }
   return values.map(
     (v, i): JSX.Element => (
       <option value={v} key={i}>
