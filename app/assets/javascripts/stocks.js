@@ -11,7 +11,7 @@ $(function () {
   trackEvent('#tab-per-track', 'per', label);
   // PBR
   trackEvent('#tab-pbr-track', 'pbr', label);
-  // 時価総額/FCF倍率
+  // FCF倍率
   trackEvent('#tab-market-cap-fcf-ratio-track', 'market-cap-fcf-ratio', label);
   // 全て
   trackEvent('#tab-disclosures', 'disclosures', label);
