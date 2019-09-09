@@ -15,9 +15,15 @@ h4.stock.display-inline.mr5
       = render "shared/fav_icon", stock_id: @stock.id
 
 
-span.font-size-normal.mr5 = per_in_stock @stock
+span.font-size-normal.mr5
+  = per_in_stock @stock
 | &nbsp;
-span.font-size-normal.mr5 = pbr_in_stock @stock
+span.font-size-normal.mr5
+  = pbr_in_stock @stock
+- if tynmarket? && @stock.fcf_ratio.present?
+  | &nbsp;
+  span.font-size-normal.mr5
+    = @stock.fcf_ratio
 = link_to_other_services(@stock, true)
 br
 br

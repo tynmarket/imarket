@@ -97,4 +97,9 @@ class Stock < ActiveRecord::Base
     stock_price_latest.try(:pbr)
   end
 
+  def fcf_ratio
+    ratio = stock_price_latest&.fcf_ratio
+    "#{ratio} 倍" if ratio
+  end
+
 end
