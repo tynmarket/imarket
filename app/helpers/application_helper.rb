@@ -28,7 +28,7 @@ module ApplicationHelper
 
   def release_notes
     <<~EOS.html_safe
-      （8/24）個別銘柄のページにSBI証券と株探とFISCOへのリンクを追加しました
+      （9/9）個別銘柄のページに月次Webへのリンクを追加しました
     EOS
   end
 
