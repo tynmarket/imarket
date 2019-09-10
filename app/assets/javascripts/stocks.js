@@ -4,43 +4,43 @@ $(function () {
   var label = 'stocks';
 
   // キャッシュフロー
-  trackEvent('#tab-cashflow', 'cashflow', label);
+  trackEvent('#tab-cashflow', 'tab', 'cashflow', label);
   // 月次
-  trackEvent('#tab-monthly', 'monthly', label);
+  trackEvent('#tab-monthly', 'tab', 'monthly', label);
   // PER
-  trackEvent('#tab-per-track', 'per', label);
+  trackEvent('#tab-per-track', 'tab', 'per', label);
   // PBR
-  trackEvent('#tab-pbr-track', 'pbr', label);
+  trackEvent('#tab-pbr-track', 'tab', 'pbr', label);
   // FCF倍率
-  trackEvent('#tab-fcf-ratio-track', 'fcf-ratio', label);
-  // 全て
-  trackEvent('#tab-disclosures', 'disclosures', label);
+  trackEvent('#tab-fcf-ratio-track', 'tab', 'fcf-ratio', label);
+  // 開示（1年分）
+  trackEvent('#tab-disclosures', 'tab', 'disclosures', label);
   // チャート
-  trackEvent('.link-chart', 'chart', label);
+  trackEvent('.link-chart', 'link', 'chart', label);
   // 企業情報
-  trackEvent('.link-profile', 'profile', label);
+  trackEvent('.link-profile', 'link', 'profile', label);
   // 信用残高
-  trackEvent('.link-margin', 'margin', label);
+  trackEvent('.link-margin', 'link', 'margin', label);
   // コンセンサス
-  trackEvent('.link-ifis', 'ifis', label);
+  trackEvent('.link-ifis', 'link', 'ifis', label);
   // 大量保有
-  trackEvent('.link-taiho', 'taiho', label);
+  trackEvent('.link-taiho', 'link', 'taiho', label);
   // 空売り
-  trackEvent('.link-karauri', 'karauri', label);
+  trackEvent('.link-karauri', 'link', 'karauri', label);
   // 融資・貸株
-  trackEvent('.link-balance', 'balance', label);
+  trackEvent('.link-balance', 'link', 'balance', label);
   // 逆日歩
-  trackEvent('.link-pcsl', 'pcsl', label);
+  trackEvent('.link-pcsl', 'link', 'pcsl', label);
   // 有報
-  trackEvent('.link-yuho', 'yuho', label);
+  trackEvent('.link-yuho', 'link', 'yuho', label);
   // PTS
-  trackEvent('.link-pts', 'pts', label);
+  trackEvent('.link-pts', 'link', 'pts', label);
   // SBI
-  trackEvent('.link-sbi', 'sbi', label);
+  trackEvent('.link-sbi', 'link', 'sbi', label);
   // 株探
-  trackEvent('.link-kabutan', 'kabutan', label);
+  trackEvent('.link-kabutan', 'link', 'kabutan', label);
   // FISCO
-  trackEvent('.link-fisco', 'fisco', label);
+  trackEvent('.link-fisco', 'link', 'fisco', label);
   // 月次Web
-  trackEvent('.link-getsuji', 'getsuji', label);
+  trackEvent('.link-getsuji', 'link', 'getsuji', label);
 });

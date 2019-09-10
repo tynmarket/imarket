@@ -23,15 +23,17 @@ $(function () {
   var label = 'disclosures';
 
   // 月次
-  trackEvent('#tab-monthly', 'monthly', label);
+  trackEvent('#tab-monthly', 'tab', 'monthly', label);
   // 全て
-  trackEvent('#tab-all', 'all', label);
+  trackEvent('#tab-all', 'tab', 'all', label);
   // チャート
-  trackEvent('.link-chart', 'chart', label);
+  trackEvent('.link-chart', 'link', 'chart', label);
   // 企業情報
-  trackEvent('.link-profile', 'profile', label);
+  trackEvent('.link-profile', 'link', 'profile', label);
   // 信用残高
-  trackEvent('.link-margin', 'margin', label);
+  // TODO 変更
+  trackEvent('.link-margin', 'link', 'margin', label);
   // コンセンサス
-  trackEvent('.link-ifis', 'ifis', label);
+  // TODO 変更
+  trackEvent('.link-ifis', 'link', 'ifis', label);
 });

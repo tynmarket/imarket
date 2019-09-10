@@ -1,4 +1,4 @@
-function trackEvent(selector, action, label) {
+function trackEvent(selector, category, action, label) {
   var targets = document.querySelectorAll(selector);
 
   if(!targets) {
@@ -8,7 +8,7 @@ function trackEvent(selector, action, label) {
 
   for (var i = 0; i < targets.length; i++) {
     targets[i].addEventListener('click', function() {
-      ga('send', 'event', 'click', action, label, null, {nonInteraction: true});
+      ga('send', 'event', category, action, label, null, {nonInteraction: true});
     });
   }
 }
