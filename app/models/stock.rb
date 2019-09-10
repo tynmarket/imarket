@@ -102,4 +102,8 @@ class Stock < ActiveRecord::Base
     "#{ratio} 倍" if ratio
   end
 
+  def change_rate
+    stock_price_latest&.change_rate
+  end
+
 end

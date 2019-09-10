@@ -147,6 +147,14 @@ module ApplicationHelper
     num < 0 ? span_red(num) : num.to_s
   end
 
+  def red_hundred_p(num)
+    return unless num
+
+    num = (num * 100).round(1)
+    num_percent = "#{num}%"
+    num < 0 ? span_red(num_percent) : num_percent
+  end
+
   def red_delimiter(num)
     return unless num
 
