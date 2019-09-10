@@ -35,4 +35,12 @@ $(function () {
   trackEvent('.link-yuho', 'yuho', label);
   // PTS
   trackEvent('.link-pts', 'pts', label);
+  // SBI
+  trackEvent('.link-sbi', 'sbi', label);
+  // 株探
+  trackEvent('.link-kabutan', 'kabutan', label);
+  // FISCO
+  trackEvent('.link-fisco', 'fisco', label);
+  // 月次Web
+  trackEvent('.link-getsuji', 'getsuji', label);
 });
