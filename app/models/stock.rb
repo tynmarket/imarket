@@ -106,4 +106,8 @@ class Stock < ActiveRecord::Base
     stock_price_latest&.change_rate
   end
 
+  def ytd
+    stock_price_latest&.ytd
+  end
+
 end
