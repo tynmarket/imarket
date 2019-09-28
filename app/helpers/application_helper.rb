@@ -2,6 +2,12 @@ module ApplicationHelper
   include Utils::Constants
   include Utils::UtilMethod
 
+  def release_notes
+    <<~EOS.html_safe
+      （9/28）お気に入り一覧に前日比と年初来の表示を追加しました
+    EOS
+  end
+
   def set_title_and_description
     title =
       if controller_name == "favorites"
@@ -24,12 +30,6 @@ module ApplicationHelper
     return false unless current_user
 
     current_user.authentications.first.provider == "google"
-  end
-
-  def release_notes
-    <<~EOS.html_safe
-      （9/9）個別銘柄のページに月次Webへのリンクを追加しました
-    EOS
   end
 
   def release_date_s(disclosure)

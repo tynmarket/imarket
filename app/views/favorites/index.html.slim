@@ -15,7 +15,8 @@
             th.text-center PBR
             - if tynmarket?
               th.text-center FCF倍率
-              th.text-center 前日比
+            th.text-center 前日比
+            th.text-center 年初来
             th.text-center チャート
         tbody
           - @stocks.each do |stock|
@@ -34,7 +35,9 @@
               - if tynmarket?
                 td.text-center
                   = stock.fcf_ratio
-                td.text-center
-                  = red_hundred_p(stock.change_rate)
+              td.text-center
+                = red_hundred_p(stock.change_rate)
+              td.text-center
+                = red_hundred_p(stock.ytd)
               td.text-center
                 = link_to_chart stock
