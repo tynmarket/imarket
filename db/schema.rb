@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_17_021555) do
+ActiveRecord::Schema.define(version: 2019_09_26_135228) do
 
   create_table "authentications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -98,6 +98,23 @@ ActiveRecord::Schema.define(version: 2019_08_17_021555) do
     t.index ["code"], name: "index_latest_results_forecasts_code"
   end
 
+  create_table "price_intradays", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.string "code", null: false
+    t.integer "period", limit: 2, null: false
+    t.datetime "datetime", null: false
+    t.datetime "datetime_original", null: false
+    t.integer "day", limit: 1, null: false, comment: "1-7、月曜は1"
+    t.integer "hour", limit: 1, null: false
+    t.integer "minute", limit: 1, null: false
+    t.float "open", null: false
+    t.float "high", null: false
+    t.float "low", null: false
+    t.float "close", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code", "datetime", "close"], name: "index_prices_intradays_code_datetime_close", unique: true
+  end
+
   create_table "results_forecasts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "code", limit: 6
     t.integer "year", limit: 2
@@ -146,6 +163,7 @@ ActiveRecord::Schema.define(version: 2019_08_17_021555) do
     t.float "per"
     t.float "pbr"
     t.float "market_cap_fcf_ratio"
+    t.float "ytd"
     t.float "close_adjusted"
     t.integer "stock_id"
     t.datetime "created_at"
