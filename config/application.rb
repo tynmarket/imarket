@@ -46,5 +46,7 @@ module Imarket
       g.helper false
       g.assets false
     end
+
+    config.exceptions_app = -> (env) { ErrorsController.action(:error).call(env) }
   end
 end
