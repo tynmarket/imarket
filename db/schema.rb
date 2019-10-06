@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_26_135228) do
+ActiveRecord::Schema.define(version: 2019_10_05_060308) do
 
   create_table "authentications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -19,6 +19,22 @@ ActiveRecord::Schema.define(version: 2019_09_26_135228) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["provider", "uid"], name: "index_authentications_on_provider_and_uid"
+  end
+
+  create_table "balance_sheets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.integer "disclosure_id", null: false
+    t.integer "stock_id", null: false
+    t.string "code", limit: 6, null: false
+    t.integer "year", limit: 2, null: false
+    t.integer "month", limit: 1, null: false
+    t.integer "quarter", limit: 1, null: false
+    t.integer "interest_bearing_debt_fisco", comment: "有利子負債（FISCO）"
+    t.integer "net_cash_fisco", comment: "ネットキャッシュ（FISCO）"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["code"], name: "index_balance_sheets_on_code"
+    t.index ["disclosure_id"], name: "index_balance_sheets_on_disclosure_id"
+    t.index ["stock_id"], name: "index_balance_sheets_on_stock_id"
   end
 
   create_table "cash_flows", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
