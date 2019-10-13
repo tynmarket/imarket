@@ -50,7 +50,8 @@ module ApplicationHelper
 
   # rubocop:disable Metrics/AbcSize
   def link_to_other_services(model, full = false)
-    link_to_other_services_short(model, full) + link_to_taiho(model, full) +
+    link_to_other_services_short(model, full) +
+      link_to_ifis(model, full) + link_to_taiho(model, full) +
       link_to_karauri(model, full) + link_to_balance(model, full) + link_to_pcsl(model, full) +
       link_to_yuho(model, full) + link_to_pts(model, full) + link_to_sbi(model, full) +
       link_to_kabutan(model, full) + link_to_fisco(model, full) + link_to_getsuji(model, full)
@@ -58,17 +59,22 @@ module ApplicationHelper
   # rubocop:enable Metrics/AbcSize
 
   def link_to_other_services_short(model, full = false)
-    link_to_chart(model, full) + link_to_profile(model, full) +
-      link_to_margin(model, full) + link_to_ifis(model, full)
+    link_to_detail(model, full) + link_to_chart(model, full) +
+      link_to_profile(model, full) + link_to_margin(model, full)
   end
 
   def link_class_name(class_name, full = false)
     "link-#{class_name} #{'full-service-name' if full}"
   end
 
+  def link_to_detail(model, full = false)
+    "<a class=#{link_class_name('detail', full)} href='http://stocks.finance.yahoo.co.jp/stocks/detail/?code=#{model.code}' target='_blank'>\
+    <span>#{full ? '詳細' : '詳'}</span></a>".html_safe
+  end
+
   def link_to_chart(model, full = false)
     "<a class=#{link_class_name('chart', full)} href='http://stocks.finance.yahoo.co.jp/stocks/chart/?code=#{model.code}' target='_blank'>\
-    <span class='glyphicon glyphicon-signal'></span>#{'チャート' if full}</a>".html_safe
+    <span class='#{'glyphicon glyphicon-signal' unless full}'>#{'チャート' if full}</span></a>".html_safe
   end
 
   def link_to_profile(model, full = false)
@@ -80,9 +86,8 @@ module ApplicationHelper
     to = Date.today
     from = to.last_year.next_week
 
-    ("<a class=#{link_class_name('margin', full)}" +
-      " href='http://info.finance.yahoo.co.jp/history/margin/?code=#{model.code}&sy=#{from.year}&sm=#{from.month}&sd=#{from.day}" +
-      "&ey=#{to.year}&em=#{to.month}&ed=#{to.day}' target='_blank'><span>#{full ? '信用残' : '信'}</span></a>").html_safe
+    "<a class=#{link_class_name('margin', full)} href='http://info.finance.yahoo.co.jp/history/margin/?code=#{model.code}&sy=#{from.year}&sm=#{from.month}&sd=#{from.day}&ey=#{to.year}&em=#{to.month}&ed=#{to.day}' target='_blank'>\
+    <span>#{full ? '信用残' : '信'}</span></a>".html_safe
   end
 
   def link_to_ifis(model, full = false)
