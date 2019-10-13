@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_05_060308) do
+ActiveRecord::Schema.define(version: 2019_10_13_023623) do
 
   create_table "authentications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -213,6 +213,7 @@ ActiveRecord::Schema.define(version: 2019_10_05_060308) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["code"], name: "index_stocks_code"
+    t.index ["listed_date"], name: "index_stocks_on_listed_date"
   end
 
   create_table "summaries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
