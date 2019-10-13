@@ -17,7 +17,7 @@
               th.text-center FCF倍率
             th.text-center 前日比
             th.text-center 年初来
-            th.text-center チャート
+            th.text-center リンク
         tbody
           - @stocks.each do |stock|
             tr
@@ -40,4 +40,6 @@
               td.text-center
                 = red_hundred_p(stock.ytd)
               td.text-center
+                = link_to_detail stock
+                | &nbsp;
                 = link_to_chart stock
