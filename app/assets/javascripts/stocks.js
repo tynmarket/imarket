@@ -15,6 +15,8 @@ $(function () {
   trackEvent('#tab-fcf-ratio-track', 'tab', 'fcf-ratio', label);
   // 開示（1年分）
   trackEvent('#tab-disclosures', 'tab', 'disclosures', label);
+  // 詳細
+  trackEvent('.link-detail', 'link', 'detail', label);
   // チャート
   trackEvent('.link-chart', 'link', 'chart', label);
   // 企業情報

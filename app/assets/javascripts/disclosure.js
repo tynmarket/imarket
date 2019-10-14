@@ -26,6 +26,8 @@ $(function () {
   trackEvent('#tab-monthly', 'tab', 'monthly', label);
   // 全て
   trackEvent('#tab-all', 'tab', 'all', label);
+  // 詳細
+  trackEvent('.link-detail', 'link', 'detail', label);
   // チャート
   trackEvent('.link-chart', 'link', 'chart', label);
   // 企業情報
@@ -33,7 +35,4 @@ $(function () {
   // 信用残高
   // TODO 変更
   trackEvent('.link-margin', 'link', 'margin', label);
-  // コンセンサス
-  // TODO 変更
-  trackEvent('.link-ifis', 'link', 'ifis', label);
 });
