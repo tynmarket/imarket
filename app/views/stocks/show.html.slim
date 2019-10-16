@@ -14,7 +14,6 @@ h4.stock.display-inline.mr5
     a href=login_path(return_to_url: request.fullpath, favorite_stock_id: @stock.id)
       = render "shared/fav_icon", stock_id: @stock.id
 
-
 span.font-size-normal.mr5
   = per_in_stock @stock
 | &nbsp;
@@ -24,230 +23,187 @@ span.font-size-normal.mr5
   | &nbsp;
   span.font-size-normal.mr5
     = @stock.fcf_ratio
-= link_to_other_services(@stock, true)
+- if show_content?
+  = link_to_other_services(@stock, true)
 br
 br
 
 / タブ
 ul.nav.nav-tabs.main-content-nav-tabs
-  li class=activate_stock_tab("menu-summary")
-    a[href="#menu-summary" data-toggle="tab"] 決算短信
-  li id="tab-cashflow" class=activate_stock_tab("menu-cashflow")
-    a[href="#menu-cashflow" data-toggle="tab"] キャッシュフロー
-  - if @disclosures_monthly.present?
+  - if show_content?
+    li class=activate_stock_tab("menu-summary")
+      a[href="#menu-summary" data-toggle="tab"] 決算短信
+    li id="tab-cashflow" class=activate_stock_tab("menu-cashflow")
+      a[href="#menu-cashflow" data-toggle="tab"] キャッシュフロー
+  - if @disclosures_monthly.present? && show_content?
     li id="tab-monthly"
       a[href="#menu-monthly" data-toggle="tab"] 月次
-  li id="tab-per-track"
+  li id="tab-per-track" class="#{'active' unless show_content?}"
     a#tab-per[href="#menu-per" data-toggle="tab"] 予想PER
   li id="tab-pbr-track"
     a#tab-pbr[href="#menu-pbr" data-toggle="tab"] PBR
   - if tynmarket?
     li id="tab-fcf-ratio-track"
       a#tab-fcf-ratio[href="#menu-fcf-ratio" data-toggle="tab"] FCF倍率
-  li id="tab-disclosures"
-    a[href="#menu-disclosures" data-toggle="tab"] 開示（1年分）
+  - if show_content?
+    li id="tab-disclosures"
+      a[href="#menu-disclosures" data-toggle="tab"] 開示（1年分）
 
 / タブコンテンツ
 .tab-content
   / 決算短信
-  #menu-summary.tab-pane class=activate_stock_tab("menu-summary")
-    .table-title
-      .pull-right
-        .term_all
-          - if term_all?(@term)
-            = link_to("今期 〜 過去3期", stock_path(@stock))
-            = " / 全て"
-          - else
-            = "今期 〜 過去3期 / "
-            = link_to("全て", "#{stock_path(@stock)}?term=all")
-      .term-annual
-        span.list_type
-          - if term_annual?
-            = link_to("累計", stock_path(@stock))
-            = " / 通期"
-          - else
-            = "累計 / "
-            = link_to "通期", "#{stock_path(@stock)}?term=annual"
-    table.table.table-summary.table-striped.table-bordered.table-condensed
-      = thead_summary
-      tbody
-        - if @latest_forecast
-          tr
-            td.text-center = @latest_forecast.accounting_period_once(nil)
-            td.text-center = link_to_pdf(@latest_forecast.disclosure_pdf, @latest_forecast.quarter_name_forecast)
-            td.text-right = number_with_delimiter(@latest_forecast.forecast_net_sales)
-            td.text-right = red_delimiter(@latest_forecast.forecast_operating_income)
-            td.text-right = red_delimiter(@latest_forecast.forecast_ordinary_income)
-            td.text-right = red_delimiter(@latest_forecast.forecast_net_income)
-            td.text-right = red_delimiter_per_share(@latest_forecast.forecast_net_income_per_share)
-            td.text-right = red_hundred(@latest_forecast.forecast_net_sales_operating_income_ratio)
-            td.text-right = red_hundred(@latest_forecast.forecast_net_sales_ordinary_income_ratio)
-            - if calc_change_in_forecast?(@latest_forecast, @summaries)
-              td.text-right = red_hundred(@latest_forecast.calc_change_in_forecast_net_sales @summaries)
-              td.text-right = red_hundred(@latest_forecast.calc_change_in_forecast_operating_income @summaries)
-              td.text-right = red_hundred(@latest_forecast.calc_change_in_forecast_ordinary_income @summaries)
-              td.text-right = red_hundred(@latest_forecast.calc_change_in_forecast_net_income @summaries)
-            - else
-              td.text-right = red_hundred(@latest_forecast.change_in_forecast_net_sales)
-              td.text-right = red_hundred(@latest_forecast.change_in_forecast_operating_income)
-              td.text-right = red_hundred(@latest_forecast.change_in_forecast_ordinary_income)
-              td.text-right = red_hundred(@latest_forecast.change_in_forecast_net_income)
-        - @summaries.each_with_index do |summary, i|
-          - if show_financial_value?(summary, @last_year)
-            tr class=(hide_if_term_annual(summary))
-              td.text-center  = summary.accounting_period_once(i > 0 ? @summaries[i - 1] : @latest_forecast)
-              td.text-center = link_to_pdf(summary.disclosure_pdf, summary.quarter_name)
-              td.text-right = number_with_delimiter(summary.net_sales)
-              td.text-right = red_delimiter(summary.operating_income)
-              td.text-right = red_delimiter(summary.ordinary_income)
-              td.text-right = red_delimiter(summary.net_income)
-              td.text-right = red_delimiter_per_share(summary.net_income_per_share)
-              td.text-right = red_hundred(summary.net_sales_operating_income_ratio)
-              td.text-right = red_hundred(summary.net_sales_ordinary_income_ratio)
-              td.text-right = red_hundred(summary.change_in_net_sales)
-              td.text-right = red_hundred(summary.change_in_operating_income)
-              td.text-right = red_hundred(summary.change_in_ordinary_income)
-              td.text-right = red_hundred(summary.change_in_net_income)
-    br
-    h5 四半期
-    table.table.table-summary.table-striped.table-bordered.table-condensed
-      = thead_summary
-      tbody
-        - if @quarter_results_forecast
-          tr
-            td.text-center = @quarter_results_forecast.accounting_period_once(nil)
-            td.text-center = link_to_pdf(@quarter_results_forecast.latest_forecast.disclosure_pdf, @quarter_results_forecast.quarter_name_forecast)
-            td.text-right = number_with_delimiter(@quarter_results_forecast.forecast_net_sales)
-            td.text-right = red_delimiter(@quarter_results_forecast.forecast_operating_income)
-            td.text-right = red_delimiter(@quarter_results_forecast.forecast_ordinary_income)
-            td.text-right = red_delimiter(@quarter_results_forecast.forecast_net_income)
-            td.text-right = red_delimiter_per_share(@quarter_results_forecast.forecast_net_income_per_share)
-            td.text-right = red_hundred(@quarter_results_forecast.forecast_net_sales_operating_income_ratio)
-            td.text-right = red_hundred(@quarter_results_forecast.forecast_net_sales_ordinary_income_ratio)
-            td.text-right = red_hundred(@quarter_results_forecast.change_in_forecast_net_sales)
-            td.text-right = red_hundred(@quarter_results_forecast.change_in_forecast_operating_income)
-            td.text-right = red_hundred(@quarter_results_forecast.change_in_forecast_ordinary_income)
-            td.text-right = red_hundred(@quarter_results_forecast.change_in_forecast_net_income)
-        - @quarter_summaries.each_with_index do |quarter_summary, i|
-          - prev_year_quarter_summary = @quarter_summaries[i + 4]
-          - if show_financial_value?(quarter_summary, @last_year)
-            tr
-              td.text-center = quarter_summary.accounting_period_once(i > 0 ? @quarter_summaries[i - 1] : @quarter_results_forecast)
-              td.text-center = link_to_pdf(quarter_summary.summary.disclosure_pdf, quarter_summary.quarter_name)
-              td.text-right = number_with_delimiter(quarter_summary.net_sales)
-              td.text-right = red_delimiter(quarter_summary.operating_income)
-              td.text-right = red_delimiter(quarter_summary.ordinary_income)
-              td.text-right = red_delimiter(quarter_summary.net_income)
-              td.text-right = red_delimiter_per_share(quarter_summary.net_income_per_share)
-              td.text-right = red_hundred(quarter_summary.net_sales_operating_income_ratio)
-              td.text-right = red_hundred(quarter_summary.net_sales_ordinary_income_ratio)
-              td.text-right = red_hundred(quarter_summary.change_in_net_sales(prev_year_quarter_summary))
-              td.text-right = red_hundred(quarter_summary.change_in_operating_income(prev_year_quarter_summary))
-              td.text-right = red_hundred(quarter_summary.change_in_ordinary_income(prev_year_quarter_summary))
-              td.text-right = red_hundred(quarter_summary.change_in_net_income(prev_year_quarter_summary))
-    br
-    .row
-      .col-6
-        h5 進捗率
-        table.table.table-progress-ratio.table-striped.table-bordered.table-condensed
-          thead
-            tr
-              th.w-period.text-center.text-middle 決算期
-              th.w-quarter.text-center.text-middle 四半期
-              th.w-ratio.text-center
-                | 売上高
-                br
-                | 進捗率
-              th.w-ratio.text-center
-                | 営業利益
-                br
-                | 進捗率
-              th.w-ratio.text-center
-                | 経常利益
-                br
-                | 進捗率
-              th.w-ratio.text-center
-                | 純利益
-                br
-                | 進捗率
-          tbody
-            - @current_summaries.each_with_index do |summary, i|
-              tr
-                td.text-center = summary.accounting_period_once(i > 0 ? @current_summaries[i - 1] : nil)
-                td.text-center = summary.quarter_name
-                td.text-center = summary.net_sales_progress_ratio(@latest_forecast)
-                td.text-center = summary.operating_income_progress_ratio(@latest_forecast)
-                td.text-center = summary.ordinary_income_progress_ratio(@latest_forecast)
-                td.text-center = summary.net_income_progress_ratio(@latest_forecast)
-
-  / キャッシュフロー
-  #menu-cashflow.tab-pane class=activate_stock_tab("menu-cashflow")
-    - unless @cash_flows_only_q4
+  - if show_content?
+    #menu-summary.tab-pane class=activate_stock_tab("menu-summary")
       .table-title
         .pull-right
           .term_all
             - if term_all?(@term)
-              = link_to "今期 〜 過去3期", stock_path(@stock, tab: "menu-cashflow")
+              = link_to("今期 〜 過去3期", stock_path(@stock))
               = " / 全て"
             - else
               = "今期 〜 過去3期 / "
-              = link_to "全て", stock_path(@stock, term: "all", tab: "menu-cashflow")
+              = link_to("全て", "#{stock_path(@stock)}?term=all")
         .term-annual
           span.list_type
             - if term_annual?
-              = link_to "累計", stock_path(@stock, tab: "menu-cashflow")
+              = link_to("累計", stock_path(@stock))
               = " / 通期"
             - else
               = "累計 / "
-              = link_to "通期", stock_path(@stock, term: "annual", tab: "menu-cashflow")
-    table.table.table-cashflow.table-striped.table-bordered.table-condensed
-      thead
-        tr
-          th.w-period.text-center.text-middle 決算期
-          th.w-quarter.text-center.text-middle 四半期
-          th.text-center
-            | 営業
-            br
-            | キャッシュフロー
-          th.text-center
-            | 投資
-            br
-            | キャッシュフロー
-          th.text-center
-            | フリー
-            br
-            | キャッシュフロー
-          th.text-center
-            | 財務
-            br
-            | キャッシュフロー
-          th.text-center
-            | 現金及び同等物の
-            br
-            | 増減額
-          th.text-center
-            | 現金及び同等物の
-            br
-            | 期末残高
-      tbody
-        - @cash_flows.each_with_index do |cash_flow, i|
-          - prev_cash_flow = @cash_flows[i + 1]
+              = link_to "通期", "#{stock_path(@stock)}?term=annual"
+      table.table.table-summary.table-striped.table-bordered.table-condensed
+        = thead_summary
+        tbody
+          - if @latest_forecast
+            tr
+              td.text-center = @latest_forecast.accounting_period_once(nil)
+              td.text-center = link_to_pdf(@latest_forecast.disclosure_pdf, @latest_forecast.quarter_name_forecast)
+              td.text-right = number_with_delimiter(@latest_forecast.forecast_net_sales)
+              td.text-right = red_delimiter(@latest_forecast.forecast_operating_income)
+              td.text-right = red_delimiter(@latest_forecast.forecast_ordinary_income)
+              td.text-right = red_delimiter(@latest_forecast.forecast_net_income)
+              td.text-right = red_delimiter_per_share(@latest_forecast.forecast_net_income_per_share)
+              td.text-right = red_hundred(@latest_forecast.forecast_net_sales_operating_income_ratio)
+              td.text-right = red_hundred(@latest_forecast.forecast_net_sales_ordinary_income_ratio)
+              - if calc_change_in_forecast?(@latest_forecast, @summaries)
+                td.text-right = red_hundred(@latest_forecast.calc_change_in_forecast_net_sales @summaries)
+                td.text-right = red_hundred(@latest_forecast.calc_change_in_forecast_operating_income @summaries)
+                td.text-right = red_hundred(@latest_forecast.calc_change_in_forecast_ordinary_income @summaries)
+                td.text-right = red_hundred(@latest_forecast.calc_change_in_forecast_net_income @summaries)
+              - else
+                td.text-right = red_hundred(@latest_forecast.change_in_forecast_net_sales)
+                td.text-right = red_hundred(@latest_forecast.change_in_forecast_operating_income)
+                td.text-right = red_hundred(@latest_forecast.change_in_forecast_ordinary_income)
+                td.text-right = red_hundred(@latest_forecast.change_in_forecast_net_income)
+          - @summaries.each_with_index do |summary, i|
+            - if show_financial_value?(summary, @last_year)
+              tr class=(hide_if_term_annual(summary))
+                td.text-center  = summary.accounting_period_once(i > 0 ? @summaries[i - 1] : @latest_forecast)
+                td.text-center = link_to_pdf(summary.disclosure_pdf, summary.quarter_name)
+                td.text-right = number_with_delimiter(summary.net_sales)
+                td.text-right = red_delimiter(summary.operating_income)
+                td.text-right = red_delimiter(summary.ordinary_income)
+                td.text-right = red_delimiter(summary.net_income)
+                td.text-right = red_delimiter_per_share(summary.net_income_per_share)
+                td.text-right = red_hundred(summary.net_sales_operating_income_ratio)
+                td.text-right = red_hundred(summary.net_sales_ordinary_income_ratio)
+                td.text-right = red_hundred(summary.change_in_net_sales)
+                td.text-right = red_hundred(summary.change_in_operating_income)
+                td.text-right = red_hundred(summary.change_in_ordinary_income)
+                td.text-right = red_hundred(summary.change_in_net_income)
+      br
+      h5 四半期
+      table.table.table-summary.table-striped.table-bordered.table-condensed
+        = thead_summary
+        tbody
+          - if @quarter_results_forecast
+            tr
+              td.text-center = @quarter_results_forecast.accounting_period_once(nil)
+              td.text-center = link_to_pdf(@quarter_results_forecast.latest_forecast.disclosure_pdf, @quarter_results_forecast.quarter_name_forecast)
+              td.text-right = number_with_delimiter(@quarter_results_forecast.forecast_net_sales)
+              td.text-right = red_delimiter(@quarter_results_forecast.forecast_operating_income)
+              td.text-right = red_delimiter(@quarter_results_forecast.forecast_ordinary_income)
+              td.text-right = red_delimiter(@quarter_results_forecast.forecast_net_income)
+              td.text-right = red_delimiter_per_share(@quarter_results_forecast.forecast_net_income_per_share)
+              td.text-right = red_hundred(@quarter_results_forecast.forecast_net_sales_operating_income_ratio)
+              td.text-right = red_hundred(@quarter_results_forecast.forecast_net_sales_ordinary_income_ratio)
+              td.text-right = red_hundred(@quarter_results_forecast.change_in_forecast_net_sales)
+              td.text-right = red_hundred(@quarter_results_forecast.change_in_forecast_operating_income)
+              td.text-right = red_hundred(@quarter_results_forecast.change_in_forecast_ordinary_income)
+              td.text-right = red_hundred(@quarter_results_forecast.change_in_forecast_net_income)
+          - @quarter_summaries.each_with_index do |quarter_summary, i|
+            - prev_year_quarter_summary = @quarter_summaries[i + 4]
+            - if show_financial_value?(quarter_summary, @last_year)
+              tr
+                td.text-center = quarter_summary.accounting_period_once(i > 0 ? @quarter_summaries[i - 1] : @quarter_results_forecast)
+                td.text-center = link_to_pdf(quarter_summary.summary.disclosure_pdf, quarter_summary.quarter_name)
+                td.text-right = number_with_delimiter(quarter_summary.net_sales)
+                td.text-right = red_delimiter(quarter_summary.operating_income)
+                td.text-right = red_delimiter(quarter_summary.ordinary_income)
+                td.text-right = red_delimiter(quarter_summary.net_income)
+                td.text-right = red_delimiter_per_share(quarter_summary.net_income_per_share)
+                td.text-right = red_hundred(quarter_summary.net_sales_operating_income_ratio)
+                td.text-right = red_hundred(quarter_summary.net_sales_ordinary_income_ratio)
+                td.text-right = red_hundred(quarter_summary.change_in_net_sales(prev_year_quarter_summary))
+                td.text-right = red_hundred(quarter_summary.change_in_operating_income(prev_year_quarter_summary))
+                td.text-right = red_hundred(quarter_summary.change_in_ordinary_income(prev_year_quarter_summary))
+                td.text-right = red_hundred(quarter_summary.change_in_net_income(prev_year_quarter_summary))
+      br
+      .row
+        .col-6
+          h5 進捗率
+          table.table.table-progress-ratio.table-striped.table-bordered.table-condensed
+            thead
+              tr
+                th.w-period.text-center.text-middle 決算期
+                th.w-quarter.text-center.text-middle 四半期
+                th.w-ratio.text-center
+                  | 売上高
+                  br
+                  | 進捗率
+                th.w-ratio.text-center
+                  | 営業利益
+                  br
+                  | 進捗率
+                th.w-ratio.text-center
+                  | 経常利益
+                  br
+                  | 進捗率
+                th.w-ratio.text-center
+                  | 純利益
+                  br
+                  | 進捗率
+            tbody
+              - @current_summaries.each_with_index do |summary, i|
+                tr
+                  td.text-center = summary.accounting_period_once(i > 0 ? @current_summaries[i - 1] : nil)
+                  td.text-center = summary.quarter_name
+                  td.text-center = summary.net_sales_progress_ratio(@latest_forecast)
+                  td.text-center = summary.operating_income_progress_ratio(@latest_forecast)
+                  td.text-center = summary.ordinary_income_progress_ratio(@latest_forecast)
+                  td.text-center = summary.net_income_progress_ratio(@latest_forecast)
 
-          - if @cash_flows_only_q4 || show_financial_value?(cash_flow, @last_year)
-            tr class=(hide_if_term_annual(cash_flow))
-              td.text-center  = cash_flow.accounting_period_once(@cash_flows[i - 1])
-              td.text-center = link_to_pdf(cash_flow.disclosure_pdf, cash_flow.quarter_name)
-              td.text-right = red_delimiter(cash_flow.operating_activities)
-              td.text-right = red_delimiter(cash_flow.investment_activities)
-              td.text-right = red_delimiter(cash_flow.fcf)
-              td.text-right = red_delimiter(cash_flow.financing_activities)
-              td.text-right = red_delimiter(cash_flow.net_increase_in_cash(prev_cash_flow))
-              td.text-right = red_delimiter(cash_flow.cash)
-    br
-    h5 四半期
-    - if @cash_flows_only_q4
-      = "#{@stock.name}の四半期毎のキャッシュフローはありません。"
-    - else
+  / キャッシュフロー
+  - if show_content?
+    #menu-cashflow.tab-pane class=activate_stock_tab("menu-cashflow")
+      - unless @cash_flows_only_q4
+        .table-title
+          .pull-right
+            .term_all
+              - if term_all?(@term)
+                = link_to "今期 〜 過去3期", stock_path(@stock, tab: "menu-cashflow")
+                = " / 全て"
+              - else
+                = "今期 〜 過去3期 / "
+                = link_to "全て", stock_path(@stock, term: "all", tab: "menu-cashflow")
+          .term-annual
+            span.list_type
+              - if term_annual?
+                = link_to "累計", stock_path(@stock, tab: "menu-cashflow")
+                = " / 通期"
+              - else
+                = "累計 / "
+                = link_to "通期", stock_path(@stock, term: "annual", tab: "menu-cashflow")
       table.table.table-cashflow.table-striped.table-bordered.table-condensed
         thead
           tr
@@ -278,22 +234,70 @@ ul.nav.nav-tabs.main-content-nav-tabs
               br
               | 期末残高
         tbody
-          - @quarter_cash_flows.each_with_index do |quarter_cash_flow, i|
-            - if show_financial_value?(quarter_cash_flow, @last_year)
-              tr
-                td.text-center = quarter_cash_flow.accounting_period_once(@quarter_cash_flows[i - 1])
-                td.text-center = link_to_pdf(quarter_cash_flow.cash_flow.disclosure_pdf, quarter_cash_flow.quarter_name)
-                td.text-right = red_delimiter(quarter_cash_flow.operating_activities)
-                td.text-right = red_delimiter(quarter_cash_flow.investment_activities)
-                td.text-right = red_delimiter(quarter_cash_flow.fcf)
-                td.text-right = red_delimiter(quarter_cash_flow.financing_activities)
-                td.text-right = red_delimiter(quarter_cash_flow.net_increase_in_cash)
-                td.text-right = red_delimiter(quarter_cash_flow.cash)
-    div
-      | ＊フリーキャッシュフローは「営業キャッシュフロー − 投資キャッシュフロー」で計算しています
+          - @cash_flows.each_with_index do |cash_flow, i|
+            - prev_cash_flow = @cash_flows[i + 1]
+
+            - if @cash_flows_only_q4 || show_financial_value?(cash_flow, @last_year)
+              tr class=(hide_if_term_annual(cash_flow))
+                td.text-center  = cash_flow.accounting_period_once(@cash_flows[i - 1])
+                td.text-center = link_to_pdf(cash_flow.disclosure_pdf, cash_flow.quarter_name)
+                td.text-right = red_delimiter(cash_flow.operating_activities)
+                td.text-right = red_delimiter(cash_flow.investment_activities)
+                td.text-right = red_delimiter(cash_flow.fcf)
+                td.text-right = red_delimiter(cash_flow.financing_activities)
+                td.text-right = red_delimiter(cash_flow.net_increase_in_cash(prev_cash_flow))
+                td.text-right = red_delimiter(cash_flow.cash)
+      br
+      h5 四半期
+      - if @cash_flows_only_q4
+        = "#{@stock.name}の四半期毎のキャッシュフローはありません。"
+      - else
+        table.table.table-cashflow.table-striped.table-bordered.table-condensed
+          thead
+            tr
+              th.w-period.text-center.text-middle 決算期
+              th.w-quarter.text-center.text-middle 四半期
+              th.text-center
+                | 営業
+                br
+                | キャッシュフロー
+              th.text-center
+                | 投資
+                br
+                | キャッシュフロー
+              th.text-center
+                | フリー
+                br
+                | キャッシュフロー
+              th.text-center
+                | 財務
+                br
+                | キャッシュフロー
+              th.text-center
+                | 現金及び同等物の
+                br
+                | 増減額
+              th.text-center
+                | 現金及び同等物の
+                br
+                | 期末残高
+          tbody
+            - @quarter_cash_flows.each_with_index do |quarter_cash_flow, i|
+              - if show_financial_value?(quarter_cash_flow, @last_year)
+                tr
+                  td.text-center = quarter_cash_flow.accounting_period_once(@quarter_cash_flows[i - 1])
+                  td.text-center = link_to_pdf(quarter_cash_flow.cash_flow.disclosure_pdf, quarter_cash_flow.quarter_name)
+                  td.text-right = red_delimiter(quarter_cash_flow.operating_activities)
+                  td.text-right = red_delimiter(quarter_cash_flow.investment_activities)
+                  td.text-right = red_delimiter(quarter_cash_flow.fcf)
+                  td.text-right = red_delimiter(quarter_cash_flow.financing_activities)
+                  td.text-right = red_delimiter(quarter_cash_flow.net_increase_in_cash)
+                  td.text-right = red_delimiter(quarter_cash_flow.cash)
+      div
+        | ＊フリーキャッシュフローは「営業キャッシュフロー − 投資キャッシュフロー」で計算しています
 
   / 月次
-  - if @disclosures_monthly.present?
+  - if @disclosures_monthly.present? && show_content?
     #menu-monthly.tab-pane
       .row
         .col-7
@@ -309,7 +313,7 @@ ul.nav.nav-tabs.main-content-nav-tabs
                   td.text-center = link_to_pdf(disclosure, disclosure.title)
 
   / 予想PER
-  #menu-per.tab-pane.tab-chart
+  #menu-per.tab-pane.tab-chart class="#{'active' unless show_content?}"
     #per-chart
 
   / PBR
@@ -328,17 +332,18 @@ ul.nav.nav-tabs.main-content-nav-tabs
         | ＊FCF倍率は 時価総額 / FCF で算出しています。
 
   / 開示全て
-  #menu-disclosures.tab-pane
-    .row
-      .col-7
-        table.table.table-monthly.table-striped.table-bordered.table-condensed
-          thead
-            tr
-              th.w-ratio.text-center 日時
-              th.w-ratio.text-center 表題
-          tbody
-            - @disclosures.each do |disclosure|
+  - if show_content?
+    #menu-disclosures.tab-pane
+      .row
+        .col-7
+          table.table.table-monthly.table-striped.table-bordered.table-condensed
+            thead
               tr
-                td.text-center
-                  = release_date_s(disclosure)
-                td.text-center = link_to_pdf(disclosure, disclosure.title)
+                th.w-ratio.text-center 日時
+                th.w-ratio.text-center 表題
+            tbody
+              - @disclosures.each do |disclosure|
+                tr
+                  td.text-center
+                    = release_date_s(disclosure)
+                  td.text-center = link_to_pdf(disclosure, disclosure.title)

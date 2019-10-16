@@ -21,6 +21,10 @@ module StocksHelper
     "hide" if term_annual? && !summary.q4?
   end
 
+  def show_content?
+    !@stock&.all_stock_median?
+  end
+
   def thead_summary
     '<thead>
       <tr>

@@ -4,6 +4,7 @@ class Stock < ActiveRecord::Base
   MOJI_DELETE = /株式会社|（株）|・/ # 「株式会社」（株）・を削除
   SPACE = / |　/ # 半角・全角空白
 
+  CODE_ALL_STOCK_MEDIAN = "10000" # 全銘柄（中央値）
   CODE_INDEX = ["998407"] # 日経平均
 
   has_many :disclosures
@@ -110,4 +111,7 @@ class Stock < ActiveRecord::Base
     stock_price_latest&.ytd
   end
 
+  def all_stock_median?
+    code == CODE_ALL_STOCK_MEDIAN
+  end
 end
