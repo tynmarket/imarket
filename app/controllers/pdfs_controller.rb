@@ -9,6 +9,8 @@ class PdfsController < ApplicationController
 
     @code = @disclosure.code
     @title = title
+  rescue Mime::Type::InvalidMimeType
+    # LINE Bot
   end
 
   private
