@@ -4,7 +4,12 @@ class FavoritesController < ApplicationController
   def index
     today = Date.today
 
-    @stocks = Stock.joins(:favorites).where(favorites: { user_id: current_user.id }).order(:code)
+    @stocks = Stock
+      .joins(:favorites)
+      .includes(:stock_price_latest)
+      .where(favorites: { user_id: current_user.id })
+      .order(:code)
+
     @disclosures = Disclosure
       .where(code: @stocks.map(&:code))
       .where(release_date: (today.prev_month)...today)
