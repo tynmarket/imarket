@@ -1,5 +1,5 @@
 .row
-  .col-8.center
+  .col-9.center
     - if @stocks.blank?
       p.result お気に入りは登録されていません。
     - else
@@ -21,16 +21,16 @@
           table.table.table-search.table-striped.table-bordered
             thead
               tr
-                th
-                th.text-center コード
+                th.w_fav
+                th.w_code.text-center コード
                 th.text-center 銘柄名
-                th.text-center PER
-                th.text-center PBR
+                th.w_per.text-center PER
+                th.w_per.text-center PBR
                 - if tynmarket?
-                  th.text-center FCF倍率
-                th.text-center 前日比
-                th.text-center 年初来
-                th.text-center リンク
+                  th.w_per.text-center FCF倍率
+                th.w_per.text-center 前日比
+                th.w_per.text-center 年初来
+                th.w_link.text-center リンク
             tbody
               - @stocks.each do |stock|
                 tr
@@ -62,14 +62,14 @@
           table.table.table-striped.table-bordered.table-condensed.table-disclosure.table-disclosure-all
             thead
               tr
-                th.w_release.text-center 時刻
+                th.w_release.text-center 日時
                 th.w_name.text-center 会社名
                 th.w_title.text-center 表題
                 th.w_code.text-center コード
             tbody
               - @disclosures.each do |disclosure|
                 tr
-                  td.text-center = release_time(disclosure)
+                  td.text-center = release_date_time(disclosure)
                   td
                     .overflow_hidden = disclosure.name
                   td = link_to_pdf(disclosure, disclosure.title)

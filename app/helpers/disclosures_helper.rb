@@ -22,6 +22,14 @@ module DisclosuresHelper
     date.strftime YMD_KA_LA
   end
 
+  def release_date_time(disclosure)
+    release_date = disclosure&.release_date
+
+    return unless release_date
+
+    release_date.strftime YMD_KA_LA + release_date.strftime(HM_C)
+  end
+
   def forecast?(summary, forecasts)
     summary.blank? && forecasts.present?
   end
