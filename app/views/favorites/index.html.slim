@@ -1,45 +1,76 @@
 .row
-  .col-8.center
+  .col-9.center
     - if @stocks.blank?
       p.result お気に入りは登録されていません。
     - else
       p.result お気に入り一覧
-      br/
-      table.table.table-search.table-striped.table-bordered
-        thead
-          tr
-            th
-            th.text-center コード
-            th.text-center 銘柄名
-            th.text-center PER
-            th.text-center PBR
-            - if tynmarket?
-              th.text-center FCF倍率
-            th.text-center 前日比
-            th.text-center 年初来
-            th.text-center リンク
-        tbody
-          - @stocks.each do |stock|
-            tr
-              td
-                = render "shared/fav_icon", fav_on: true, stock_id: stock.id
-              td.text-center
-                a href=stock_path(stock) target="_blank"
-                  = stock.code
-              td.text-center
-                = stock.name
-              td.text-center
-                = per_in_stock stock
-              td.text-center
-                = pbr_in_stock stock
-              - if tynmarket?
-                td.text-center
-                  = stock.fcf_ratio
-              td.text-center
-                = red_hundred_p(stock.change_rate)
-              td.text-center
-                = red_hundred_p(stock.ytd)
-              td.text-center
-                = link_to_detail stock
-                | &nbsp;
-                = link_to_chart stock
+      br
+
+      / タブ
+      ul.nav.nav-tabs.main-content-nav-tabs
+        li.active
+          a href="#summary" data-toggle="tab" 概要
+        li
+          a href="#disclosure" data-toggle="tab" 開示
+
+      / タブコンテンツ
+      .tab-content
+        / 概要
+        #summary.tab-pane.active
+
+          table.table.table-search.table-striped.table-bordered
+            thead
+              tr
+                th.w_fav
+                th.w_code.text-center コード
+                th.text-center 銘柄名
+                th.w_per.text-center PER
+                th.w_per.text-center PBR
+                - if tynmarket?
+                  th.w_per.text-center FCF倍率
+                th.w_per.text-center 前日比
+                th.w_per.text-center 年初来
+                th.w_link.text-center リンク
+            tbody
+              - @stocks.each do |stock|
+                tr
+                  td
+                    = render "shared/fav_icon", fav_on: true, stock_id: stock.id
+                  td.text-center
+                    a href=stock_path(stock) target="_blank"
+                      = stock.code
+                  td.text-center
+                    = stock.name
+                  td.text-center
+                    = per_in_stock stock
+                  td.text-center
+                    = pbr_in_stock stock
+                  - if tynmarket?
+                    td.text-center
+                      = stock.fcf_ratio
+                  td.text-center
+                    = red_hundred_p(stock.change_rate)
+                  td.text-center
+                    = red_hundred_p(stock.ytd)
+                  td.text-center
+                    = link_to_detail stock
+                    | &nbsp;
+                    = link_to_chart stock
+
+        / 開示
+        #disclosure.tab-pane
+          table.table.table-striped.table-bordered.table-condensed.table-disclosure.table-disclosure-all
+            thead
+              tr
+                th.w_date.text-center 日時
+                th.w_name.text-center 会社名
+                th.text-center 表題
+                th.w_code.text-center コード
+            tbody
+              - @disclosures.each do |disclosure|
+                tr
+                  td.text-center = release_month_date(disclosure)
+                  td
+                    .overflow_hidden = disclosure.name
+                  td = link_to_pdf(disclosure, disclosure.title)
+                  td.text-center = link_to_stock(disclosure)

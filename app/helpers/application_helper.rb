@@ -4,7 +4,7 @@ module ApplicationHelper
 
   def release_notes
     <<~EOS.html_safe
-      （10/15）全銘柄の予想PERとPBRの中央値を表示できるようにしました。<a href="/stocks/10000" target="_blank" >全銘柄（中央値）</a>
+      （12/3）お気に入りに登録した銘柄の開示一覧を表示するようにしました。</a>
     EOS
   end
 
