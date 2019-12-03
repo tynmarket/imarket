@@ -62,14 +62,14 @@
           table.table.table-striped.table-bordered.table-condensed.table-disclosure.table-disclosure-all
             thead
               tr
-                th.w_release.text-center 日時
+                th.w_date.text-center 日時
                 th.w_name.text-center 会社名
-                th.w_title.text-center 表題
+                th.text-center 表題
                 th.w_code.text-center コード
             tbody
               - @disclosures.each do |disclosure|
                 tr
-                  td.text-center = release_date_time(disclosure)
+                  td.text-center = release_month_date(disclosure)
                   td
                     .overflow_hidden = disclosure.name
                   td = link_to_pdf(disclosure, disclosure.title)

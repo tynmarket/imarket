@@ -8,6 +8,7 @@ module Utils
 
     # TODO 例示する
     HM_C = "%H:%M"
+    MD_KA_LA = "%-m月%-d日"
     YMD_S = "%Y/%m/%d"
     YMD_KA_LA = "%Y年%-m月%-d日"
     YMD_HM_KA_LA = "%Y年%-m月%-d日 %-H時%-M分"

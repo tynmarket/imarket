@@ -22,12 +22,12 @@ module DisclosuresHelper
     date.strftime YMD_KA_LA
   end
 
-  def release_date_time(disclosure)
+  def release_month_date(disclosure)
     release_date = disclosure&.release_date
 
     return unless release_date
 
-    release_date.strftime YMD_KA_LA + release_date.strftime(HM_C)
+    release_date.strftime MD_KA_LA
   end
 
   def forecast?(summary, forecasts)
