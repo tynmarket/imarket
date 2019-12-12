@@ -141,7 +141,7 @@ module ApplicationHelper
   end
 
   def link_to_getsuji(model, full = false)
-    "<a class=#{link_class_name('getsuji', full)} href='http://kabuka.biz/getuji/code/7564#{model.code}.htm' target='_blank'>\
+    "<a class=#{link_class_name('getsuji', full)} href='http://kabuka.biz/getuji/code/#{model.code}.htm' target='_blank'>\
     <span>#{full ? '月次Web' : '月'}</span></a>".html_safe
   end
 
