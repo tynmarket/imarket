@@ -4,7 +4,7 @@ module ApplicationHelper
 
   def release_notes
     <<~EOS.html_safe
-      （12/3）お気に入りに登録した銘柄の開示一覧を表示するようにしました。</a>
+      （12/12）月次Webのリンク切れを修正しました。</a>
     EOS
   end
 
