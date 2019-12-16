@@ -4,7 +4,7 @@ module ApplicationHelper
 
   def release_notes
     <<~EOS.html_safe
-      （12/16）個別銘柄のページに四季報オンラインのリンクを追加しました。</a>
+      （12/16）開示一覧と個別銘柄のページに四季報オンラインのリンクを追加しました。</a>
     EOS
   end
 
@@ -62,7 +62,7 @@ module ApplicationHelper
 
   def link_to_other_services_short(model, full = false)
     link_to_detail(model, full) + link_to_chart(model, full) +
-      link_to_profile(model, full) + link_to_margin(model, full)
+      link_to_profile(model, full) + link_to_shikiho(model, full)
   end
 
   def link_class_name(class_name, full = false)
