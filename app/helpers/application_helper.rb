@@ -4,7 +4,7 @@ module ApplicationHelper
 
   def release_notes
     <<~EOS.html_safe
-      （12/12）月次Webのリンク切れを修正しました。</a>
+      （12/16）個別銘柄のページに四季報オンラインのリンクを追加しました。</a>
     EOS
   end
 
