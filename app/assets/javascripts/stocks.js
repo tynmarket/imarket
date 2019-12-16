@@ -43,6 +43,8 @@ $(function () {
   trackEvent('.link-kabutan', 'link', 'kabutan', label);
   // FISCO
   trackEvent('.link-fisco', 'link', 'fisco', label);
+  // 四季報
+  trackEvent('.link-shikiho', 'link', 'shikiho', label);
   // 月次Web
   trackEvent('.link-getsuji', 'link', 'getsuji', label);
 });
