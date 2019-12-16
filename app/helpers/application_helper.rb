@@ -54,7 +54,9 @@ module ApplicationHelper
       link_to_ifis(model, full) + link_to_taiho(model, full) +
       link_to_karauri(model, full) + link_to_balance(model, full) + link_to_pcsl(model, full) +
       link_to_yuho(model, full) + link_to_pts(model, full) + link_to_sbi(model, full) +
-      link_to_kabutan(model, full) + link_to_fisco(model, full) + link_to_getsuji(model, full)
+      link_to_kabutan(model, full) + link_to_fisco(model, full) +
+      link_to_shikiho(model, full) +
+      link_to_getsuji(model, full)
   end
   # rubocop:enable Metrics/AbcSize
 
@@ -138,6 +140,11 @@ module ApplicationHelper
   def link_to_fisco(model, full = false)
     "<a class=#{link_class_name('fisco', full)} href='https://web.fisco.jp/platform/companies/0#{model.code}00/cashflow' target='_blank'>\
     <span>#{full ? 'FISCO' : 'F'}</span></a>".html_safe
+  end
+
+  def link_to_shikiho(model, full = false)
+    "<a class=#{link_class_name('shikiho', full)} href='https://shikiho.jp/stocks/#{model.code}/' target='_blank'>\
+    <span>#{full ? '四季報' : '四'}</span></a>".html_safe
   end
 
   def link_to_getsuji(model, full = false)
