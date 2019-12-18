@@ -71,7 +71,7 @@ module ApplicationHelper
 
   def link_to_detail(model, full = false)
     "<a class=#{link_class_name('detail', full)} href='http://stocks.finance.yahoo.co.jp/stocks/detail/?code=#{model.code}' target='_blank'>\
-    <span>#{full ? '詳細' : '詳'}</span></a>".html_safe
+    <span>#{full ? '詳細' : 'Y!'}</span></a>".html_safe
   end
 
   def link_to_chart(model, full = false)
