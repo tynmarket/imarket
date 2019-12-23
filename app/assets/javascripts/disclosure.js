@@ -32,7 +32,6 @@ $(function () {
   trackEvent('.link-chart', 'link', 'chart', label);
   // 企業情報
   trackEvent('.link-profile', 'link', 'profile', label);
-  // 信用残高
-  // TODO 変更
-  trackEvent('.link-margin', 'link', 'margin', label);
+  // 四季報
+  trackEvent('.link-shikiho', 'link', 'shikiho', label);
 });
