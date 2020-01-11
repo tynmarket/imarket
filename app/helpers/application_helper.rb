@@ -50,12 +50,14 @@ module ApplicationHelper
 
   # rubocop:disable Metrics/AbcSize
   def link_to_other_services(model, full = false)
-    link_to_other_services_short(model, full) +
-      link_to_ifis(model, full) + link_to_taiho(model, full) +
-      link_to_karauri(model, full) + link_to_balance(model, full) + link_to_pcsl(model, full) +
-      link_to_yuho(model, full) + link_to_pts(model, full) + link_to_sbi(model, full) +
-      link_to_kabutan(model, full) + link_to_fisco(model, full) +
-      link_to_shikiho(model, full) +
+    link_to_detail(model, full) + link_to_chart(model, full) +
+      link_to_profile(model, full) + link_to_margin(model, full) +
+      link_to_shikiho(model, full) + link_to_ifis(model, full) +
+      link_to_taiho(model, full) + link_to_karauri(model, full) +
+      link_to_balance(model, full) + link_to_pcsl(model, full) +
+      link_to_yuho(model, full) + link_to_pts(model, full) +
+      link_to_sbi(model, full) + link_to_kabutan(model, full) +
+      link_to_fisco(model, full) + link_to_shikiho(model, full) +
       link_to_getsuji(model, full)
   end
   # rubocop:enable Metrics/AbcSize
