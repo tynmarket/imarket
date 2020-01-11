@@ -4,7 +4,7 @@ module ApplicationHelper
 
   def release_notes
     <<~EOS.html_safe
-      （12/16）開示一覧と個別銘柄のページに四季報オンラインのリンクを追加しました。</a>
+      （1/11）個別銘柄のページの信用残のリンクが表示されていなかったのを修正しました。</a>
     EOS
   end
 
