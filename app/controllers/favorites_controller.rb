@@ -2,7 +2,7 @@ class FavoritesController < ApplicationController
   before_action :require_login, except: [:show]
 
   def index
-    today = Date.today
+    tomorrow = Date.tomorrow
 
     @stocks = Stock
               .joins(:favorites)
@@ -12,7 +12,7 @@ class FavoritesController < ApplicationController
 
     @disclosures = Disclosure
                    .where(code: @stocks.map(&:code))
-                   .where(release_date: (today.prev_month)...today)
+                   .where(release_date: (tomorrow.prev_month)..tomorrow)
                    .order(id: :desc)
   end
 
