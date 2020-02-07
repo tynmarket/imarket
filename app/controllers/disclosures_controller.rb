@@ -10,6 +10,8 @@ class DisclosuresController < ApplicationController
                    .where(release_date: @date...@date + 1)
                    .page(page)
                    .order(id: :desc)
+
+    @favorite_code_hash = logged_in? && current_user.favorite_code_hash || {}
   end
 
   def find_date
