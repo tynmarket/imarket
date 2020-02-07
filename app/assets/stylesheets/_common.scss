@@ -128,3 +128,24 @@ header .fav {
   margin-left: auto;
   margin-right: auto;
 }
+
+.disclosure-name {
+  display: flex;
+  justify-content: space-between;
+  border: none !important;
+
+  &.border-top {
+    border-top: 1px solid #ddd !important;
+  }
+}
+
+.disclosure-fav {
+  width: 10px;
+  height: 10px;
+  min-width: 10px;
+  min-height: 10px;
+
+  path {
+    fill: rgb(224, 36, 94);
+  }
+}

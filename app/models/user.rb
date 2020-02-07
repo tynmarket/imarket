@@ -17,4 +17,8 @@ class User < ApplicationRecord
   def add_favorite(stock_id)
     Favorite.create(stock_id: stock_id, user_id: id) rescue nil # 作成済みなど
   end
+
+  def favorite_code_hash
+    favorites.joins(:stock).pluck("stocks.code").map { |code| [code, true] }.to_h
+  end
 end
