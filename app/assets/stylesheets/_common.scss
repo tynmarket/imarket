@@ -133,6 +133,10 @@ header .fav {
   display: flex;
   justify-content: space-between;
   border: none !important;
+
+  &.border-top {
+    border-top: 1px solid #ddd !important;
+  }
 }
 
 .disclosure-fav {
