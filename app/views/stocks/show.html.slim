@@ -99,7 +99,10 @@ ul.nav.nav-tabs.main-content-nav-tabs
             - if show_financial_value?(summary, @last_year)
               tr class=(hide_if_term_annual(summary))
                 td.text-center  = summary.accounting_period_once(i > 0 ? @summaries[i - 1] : @latest_forecast)
-                td.text-center = link_to_pdf(summary.disclosure_pdf, summary.quarter_name)
+                - if show_summary?(summary.disclosure_pdf.release_date)
+                  td.text-center = link_to_pdf(summary.disclosure_pdf, summary.quarter_name)
+                - else
+                  td.text-center = summary.quarter_name
                 td.text-right = number_with_delimiter(summary.net_sales)
                 td.text-right = red_delimiter(summary.operating_income)
                 td.text-right = red_delimiter(summary.ordinary_income)
@@ -136,7 +139,10 @@ ul.nav.nav-tabs.main-content-nav-tabs
             - if show_financial_value?(quarter_summary, @last_year)
               tr
                 td.text-center = quarter_summary.accounting_period_once(i > 0 ? @quarter_summaries[i - 1] : @quarter_results_forecast)
-                td.text-center = link_to_pdf(quarter_summary.summary.disclosure_pdf, quarter_summary.quarter_name)
+                - if show_summary?(quarter_summary.summary.disclosure_pdf.release_date)
+                  td.text-center = link_to_pdf(quarter_summary.summary.disclosure_pdf, quarter_summary.quarter_name)
+                - else
+                  td.text-center = quarter_summary.quarter_name
                 td.text-right = number_with_delimiter(quarter_summary.net_sales)
                 td.text-right = red_delimiter(quarter_summary.operating_income)
                 td.text-right = red_delimiter(quarter_summary.ordinary_income)

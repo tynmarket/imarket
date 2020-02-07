@@ -25,6 +25,10 @@ module StocksHelper
     !@stock&.all_stock_median?
   end
 
+  def show_summary?(release_date)
+    release_date.year >= 2014
+  end
+
   def thead_summary
     '<thead>
       <tr>
