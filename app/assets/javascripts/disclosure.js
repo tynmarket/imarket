@@ -2,17 +2,17 @@ $(function () {
   if (!document.getElementById('disclosures-index')) { return }
 
   $('.main-content-nav-tabs a').on('show.bs.tab', function(e) {
-    const tab = e.currentTarget.href.split('#')[1];  // タブのid
+    var tab = e.currentTarget.href.split('#')[1];  // タブのid
 
     // ページネーションにタブのidを付加
     replacePagination(tab);
   });
 
-  const paramStr = location.href.split("?")[1];
+  var paramStr = location.href.split("?")[1];
 
   if (paramStr) {
-    const params = new URLSearchParams(paramStr);
-    const tab = params.get("tab");
+    var params = new URLSearchParams(paramStr);
+    var tab = params.get("tab");
 
     // ページネーションにタブのidを付加
     replacePagination(tab);
@@ -39,7 +39,7 @@ $(function () {
     }
   }
 
-  const label = 'disclosures';
+  var label = 'disclosures';
 
   // 月次
   trackEvent('#tab-monthly', 'tab', 'monthly', label);
