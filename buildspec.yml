@@ -16,6 +16,7 @@ phases:
       - echo Building the Docker image...
       - git rev-parse HEAD
       - BUILD_BRANCH=`echo $CODEBUILD_WEBHOOK_TRIGGER | awk -F/ '{print $2}'`
+      - ${BUILD_BRANCH:-master}
       - '[ "$BUILD_BRANCH" = "master" ] && IMAGE_TAG=latest || IMAGE_TAG=$BUILD_BRANCH'
       - echo $IMAGE_TAG
       - docker build -t $IMAGE_REPO_NAME --build-arg rails_master_key=$rails_master_key .
