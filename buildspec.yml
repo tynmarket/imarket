@@ -13,6 +13,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
+      - printenv
       - IMAGE_TAG_ECHO=`echo $CODEBUILD_WEBHOOK_TRIGGER | awk -F/ '{print $2}' | sed 's/master/latest/'`
       - echo $IMAGE_TAG_ECHO
       - docker build -t $IMAGE_REPO_NAME --build-arg rails_master_key=$rails_master_key .
