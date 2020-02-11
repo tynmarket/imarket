@@ -1,0 +1,24 @@
+version: 0.2
+
+env:
+  parameter-store:
+    rails_master_key: rails_master_key
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - IMAGE_TAG_ECHO=`echo $CODEBUILD_WEBHOOK_TRIGGER | awk -F/ '{print $2}' | sed 's/master/latest/'`
+      - echo $IMAGE_TAG_ECHO
+      - docker build -t $IMAGE_REPO_NAME --build-arg rails_master_key=$rails_master_key .
+      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
