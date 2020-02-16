@@ -154,6 +154,10 @@ module ApplicationHelper
     <span>#{full ? '月次Web' : '月'}</span></a>".html_safe
   end
 
+  def chrome_extention_url
+    "https://chrome.google.com/webstore/detail/imarket%E3%82%B5%E3%83%BC%E3%83%81/acjlglhdafdpngebjlidbmgnlplfpgpd"
+  end
+
   def red_hundred(num)
     return unless num
 
