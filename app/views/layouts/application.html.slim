@@ -21,7 +21,7 @@ html lang="ja"
 
   body id="#{controller_name}-#{@action_name || action_name}" class=body_class
     header.navbar.navbar-default
-      .container class=@container_size
+      .container
         .navbar-header
           a.navbar-brand href="/"
             | iMarket（適時開示ネット）
@@ -53,20 +53,20 @@ html lang="ja"
                   | ログアウト
 
     / 検索
-    #search.container class=@container_size
+    #search.container
       form.navbar-form.navbar-left action="/stocks/search" role="search"
         .form-group
           input.form-control name="query" placeholder="証券コード、企業名" type="text" tabindex="1"
         | &nbsp;
         button.btn.btn-default type="submit" 検索
-      .btn-group.announce class=@container_size
+      .btn-group.announce
         = release_notes
     / コンテンツ
-    .container.main class=@container_size
+    .container.main
       = yield
 
     / フッター
-    footer.container.footer class=@container_size
+    footer.container.footer
       .disclaimer
         div ・動作確認はChromeで行っています。
         div ・データは数十秒〜数十分程度遅れて表示されます。
@@ -79,7 +79,7 @@ html lang="ja"
         div ・当サイトの全てのコンテンツやプログラムの著作権は管理人及びその他の権利者に帰属するものとします。
       br
       .navbar.navbar-default
-        .container class=@container_size
+        .container
           ul.nav.navbar-nav
             li
               a href=chrome_extention_url
