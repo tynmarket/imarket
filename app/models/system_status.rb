@@ -9,7 +9,19 @@ class SystemStatus < ActiveRecord::Base
     return unless system_status
 
     last_updated = DateTime.parse system_status.status
-    last_updated.strftime(Utils::Constants::YMD_HM_KA_LA)
+    text = last_updated.strftime(Utils::Constants::YMD_HM_KA_LA)
+
+    now = Time.current
+    today = Date.today
+    prev_trading_day = TradingDayJp.prev(today)
+
+    if today.trading_day_jp? && last_updated < today && now.hour >= 17 ||
+       !today.trading_day_jp? && prev_trading_day > last_updated.to_date
+      # 営業日の17時以降に株価が更新されていない場合、更新の遅れを表示する
+      "#{text}（更新が遅れています）"
+    else
+      text
+    end
   end
 
 end
