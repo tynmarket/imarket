@@ -13,7 +13,7 @@ describe SystemStatus do
       context "営業日の17:00" do
         let(:now) { Time.local(2020, 3, 6, 17) }
 
-        around { |e| travel_to(now){ e.run } }
+        around { |e| travel_to(now) { e.run } }
 
         it { expect(last_updated_text).to eq "2020年3月6日 16時40分" }
       end
@@ -21,7 +21,7 @@ describe SystemStatus do
       context "休日" do
         let(:now) { Time.local(2020, 3, 7, 9) }
 
-        around { |e| travel_to(now){ e.run } }
+        around { |e| travel_to(now) { e.run } }
 
         it { expect(last_updated_text).to eq "2020年3月6日 16時40分" }
       end
@@ -35,7 +35,7 @@ describe SystemStatus do
       context "営業日の16:00" do
         let(:now) { Time.local(2020, 3, 6, 16) }
 
-        around { |e| travel_to(now){ e.run } }
+        around { |e| travel_to(now) { e.run } }
 
         it { expect(last_updated_text).to eq "2020年3月5日 16時40分" }
       end
@@ -43,7 +43,7 @@ describe SystemStatus do
       context "営業日の17:00" do
         let(:now) { Time.local(2020, 3, 6, 17) }
 
-        around { |e| travel_to(now){ e.run } }
+        around { |e| travel_to(now) { e.run } }
 
         it { expect(last_updated_text).to eq "2020年3月5日 16時40分（更新が遅れています）" }
       end
@@ -51,7 +51,7 @@ describe SystemStatus do
       context "休日" do
         let(:now) { Time.local(2020, 3, 7, 9) }
 
-        around { |e| travel_to(now){ e.run } }
+        around { |e| travel_to(now) { e.run } }
 
         it { expect(last_updated_text).to eq "2020年3月5日 16時40分（更新が遅れています）" }
       end
