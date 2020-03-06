@@ -33,6 +33,8 @@ const eventToBuild = (data) => {
 // createSlackMessage creates a message from a build object.
 const createSlackMessage = (build) => {
   const source = build.source.repoSource;
+  const icon = build.status === 'SUCCESS' ? ':white_check_mark:' : ':warning:';
+  const text = `${icon}${build.status}`
 
   const message = {
    text: `Build \`${source.repoName}/${source.branchName}\``,
@@ -43,7 +45,7 @@ const createSlackMessage = (build) => {
         title_link: build.logUrl,
         fields: [{
           title: 'Status',
-          value: build.status || 'No status'
+          value: text || 'No status'
         }]
       }
     ]
