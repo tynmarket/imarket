@@ -24,7 +24,7 @@ RUN apk upgrade --no-cache && \
 
 COPY Gemfile Gemfile.lock yarn.lock /app/
 
-# apk del build-dependenciesがあるとnokogiriのインストールが上手くいかない
+# apk del build-dependenciesがあるとnokogiriの読み込みでエラーになる
 RUN apk add --update --no-cache \
       build-base \
       curl \
