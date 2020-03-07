@@ -14,6 +14,17 @@ class StockPricesController < ApplicationController
     render "per"
   end
 
+  def ohlc
+    code = params[:id] # TODO: id or code
+    period = params[:period]
+    from = params[:from]
+    to = params[:to]
+
+    data = PriceIntraday.ohlc(code, period, from, to)
+
+    render json: data
+  end
+
   private
 
   def set_stock_price_data(column)

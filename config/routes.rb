@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       get "per"
       get "pbr"
       get "fcf-ratio"
+      get "ohlc"
     end
   end
 
