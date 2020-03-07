@@ -10,7 +10,7 @@ class PriceIntraday < ApplicationRecord
         .where("datetime >= ?", from)
         .where("datetime <= ?", to)
         .pluck(:datetime, :open, :high, :low, :close)
-        .map{ |v| [v[0].to_i * 1000, v[1], v[2], v[3], v[4]] }
+        .map { |v| [v[0].to_i * 1000, v[1], v[2], v[3], v[4]] }
     end
   end
 end
