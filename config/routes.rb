@@ -32,6 +32,8 @@ Rails.application.routes.draw do
     end
   end
 
+  # ローソク足
+  resources :ohlc, only: [:show]
 
   # PDF（iMrket以外）
   get "pdf/*path", to: "pdfs#show"
