@@ -5,7 +5,6 @@ gem 'active_model_serializers'
 gem 'bootsnap', require: false
 gem 'bootstrap-sass'
 gem 'browser'
-gem 'holiday_jp'
 gem 'jbuilder'
 gem 'jquery-rails'
 gem 'kaminari'
@@ -22,7 +21,7 @@ gem 'sass-rails'
 gem 'settingslogic'
 gem 'slim-rails'
 gem 'sorcery'
-gem 'trading_day_jp', github: 'tyn-iMarket/trading_day_jp'
+gem 'trading_day_jp'
 gem 'uglifier'
 
 group :production do
