@@ -52,6 +52,11 @@ jobs:
           paths:
             - ~/.cache/yarn
 
+      # Check tsc version
+      - run:
+          name: check tsc version
+          command: ./node_modules/.bin/tsc --version
+
       # Check type
       - run:
           name: npx tsc
