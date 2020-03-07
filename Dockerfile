@@ -24,7 +24,8 @@ RUN apk upgrade --no-cache && \
 
 COPY Gemfile Gemfile.lock yarn.lock /app/
 
-RUN apk add --update --no-cache --virtual=build-dependencies \
+# apk del build-dependenciesがあるとnokogiriのインストールが上手くいかない
+RUN apk add --update --no-cache \
       build-base \
       curl \
       tar \
@@ -38,8 +39,7 @@ RUN apk add --update --no-cache --virtual=build-dependencies \
     bundle install -j4 --deployment --path /usr/local/bundle --without development test && \
     yarn install --production && \
     curl -LO https://mackerel.io/file/agent/tgz/mackerel-agent-latest.tar.gz && \
-    tar xvzf mackerel-agent-latest.tar.gz && \
-    apk del build-dependencies
+    tar xvzf mackerel-agent-latest.tar.gz
 
 COPY . /app
 COPY docker/default.conf /etc/nginx/conf.d
