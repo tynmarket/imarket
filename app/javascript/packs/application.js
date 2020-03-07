@@ -1,12 +1,9 @@
 import App from './components/App';
-import Exporting from 'highcharts/modules/exporting';
-import Highcharts from 'highcharts';
+import CandleStick from './components/CandleStick';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 //import "../styles/application";
-
-Exporting(Highcharts);
 
 document.addEventListener('DOMContentLoaded', () => {
   const elm = document.querySelector('#code');
@@ -16,6 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const code = elm.textContent;
+
+  const ohlcElm = document.querySelector('#candle-stick-chart');
+
+  // ローソク足
+  if (ohlcElm) {
+    CandleStick();
+    return;
+  }
 
   // PER
   ReactDOM.render(
