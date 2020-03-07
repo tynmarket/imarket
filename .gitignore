@@ -33,6 +33,7 @@ pkg
 .env.yaml
 
 /public/packs
+/build
 
 # firebase
 .firebase
