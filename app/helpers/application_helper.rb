@@ -4,7 +4,7 @@ module ApplicationHelper
 
   def release_notes
     <<~EOS.html_safe
-      （1/11）個別銘柄のページの信用残のリンクが表示されていなかったのを修正しました。</a>
+      （3/11）個別銘柄のページに年初来を表示するようにしました。</a>
     EOS
   end
 
