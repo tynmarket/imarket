@@ -85,6 +85,10 @@ module StocksHelper
     "#{pbr} 倍"
   end
 
+  def ytd_text(stock)
+    red_hundred_p(stock.ytd)
+  end
+
   def options_select_per
     [[100, 100], [50, 50], [30, 30], [20, 20], [15, 15], [10, 10]].reverse
   end

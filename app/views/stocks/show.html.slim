@@ -23,6 +23,10 @@ span.font-size-normal.mr5
   | &nbsp;
   span.font-size-normal.mr5
     = @stock.fcf_ratio
+- if @stock.ytd.present?
+  | &nbsp;
+  span.font-size-normal.mr5
+    = ytd_text(@stock)
 - if show_content?
   = link_to_other_services(@stock, true)
 br
