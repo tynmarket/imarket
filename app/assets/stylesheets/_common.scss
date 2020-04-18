@@ -29,6 +29,14 @@ $border-divider: 1px solid #e5e5e5;
   text-align: center;
 }
 
+.text-bold {
+  font-weight: bold;
+}
+
+.border-top-none {
+  border-top: none !important;
+}
+
 .font-size-normal {
   font-size: $font-size-normal;
 }

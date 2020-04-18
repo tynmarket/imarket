@@ -22,6 +22,9 @@ Rails.application.routes.draw do
   # お気に入り
   resources :favorites, only: [:index]
 
+  # EPS修正履歴
+  resources :eps_estimates, only: [:index]
+
   # 株価
   resources :stock_prices, only: [] do
     member do

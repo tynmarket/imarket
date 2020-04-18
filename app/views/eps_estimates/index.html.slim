@@ -1,0 +1,42 @@
+h1 Earnings Estimate (EPS)
+
+table.table
+  thead
+    tr
+      th Date
+      th Ticker
+      th Current Qtr.
+      th Next Qtr.
+      th Current Year
+      th Next Year
+  tbody
+    - @eps_estimates.each_with_index do |eps_estimate, i|
+      - eps_estimate_class = @eps_estimate_classes[i]
+      - prev_estimate = eps_estimate_class[eps_estimate.code]
+
+      tr
+        td
+          = eps_estimate.date
+        td
+          = eps_estimate.code
+        td class=(eps_estimate_class[:current_quarter_eps])
+          = eps_estimate.current_quarter_eps
+        td class=(eps_estimate_class[:next_quarter_eps])
+          = eps_estimate.next_quarter_eps
+        td class=(eps_estimate_class[:current_year_eps])
+          = eps_estimate.current_year_eps
+        td class=(eps_estimate_class[:next_year_eps])
+          = eps_estimate.next_year_eps
+
+      - if prev_estimate
+        tr
+          td.border-top-none
+          td.border-top-none
+          td
+            = prev_estimate.current_quarter_eps
+          td
+            = prev_estimate.next_quarter_eps
+          td
+            = prev_estimate.current_year_eps
+          td
+            = prev_estimate.next_year_eps
