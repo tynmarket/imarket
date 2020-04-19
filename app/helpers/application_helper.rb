@@ -4,7 +4,7 @@ module ApplicationHelper
 
   def release_notes
     <<~EOS.html_safe
-      （3/11）個別銘柄のページに年初来を表示するようにしました。</a>
+      （4/19）<a href="/eps_estimates">ダウ平均と構成銘柄のEPSの修正履歴</a> を表示するようにしました。
     EOS
   end
 
