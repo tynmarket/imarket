@@ -27,7 +27,7 @@ ul.nav.nav-tabs
             td
               = eps_estimate.date
             td
-              = eps_estimate.code
+              = yafoo_us_url(eps_estimate.code)
             td class=(eps_estimate_class[:current_quarter_eps])
               = eps_estimate.current_quarter_eps
             td class=(eps_estimate_class[:next_quarter_eps])
@@ -55,7 +55,7 @@ ul.nav.nav-tabs
             td
               = eps_estimate.date
             td
-              = eps_estimate.code
+              = yafoo_us_url(eps_estimate.code)
             td class=(eps_estimate_class[:current_quarter_eps])
               = eps_estimate.current_quarter_eps
             td class=(eps_estimate_class[:next_quarter_eps])
