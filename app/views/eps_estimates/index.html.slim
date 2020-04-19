@@ -9,7 +9,30 @@ ul.nav.nav-tabs
 
 .tab-content
   #dow.tab-pane
-    | ^DJI
+    table.table
+      thead
+        tr
+          th Date
+          th Ticker
+          th Current Qtr.
+          th Next Qtr.
+          th Current Year
+          th Next Year
+      tbody
+        - @dow_estimates.each do |eps_estimate|
+          tr
+            td
+              = eps_estimate.date
+            td
+              = eps_estimate.code
+            td
+              = eps_estimate.current_quarter_eps
+            td
+              = eps_estimate.next_quarter_eps
+            td
+              = eps_estimate.current_year_eps
+            td
+              = eps_estimate.next_year_eps
   #constituents.tab-pane
     table.table
       thead

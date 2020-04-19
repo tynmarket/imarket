@@ -2,6 +2,7 @@ class EpsEstimatesController < ApplicationController
   def index
     @eps_estimates = EpsEstimate.dow_constituents.order("id desc")
     @eps_estimate_classes = estimate_class(@eps_estimates)
+    @dow_estimates = EpsEstimate.dow.order("id desc")
   end
 
   private
