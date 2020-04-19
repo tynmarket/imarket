@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_13_023623) do
+ActiveRecord::Schema.define(version: 2020_04_11_024011) do
 
   create_table "authentications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -75,6 +75,21 @@ ActiveRecord::Schema.define(version: 2019_10_13_023623) do
     t.index ["stock_id"], name: "index_disclosures_stock_id"
   end
 
+  create_table "eps_estimates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.string "code", limit: 6, null: false
+    t.date "date", null: false
+    t.string "current_quarter", null: false
+    t.string "next_quarter", null: false
+    t.string "current_year", null: false
+    t.string "next_year", null: false
+    t.float "current_quarter_eps", null: false
+    t.float "next_quarter_eps", null: false
+    t.float "current_year_eps", null: false
+    t.float "next_year_eps", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "stock_id", null: false
@@ -115,20 +130,23 @@ ActiveRecord::Schema.define(version: 2019_10_13_023623) do
   end
 
   create_table "price_intradays", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.integer "stock_id"
     t.string "code", null: false
-    t.integer "period", limit: 2, null: false
-    t.datetime "datetime", null: false
-    t.datetime "datetime_original", null: false
-    t.integer "day", limit: 1, null: false, comment: "1-7、月曜は1"
+    t.integer "period", limit: 2, null: false, comment: "分足"
+    t.datetime "datetime", null: false, comment: "日時"
+    t.datetime "datetime_local", null: false, comment: "日時（現地）"
+    t.integer "day", limit: 1, null: false, comment: "0-6、日曜は0（MySQLのDAYOFWEEKは日曜日が1）"
+    t.integer "session", limit: 2, comment: "0 - 日中, 1 - ナイトセッション"
     t.integer "hour", limit: 1, null: false
     t.integer "minute", limit: 1, null: false
     t.float "open", null: false
     t.float "high", null: false
     t.float "low", null: false
     t.float "close", null: false
+    t.integer "volume"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["code", "datetime", "close"], name: "index_prices_intradays_code_datetime_close", unique: true
+    t.index ["code", "period", "datetime"], name: "index_prices_intradays_code_period_datetime", unique: true
   end
 
   create_table "results_forecasts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|

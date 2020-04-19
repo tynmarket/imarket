@@ -2,6 +2,10 @@ body {
   font-size: $font-size-small;
 }
 
+h1 {
+  font-size: 24px;
+}
+
 /* ナビゲーションバー */
 @mixin padding-navbar {
   padding-top: 10px;

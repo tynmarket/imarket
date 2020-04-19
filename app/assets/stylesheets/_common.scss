@@ -6,6 +6,7 @@ $font-size-small: 12px;
 $color-nabvar: #595857;
 $color-red: #d3381c;
 $color-blue: blue;
+$color-green: green;
 $color-link: #428bca;
 $color-text: #333;
 
@@ -29,6 +30,14 @@ $border-divider: 1px solid #e5e5e5;
   text-align: center;
 }
 
+.text-bold {
+  font-weight: bold;
+}
+
+.border-top-none {
+  border-top: none !important;
+}
+
 .font-size-normal {
   font-size: $font-size-normal;
 }
@@ -44,6 +53,10 @@ $border-divider: 1px solid #e5e5e5;
 
 .blue {
   color: $color-blue !important;
+}
+
+.green {
+  color: $color-green !important;
 }
 
 div.overflow_hidden {
@@ -109,14 +122,6 @@ div.overflow_hidden {
   height: 20px;
   cursor: pointer;
   vertical-align: bottom;
-}
-
-header .text {
-  padding-left: 5px;
-}
-
-header .fav {
-  display: inline !important;
 }
 
 .stocks .fav {

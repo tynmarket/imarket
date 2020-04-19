@@ -4,11 +4,24 @@ module ApplicationHelper
 
   def release_notes
     <<~EOS.html_safe
-      （3/11）個別銘柄のページに年初来を表示するようにしました。</a>
+      （4/19）<a href="/eps_estimates">ダウ平均と構成銘柄の予想EPSの修正履歴</a> を表示するようにしました。
     EOS
   end
 
   def set_title_and_description
+    if controller_name == "eps_estimates"
+      set_title_and_description_eps_estimates
+    else
+      set_title_and_description_others
+    end
+  end
+
+  def set_title_and_description_eps_estimates
+    @title = "ダウ平均・構成銘柄予想EPS修正履歴 | iMarket（適時開示ネット）"
+    @description = "ダウ平均と構成銘柄の予想EPSの修正履歴を確認することができます。"
+  end
+
+  def set_title_and_description_others
     title =
       if controller_name == "favorites"
         "お気に入り | "
