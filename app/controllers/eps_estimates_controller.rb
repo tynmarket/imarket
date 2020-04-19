@@ -36,7 +36,7 @@ class EpsEstimatesController < ApplicationController
 
       next if diff == 0
 
-      class_name = diff > 0 ? "text-bold" : "text-bold red"
+      class_name = diff > 0 ? "text-bold green" : "text-bold red"
       eps_estimate_class[attr] = class_name
       eps_estimate_class[eps_estimate.code] = prev_estimate
     end

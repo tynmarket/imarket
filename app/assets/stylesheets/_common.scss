@@ -6,6 +6,7 @@ $font-size-small: 12px;
 $color-nabvar: #595857;
 $color-red: #d3381c;
 $color-blue: blue;
+$color-green: green;
 $color-link: #428bca;
 $color-text: #333;
 
@@ -52,6 +53,10 @@ $border-divider: 1px solid #e5e5e5;
 
 .blue {
   color: $color-blue !important;
+}
+
+.green {
+  color: $color-green !important;
 }
 
 div.overflow_hidden {
