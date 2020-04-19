@@ -21,19 +21,20 @@ ul.nav.nav-tabs
           th Current Year
           th Next Year
       tbody
-        - @dow_estimates.each do |eps_estimate|
+        - @dow_estimates.each_with_index do |eps_estimate, i|
+          - eps_estimate_class = @dow_estimate_classes[i]
           tr
             td
               = eps_estimate.date
             td
               = eps_estimate.code
-            td
+            td class=(eps_estimate_class[:current_quarter_eps])
               = eps_estimate.current_quarter_eps
-            td
+            td class=(eps_estimate_class[:next_quarter_eps])
               = eps_estimate.next_quarter_eps
-            td
+            td class=(eps_estimate_class[:current_year_eps])
               = eps_estimate.current_year_eps
-            td
+            td class=(eps_estimate_class[:next_year_eps])
               = eps_estimate.next_year_eps
   #constituents.tab-pane
     table.table

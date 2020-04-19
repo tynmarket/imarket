@@ -3,6 +3,7 @@ class EpsEstimatesController < ApplicationController
     @eps_estimates = EpsEstimate.dow_constituents.order("id desc")
     @eps_estimate_classes = estimate_classes(@eps_estimates)
     @dow_estimates = EpsEstimate.dow.order("id desc")
+    @dow_estimate_classes = estimate_classes(@dow_estimates)
   end
 
   private
