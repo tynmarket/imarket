@@ -104,6 +104,9 @@ Style/NestedParenthesizedCalls:
 Style/NumericPredicate:
   Enabled: false
 
+Style/PercentLiteralDelimiters:
+  Enabled: false
+
 Style/RescueModifier:
   Enabled: false
 
