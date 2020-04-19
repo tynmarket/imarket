@@ -1,7 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "sp/bootstrap_overrides";
+@import "bootstrap/bootstrap_overrides_sp";
 @import "common";
-@import "sp/layout";
-@import "sp/disclosures";
-@import "sp/stocks";
+@import "both/*";
+@import "sp/*";
