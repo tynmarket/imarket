@@ -65,6 +65,9 @@ Layout/EmptyLinesAroundBlockBody:
 Layout/EmptyLinesAroundClassBody:
   Enabled: false
 
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: false
+
 Layout/MultilineBlockLayout:
   Exclude:
     - "spec/**/*"
