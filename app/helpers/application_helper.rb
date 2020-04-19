@@ -186,6 +186,15 @@ module ApplicationHelper
     num < 0 ? span_red(num_percent) : num_percent
   end
 
+  def red_hundred_p_shorter(num)
+    return unless num
+
+    num = (num * 100)
+    num = num > 100 ? num.floor : num.round(1)
+    num_percent = "#{num}%"
+    num < 0 ? span_red(num_percent) : num_percent
+  end
+
   def red_delimiter(num)
     return unless num
 
@@ -201,6 +210,6 @@ module ApplicationHelper
   end
 
   def span_red(value)
-    content_tag(:span, value, style: "color:#d3381c")
+    content_tag(:span, value, "class": "red")
   end
 end
