@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_11_024011) do
+ActiveRecord::Schema.define(version: 2020_04_21_022343) do
 
   create_table "authentications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -57,6 +57,17 @@ ActiveRecord::Schema.define(version: 2020_04_11_024011) do
     t.index ["stock_id"], name: "index_cash_flows_on_stock_id"
   end
 
+  create_table "constituent_stocks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "revision_history_id", null: false
+    t.bigint "stock_id", null: false
+    t.integer "face_value_numerator", default: 1, null: false, comment: "みなし額面（分子）"
+    t.integer "face_value_denominator", default: 1, null: false, comment: "みなし額面（分母）"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["revision_history_id"], name: "index_constituent_stocks_on_revision_history_id"
+    t.index ["stock_id"], name: "index_constituent_stocks_on_stock_id"
+  end
+
   create_table "disclosures", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.datetime "release_date"
     t.string "code", limit: 6
@@ -76,7 +87,7 @@ ActiveRecord::Schema.define(version: 2020_04_11_024011) do
   end
 
   create_table "eps_estimates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
-    t.string "code", limit: 6, null: false
+    t.string "code", null: false
     t.date "date", null: false
     t.string "current_quarter", null: false
     t.string "next_quarter", null: false
@@ -88,6 +99,7 @@ ActiveRecord::Schema.define(version: 2020_04_11_024011) do
     t.float "next_year_eps", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["code", "date"], name: "index_eps_estimates_on_code_and_date"
   end
 
   create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
@@ -178,6 +190,16 @@ ActiveRecord::Schema.define(version: 2020_04_11_024011) do
     t.datetime "updated_at"
     t.index ["disclosure_id", "quarter"], name: "index_unique_results_forecasts_disclosure_id_quarter", unique: true
     t.index ["quarter", "code"], name: "index_results_forecasts_quarter_code"
+  end
+
+  create_table "revision_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.string "code", null: false
+    t.date "date", null: false
+    t.float "divisor", null: false, comment: "除数"
+    t.integer "face_value", default: 1, null: false, comment: "額面"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["code", "date"], name: "index_revision_histories_on_code_and_date"
   end
 
   create_table "stock_prices", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
