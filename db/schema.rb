@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 2020_04_21_022343) do
 
   create_table "eps_estimates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "code", null: false
-    t.date "date", null: false
+    t.date "date"
     t.string "current_quarter", null: false
     t.string "next_quarter", null: false
     t.string "current_year", null: false
@@ -99,7 +99,6 @@ ActiveRecord::Schema.define(version: 2020_04_21_022343) do
     t.float "next_year_eps", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["code", "date"], name: "index_eps_estimates_on_code_and_date"
   end
 
   create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
@@ -159,6 +158,23 @@ ActiveRecord::Schema.define(version: 2020_04_21_022343) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code", "period", "datetime"], name: "index_prices_intradays_code_period_datetime", unique: true
+  end
+
+  create_table "price_intradays_bak", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.string "code", null: false
+    t.integer "period", limit: 2, null: false
+    t.datetime "datetime", null: false
+    t.datetime "datetime_original", null: false
+    t.integer "day", limit: 1, null: false, comment: "1-7、月曜は1"
+    t.integer "hour", limit: 1, null: false
+    t.integer "minute", limit: 1, null: false
+    t.float "open", null: false
+    t.float "high", null: false
+    t.float "low", null: false
+    t.float "close", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code", "datetime", "close"], name: "index_prices_intradays_code_datetime_close", unique: true
   end
 
   create_table "results_forecasts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|

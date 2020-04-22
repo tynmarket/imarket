@@ -25,6 +25,9 @@ Rails.application.routes.draw do
   # 予想EPS修正履歴
   resources :eps_estimates, only: [:index]
 
+  # 株式分割
+  resources :stock_splits, only: [:index]
+
   # 株価
   resources :stock_prices, only: [] do
     member do

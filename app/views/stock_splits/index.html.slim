@@ -1,0 +1,71 @@
+h1
+  | 株式分割一覧
+
+/ タブ
+ul.nav.nav-tabs
+  li.active
+    a href="#dow" data-toggle="tab" 日経平均構成銘柄
+  li
+    a href="#constituents" data-toggle="tab" 全銘柄
+
+.tab-content
+  #dow.tab-pane.active
+    table.table
+      thead
+        tr
+          th コード
+          th 銘柄名
+          th 分割比率
+          th 分割日
+      tbody
+        - @stock_splits.each do |stock_split|
+          tr
+            td
+              = link_to_stock(stock_split)
+            td
+              = stock_split.stock.name
+            td
+              = stock_split.split_ratio
+            td
+              = stock_split.split_date
+  #constituents.tab-pane
+    table.table
+      thead
+        tr
+          th Date
+          th Ticker
+          th Current Qtr.
+          th Next Qtr.
+          th Current Year
+          th Next Year
+      tbody
+        /- @eps_estimates.each_with_index do |eps_estimate, i|
+          - eps_estimate_class = @eps_estimate_classes[i]
+          - prev_estimate = eps_estimate_class[eps_estimate.code]
+
+          tr
+            td
+              = eps_estimate.date
+            td
+              = yafoo_us_url(eps_estimate.code)
+            td class=(eps_estimate_class[:current_quarter_eps])
+              = eps_estimate.current_quarter_eps
+            td class=(eps_estimate_class[:next_quarter_eps])
+              = eps_estimate.next_quarter_eps
+            td class=(eps_estimate_class[:current_year_eps])
+              = eps_estimate.current_year_eps
+            td class=(eps_estimate_class[:next_year_eps])
+              = eps_estimate.next_year_eps
+
+          - if prev_estimate
+            tr
+              td.border-top-none
+              td.border-top-none
+              td
+                = prev_estimate.current_quarter_eps
+              td
+                = prev_estimate.next_quarter_eps
+              td
+                = prev_estimate.current_year_eps
+              td
+                = prev_estimate.next_year_eps
