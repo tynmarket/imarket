@@ -29,8 +29,10 @@ module MetaTagsHelper
       elsif @date && !current_page?(root_path)
         "#{l(@date, format: :ymd_k)}の決算短信 | "
       end
+    head = @stock.name || l(@date, format: :ymd_k) || "東証"
 
     @title = "#{title}iMarket（適時開示ネット）"
-    @description = "#{title || '東証'}の適時開示で開示された決算短信や業績予想の修正の一覧が見られます。四半期ごとの業績の推移や前年比、営業利益率、予想PERとPBRの時系列データをグラフ確認できます。"
+    @description = "#{head}の適時開示で開示された決算短信や業績予想の修正の一覧が見られます。" +
+      "四半期ごとの業績の推移や前年比、営業利益率、予想PERとPBRの時系列データをグラフ確認できます。"
   end
 end
