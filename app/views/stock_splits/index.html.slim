@@ -1,0 +1,49 @@
+h1
+  | 株式分割一覧
+
+/ タブ
+ul.nav.nav-tabs
+  li.active
+    a href="#all" data-toggle="tab" 全銘柄
+  li
+    a href="#n225" data-toggle="tab" 日経平均採用銘柄
+
+.tab-content
+  #all.tab-pane.active
+    table.table
+      thead
+        tr
+          th コード
+          th 銘柄名
+          th 分割比率
+          th 分割日
+      tbody
+        - @stock_splits.each do |stock_split|
+          tr
+            td
+              = link_to_stock(stock_split)
+            td
+              = stock_split.stock&.name
+            td
+              = stock_split.split_ratio
+            td
+              = stock_split.split_date
+  #n225.tab-pane
+    table.table
+      thead
+        tr
+          th コード
+          th 銘柄名
+          th 分割比率
+          th 分割日
+      tbody
+        - @stock_splits_n225.each do |stock_split|
+          tr
+            td
+              = link_to_stock(stock_split)
+            td
+              = stock_split.stock.name
+            td
+              = stock_split.split_ratio
+            td
+              = stock_split.split_date

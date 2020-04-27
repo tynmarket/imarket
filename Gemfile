@@ -19,6 +19,7 @@ gem 'puma'
 gem 'rails', '~> 6.0.0'
 gem 'rubocop', require: false
 gem 'sass-rails'
+gem 'seed-fu'
 gem 'settingslogic'
 gem 'slim-rails'
 gem 'sorcery'
@@ -37,7 +38,6 @@ group :development do
   gem 'better_errors'
   gem 'foreman'
   gem 'rack-proxy'
-  gem 'seed-fu'
   gem 'spring'
   gem 'spring-watcher-listen'
 end

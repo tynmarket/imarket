@@ -1,0 +1,18 @@
+.stock_splits {
+  h1 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+ .table {
+    thead > tr > th {
+      border-bottom: initial;
+    }
+
+    tbody {
+      td:nth-child(n + 3) {
+        text-align: center;
+      }
+    }
+  }
+}

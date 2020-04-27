@@ -1,7 +1,7 @@
 class CreateEpsEstimates < ActiveRecord::Migration[6.0]
   def change
     create_table :eps_estimates do |t|
-      t.string :code, limit: 6, null: false
+      t.string :code, null: false
       t.date :date, null: false
       t.string :current_quarter, null: false
       t.string :next_quarter, null: false
@@ -13,6 +13,8 @@ class CreateEpsEstimates < ActiveRecord::Migration[6.0]
       t.float :next_year_eps, null: false
 
       t.timestamps
+
+      t.index [:code, :date]
     end
   end
 end
