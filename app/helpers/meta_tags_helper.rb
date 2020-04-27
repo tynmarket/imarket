@@ -21,10 +21,10 @@ module MetaTagsHelper
   end
 
   def set_title_and_description_others
-    head = @stock.name || l(@date, format: :ymd_k) || "東証"
+    title = meta_title_others
 
-    @title = "#{meta_title_others}iMarket（適時開示ネット）"
-    @description = "#{head}の適時開示で開示された決算短信や業績予想の修正の一覧が見られます。" +
+    @title = "#{title}iMarket（適時開示ネット）"
+    @description = "#{title || '東証'}の適時開示で開示された決算短信や業績予想の修正の一覧が見られます。" +
                    "四半期ごとの業績の推移や前年比、営業利益率、予想PERとPBRの時系列データをグラフ確認できます。"
   end
 
