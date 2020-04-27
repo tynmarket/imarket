@@ -8,33 +8,6 @@ module ApplicationHelper
     EOS
   end
 
-  def set_title_and_description
-    if controller_name == "eps_estimates"
-      set_title_and_description_eps_estimates
-    else
-      set_title_and_description_others
-    end
-  end
-
-  def set_title_and_description_eps_estimates
-    @title = "ダウ平均・構成銘柄予想EPS修正履歴 | iMarket（適時開示ネット）"
-    @description = "ダウ平均と構成銘柄の予想EPSの修正履歴を確認することができます。"
-  end
-
-  def set_title_and_description_others
-    title =
-      if controller_name == "favorites"
-        "お気に入り | "
-      elsif @stock
-        "【#{@stock.code}】#{@stock.name}の決算短信 | "
-      elsif @date && !current_page?(root_path)
-        "#{l(@date, format: :ymd_k)}の決算短信 | "
-      end
-
-    @title = "#{title}iMarket（適時開示ネット）"
-    @description = "#{title || '東証'}の適時開示で開示された決算短信や業績予想の修正の一覧が見られます。四半期ごとの業績の推移や前年比、営業利益率、予想PERとPBRの時系列データをグラフ確認できます。"
-  end
-
   def body_class
     "#{controller_name} #{'logged_in' if logged_in?}"
   end
