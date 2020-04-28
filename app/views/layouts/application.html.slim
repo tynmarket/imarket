@@ -71,7 +71,9 @@ html lang="ja"
         .container
           ul.nav.navbar-nav
             li
-              = link_to "ダウ平均・構成銘柄予想EPS修正履歴", eps_estimates_path
+              = link_to "日経平均予想EPS", eps_estimates_path
+            li
+              = link_to "ダウ平均予想EPS", eps_estimates_path(tab: "dow")
             li
               = link_to "株式分割", stock_splits_path
       .navbar.navbar-default

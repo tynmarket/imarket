@@ -16,7 +16,11 @@
     }
 
     tbody {
-      td:nth-child(n + 3) {
+      &.n225 td:nth-child(n + 2) {
+        text-align: right;
+      }
+
+      &.dow td:nth-child(n + 3) {
         text-align: right;
       }
     }

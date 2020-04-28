@@ -4,7 +4,8 @@ module ApplicationHelper
 
   def release_notes
     <<~EOS.html_safe
-      （4/19）<a href="/eps_estimates">ダウ平均と構成銘柄の予想EPSの修正履歴</a> を表示するようにしました。
+      （4/28）<a href="/eps_estimates">日経平均</a> と <a href="/eps_estimates">ダウ平均</a> の予想EPSを表示するようにしました。<br>
+       <span style="color:white;">（4/28）</span>日経平均は公式のものとiMarket算出の2種類を載せています。
     EOS
   end
 

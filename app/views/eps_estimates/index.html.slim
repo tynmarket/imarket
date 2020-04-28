@@ -1,16 +1,38 @@
 h1
-  | Earnings Estimate (EPS)
-  span.notes Yahoo FinanceのAnalysisのAvg. Estimateを参照しています。
+  | 予想EPS（Earnings Estimate）
+  span.notes ダウ平均はYahoo FinanceのAnalysisのAvg. Estimateを参照しています。
 
 / タブ
 ul.nav.nav-tabs
-  li.active
+  li class=("active" if @tab == 'n225')
+    a href="#n225" data-toggle="tab" 日経平均
+  li class==("active" if @tab == 'dow')
     a href="#dow" data-toggle="tab" ダウ平均
   li
-    a href="#constituents" data-toggle="tab" ダウ構成銘柄（修正履歴）
+    a href="#dow-constituents" data-toggle="tab" ダウ構成銘柄（修正履歴）
 
 .tab-content
-  #dow.tab-pane.active
+  #n225.tab-pane class=("active" if @tab == 'n225')
+    table.table
+      thead
+        tr
+          th 日付
+          th 公式
+          th iMarket算出
+      tbody.n225
+        - @n225_estimates.each_with_index do |eps_estimate_n225, i|
+          - eps_estimate_n225_r = @n225_r_estimates[i]
+          - eps_estimate_n225_class = @n225_estimates_classes[i]
+          - eps_estimate_n225_r_class = @n225_r_estimates_classes[i]
+
+          tr
+            td
+              = eps_estimate_n225.date
+            td class=(eps_estimate_n225_class[:current_year_eps])
+              = eps_estimate_n225.current_year_eps
+            td class=(eps_estimate_n225_r_class[:current_year_eps])
+              = eps_estimate_n225_r.current_year_eps
+  #dow.tab-pane class=("active" if @tab == 'dow')
     table.table
       thead
         tr
@@ -20,7 +42,7 @@ ul.nav.nav-tabs
           th Next Qtr.
           th Current Year
           th Next Year
-      tbody
+      tbody.dow
         - @dow_estimates.each_with_index do |eps_estimate, i|
           - eps_estimate_class = @dow_estimate_classes[i]
           tr
@@ -36,7 +58,7 @@ ul.nav.nav-tabs
               = eps_estimate.current_year_eps
             td class=(eps_estimate_class[:next_year_eps])
               = eps_estimate.next_year_eps
-  #constituents.tab-pane
+  #dow-constituents.tab-pane
     table.table
       thead
         tr
@@ -46,9 +68,9 @@ ul.nav.nav-tabs
           th Next Qtr.
           th Current Year
           th Next Year
-      tbody
-        - @eps_estimates.each_with_index do |eps_estimate, i|
-          - eps_estimate_class = @eps_estimate_classes[i]
+      tbody.dow
+        - @dow_constituent_estimates.each_with_index do |eps_estimate, i|
+          - eps_estimate_class = @dow_constituent_estimate_classes[i]
           - prev_estimate = eps_estimate_class[eps_estimate.code]
 
           tr

@@ -17,8 +17,18 @@ class Stock < ActiveRecord::Base
   has_many :shikihos
 
   class << self
+    def code_dow
+      "^DJI"
+    end
 
-    #
+    def code_n225
+      "998407"
+    end
+
+    def code_n225_r
+      "998407-r"
+    end
+
     # utf8_bin:ガスミ…なし
     #         :７２０３…なし
     #         :TOYOTA…なし
