@@ -30,8 +30,11 @@ ul.nav.nav-tabs
               = eps_estimate_n225.date
             td class=(eps_estimate_n225_class[:current_year_eps])
               = eps_estimate_n225.current_year_eps
-            td class=(eps_estimate_n225_r_class[:current_year_eps])
-              = eps_estimate_n225_r.current_year_eps
+            - if eps_estimate_n225_r
+              td class=(eps_estimate_n225_r_class[:current_year_eps])
+                = eps_estimate_n225_r.current_year_eps
+            - else
+              td
   #dow.tab-pane class=("active" if @tab == 'dow')
     table.table
       thead
