@@ -1,14 +1,32 @@
 class EpsEstimatesController < ApplicationController
+
   def index
-    @eps_estimates = EpsEstimate.dow_constituents.order("id desc")
-    @eps_estimate_classes = estimate_classes(@eps_estimates)
-    @dow_estimates = EpsEstimate.dow.order("id desc")
-    @dow_estimate_classes = estimate_classes(@dow_estimates)
+    @tab = params[:tab] || "n225"
+    eps_estimates_n225
+    eps_estimates_dow
   end
 
   private
 
-  def estimate_classes(eps_estimates)
+  def eps_estimates_n225
+    attrs = [:current_year_eps]
+
+    @n225_r_estimates = EpsEstimate.n225_r.order("id desc")
+    @n225_r_estimates_classes = estimate_classes(@n225_r_estimates, attrs)
+    @n225_estimates = EpsEstimate.n225.order("id desc")
+    @n225_estimates_classes = estimate_classes(@n225_estimates, attrs)
+  end
+
+  def eps_estimates_dow
+    attrs = [:current_quarter_eps, :next_quarter_eps, :current_year_eps, :next_year_eps]
+
+    @dow_estimates = EpsEstimate.dow.order("id desc")
+    @dow_estimate_classes = estimate_classes(@dow_estimates, attrs)
+    @dow_constituent_estimates = EpsEstimate.dow_constituents.order("id desc")
+    @dow_constituent_estimate_classes = estimate_classes(@dow_constituent_estimates, attrs)
+  end
+
+  def estimate_classes(eps_estimates, attrs)
     eps_estimate_classes = []
     prev_estimates = {}
 
@@ -21,7 +39,7 @@ class EpsEstimatesController < ApplicationController
         next
       end
 
-      eps_estimate_classes << estimate_class(eps_estimate, prev_estimate)
+      eps_estimate_classes << estimate_class(eps_estimate, prev_estimate, attrs)
 
       prev_estimates[eps_estimate.code] = eps_estimate
     end
@@ -29,10 +47,10 @@ class EpsEstimatesController < ApplicationController
     eps_estimate_classes.reverse
   end
 
-  def estimate_class(eps_estimate, prev_estimate)
+  def estimate_class(eps_estimate, prev_estimate, attrs)
     eps_estimate_class = {}
 
-    [:current_quarter_eps, :next_quarter_eps, :current_year_eps, :next_year_eps].each do |attr|
+    attrs.each do |attr|
       diff = eps_estimate.send(attr) - prev_estimate.send(attr)
 
       next if diff == 0
