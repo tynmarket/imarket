@@ -11,7 +11,7 @@ describe "GET /eps_estimates/:code/chart" do
     let(:data_n225_r) { json["data_n225_r"] }
     let(:data_close) { json["data_close"] }
 
-    around { |e| travel_to(date){ e.run } }
+    around { |e| travel_to(date) { e.run } }
 
     before do
       create :stock_price, :daily, :n225, close: 1.0, date: date_start
