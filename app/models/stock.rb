@@ -12,7 +12,7 @@ class Stock < ActiveRecord::Base
   has_many :disclosures_monthly, -> { select(:id, :stock_id, :release_date, :title, :pdf).monthly },
            class_name: "Disclosure"
 
-  has_one :stock_price_latest, -> { where term: StockPrice::LATEST }, class_name: "StockPrice"
+  has_one :stock_price_latest, -> { latest }, class_name: "StockPrice"
 
   has_many :shikihos
 

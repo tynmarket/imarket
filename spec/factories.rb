@@ -31,11 +31,11 @@ FactoryBot.define do
     stock
 
     trait :latest do
-      term { StockPrice::LATEST }
+      term { :latest }
     end
 
     trait :daily do
-      term { StockPrice::DAILY }
+      term { :daily }
     end
   end
 
@@ -44,5 +44,6 @@ FactoryBot.define do
     trait :stock_price_last_updated do
       id { SystemStatus::STOCK_PRICE_LAST_UPDATED }
     end
+  end
   end
 end
