@@ -75,6 +75,8 @@ html lang="ja"
             li
               = link_to "ダウ平均予想EPS", eps_estimates_path(tab: "dow")
             li
+              = link_to "全銘柄（中央値）予想EPS", stock_path(10000)
+            li
               = link_to "株式分割", stock_splits_path
       .navbar.navbar-default
         .container
