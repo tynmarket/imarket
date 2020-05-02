@@ -1,6 +1,7 @@
 stock_prices = @stock_prices.map { |s| [s[0], s[1]] }.to_h
 
 def render_per(dates, stock_prices, json)
+  # TODO ラベルを全て返す必要はない
   json.x_label do
     json.array! dates
   end
