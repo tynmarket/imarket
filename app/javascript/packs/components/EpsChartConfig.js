@@ -5,7 +5,7 @@ export const options = {
     numericSymbols: null, // 数字を省略しない
     thousandsSep: ',', // 桁区切り
   },
-}
+};
 
 export const n225Config = (pointsN225, pointsN225R, prices, labels) => {
   const config = {
@@ -84,7 +84,7 @@ function defaultConfig(labels) {
             enabled: false, // hover時のマーカーを表示しない
           },
           inactive: {
-              opacity: 1, // inactive時に半透明にしない
+            opacity: 1, // inactive時に半透明にしない
           },
         },
         turboThreshold: 100000,

@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
+import { n225Config, options } from './EpsChartConfig';
 import Highcharts from 'highcharts';
 import axios from 'axios';
-import { options, n225Config } from './EpsChartConfig';
 import { useEffect } from 'react';
 
 const EpsChart = ({ code }) => {
