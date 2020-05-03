@@ -36,7 +36,7 @@ function getConfig(code, data) {
       return n225Config(points, prices, labels, '予想EPS（日経）', 20);
       break;
     case '998407-r':
-      return n225Config(points, prices, labels, '予想EPS（iMarket）', 10);
+      return n225Config(points, prices, labels, '予想EPS（iMarket算出）', 10);
       break;
     case 'dow':
       break;

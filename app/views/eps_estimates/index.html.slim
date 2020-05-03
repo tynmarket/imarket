@@ -11,7 +11,7 @@ ul.nav.nav-tabs
   li class=("active" if @tab == 'n225-chart')
     a href="#n225_chart" data-toggle="tab" チャート（日経）
   li class=("active" if @tab == 'n225-r-chart')
-    a href="#n225_r_chart" data-toggle="tab" チャート（iMarket）
+    a href="#n225_r_chart" data-toggle="tab" チャート（iMarket算出）
   li class==("active" if @tab == 'dow')
     a href="#dow" data-toggle="tab" ダウ平均
   li
@@ -23,7 +23,7 @@ ul.nav.nav-tabs
       thead
         tr
           th 日付
-          th 公式
+          th 日経
           th iMarket算出
       tbody.n225
         - @n225_estimates.each_with_index do |eps_estimate_n225, i|
