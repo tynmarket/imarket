@@ -1,27 +1,29 @@
 import merge from 'lodash/fp/merge';
 
+export const options = {
+  lang: {
+    numericSymbols: null, // 数字を省略しない
+    thousandsSep: ',', // 桁区切り
+  },
+}
+
 export const n225Config = (pointsN225, pointsN225R, prices, labels) => {
   const config = {
-    xAxis: {
-      tickInterval: 20,
-      labels: {
-        formatter: function() {
-          return `${labels[this.value]}`;
-        },
-      },
-    },
     series: [
       {
+        name: '予想EPS（日経）',
         type: 'line',
         data: pointsN225,
       },
       {
+        name: '予想EPS（iMarket）',
         type: 'line',
         data: pointsN225R,
       },
       {
+        name: '日経平均',
         type: 'line',
-        yAxis: 1,
+        yAxis: 1, // 右縦軸
         data: prices,
       },
     ],
@@ -39,16 +41,17 @@ function defaultConfig(labels) {
       enabled: false,
     },
     chart: {
-      zoomType: 'x',
+      zoomType: 'x', // Zoomする
     },
     xAxis: {
-      type: 'datetime',
-      dateTimeLabelFormats: {
-        day: '%Y-%m-%d',
-        week: '%Y-%m-%d',
-        month: '%Y-%m-%d',
-      },
+      crosshair: true, // 十字線を表示する
       gridLineWidth: 1,
+      labels: {
+        formatter: function() {
+          return `${labels[this.value]}`; // x軸のラベル
+        },
+      },
+      tickInterval: 20, // ラベル表示間隔
     },
     yAxis: [
       {
@@ -60,50 +63,36 @@ function defaultConfig(labels) {
         title: {
           text: null,
         },
-        opposite: true,
+        opposite: true, // 第2縦軸は右に表示
       },
     ],
     plotOptions: {
       line: {
-        animation: false,
-        marker: {
-          fillColor: 'transparent',
-          lineColor: '#7cb5ec',
-          lineWidth: 2.5,
-          radius: 3.5,
-        },
+        animation: false, // グラフ表示時のアニメーションを表示しない
         lineWidth: 2,
         shadow: {
           offsetY: 1.5,
           width: 1.5,
         },
-        states: {
-          hover: {
-            halo: {
-              size: 0,
-            },
-            lineWidthPlus: 0,
-          },
-          normal: {
-            animation: false,
-          },
-        },
       },
       series: {
-        label: {
-          connectorAllowed: false,
+        marker: {
+          enabled: false, // マーカーを表示しない
         },
-        color: '#edc240',
+        states: {
+          hover: {
+            enabled: false, // hover時のマーカーを表示しない
+          },
+          inactive: {
+              opacity: 1, // inactive時に半透明にしない
+          },
+        },
         turboThreshold: 100000,
       },
     },
     tooltip: {
       headerFormat: '',
-      pointFormatter: function() {
-        return `<span style="font-weight: bold; color: #595857;">${
-          this.y
-        } 倍 (${labels[this.index]})</span>`;
-      },
+      shared: true, // 系列のツールチップをまとめて表示する
     },
     responsive: {
       rules: [

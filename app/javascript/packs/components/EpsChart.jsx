@@ -2,7 +2,7 @@
 import { css, jsx } from '@emotion/core';
 import Highcharts from 'highcharts';
 import axios from 'axios';
-import { n225Config } from './EpsChartConfig';
+import { options, n225Config } from './EpsChartConfig';
 import { useEffect } from 'react';
 
 const EpsChart = ({ code }) => {
@@ -16,6 +16,7 @@ const EpsChart = ({ code }) => {
       const prices = data.data_close;
       const config = n225Config(pointsN225, pointsN225R, prices, labels);
 
+      Highcharts.setOptions(options);
       Highcharts.chart(idStr, config);
     });
   });
