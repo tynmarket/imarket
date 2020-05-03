@@ -3,15 +3,12 @@ import merge from 'lodash/fp/merge';
 
 export const n225Config = (pointsN225, pointsN225R, prices, labels) => {
   const config = {
-    chart: {
-      zoomType: 'x',
-    },
     xAxis: {
-      type: 'datetime',
-      dateTimeLabelFormats: {
-        day: '%Y-%m-%d',
-        week: '%Y-%m-%d',
-        month: '%Y-%m-%d',
+      tickInterval: 20,
+      labels: {
+        formatter: function() {
+          return `${labels[this.value]}`;
+        },
       },
     },
     series: [
