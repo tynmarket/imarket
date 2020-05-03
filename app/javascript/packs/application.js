@@ -54,5 +54,4 @@ function renderEpsChart() {
     <EpsChart code={'998407'} />,
     document.querySelector('#n225-chart')
   );
-
 }

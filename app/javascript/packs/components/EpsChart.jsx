@@ -1,21 +1,19 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
+import Highcharts from 'highcharts';
+import axios from 'axios';
 import { n225Config } from './EpsChartConfig';
 import { useEffect } from 'react';
-import Highcharts from 'highcharts';
-import React from 'react';
-import axios from 'axios';
-import dayjs from 'dayjs';
 
-const EpsChart = ({ code, indices }) => {
+const EpsChart = ({ code }) => {
   const idStr = `${code}-highcharts`;
 
   useEffect(() => {
-    getData(code).then((data) => {
+    getData(code).then(data => {
       const labels = data.x_label;
-      const pointsN225 = data.data_n225
-      const pointsN225R = data.data_n225_r
-      const prices = data.data_close
+      const pointsN225 = data.data_n225;
+      const pointsN225R = data.data_n225_r;
+      const prices = data.data_close;
       const config = n225Config(pointsN225, pointsN225R, prices, labels);
 
       Highcharts.chart(idStr, config);

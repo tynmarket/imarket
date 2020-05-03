@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import merge from 'lodash/fp/merge';
 
 export const n225Config = (pointsN225, pointsN225R, prices, labels) => {
