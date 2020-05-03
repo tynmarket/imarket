@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
-import { n225Config, dowConfig, options } from './EpsChartConfig';
+import { dowConfig, n225Config, options } from './EpsChartConfig';
 import Highcharts from 'highcharts';
 import axios from 'axios';
 import { useEffect } from 'react';

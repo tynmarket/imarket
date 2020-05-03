@@ -31,7 +31,7 @@ export const n225Config = (points, prices, labels, name, interval) => {
   return merge(defaultConfig(labels), config);
 };
 
-export const dowConfig = (points_current, points_next, prices, labels) => {
+export const dowConfig = (pointsCurrent, pointsNext, prices, labels) => {
   const config = {
     xAxis: {
       tickInterval: 10, // ラベル表示間隔
@@ -40,13 +40,13 @@ export const dowConfig = (points_current, points_next, prices, labels) => {
       {
         name: 'Earnings Estimate (Current Year)',
         type: 'line',
-        data: points_current,
+        data: pointsCurrent,
         color: '#edc240',
       },
       {
         name: 'Earnings Estimate (Next Year)',
         type: 'line',
-        data: points_next,
+        data: pointsNext,
         color: '#edc240',
       },
       {
