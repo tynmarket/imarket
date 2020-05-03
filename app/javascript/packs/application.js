@@ -1,4 +1,5 @@
 import App from './components/App';
+import EpsChart from './components/EpsChart';
 import Exporting from 'highcharts/modules/exporting';
 import Highcharts from 'highcharts';
 
@@ -9,14 +10,24 @@ import ReactDOM from 'react-dom';
 Exporting(Highcharts);
 
 document.addEventListener('DOMContentLoaded', () => {
-  const elm = document.querySelector('#code');
+  let elm = document.querySelector('#code');
 
-  if (!elm) {
-    return;
+  if (elm) {
+    const code = elm.textContent;
+
+    // 予想PER, PBR, FCF倍率
+    renderStockChart(code);
   }
 
-  const code = elm.textContent;
+  elm = document.querySelector('#eps_estimates-index');
 
+  if (elm) {
+    // 予想EPS
+    renderEpsChart();
+  }
+});
+
+function renderStockChart(code) {
   // PER
   ReactDOM.render(
     <App code={code} indices={'per'} />,
@@ -35,4 +46,24 @@ document.addEventListener('DOMContentLoaded', () => {
   if (fcfElm) {
     ReactDOM.render(<App code={code} indices={'fcf-ratio'} />, fcfElm);
   }
-});
+}
+
+function renderEpsChart() {
+  // 日経
+  ReactDOM.render(
+    <EpsChart code={'998407'} />,
+    document.querySelector('#n225-chart')
+  );
+
+  // iMarket算出
+  ReactDOM.render(
+    <EpsChart code={'998407-r'} />,
+    document.querySelector('#n225-r-chart')
+  );
+
+  // ダウ平均
+  ReactDOM.render(
+    <EpsChart code={'^DJI'} />,
+    document.querySelector('#dow-chart')
+  );
+}

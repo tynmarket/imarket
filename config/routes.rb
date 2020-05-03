@@ -23,7 +23,10 @@ Rails.application.routes.draw do
   resources :favorites, only: [:index]
 
   # 予想EPS修正履歴
-  resources :eps_estimates, only: [:index]
+  resources :eps_estimates, only: [:index], param: :code do
+    # 検索
+    get "chart", on: :member, to: 'eps_estimates_charts#show', defaults: {format: :json}
+  end
 
   # 株式分割
   resources :stock_splits, only: [:index]

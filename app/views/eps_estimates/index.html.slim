@@ -1,3 +1,5 @@
+= javascript_pack_tag "application", defer: true
+
 h1
   | 予想EPS（Earnings Estimate）
   span.notes ダウ平均はYahoo FinanceのAnalysisのAvg. Estimateを参照しています。
@@ -6,8 +8,14 @@ h1
 ul.nav.nav-tabs
   li class=("active" if @tab == 'n225')
     a href="#n225" data-toggle="tab" 日経平均
+  li class=("active" if @tab == 'n225-chart')
+    a href="#n225_chart" data-toggle="tab" チャート（日経）
+  li class=("active" if @tab == 'n225-r-chart')
+    a href="#n225_r_chart" data-toggle="tab" チャート（iMarket算出）
   li class==("active" if @tab == 'dow')
     a href="#dow" data-toggle="tab" ダウ平均
+  li class=("active" if @tab == 'dow-chart')
+    a href="#dow_chart" data-toggle="tab" チャート（ダウ平均）
   li
     a href="#dow-constituents" data-toggle="tab" ダウ構成銘柄（修正履歴）
 
@@ -17,7 +25,7 @@ ul.nav.nav-tabs
       thead
         tr
           th 日付
-          th 公式
+          th 日経
           th iMarket算出
       tbody.n225
         - @n225_estimates.each_with_index do |eps_estimate_n225, i|
@@ -35,6 +43,10 @@ ul.nav.nav-tabs
                 = eps_estimate_n225_r.current_year_eps
             - else
               td
+  #n225_chart.tab-pane class=("active" if @tab == 'n225-chart')
+    #n225-chart
+  #n225_r_chart.tab-pane class=("active" if @tab == 'n225-r-chart')
+    #n225-r-chart
   #dow.tab-pane class=("active" if @tab == 'dow')
     table.table
       thead
@@ -61,6 +73,8 @@ ul.nav.nav-tabs
               = eps_estimate.current_year_eps
             td class=(eps_estimate_class[:next_year_eps])
               = eps_estimate.next_year_eps
+  #dow_chart.tab-pane class=("active" if @tab == 'dow-chart')
+    #dow-chart
   #dow-constituents.tab-pane
     table.table
       thead
