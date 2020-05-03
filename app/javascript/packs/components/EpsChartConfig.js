@@ -120,7 +120,14 @@ function defaultConfig(labels) {
       },
     },
     tooltip: {
-      headerFormat: '',
+      formatter: function() {
+        const header = `<span style="color:#f7f7f7">● </span><span>${labels[this.x]}</span><br>`
+        const point = this.points.map((point) => {
+          return `<span style="color:${point.color}">●</span> ${point.series.name}: <b>${point.y}</b><br>`;
+        }).join('');
+
+        return `${header}${point}`;
+      },
       shared: true, // 系列のツールチップをまとめて表示する
     },
     responsive: {
