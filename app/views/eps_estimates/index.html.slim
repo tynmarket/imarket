@@ -9,7 +9,9 @@ ul.nav.nav-tabs
   li class=("active" if @tab == 'n225')
     a href="#n225" data-toggle="tab" 日経平均
   li class=("active" if @tab == 'n225-chart')
-    a href="#n225_chart" data-toggle="tab" 日経平均（チャート）
+    a href="#n225_chart" data-toggle="tab" チャート（日経）
+  li class=("active" if @tab == 'n225-r-chart')
+    a href="#n225_r_chart" data-toggle="tab" チャート（iMarket）
   li class==("active" if @tab == 'dow')
     a href="#dow" data-toggle="tab" ダウ平均
   li
@@ -41,6 +43,8 @@ ul.nav.nav-tabs
               td
   #n225_chart.tab-pane class=("active" if @tab == 'n225-chart')
     #n225-chart
+  #n225_r_chart.tab-pane class=("active" if @tab == 'n225-r-chart')
+    #n225-r-chart
   #dow.tab-pane class=("active" if @tab == 'dow')
     table.table
       thead

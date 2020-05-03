@@ -3,10 +3,9 @@ class EpsEstimatesChartsController < ApplicationController
   def show
     code = params[:code]
     @eps_estimates = EpsEstimate.where(code: code).order(:date)
-    @stock_prices = StockPrice.daily.where(code: code).order(:date).pluck(:close)
 
     case code
-    when Stock.code_n225
+    when Stock.code_n225, Stock.code_n225_r
       chart_n225
     when Stock.code_dow
       chart_dow
@@ -18,10 +17,12 @@ class EpsEstimatesChartsController < ApplicationController
   def chart_n225
     @eps_estimates_n225 = @eps_estimates.pluck(:date, :current_year_eps)
     @dates = @eps_estimates_n225.map(&:first)
-    @eps_estimates_n225_r = EpsEstimate.n225_r.order(:date).pluck(:date, :current_year_eps)
-
-    # iMarket計算値の欠損値をnilで埋める
-    insert_empty_data
+    @stock_prices = StockPrice
+                    .daily
+                    .where(code: Stock.code_n225)
+                    .where("date >= ?", @dates.first)
+                    .order(:date)
+                    .pluck(:close)
 
     @eps_estimates_n225 = @eps_estimates_n225.map(&:last)
 

@@ -7,18 +7,17 @@ export const options = {
   },
 };
 
-export const n225Config = (pointsN225, pointsN225R, prices, labels) => {
+export const n225Config = (points, prices, labels, name, interval) => {
   const config = {
+    xAxis: {
+      tickInterval: interval, // ラベル表示間隔
+    },
     series: [
       {
-        name: '予想EPS（日経）',
+        name: name,
         type: 'line',
-        data: pointsN225,
-      },
-      {
-        name: '予想EPS（iMarket）',
-        type: 'line',
-        data: pointsN225R,
+        data: points,
+        color: '#edc240',
       },
       {
         name: '日経平均',
@@ -51,7 +50,6 @@ function defaultConfig(labels) {
           return `${labels[this.value]}`; // x軸のラベル
         },
       },
-      tickInterval: 20, // ラベル表示間隔
     },
     yAxis: [
       {

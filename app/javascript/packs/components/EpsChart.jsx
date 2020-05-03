@@ -10,11 +10,7 @@ const EpsChart = ({ code }) => {
 
   useEffect(() => {
     getData(code).then(data => {
-      const labels = data.x_label;
-      const pointsN225 = data.data_n225;
-      const pointsN225R = data.data_n225_r;
-      const prices = data.data_close;
-      const config = n225Config(pointsN225, pointsN225R, prices, labels);
+      const config = getConfig(code, data);
 
       Highcharts.setOptions(options);
       Highcharts.chart(idStr, config);
@@ -28,6 +24,23 @@ async function getData(code) {
   const url = `/eps_estimates/${code}/chart`;
   const response = await axios.get(url);
   return response.data;
+}
+
+function getConfig(code, data) {
+  const labels = data.x_label;
+  const points = data.data_eps;
+  const prices = data.data_price;
+
+  switch (code) {
+    case '998407':
+      return n225Config(points, prices, labels, '予想EPS（日経）', 20);
+      break;
+    case '998407-r':
+      return n225Config(points, prices, labels, '予想EPS（iMarket）', 10);
+      break;
+    case 'dow':
+      break;
+  }
 }
 
 const style = css`

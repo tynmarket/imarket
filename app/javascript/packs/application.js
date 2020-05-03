@@ -54,4 +54,10 @@ function renderEpsChart() {
     <EpsChart code={'998407'} />,
     document.querySelector('#n225-chart')
   );
+
+  // iMarket
+  ReactDOM.render(
+    <EpsChart code={'998407-r'} />,
+    document.querySelector('#n225-r-chart')
+  );
 }
