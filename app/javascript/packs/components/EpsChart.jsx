@@ -46,6 +46,8 @@ function getConfig(code, data) {
 const style = css`
   width: 100%;
   height: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
   font-size: 14px;
   line-height: 1.2em;
 `;
