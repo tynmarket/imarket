@@ -41,6 +41,10 @@ FactoryBot.define do
     trait :n225 do
       code { Stock.code_n225 }
     end
+
+    trait :dow do
+      code { Stock.code_dow }
+    end
   end
 
   factory :system_status do
@@ -66,6 +70,10 @@ FactoryBot.define do
 
     trait :n225_r do
       code { Stock.code_n225_r }
+    end
+
+    trait :dow do
+      code { Stock.code_dow }
     end
   end
 end

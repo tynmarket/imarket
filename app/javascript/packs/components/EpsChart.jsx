@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
-import { n225Config, options } from './EpsChartConfig';
+import { n225Config, dowConfig, options } from './EpsChartConfig';
 import Highcharts from 'highcharts';
 import axios from 'axios';
 import { useEffect } from 'react';
@@ -34,12 +34,10 @@ function getConfig(code, data) {
   switch (code) {
     case '998407':
       return n225Config(points, prices, labels, '予想EPS（日経）', 20);
-      break;
     case '998407-r':
       return n225Config(points, prices, labels, '予想EPS（iMarket算出）', 10);
-      break;
-    case 'dow':
-      break;
+    case '^DJI':
+      return dowConfig(points.current, points.next, prices, labels);
   }
 }
 

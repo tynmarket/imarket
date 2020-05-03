@@ -14,6 +14,8 @@ ul.nav.nav-tabs
     a href="#n225_r_chart" data-toggle="tab" チャート（iMarket算出）
   li class==("active" if @tab == 'dow')
     a href="#dow" data-toggle="tab" ダウ平均
+  li class=("active" if @tab == 'dow-chart')
+    a href="#dow_chart" data-toggle="tab" チャート（ダウ平均）
   li
     a href="#dow-constituents" data-toggle="tab" ダウ構成銘柄（修正履歴）
 
@@ -71,6 +73,8 @@ ul.nav.nav-tabs
               = eps_estimate.current_year_eps
             td class=(eps_estimate_class[:next_year_eps])
               = eps_estimate.next_year_eps
+  #dow_chart.tab-pane class=("active" if @tab == 'dow-chart')
+    #dow-chart
   #dow-constituents.tab-pane
     table.table
       thead

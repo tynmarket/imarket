@@ -31,15 +31,21 @@ class EpsEstimatesChartsController < ApplicationController
 
   def chart_dow
     # TODO 米国の祝日対応
-    @dates = @eps_estimates.map(&:date)
+    @eps_estimates_dow = @eps_estimates.pluck(:date, :current_year_eps, :next_year_eps)
+    @dates = @eps_estimates_dow.map(&:first)
+    # ダウの日付は1日ずらす
+    @stock_prices = StockPrice
+                    .daily
+                    .where(code: Stock.code_dow)
+                    .where("date < ?", @dates.last)
+                    .order("date desc")
+                    .limit(@dates.size)
+                    .pluck(:close)
+                    .reverse
+
+    @eps_estimates_current = @eps_estimates_dow.map(&:second)
+    @eps_estimates_next = @eps_estimates_dow.map(&:last)
 
     render "eps_estimates/chart_dow"
-  end
-
-  def insert_empty_data
-    eps_estimates_n225_r = @eps_estimates_n225_r.to_h
-    @eps_estimates_n225_r = @eps_estimates_n225.map do |eps_estimates|
-      eps_estimates_n225_r[eps_estimates.first]
-    end
   end
 end
