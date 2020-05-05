@@ -28,6 +28,7 @@ table.table
       - results_forecast = highest_forecast.results_forecast
       - disclosure = results_forecast.disclosure
       - code = results_forecast.code
+      - summary = highest_forecast.summary
 
       tr
         td
@@ -45,8 +46,8 @@ table.table
         td
           = red_delimiter(results_forecast.forecast_net_income)
         td
-          = red_hundred(results_forecast.change_in_forecast_operating_income)
+          = red_hundred(results_forecast.change_in_forecast_or_calc(:operating_income, summary))
         td
-          = red_hundred(results_forecast.change_in_forecast_ordinary_income)
+          = red_hundred(results_forecast.change_in_forecast_or_calc(:ordinary_income, summary))
         td
-          = red_hundred(results_forecast.change_in_forecast_net_income)
+          = red_hundred(results_forecast.change_in_forecast_or_calc(:net_income, summary))
