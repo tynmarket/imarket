@@ -5,6 +5,8 @@ module MetaTagsHelper
       set_title_and_description_eps_estimates
     when "stock_splits"
       set_title_and_description_stock_splits
+    when "highest_forecasts"
+      set_title_and_description_highest_forecasts
     else
       set_title_and_description_others
     end
@@ -18,6 +20,11 @@ module MetaTagsHelper
   def set_title_and_description_stock_splits
     @title = "株式分割一覧 | iMarket（適時開示ネット）"
     @description = "全銘柄と日経平均採用銘柄の株式分割の一覧を確認することができます。"
+  end
+
+  def set_title_and_description_highest_forecasts
+    @title = "過去最高益予想銘柄 | iMarket（適時開示ネット）"
+    @description = "業績予想と過去の決算合わせて3期以上で営業利益・経常利益・純利益が全て過去最高を更新する見通しの銘柄一覧を表示します。"
   end
 
   def set_title_and_description_others
