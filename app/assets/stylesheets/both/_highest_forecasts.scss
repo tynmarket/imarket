@@ -13,6 +13,7 @@
  .table {
     thead > tr > th {
       border-bottom: initial;
+      background-color: $color-light-brown;
     }
 
     tbody {
@@ -22,6 +23,12 @@
 
       td:nth-child(n + 5) {
         text-align: right;
+      }
+    }
+
+    th, td {
+      &:nth-child(4), &:nth-child(7) {
+        border-right: 1px solid $color-light-gray;
       }
     }
   }

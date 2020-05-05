@@ -120,7 +120,7 @@ $container-margin: 20px;
 
 .table-striped {
   & > thead > tr > th {
-    background-color: #f5f0eb;
+    background-color: $color-light-brown;
   }
 
   & > tbody > tr {

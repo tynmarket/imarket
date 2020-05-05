@@ -9,6 +9,8 @@ $color-blue: blue;
 $color-green: green;
 $color-link: #428bca;
 $color-text: #333;
+$color-light-gray: #ddd;
+$color-light-brown: #f5f0eb;
 
 /* margin, padding */
 .ml5 { margin-left: 5px !important; }
@@ -140,7 +142,7 @@ div.overflow_hidden {
   border: none !important;
 
   &.border-top {
-    border-top: 1px solid #ddd !important;
+    border-top: 1px solid $color-light-gray !important;
   }
 }
 
