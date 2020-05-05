@@ -2,7 +2,7 @@ class HighestForecastsController < ApplicationController
 
   def index
     highest_forecasts = HighestForecast
-                        .includes(results_forecast: {disclosure: :stock})
+                        .includes(results_forecast: { disclosure: :stock })
                         .order("date desc, id desc")
 
     # 同じ決算期の場合、最初に作成されたも時に表示

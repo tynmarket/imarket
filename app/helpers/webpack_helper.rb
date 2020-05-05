@@ -10,7 +10,7 @@ module WebpackHelper
 
     options = {
       src: path,
-      defer: true
+      defer: true,
     }.merge(options)
 
     # async と defer を両方指定した場合、ふつうは async が優先されるが、
@@ -24,7 +24,7 @@ module WebpackHelper
     path = asset_bundle_path("#{entry}.css")
 
     options = {
-      href: path
+      href: path,
     }.merge(options)
 
     stylesheet_link_tag "", **options
