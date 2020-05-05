@@ -5,6 +5,7 @@ class HighestForecastsController < ApplicationController
                         .includes(results_forecast: :disclosure)
                         .order("date desc, id desc")
 
+    # 同じ決算期の場合、最初に作成されたも時に表示
     @highest_forecasts = filter_duplications(highest_forecasts)
   end
 

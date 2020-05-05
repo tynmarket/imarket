@@ -7,6 +7,7 @@ table.table
       th 日付
       th 決算期
       th コード
+      th 会社名
       th 営業利益
       th 経常利益
       th 純利益
@@ -34,6 +35,8 @@ table.table
           = link_to(results_forecast.accounting_period, results_forecast.disclosure.pdf_path)
         td
           = link_to(code, stock_path(code), target: "_blank")
+        td
+          = results_forecast.disclosure.name
         td
           = red_delimiter(results_forecast.forecast_operating_income)
         td
