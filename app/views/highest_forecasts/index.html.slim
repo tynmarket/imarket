@@ -32,7 +32,7 @@ table.table
         td
           = highest_forecast.date
         td
-          = link_to(results_forecast.accounting_period, results_forecast.disclosure.pdf_path)
+          = link_to(results_forecast.accounting_period, results_forecast.disclosure.pdf_path, target: "_blank")
         td
           = link_to(code, stock_path(code), target: "_blank")
         td
