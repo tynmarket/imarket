@@ -4,6 +4,7 @@ module ApplicationHelper
 
   def release_notes
     <<~EOS.html_safe
+      （5/5）<a href="/highest_forecasts">過去最高益銘柄</a> を表示するようにしました。<br>
       （5/3）予想EPSを <a href="/eps_estimates?tab=n225-chart">チャート</a> で指数と比較して表示するようにしました。<br>
       （4/28）<a href="/eps_estimates">日経平均</a> と <a href="/eps_estimates?tab=dow">ダウ平均</a> の予想EPSを表示するようにしました。<br>
        <span style="color:white;">（4/28）</span>日経平均は公式のものとiMarket算出の2種類を載せています。

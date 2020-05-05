@@ -34,11 +34,11 @@ default_dev: &default_dev
   username: root
 
 development:
-  <<: *default_dev
-  database: imarket_development
-  #<<: *default
-  #host: <%= ENV["DB_IP"] %>
-  #database: <%= ENV["MYSQL_DATABASE"] %>
+  #<<: *default_dev
+  #database: imarket_development
+  <<: *default
+  host: <%= ENV["DB_IP"] %>
+  database: <%= ENV["MYSQL_DATABASE"] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
