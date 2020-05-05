@@ -31,6 +31,9 @@ Rails.application.routes.draw do
   # 株式分割
   resources :stock_splits, only: [:index]
 
+  # 過去最高益銘柄
+  resources :highest_forecasts, only: [:index]
+
   # 株価
   resources :stock_prices, only: [] do
     member do
