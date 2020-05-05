@@ -122,6 +122,9 @@ Style/StringLiteralsInInterpolation:
 Style/SymbolArray:
   Enabled: false
 
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
 Style/WordArray:
   Enabled: false
 

@@ -7,6 +7,12 @@ class Disclosure < ActiveRecord::Base
 
   has_many :results_forecasts
 
+  # デフォルト, 月次, 株式分割, 短信, 業績予想（期末）, 訂正
+  enum category: {
+    default: 0, monthly: 1, enum_split: 2, summary: 3,
+    results_forecast_q4: 4, results_forecast_q2: 5, correction: 6,
+  }
+
   class << self
     def one_year_disclosures(code)
       where(code: code)

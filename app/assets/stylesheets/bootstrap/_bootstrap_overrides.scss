@@ -3,7 +3,7 @@ body {
 }
 
 h1 {
-  font-size: 24px;
+  font-size: 20px;
 }
 
 /* ナビゲーションバー */
@@ -120,7 +120,7 @@ $container-margin: 20px;
 
 .table-striped {
   & > thead > tr > th {
-    background-color: #f5f0eb;
+    background-color: $color-light-brown;
   }
 
   & > tbody > tr {
