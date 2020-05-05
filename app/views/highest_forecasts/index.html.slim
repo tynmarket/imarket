@@ -5,7 +5,7 @@ table.table
   thead
     tr
       th 日付
-      th 決算期
+      th PDF
       th コード
       th 会社名
       th 営業利益
@@ -26,17 +26,18 @@ table.table
   tbody
     - @highest_forecasts.each do |highest_forecast|
       - results_forecast = highest_forecast.results_forecast
+      - disclosure = results_forecast.disclosure
       - code = results_forecast.code
 
       tr
         td
           = highest_forecast.date
         td
-          = link_to(results_forecast.accounting_period, results_forecast.disclosure.pdf_path, target: "_blank")
+          = link_to(summary_or_forecast(disclosure), disclosure.pdf_path, target: "_blank")
         td
           = link_to(code, stock_path(code), target: "_blank")
         td
-          = results_forecast.disclosure.name
+          = results_forecast.disclosure.stock&.name || results_forecast.disclosure.name
         td
           = red_delimiter(results_forecast.forecast_operating_income)
         td

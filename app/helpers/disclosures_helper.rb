@@ -44,6 +44,10 @@ module DisclosuresHelper
     "#{pbr} 倍"
   end
 
+  def summary_or_forecast(disclosure)
+    disclosure.summary? ? "短信" : "業予"
+  end
+
   def disclosure_table
     DisclosureTable.new
   end
