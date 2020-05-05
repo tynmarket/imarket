@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_21_022343) do
+ActiveRecord::Schema.define(version: 2020_05_04_054812) do
 
   create_table "authentications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -109,6 +109,15 @@ ActiveRecord::Schema.define(version: 2020_04_21_022343) do
     t.datetime "updated_at", null: false
     t.index ["stock_id"], name: "index_favorites_on_stock_id"
     t.index ["user_id", "stock_id"], name: "index_favorites_on_user_id_and_stock_id", unique: true
+  end
+
+  create_table "highest_forecasts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "results_forecast_id", null: false
+    t.date "date", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["date"], name: "index_highest_forecasts_on_date"
+    t.index ["results_forecast_id"], name: "index_highest_forecasts_on_results_forecast_id"
   end
 
   create_table "latest_results_forecasts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
@@ -250,9 +259,11 @@ ActiveRecord::Schema.define(version: 2020_04_21_022343) do
     t.date "listed_date"
     t.boolean "is_consolidated", default: true
     t.string "taisyaku_code", limit: 6
+    t.integer "country", default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["code"], name: "index_stocks_code"
+    t.index ["country", "listed_date"], name: "index_stocks_on_country_and_listed_date"
     t.index ["listed_date"], name: "index_stocks_on_listed_date"
   end
 
