@@ -27,7 +27,7 @@
     }
 
     th, td {
-      &:nth-child(4), &:nth-child(7) {
+      &:nth-child(4), &:nth-child(5), &:nth-child(7) {
         border-right: 1px solid $color-light-gray;
       }
     }

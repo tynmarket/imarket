@@ -8,6 +8,10 @@ table.table
       th PDF
       th コード
       th 会社名
+      th
+        | 予想
+        br
+        | PER
       th 営業利益
       th 経常利益
       th 純利益
@@ -39,6 +43,8 @@ table.table
           = link_to(code, stock_path(code), target: "_blank")
         td
           = results_forecast.disclosure.stock&.name || results_forecast.disclosure.name
+        td
+          = per_in_disclosure(disclosure)
         td
           = red_delimiter(results_forecast.forecast_operating_income)
         td
