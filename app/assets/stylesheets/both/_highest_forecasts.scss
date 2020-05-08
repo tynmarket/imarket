@@ -27,7 +27,11 @@
     }
 
     th, td {
-      &:nth-child(4), &:nth-child(5), &:nth-child(7) {
+      &:nth-child(1) {
+        min-width: 80px;
+      }
+
+      &:nth-child(4), &:nth-child(5), &:nth-child(8), &:nth-child(11) {
         border-right: 1px solid $color-light-gray;
       }
     }

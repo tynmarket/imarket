@@ -27,6 +27,7 @@ table.table
         | 純利益
         br
         | 前年比
+      th 年初来
   tbody
     - @highest_forecasts.each do |highest_forecast|
       - results_forecast = highest_forecast.results_forecast
@@ -57,3 +58,5 @@ table.table
           = red_hundred(results_forecast.change_in_forecast_or_calc(:ordinary_income, summary)) || "-"
         td
           = red_hundred(results_forecast.change_in_forecast_or_calc(:net_income, summary)) || "-"
+        td
+          = ytd_text(disclosure.stock)

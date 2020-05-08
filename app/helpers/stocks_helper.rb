@@ -86,7 +86,7 @@ module StocksHelper
   end
 
   def ytd_text(stock)
-    red_hundred_p(stock.ytd)
+    stock.ytd && red_hundred_p(stock.ytd)
   end
 
   def options_select_per
