@@ -29,15 +29,20 @@ table.table
         | 前年比
       th 年初来
   tbody
-    - @highest_forecasts.each do |highest_forecast|
+    - prev_forecast = nil
+
+    - @highest_forecasts.each_with_index do |highest_forecast, i|
       - results_forecast = highest_forecast.results_forecast
       - disclosure = results_forecast.disclosure
       - code = results_forecast.code
       - summary = highest_forecast.summary
 
       tr
-        td
-          = highest_forecast.date
+        - if !prev_forecast || highest_forecast.date != prev_forecast.date
+          td
+            = highest_forecast.date
+        - else
+          td.border-top-none
         td
           = link_to(summary_or_forecast(disclosure), disclosure.pdf_path, target: "_blank")
         td
@@ -60,3 +65,6 @@ table.table
           = red_hundred(results_forecast.change_in_forecast_or_calc(:net_income, summary)) || "-"
         td
           = ytd_text(disclosure.stock)
+
+      - prev_forecast = highest_forecast
+
