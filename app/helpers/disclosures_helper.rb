@@ -35,18 +35,18 @@ module DisclosuresHelper
   end
 
   def per_in_disclosure(disclosure)
-    per = floor_per(disclosure.stock.try(:per)) || HYPHEN_SPACE
+    per = floor_num(disclosure.stock.try(:per)) || HYPHEN_SPACE
     "#{per} 倍"
   end
 
   def pbr_in_disclosure(disclosure)
-    pbr = floor_per(disclosure.stock.try(:pbr)) || HYPHEN_SPACE
+    pbr = floor_num(disclosure.stock.try(:pbr)) || HYPHEN_SPACE
     "#{pbr} 倍"
   end
 
-  def floor_per(per)
-    return unless per
-    per >= 100 ? per.floor : per
+  def floor_num(num)
+    return unless num
+    num >= 100 ? num.floor : num
   end
 
   def summary_or_forecast(disclosure)

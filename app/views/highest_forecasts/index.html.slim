@@ -33,7 +33,7 @@ table.table
         | 純利益
         br
         | 前年比
-      th 年初来
+      th.ytd 年初来
   tbody
     - prev_forecast = nil
 
@@ -67,12 +67,15 @@ table.table
           = red_delimiter(results_forecast.forecast_ordinary_income)
         td
           = red_delimiter(results_forecast.forecast_net_income)
-        td
-          = red_hundred(results_forecast.change_in_forecast_or_calc(:operating_income, summary)) || "-"
-        td
-          = red_hundred(results_forecast.change_in_forecast_or_calc(:ordinary_income, summary)) || "-"
-        td
-          = red_hundred(results_forecast.change_in_forecast_or_calc(:net_income, summary)) || "-"
+        td.income_short_value
+          .overflow_hidden
+            = red_hundred(results_forecast.change_in_forecast_or_calc(:operating_income, summary)) || "-"
+        td.income_short_value
+          .overflow_hidden
+            = red_hundred(results_forecast.change_in_forecast_or_calc(:ordinary_income, summary)) || "-"
+        td.income_short_value
+          .overflow_hidden
+            = red_hundred(results_forecast.change_in_forecast_or_calc(:net_income, summary)) || "-"
         td
           = ytd_text(disclosure.stock)
 

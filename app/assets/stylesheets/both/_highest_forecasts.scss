@@ -31,7 +31,7 @@
         min-width: 252px;
       }
 
-      &.per {
+      &.per, &.ytd {
         width: 6.5%;
       }
 
@@ -51,6 +51,10 @@
 
       td:nth-child(n + 5) {
         text-align: right;
+      }
+
+      td.income_short_value {
+        word-break: break-all;
       }
     }
 
