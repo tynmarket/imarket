@@ -74,13 +74,13 @@ module StocksHelper
   end
 
   def per_in_stock(stock)
-    per = stock.per || HYPHEN_SPACE
+    per = floor_per(stock.per) || HYPHEN_SPACE
 
     "#{per} 倍"
   end
 
   def pbr_in_stock(stock)
-    pbr = stock.pbr || HYPHEN_SPACE
+    pbr = floor_per(stock.pbr) || HYPHEN_SPACE
 
     "#{pbr} 倍"
   end
