@@ -15,6 +15,10 @@
       border-bottom: initial;
       background-color: $color-light-brown;
 
+      &.code {
+        min-width: 52px;
+      }
+
       &.name {
         min-width: 252px;
       }
