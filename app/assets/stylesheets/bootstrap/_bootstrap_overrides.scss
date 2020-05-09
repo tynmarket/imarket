@@ -79,7 +79,7 @@ $container-margin: 20px;
 
 /* ページネーション */
 .pagination {
-  & > .active {
+  & > .current {
     & > a, & > a:hover {
       color: #999999;
       background-color: #f5f5f5;

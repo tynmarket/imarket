@@ -1,6 +1,12 @@
 h1
   | 過去最高益予想銘柄
 
+.flex-center
+  - if @highest_forecasts.present?
+    = paginate(@highest_forecasts)
+  - else
+    .pagination
+
 table.table
   thead
     tr
@@ -31,7 +37,7 @@ table.table
   tbody
     - prev_forecast = nil
 
-    - @highest_forecasts.each_with_index do |highest_forecast, i|
+    - @highest_forecasts.each do |highest_forecast|
       - results_forecast = highest_forecast.results_forecast
       - disclosure = results_forecast.disclosure
       - code = results_forecast.code
@@ -70,4 +76,10 @@ table.table
           = ytd_text(disclosure.stock)
 
       - prev_forecast = highest_forecast
+
+.flex-center
+  - if @highest_forecasts.present?
+    = paginate(@highest_forecasts)
+  - else
+    .pagination
 

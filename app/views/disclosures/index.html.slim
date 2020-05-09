@@ -15,7 +15,7 @@
 - else
   / ページネーション
   .page_entries_info = "#{release_date(@date)}の#{page_entries_info(@disclosures)}"
-  = paginate(@disclosures)
+  = paginate(@disclosures, views_prefix: :disclosures)
 
   / タブ
   ul.nav.nav-tabs.main-content-nav-tabs

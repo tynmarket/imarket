@@ -1,10 +1,10 @@
 ja:
   views:
     pagination:
-      first: 先頭
-      last: 最終
-      previous: 前ページ
-      next: 次ページ
+      first: << 最初へ
+      last: 最後へ >>
+      previous: < 前へ
+      next: 次へ >
       truncate: "..."
   helpers:
     page_entries_info:
