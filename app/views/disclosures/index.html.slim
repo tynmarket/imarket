@@ -91,12 +91,7 @@
                 td.text-right = red_delimiter_per_share(summary.prior_net_income_per_share)
                 td.text-center = link_to_stock(disclosure)
               tr
-                - if tynmarket?
-                  td.fcf-ratio
-                    div
-                      = disclosure.stock&.fcf_ratio
-                - else
-                  td
+                td
                 td
                   span.float-right = per_in_disclosure(disclosure)
                 td
