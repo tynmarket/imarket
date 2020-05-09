@@ -13,6 +13,7 @@ class ResultsForecast < ActiveRecord::Base
     prev_value = summary.send(attr)
 
     forecast_value && prev_value &&
+      prev_value > 0 &&
       (forecast_value.to_f - prev_value) / prev_value
   end
 end

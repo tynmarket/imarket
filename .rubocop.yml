@@ -72,6 +72,9 @@ Layout/MultilineBlockLayout:
   Exclude:
     - "spec/**/*"
 
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+
 Style/AsciiComments:
   Enabled: false
 

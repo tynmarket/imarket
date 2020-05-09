@@ -1,12 +1,14 @@
 class HighestForecastsController < ApplicationController
 
   def index
-    highest_forecasts = HighestForecast
-                        .includes(:summary, results_forecast: { disclosure: :stock })
-                        .order("date desc, id desc")
+    @highest_forecasts = HighestForecast
+                         .includes(:summary,
+                                   results_forecast: { disclosure: { stock: :stock_price_latest } })
+                         .order("date desc, id desc")
+                         .page(params[:page])
 
     # 同じ決算期の場合、最初に作成されたも時に表示
-    @highest_forecasts = filter_duplications(highest_forecasts)
+    # @highest_forecasts = filter_duplications(highest_forecasts)
   end
 
   private

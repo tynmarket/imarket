@@ -1,29 +1,42 @@
 h1
   | 過去最高益予想銘柄
 
+.flex-center
+  - if @highest_forecasts.present?
+    = paginate(@highest_forecasts)
+  - else
+    .pagination
+
 table.table
   thead
     tr
-      th 日付
-      th PDF
-      th コード
-      th 会社名
-      th 営業利益
-      th 経常利益
-      th 純利益
-      th
-        | 営業利益
+      th.date 日付
+      th.pdf PDF
+      th.code コード
+      th.name 会社名
+      th.per
+        | 予想
+        br
+        | PER
+      th.income 営業利益
+      th.income 経常利益
+      th.income_short 純利益
+      th.income_short
+        | 営業益
         br
         | 前年比
-      th
-        | 経常利益
+      th.income_short
+        | 経常益
         br
         | 前年比
-      th
+      th.income_short
         | 純利益
         br
         | 前年比
+      th.ytd 年初来
   tbody
+    - prev_forecast = nil
+
     - @highest_forecasts.each do |highest_forecast|
       - results_forecast = highest_forecast.results_forecast
       - disclosure = results_forecast.disclosure
@@ -31,23 +44,46 @@ table.table
       - summary = highest_forecast.summary
 
       tr
-        td
-          = highest_forecast.date
+        - if !prev_forecast || highest_forecast.date != prev_forecast.date
+          td
+            = highest_forecast.date
+        - else
+          td.border-top-none
         td
           = link_to(summary_or_forecast(disclosure), disclosure.pdf_path, target: "_blank")
         td
           = link_to(code, stock_path(code), target: "_blank")
+        td.flex-space-between
+          .overflow_hidden
+            = results_forecast.disclosure.stock&.name || results_forecast.disclosure.name
+          span.link_container
+            = link_to_detail(results_forecast.disclosure.stock)
+            = link_to_shikiho(results_forecast.disclosure.stock)
         td
-          = results_forecast.disclosure.stock&.name || results_forecast.disclosure.name
+          = per_in_disclosure(disclosure)
         td
           = red_delimiter(results_forecast.forecast_operating_income)
         td
           = red_delimiter(results_forecast.forecast_ordinary_income)
         td
           = red_delimiter(results_forecast.forecast_net_income)
+        td.income_short_value
+          .overflow_hidden
+            = red_hundred(results_forecast.change_in_forecast_or_calc(:operating_income, summary)) || "-"
+        td.income_short_value
+          .overflow_hidden
+            = red_hundred(results_forecast.change_in_forecast_or_calc(:ordinary_income, summary)) || "-"
+        td.income_short_value
+          .overflow_hidden
+            = red_hundred(results_forecast.change_in_forecast_or_calc(:net_income, summary)) || "-"
         td
-          = red_hundred(results_forecast.change_in_forecast_or_calc(:operating_income, summary))
-        td
-          = red_hundred(results_forecast.change_in_forecast_or_calc(:ordinary_income, summary))
-        td
-          = red_hundred(results_forecast.change_in_forecast_or_calc(:net_income, summary))
+          = ytd_text(disclosure.stock)
+
+      - prev_forecast = highest_forecast
+
+.flex-center
+  - if @highest_forecasts.present?
+    = paginate(@highest_forecasts)
+  - else
+    .pagination
+
