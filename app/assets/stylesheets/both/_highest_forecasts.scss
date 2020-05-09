@@ -14,6 +14,22 @@
     thead > tr > th {
       border-bottom: initial;
       background-color: $color-light-brown;
+
+      &.name {
+        min-width: 252px;
+      }
+
+      &.per {
+        min-width: 55px;
+      }
+
+      &.income {
+        min-width: 65px;
+      }
+
+      &.net_income {
+        min-width: 55px;
+      }
     }
 
     tbody {
@@ -34,6 +50,10 @@
       &:nth-child(4), &:nth-child(5), &:nth-child(8), &:nth-child(11) {
         border-right: 1px solid $color-light-gray;
       }
+    }
+
+    .link_container {
+      min-width: 32px;
     }
   }
 }

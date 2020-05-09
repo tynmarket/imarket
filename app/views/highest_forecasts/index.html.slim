@@ -13,23 +13,23 @@ table.table
       th 日付
       th PDF
       th コード
-      th 会社名
-      th
+      th.name 会社名
+      th.per
         | 予想
         br
         | PER
-      th 営業利益
-      th 経常利益
-      th 純利益
-      th
+      th.income 営業利益
+      th.income 経常利益
+      th.net_income 純利益
+      th.income
         | 営業利益
         br
         | 前年比
-      th
+      th.income
         | 経常利益
         br
         | 前年比
-      th
+      th.net_income
         | 純利益
         br
         | 前年比
@@ -54,7 +54,8 @@ table.table
         td
           = link_to(code, stock_path(code), target: "_blank")
         td.flex-space-between
-          = results_forecast.disclosure.stock&.name || results_forecast.disclosure.name
+          .overflow_hidden
+            = results_forecast.disclosure.stock&.name || results_forecast.disclosure.name
           span.link_container
             = link_to_detail(results_forecast.disclosure.stock)
             = link_to_shikiho(results_forecast.disclosure.stock)
