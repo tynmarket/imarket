@@ -131,6 +131,9 @@ Style/TrailingCommaInHashLiteral:
 Style/WordArray:
   Enabled: false
 
+Style/ZeroLengthPredicate:
+  Enabled: false
+
 Naming/AccessorMethodName:
   Exclude:
     - "app/controllers/*"

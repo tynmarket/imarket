@@ -1,13 +1,13 @@
 class StocksController < ApplicationController
 
   def search
-    query = params[:query]
+    find_stock
 
-    @stocks = Stock.search(query)
-
-    if @stocks.length == 1
-      @stock = @stocks.first
+    if @stock
       find_data
+      @action_name = "show"
+
+      render action: @action_name
     else
       render action: "index"
     end
@@ -25,6 +25,23 @@ class StocksController < ApplicationController
   end
 
   private
+
+  def find_stock
+    query = params[:query]
+
+    @stocks = Stock.search(query)
+
+    if @stocks.size == 1
+      @stock = @stocks.first
+    elsif @stocks.size == 0
+      disclosure = Disclosure.find_by(code: query)
+
+      if disclosure
+        code = disclosure.code
+        @stock = Stock.new(id: code, code: code, name: disclosure.name)
+      end
+    end
+  end
 
   # rubocop:disable Metrics/AbcSize
   def find_data
@@ -45,9 +62,6 @@ class StocksController < ApplicationController
     @last_year = get_last_year(@summaries) unless view_context.term_all?(@term)
 
     @disclosures = Disclosure.one_year_disclosures(@stock.code)
-    @action_name = "show"
-
-    render action: @action_name
   end
   # rubocop:enable Metrics/AbcSize
 
