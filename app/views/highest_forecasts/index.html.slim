@@ -47,8 +47,11 @@ table.table
           = link_to(summary_or_forecast(disclosure), disclosure.pdf_path, target: "_blank")
         td
           = link_to(code, stock_path(code), target: "_blank")
-        td
+        td.flex-space-between
           = results_forecast.disclosure.stock&.name || results_forecast.disclosure.name
+          span.link_container
+            = link_to_detail(results_forecast.disclosure.stock)
+            = link_to_shikiho(results_forecast.disclosure.stock)
         td
           = per_in_disclosure(disclosure)
         td

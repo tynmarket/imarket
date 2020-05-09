@@ -136,9 +136,16 @@ div.overflow_hidden {
   margin-right: auto;
 }
 
-.disclosure-name {
+.flex-space-between {
   display: flex;
   justify-content: space-between;
+}
+
+.link_container > a {
+  padding-left: 2px;
+}
+
+.disclosure-name {
   border: none !important;
 
   &.border-top {
