@@ -15,8 +15,16 @@
       border-bottom: initial;
       background-color: $color-light-brown;
 
+      &.date {
+        width: 9%;
+      }
+
+      &.pdf {
+        width: 4.5%;
+      }
+
       &.code {
-        min-width: 52px;
+        width: 6%;
       }
 
       &.name {
@@ -24,15 +32,15 @@
       }
 
       &.per {
-        min-width: 55px;
+        width: 6.5%;
       }
 
       &.income {
-        min-width: 65px;
+        width: 7.25%;
       }
 
-      &.net_income {
-        min-width: 55px;
+      &.income_short {
+        width: 6.125%;
       }
     }
 
