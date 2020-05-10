@@ -91,12 +91,7 @@
                 td.text-right = red_delimiter_per_share(summary.prior_net_income_per_share)
                 td.text-center = link_to_stock(disclosure)
               tr
-                - if tynmarket?
-                  td.fcf-ratio
-                    div
-                      = disclosure.stock&.fcf_ratio
-                - else
-                  td
+                td
                 td
                   span.float-right = per_in_disclosure(disclosure)
                 td
@@ -117,7 +112,11 @@
                 td
                   = link_to_other_services_short(disclosure)
                   span.float-right = pbr_in_disclosure(disclosure)
-                td
+                - if @highest_forecast_results_forecast_id[forecast.id]
+                  td.highest-forecast
+                    | 最高益
+                - else
+                  td
                 td.text-center = forecast.accounting_period
                 td.text-center = forecast.quarter_name
                 td.text-right = number_with_delimiter(forecast.forecast_net_sales)
@@ -162,7 +161,11 @@
                   td
                   td
                     span.float-right = per_in_disclosure(disclosure)
-                  td
+                  - if @highest_forecast_results_forecast_id[forecast.id]
+                    td.highest-forecast
+                      | 最高益
+                  - else
+                    td
                   td.text-center = forecast.accounting_period
                   td.text-center = forecast.quarter_name
                   td.text-right = number_with_delimiter(forecast.forecast_net_sales)
@@ -223,4 +226,4 @@
                 td.text-center = link_to_stock(disclosure)
 
   / ページネーション
-  = paginate(@disclosures)
+  = paginate(@disclosures, views_prefix: :disclosures)
