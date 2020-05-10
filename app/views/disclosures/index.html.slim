@@ -226,4 +226,4 @@
                 td.text-center = link_to_stock(disclosure)
 
   / ページネーション
-  = paginate(@disclosures)
+  = paginate(@disclosures, views_prefix: :disclosures)
