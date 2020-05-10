@@ -12,6 +12,11 @@ class DisclosuresController < ApplicationController
                    .order(id: :desc)
 
     @favorite_code_hash = logged_in? && current_user.favorite_code_hash || {}
+    @highest_forecast_results_forecast_id = HighestForecast
+                                            .where(date: @date)
+                                            .pluck(:results_forecast_id)
+                                            .map { |id| [id, true] }
+                                            .to_h
   end
 
   def find_date
