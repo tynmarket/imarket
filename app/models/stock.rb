@@ -17,7 +17,7 @@ class Stock < ActiveRecord::Base
   has_many :shikihos
   has_many :constituent_stocks
 
-  enum country: {jp: 0, us: 1}
+  enum country: { jp: 0, us: 1 }
 
   class << self
     def code_dow
