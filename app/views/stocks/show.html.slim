@@ -46,7 +46,7 @@ ul.nav.nav-tabs.main-content-nav-tabs
     a#tab-per[href="#menu-per" data-toggle="tab"] 予想PER
   li id="tab-pbr-track"
     a#tab-pbr[href="#menu-pbr" data-toggle="tab"] PBR
-  - if tynmarket?
+  - if tynmarket? || @stock.all_stock_median?
     li id="tab-fcf-ratio-track"
       a#tab-fcf-ratio[href="#menu-fcf-ratio" data-toggle="tab"] FCF倍率
   - if show_content?
@@ -334,7 +334,7 @@ ul.nav.nav-tabs.main-content-nav-tabs
       | ＊PBRは 株主資本 /（期末発行済株式数 - 期末自己株式数）で算出しており、Yahooファイナンス等の値と一致しない場合があります。
 
   / FCF倍率
-  - if tynmarket?
+  - if tynmarket? || @stock.all_stock_median?
     #menu-fcf-ratio.tab-pane.tab-chart
       #fcf-ratio-chart
       .clearfix

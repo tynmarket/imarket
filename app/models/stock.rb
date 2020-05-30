@@ -29,6 +29,10 @@ class Stock < ActiveRecord::Base
       "998407-r"
     end
 
+    def code_all_stock_median?
+      "10000"
+    end
+
     # utf8_bin:ガスミ…なし
     #         :７２０３…なし
     #         :TOYOTA…なし
@@ -69,6 +73,10 @@ class Stock < ActiveRecord::Base
 
     def index?(code)
       CODE_INDEX.include? code
+    end
+
+    def all_stock_median?
+      code == code_all_stock_median
     end
 
     private
