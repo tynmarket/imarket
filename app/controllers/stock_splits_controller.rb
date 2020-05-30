@@ -1,11 +1,11 @@
 class StockSplitsController < ApplicationController
   def index
     from_date = Date.today.beginning_of_year - 1.years
-    codes = RevisionHistory
-            .includes(constituent_stocks: :stock)
-            .last
-            .constituent_stocks
-            .map(&:code)
+    codes = Stock
+            .joins(:constituent_stocks)
+            .jp
+            .pluck(:code)
+            .uniq
 
     @stock_splits = StockSplit
                     .includes(:stock)
