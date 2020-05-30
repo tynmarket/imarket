@@ -15,6 +15,9 @@ class Stock < ActiveRecord::Base
   has_one :stock_price_latest, -> { latest }, class_name: "StockPrice"
 
   has_many :shikihos
+  has_many :constituent_stocks
+
+  enum country: { jp: 0, us: 1 }
 
   class << self
     def code_dow
@@ -27,6 +30,10 @@ class Stock < ActiveRecord::Base
 
     def code_n225_r
       "998407-r"
+    end
+
+    def code_all_stock_median?
+      "10000"
     end
 
     # utf8_bin:ガスミ…なし
@@ -69,6 +76,10 @@ class Stock < ActiveRecord::Base
 
     def index?(code)
       CODE_INDEX.include? code
+    end
+
+    def all_stock_median?
+      code == code_all_stock_median
     end
 
     private

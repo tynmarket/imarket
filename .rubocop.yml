@@ -24,10 +24,10 @@ AllCops:
 StringLiterals:
   EnforcedStyle: double_quotes
 
-Lint/HandleExceptions:
+Lint/SafeNavigationConsistency:
   Enabled: false
 
-Lint/SafeNavigationConsistency:
+Lint/SuppressedException:
   Enabled: false
 
 Metrics/AbcSize:
@@ -50,7 +50,7 @@ Metrics/MethodLength:
 Metrics/ModuleLength:
   Enabled: false
 
-Layout/AlignHash:
+Layout/HashAlignment:
   Exclude:
     - "spec/**/*"
 
@@ -94,7 +94,13 @@ Style/DoubleNegation:
 Style/EmptyMethod:
   Enabled: false
 
+Style/FormatStringToken:
+  Enabled: false
+
 Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/IfUnlessModifier:
   Enabled: false
 
 Style/LineEndConcatenation:
