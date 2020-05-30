@@ -1,4 +1,5 @@
 # docker build -t tynmarket/mysql:8.0 .
+# TODO gsutilインストール
 
 FROM mysql:8.0
 
