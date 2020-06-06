@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_04_054812) do
+ActiveRecord::Schema.define(version: 2020_06_06_021934) do
 
   create_table "authentications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -112,12 +112,14 @@ ActiveRecord::Schema.define(version: 2020_05_04_054812) do
   end
 
   create_table "highest_forecasts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
-    t.bigint "results_forecast_id", null: false
+    t.bigint "results_forecast_id", null: false, comment: "今期予想"
+    t.bigint "summary_id", null: false, comment: "前期決算"
     t.date "date", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["date"], name: "index_highest_forecasts_on_date"
     t.index ["results_forecast_id"], name: "index_highest_forecasts_on_results_forecast_id"
+    t.index ["summary_id"], name: "index_highest_forecasts_on_summary_id"
   end
 
   create_table "latest_results_forecasts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
@@ -227,14 +229,19 @@ ActiveRecord::Schema.define(version: 2020_05_04_054812) do
     t.bigint "shares"
     t.float "per"
     t.float "pbr"
+    t.float "open_adjusted"
+    t.float "high_adjusted"
+    t.float "low_adjusted"
     t.float "market_cap_fcf_ratio"
     t.float "ytd"
     t.float "close_adjusted"
+    t.integer "volume_adjusted"
     t.integer "stock_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["term", "code", "date", "close"], name: "index_stock_prices_term_code_date_close"
     t.index ["term", "code", "date", "per"], name: "index_stock_prices_term_code_date_per"
+    t.index ["term", "code", "date"], name: "index_stock_prices_on_term_and_code_and_date", unique: true
     t.index ["term", "stock_id"], name: "index_stock_prices_term_stock_id"
   end
 
